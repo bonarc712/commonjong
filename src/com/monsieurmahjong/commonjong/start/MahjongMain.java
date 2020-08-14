@@ -1,6 +1,6 @@
-package start;
+package com.monsieurmahjong.commonjong.start;
 
-import game.mahjong.MahjongGame;
+import com.monsieurmahjong.commonjong.game.mahjong.MahjongGame;
 
 public class MahjongMain
 {

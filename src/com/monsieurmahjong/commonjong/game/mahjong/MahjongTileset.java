@@ -1,10 +1,10 @@
-package game.mahjong;
+package com.monsieurmahjong.commonjong.game.mahjong;
 
 import java.util.Arrays;
 import java.util.List;
 
-import game.Tile;
-import game.Tileset;
+import com.monsieurmahjong.commonjong.*;
+import com.monsieurmahjong.commonjong.game.*;
 
 public class MahjongTileset extends Tileset
 {

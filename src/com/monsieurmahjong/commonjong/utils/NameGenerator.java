@@ -1,4 +1,4 @@
-package utils;
+package com.monsieurmahjong.commonjong.utils;
 
 import java.util.ArrayList;
 import java.util.Collections;

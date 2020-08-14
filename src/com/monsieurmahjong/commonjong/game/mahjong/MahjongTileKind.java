@@ -1,4 +1,4 @@
-package game.mahjong;
+package com.monsieurmahjong.commonjong.game.mahjong;
 
 public enum MahjongTileKind
 {
@@ -20,7 +20,7 @@ public enum MahjongTileKind
 	P7, //
 	P8, //
 	P9, //
-	S1, // souzu --> bamboos
+	S1, // souzu -->ï¿½bamboos
 	S2, //
 	S3, //
 	S4, //

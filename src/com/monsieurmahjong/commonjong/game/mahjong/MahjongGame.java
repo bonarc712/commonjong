@@ -1,11 +1,11 @@
-package game.mahjong;
+package com.monsieurmahjong.commonjong.game.mahjong;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import game.Player;
-import utils.NameGenerator;
+import com.monsieurmahjong.commonjong.game.Player;
+import com.monsieurmahjong.commonjong.utils.NameGenerator;
 
 public class MahjongGame // riichi
 {

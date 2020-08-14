@@ -1,4 +1,4 @@
-package game;
+package com.monsieurmahjong.commonjong.game;
 
 public abstract class Player
 {

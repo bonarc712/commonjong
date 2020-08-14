@@ -1,10 +1,10 @@
-package game;
+package com.monsieurmahjong.commonjong.game;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import game.locale.TileLabels_fr;
-import game.mahjong.MahjongTileKind;
+import com.monsieurmahjong.commonjong.game.locale.TileLabels_fr;
+import com.monsieurmahjong.commonjong.game.mahjong.MahjongTileKind;
 
 public class Tile
 {

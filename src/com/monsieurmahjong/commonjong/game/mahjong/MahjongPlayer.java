@@ -1,10 +1,10 @@
-package game.mahjong;
+package com.monsieurmahjong.commonjong.game.mahjong;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import game.Player;
-import game.Tile;
+import com.monsieurmahjong.commonjong.*;
+import com.monsieurmahjong.commonjong.game.*;
 
 public class MahjongPlayer extends Player
 {

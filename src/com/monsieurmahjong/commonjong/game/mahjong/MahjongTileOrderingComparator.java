@@ -1,8 +1,8 @@
-package game.mahjong;
+package com.monsieurmahjong.commonjong.game.mahjong;
 
 import java.util.Comparator;
 
-import game.Tile;
+import com.monsieurmahjong.commonjong.game.Tile;
 
 public class MahjongTileOrderingComparator implements Comparator<Tile>
 {
