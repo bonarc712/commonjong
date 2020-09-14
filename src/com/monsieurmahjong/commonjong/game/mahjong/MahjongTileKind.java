@@ -2,79 +2,104 @@ package com.monsieurmahjong.commonjong.game.mahjong;
 
 public enum MahjongTileKind
 {
-	M1, // manzu --> characters
-	M2, //
-	M3, //
-	M4, //
-	M5, //
-	M6, //
-	M7, //
-	M8, //
-	M9, //
-	P1, // pinzu --> circles
-	P2, //
-	P3, //
-	P4, //
-	P5, //
-	P6, //
-	P7, //
-	P8, //
-	P9, //
-	S1, // souzu -->�bamboos
-	S2, //
-	S3, //
-	S4, //
-	S5, //
-	S6, //
-	S7, //
-	S8, //
-	S9, //
-	C, // red dragon
-	F, // green dragon
-	H, // white dragon
-	E, // east
-	S, // south
-	W, // west
-	N; // north
+    CHARACTERS_1("1m"), // characters
+    CHARACTERS_2("2m"), //
+    CHARACTERS_3("3m"), //
+    CHARACTERS_4("4m"), //
+    CHARACTERS_5("5m"), //
+    CHARACTERS_6("6m"), //
+    CHARACTERS_7("7m"), //
+    CHARACTERS_8("8m"), //
+    CHARACTERS_9("9m"), //
+    CIRCLES_1("1p"), // circles
+    CIRCLES_2("2p"), //
+    CIRCLES_3("3p"), //
+    CIRCLES_4("4p"), //
+    CIRCLES_5("5p"), //
+    CIRCLES_6("6p"), //
+    CIRCLES_7("7p"), //
+    CIRCLES_8("8p"), //
+    CIRCLES_9("9p"), //
+    BAMBOOS_1("1s"), // bamboos
+    BAMBOOS_2("2s"), //
+    BAMBOOS_3("3s"), //
+    BAMBOOS_4("4s"), //
+    BAMBOOS_5("5s"), //
+    BAMBOOS_6("6s"), //
+    BAMBOOS_7("7s"), //
+    BAMBOOS_8("8s"), //
+    BAMBOOS_9("9s"), //
+    EAST("1z"), // east
+    SOUTH("2z"), // south
+    WEST("3z"), // west
+    NORTH("4z"), // north
+    RED("5z"), // red dragon
+    GREEN("6z"), // green dragon
+    WHITE("7z"); // white dragon
 
-	public boolean is(MahjongTileKind... choices)
-	{
-		for (MahjongTileKind choice : choices)
-		{
-			if (this == choice)
-				return true;
-		}
-		return false;
-	}
+    // TODO add flowers, jokers, etc.
 
-	public boolean isHonour()
-	{
-		return this.isDragon() || this.isWind();
-	}
+    public String abbreviation;
 
-	public boolean isDragon()
-	{
-		return this.is(C, F, H);
-	}
+    private MahjongTileKind(String abbreviation)
+    {
+        this.abbreviation = abbreviation;
+    }
 
-	public boolean isWind()
-	{
-		return this.is(E, S, W, N);
-	}
+    public boolean is(MahjongTileKind... choices)
+    {
+        for (MahjongTileKind choice : choices)
+        {
+            if (this == choice)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public boolean isCharacters()
-	{
-		return this.is(M1, M2, M3, M4, M5, M6, M7, M8, M9);
-	}
+    public boolean isHonour()
+    {
+        return this.isDragon() || this.isWind();
+    }
 
-	public boolean isCircles()
-	{
-		return this.is(P1, P2, P3, P4, P5, P6, P7, P8, P9);
-	}
+    public boolean isDragon()
+    {
+        return this.is(RED, GREEN, WHITE);
+    }
 
-	public boolean isBamboos()
-	{
-		return this.is(S1, S2, S3, S4, S5, S6, S7, S8, S9);
-	}
+    public boolean isWind()
+    {
+        return this.is(EAST, SOUTH, WEST, NORTH);
+    }
+
+    public boolean isCharacters()
+    {
+        return this.is(CHARACTERS_1, CHARACTERS_2, CHARACTERS_3, CHARACTERS_4, CHARACTERS_5, CHARACTERS_6, CHARACTERS_7, CHARACTERS_8, CHARACTERS_9);
+    }
+
+    public boolean isCircles()
+    {
+        return this.is(CIRCLES_1, CIRCLES_2, CIRCLES_3, CIRCLES_4, CIRCLES_5, CIRCLES_6, CIRCLES_7, CIRCLES_8, CIRCLES_9);
+    }
+
+    public boolean isBamboos()
+    {
+        return this.is(BAMBOOS_1, BAMBOOS_2, BAMBOOS_3, BAMBOOS_4, BAMBOOS_5, BAMBOOS_6, BAMBOOS_7, BAMBOOS_8, BAMBOOS_9);
+    }
+
+    public static MahjongTileKind getMahjongTileByAbbreviation(String abbreviation)
+    {
+        for (MahjongTileKind tile : MahjongTileKind.values())
+        {
+            if (tile.abbreviation.equals(abbreviation))
+            {
+                return tile;
+            }
+        }
+
+        System.out.println("No match found for tile :" + abbreviation);
+        return null;
+    }
 
 }
