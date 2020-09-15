@@ -33,9 +33,9 @@ public enum MahjongTileKind
     SOUTH("2z"), // south
     WEST("3z"), // west
     NORTH("4z"), // north
-    RED("5z"), // red dragon
+    WHITE("5z"), // white dragon
     GREEN("6z"), // green dragon
-    WHITE("7z"); // white dragon
+    RED("7z"); // red dragon
 
     // TODO add flowers, jokers, etc.
 
