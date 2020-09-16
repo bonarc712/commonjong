@@ -1,6 +1,6 @@
 package com.monsieurmahjong.commonjong.ui.locale;
 
-import com.monsieurmahjong.commonjong.game.mahjong.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 
 public class TileLabels_fr
 {

@@ -1,4 +1,4 @@
-package com.monsieurmahjong.commonjong.game.mahjong;
+package com.monsieurmahjong.commonjong.rules.generic;
 
 import java.util.Comparator;
 

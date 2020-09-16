@@ -2,7 +2,7 @@ package com.monsieurmahjong.commonjong.game;
 
 import java.util.*;
 
-import com.monsieurmahjong.commonjong.game.mahjong.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.ui.locale.TileLabels_fr;
 
 public class Tile

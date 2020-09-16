@@ -1,5 +1,9 @@
-package com.monsieurmahjong.commonjong.game.mahjong;
+package com.monsieurmahjong.commonjong.rules.generic;
 
+/**
+ * The mahjong tile kinds are in the rules because it's a
+ * definition of a game element.
+ */
 public enum MahjongTileKind
 {
     CHARACTERS_1("1m"), // characters
@@ -58,6 +62,8 @@ public enum MahjongTileKind
         return false;
     }
 
+    // UTIL METHODS
+
     public boolean isHonour()
     {
         return this.isDragon() || this.isWind();
@@ -101,5 +107,4 @@ public enum MahjongTileKind
         System.out.println("No match found for tile :" + abbreviation);
         return null;
     }
-
 }

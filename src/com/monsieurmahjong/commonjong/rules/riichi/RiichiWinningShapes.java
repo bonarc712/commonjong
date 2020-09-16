@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.Tile;
-import com.monsieurmahjong.commonjong.game.mahjong.WinningShapes;
+import com.monsieurmahjong.commonjong.rules.generic.WinningShapes;
 
 public class RiichiWinningShapes implements WinningShapes
 {

@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Tile;
-import com.monsieurmahjong.commonjong.game.mahjong.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 
 public class RiichiWinningShapesTest
 {
