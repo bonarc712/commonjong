@@ -3,7 +3,7 @@ package com.monsieurmahjong.commonjong.game;
 import java.util.*;
 
 import com.monsieurmahjong.commonjong.game.mahjong.*;
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileOrderingComparator;
+import com.monsieurmahjong.commonjong.rules.generic.*;
 
 public class Player
 {
@@ -31,6 +31,11 @@ public class Player
     public void play()
     {
         hand.add(game.getTileset().draw());
+    }
+
+    public List<Tile> getHand()
+    {
+        return hand;
     }
 
     public void showHand()
