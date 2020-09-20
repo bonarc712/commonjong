@@ -59,7 +59,7 @@ public class Player
         hand.getTiles().sort(new MahjongTileOrderingComparator());
         System.out.println("Je suis " + name);
         System.out.println("J'ai " + hand);
-        System.out.println("Ma main a un shanten de " + MahjongShantenCounter.shantenCount(hand.getTiles()));
+        // System.out.println("Ma main a un shanten de " + MahjongShantenCounter.shantenCount(hand.getTiles()));
         System.out.println();
     }
 }
