@@ -36,5 +36,9 @@ public class RiichiWinningShapesTest
         assertTrue(winningShapes.isMahjong(thirteenOrphans));
         assertFalse(winningShapes.isFourGroupsOnePair(thirteenOrphans));
         assertTrue(winningShapes.isThirteenOrphans(thirteenOrphans));
+
+        List<Tile> firstHandCompactNotation = TileKindUtils.asHand("11122333444555z");
+        assertTrue(winningShapes.isMahjong(firstHandCompactNotation));
+        assertTrue(winningShapes.isFourGroupsOnePair(firstHandCompactNotation));
     }
 }

@@ -4,7 +4,7 @@ import java.util.*;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 
-public class Tileset
+public abstract class Tileset
 {
     protected List<Tile> tiles;
     protected List<Tile> drawnTiles;
@@ -26,6 +26,11 @@ public class Tileset
                 tiles.add(physicalTile);
             }
         });
+        System.out.println("Before shuffle " + tiles);
+        System.out.println();
+        shuffle();
+        System.out.println("Shuffling result " + tiles);
+        System.out.println(" --- ");
     }
 
     public void reset()
@@ -34,16 +39,17 @@ public class Tileset
         drawnTiles.clear();
     }
 
+    public void shuffle()
+    {
+        Collections.shuffle(tiles);
+    }
+
     public Tile draw()
     {
-        int result = (int) (Math.random() * tiles.size());
-        Tile drawnTile = tiles.remove(result);
+        Tile drawnTile = tiles.remove(0);
         drawnTiles.add(drawnTile);
         return drawnTile;
     }
 
-    private static List<MahjongTileKind> getTileList()
-    {
-        return Arrays.asList(MahjongTileKind.values());
-    }
+    public abstract List<MahjongTileKind> getTileList();
 }

@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.rules.riichi.RiichiTileset;
 import com.monsieurmahjong.commonjong.utils.NameGenerator;
 
 public class MahjongGame
@@ -13,7 +14,7 @@ public class MahjongGame
 
     public MahjongGame()
     {
-        tileset = new Tileset();
+        tileset = new RiichiTileset(); // TODO this should not be hardcoded
         players = new ArrayList<>(4);
         for (int i = 0; i < 4; i++)
         {
