@@ -78,6 +78,63 @@ public class TileKindUtils
         return hand;
     }
 
+    public static MahjongTileKind getKindFromIndex(int index)
+    {
+        return MahjongTileKind.values()[index];
+    }
+
+    public static boolean isWind(int index)
+    {
+        return getKindFromIndex(index).isWind();
+    }
+
+    public static boolean isDragon(int index)
+    {
+        return getKindFromIndex(index).isDragon();
+    }
+
+    public static boolean isHonor(int index)
+    {
+        return getKindFromIndex(index).isHonour();
+    }
+
+    /**
+     * An end tile is any tile that is a 1 or a 9.
+     */
+    public static boolean isEnd(int index)
+    {
+        return getKindFromIndex(index).isEnd();
+    }
+
+    /**
+     * A terminal tile is any tile that is a 1, a 9,
+     * a wind or a dragon.
+     */
+    public static boolean isTerminal(int index)
+    {
+        MahjongTileKind tileKind = getKindFromIndex(index);
+        return tileKind.isHonour() || tileKind.isEnd();
+    }
+
+    /**
+     * An ordinal tile is any tile is part of
+     * a family (characters, bamboos, dots)
+     */
+    public static boolean isOrdinal(int index)
+    {
+        return getKindFromIndex(index).isOrdinal();
+    }
+
+    /**
+     * A simple tile is any tile that is between
+     * 2 and 8, inclusive.
+     */
+    public static boolean isSimple(int index)
+    {
+        MahjongTileKind tileKind = getKindFromIndex(index);
+        return tileKind.isOrdinal() && !tileKind.isEnd();
+    }
+
     public static List<MahjongTileKind> getAllCharacters()
     {
         return Arrays.asList(MahjongTileKind.CHARACTERS_1, MahjongTileKind.CHARACTERS_2, MahjongTileKind.CHARACTERS_3, MahjongTileKind.CHARACTERS_4, MahjongTileKind.CHARACTERS_5,

@@ -79,6 +79,16 @@ public enum MahjongTileKind
         return this.is(EAST, SOUTH, WEST, NORTH);
     }
 
+    public boolean isEnd()
+    {
+        return this.is(CHARACTERS_1, CHARACTERS_9, CIRCLES_1, CIRCLES_9, BAMBOOS_1, BAMBOOS_9);
+    }
+
+    public boolean isOrdinal()
+    {
+        return this.isCharacters() || this.isBamboos() || this.isCircles();
+    }
+
     public boolean isCharacters()
     {
         return this.is(CHARACTERS_1, CHARACTERS_2, CHARACTERS_3, CHARACTERS_4, CHARACTERS_5, CHARACTERS_6, CHARACTERS_7, CHARACTERS_8, CHARACTERS_9);

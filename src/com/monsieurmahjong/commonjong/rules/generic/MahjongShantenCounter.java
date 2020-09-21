@@ -3,6 +3,7 @@ package com.monsieurmahjong.commonjong.rules.generic;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Tile;
+import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
 public class MahjongShantenCounter
 {
@@ -153,18 +154,18 @@ public class MahjongShantenCounter
     {
         int res = 0;
         // Check ones, nines, winds/dragons.
-        if (isTerminal(hand[0]))
+        if (TileKindUtils.isTerminal(hand[0]))
         {
             res++;
         }
         // Check non-pairs ones/nines, winds/dragons
         for (int i = 1; i < hand.length; i++)
         {
-            if (isTerminal(hand[i]) && hand[i - 1] != hand[i])
+            if (TileKindUtils.isTerminal(hand[i]) && hand[i - 1] != hand[i])
             {
                 res++;
             }
-            if (isTerminal(hand[i]) && hand[i - 1] != hand[i])
+            if (TileKindUtils.isTerminal(hand[i]) && hand[i - 1] != hand[i])
             {
                 res++;
             }
@@ -178,13 +179,13 @@ public class MahjongShantenCounter
         for (int i = 1; i < hand.length; i++)
         {
             // Count from second tile (index = 1)
-            if (isTerminal(hand[i]) && hand[i - 1] == hand[i])
+            if (TileKindUtils.isTerminal(hand[i]) && hand[i - 1] == hand[i])
             {
                 res++;
             }
             // If three+ tiles, the line above adds, and the line below takes away. 
             // Distinct pair logic.
-            if (isTerminal(hand[i]) && hand[i - 2] == hand[i])
+            if (TileKindUtils.isTerminal(hand[i]) && hand[i - 2] == hand[i])
             {
                 res--;
             }
@@ -250,78 +251,6 @@ public class MahjongShantenCounter
     {
         // Irrelevant for protogroup checks on winds, dragons, etc.
         if (a / 9 == b / 9)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    // Basic definitions -- redundancy possible
-    private static boolean isWind(int i)
-    {
-        if (i >= 27 && i < 31)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isDragon(int i)
-    {
-        if (i >= 31 && i < 34)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isHonor(int i)
-    {
-        if (isWind(i) || isDragon(i))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isEnd(int i)
-    {
-        if (i < 27 && (i % 9 == 0 || i % 9 == 8))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isTerminal(int i)
-    {
-        if (isHonor(i) || isEnd(i))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isOrdinal(int a)
-    {
-        if (isHonor(a))
-        {
-            return false;
-        }
-        if (a < 27)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isSimple(int a)
-    {
-        if (isHonor(a) || isEnd(a))
-        {
-            return false;
-        }
-        if (a < 27)
         {
             return true;
         }
@@ -449,11 +378,11 @@ public class MahjongShantenCounter
     {
         for (int i = 0; i < hand.length; i++)
         {
-            if (isHonor(hand[i]))
+            if (TileKindUtils.isHonor(hand[i]))
             {
                 return false;
             }
-            else if (isEnd(hand[i]))
+            else if (TileKindUtils.isEnd(hand[i]))
             {
                 return false;
             }
