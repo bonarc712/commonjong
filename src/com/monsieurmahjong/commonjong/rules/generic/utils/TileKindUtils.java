@@ -158,4 +158,17 @@ public class TileKindUtils
         return Arrays.asList(MahjongTileKind.EAST, MahjongTileKind.SOUTH, MahjongTileKind.WEST, MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED);
     }
 
+    /**
+     * Checks only for the same suit, within characters, circles and bamboos.
+     */
+    public static boolean areSameSuit(int first, int second)
+    {
+        MahjongTileKind firstTile = getKindFromIndex(first);
+        MahjongTileKind secondTile = getKindFromIndex(second);
+
+        return firstTile.isCharacters() && secondTile.isCharacters() || //
+                firstTile.isCircles() && secondTile.isCircles() || //
+                firstTile.isBamboos() && secondTile.isBamboos();
+    }
+
 }

@@ -20,6 +20,11 @@ public class Hand
         return tiles;
     }
 
+    public void setTiles(List<Tile> tiles)
+    {
+        this.tiles = tiles;
+    }
+
     public List<List<Tile>> getMelds()
     {
         return melds;

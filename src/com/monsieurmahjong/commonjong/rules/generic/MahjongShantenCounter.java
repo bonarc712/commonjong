@@ -3,7 +3,7 @@ package com.monsieurmahjong.commonjong.rules.generic;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Tile;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.*;
 
 public class MahjongShantenCounter
 {
@@ -64,7 +64,7 @@ public class MahjongShantenCounter
                     for (int k = j + 1; k < hand.length && (k - j < 5); k++)
                     {
                         // Max subhands:: 14 tiles: 6635520; 13 tiles: 1351680.
-                        if (isGroup(hand[i], hand[j], hand[k]))
+                        if (WaitShapeUtils.isGroup(hand[i], hand[j], hand[k]))
                         {
                             int[] subHand = new int[hand.length - 3];
                             subHand = extractHand(hand, i, j, k);
@@ -72,7 +72,7 @@ public class MahjongShantenCounter
                         }
                         // Programmed triplet jump : AAABC implies after scanning AAA, 
                         // scanning AAB is useless. Jump to AAB exit condition to check ABC next iteration.
-                        if (isSet(hand[i], hand[j], hand[k]))
+                        if (WaitShapeUtils.isTriplet(hand[i], hand[j], hand[k]))
                         {
                             i++;
                         }
@@ -88,17 +88,17 @@ public class MahjongShantenCounter
             // Priority: AB pair, AC pair, AB taatsu
             for (int i = 0; i < hand.length - 1; i++)
             {
-                if (isPair(hand[i], hand[i + 1]))
+                if (WaitShapeUtils.isPair(hand[i], hand[i + 1]))
                 {
                     pCount++;
                     i++;
                 }
-                else if (i < hand.length - 2 && isPair(hand[i], hand[i + 2]))
+                else if (i < hand.length - 2 && WaitShapeUtils.isPair(hand[i], hand[i + 2]))
                 {
                     pCount++;
                     i = i + 2;
                 }
-                else if (isTaatsu(hand[i], hand[i + 1]))
+                else if (WaitShapeUtils.isProtogroup(hand[i], hand[i + 1]))
                 {
                     tCount++;
                     i++;
@@ -191,70 +191,6 @@ public class MahjongShantenCounter
             }
         }
         return res;
-    }
-
-    // Element checks
-    private static boolean isGroup(int a, int b, int c)
-    {
-        // Group identity checked in isolation. Looping checks left to bigger functions.
-        if (isSet(a, b, c))
-        {
-            return true;
-        }
-        if (isRun(a, b, c))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isSet(int a, int b, int c)
-    {
-        if (a == b && b == c)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isRun(int a, int b, int c)
-    {
-        // ABC must be one tile up for each other. Same suit check
-        if (a + 1 == b && b + 1 == c && sameSuit(a, c))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isPair(int a, int b)
-    {
-        if (a == b)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isTaatsu(int a, int b)
-    {
-        // Same suit check required. 17 and 19 are two apart, but refer to 9-pin and 2-sô.
-        // Protogroups (taatsu) do not exist for winds, all pairs are considered separate entities.
-        if ((a + 1 == b || a + 2 == b) && sameSuit(a, b) && b < 27)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean sameSuit(int a, int b)
-    {
-        // Irrelevant for protogroup checks on winds, dragons, etc.
-        if (a / 9 == b / 9)
-        {
-            return true;
-        }
-        return false;
     }
 
     private static int[] loadHand(int[] hand, int[] newHand)
@@ -367,7 +303,7 @@ public class MahjongShantenCounter
 
     private static boolean pureFlushHand(int[] hand)
     {
-        if (sameSuit(hand[0], hand[hand.length - 1]))
+        if (TileKindUtils.areSameSuit(hand[0], hand[hand.length - 1]))
         {
             return true;
         }
