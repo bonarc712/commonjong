@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="compiler" name="Commonjong Ant Build">
+	<target name="compiler">
+		<javac includeantruntime="false" srcdir="./src"/>
+	</target>
+</project>
