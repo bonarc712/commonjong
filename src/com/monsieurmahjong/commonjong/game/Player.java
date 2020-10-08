@@ -3,12 +3,13 @@ package com.monsieurmahjong.commonjong.game;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.mahjong.MahjongGame;
-import com.monsieurmahjong.commonjong.rules.generic.*;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileOrderingComparator;
 
 public class Player
 {
     private String name;
     private Hand hand;
+    private Seat seat;
     @Deprecated // player should not have direct access to the game. It should be passed to him via play method
     private MahjongGame game;
 
@@ -26,6 +27,16 @@ public class Player
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public Seat getSeat()
+    {
+        return seat;
+    }
+
+    public void setSeat(Seat seat)
+    {
+        this.seat = seat;
     }
 
     public void play()
