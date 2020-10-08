@@ -84,7 +84,7 @@ public enum MahjongTileKind
         return this.is(CHARACTERS_1, CHARACTERS_9, CIRCLES_1, CIRCLES_9, BAMBOOS_1, BAMBOOS_9);
     }
 
-    public boolean isOrdinal()
+    public boolean isNumeral()
     {
         return this.isCharacters() || this.isBamboos() || this.isCircles();
     }

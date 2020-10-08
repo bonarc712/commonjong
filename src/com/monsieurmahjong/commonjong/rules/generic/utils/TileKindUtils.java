@@ -120,9 +120,9 @@ public class TileKindUtils
      * An ordinal tile is any tile is part of
      * a family (characters, bamboos, dots)
      */
-    public static boolean isOrdinal(int index)
+    public static boolean isNumeral(int index)
     {
-        return getKindFromIndex(index).isOrdinal();
+        return getKindFromIndex(index).isNumeral();
     }
 
     /**
@@ -132,7 +132,7 @@ public class TileKindUtils
     public static boolean isSimple(int index)
     {
         MahjongTileKind tileKind = getKindFromIndex(index);
-        return tileKind.isOrdinal() && !tileKind.isEnd();
+        return tileKind.isNumeral() && !tileKind.isEnd();
     }
 
     public static List<MahjongTileKind> getAllCharacters()
