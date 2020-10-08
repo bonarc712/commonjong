@@ -3,6 +3,16 @@
   <groupId>monsieurmahjong</groupId>
   <artifactId>commonjong</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.6.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+    
   <build>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>tests</testSourceDirectory>
@@ -25,4 +35,5 @@
       </plugin>
     </plugins>
   </build>
+  
 </project>
