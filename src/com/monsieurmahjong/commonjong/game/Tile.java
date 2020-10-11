@@ -3,7 +3,7 @@ package com.monsieurmahjong.commonjong.game;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.ui.locale.TileLabels_fr;
 
-public class Tile extends Object
+public class Tile
 {
     private MahjongTileKind tileKind;
     private boolean red; // red/special tile

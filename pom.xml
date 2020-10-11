@@ -4,6 +4,10 @@
   <artifactId>commonjong</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
+  <properties>
+    <skipTests>false</skipTests>
+  </properties>
+  
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
