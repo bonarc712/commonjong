@@ -101,19 +101,19 @@ public class TileKindUtils
     /**
      * An end tile is any tile that is a 1 or a 9.
      */
-    public static boolean isEnd(int index)
+    public static boolean isTerminal(int index)
     {
-        return getKindFromIndex(index).isEnd();
+        return getKindFromIndex(index).isTerminal();
     }
 
     /**
      * A terminal tile is any tile that is a 1, a 9,
      * a wind or a dragon.
      */
-    public static boolean isTerminal(int index)
+    public static boolean isTerminalOrHonour(int index)
     {
         MahjongTileKind tileKind = getKindFromIndex(index);
-        return tileKind.isHonour() || tileKind.isEnd();
+        return tileKind.isHonour() || tileKind.isTerminal();
     }
 
     /**
@@ -132,7 +132,7 @@ public class TileKindUtils
     public static boolean isSimple(int index)
     {
         MahjongTileKind tileKind = getKindFromIndex(index);
-        return tileKind.isNumeral() && !tileKind.isEnd();
+        return tileKind.isNumeral() && !tileKind.isTerminal();
     }
 
     public static List<MahjongTileKind> getAllCharacters()

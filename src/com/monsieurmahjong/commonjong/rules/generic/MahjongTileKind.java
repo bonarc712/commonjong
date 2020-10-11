@@ -79,7 +79,7 @@ public enum MahjongTileKind
         return this.is(EAST, SOUTH, WEST, NORTH);
     }
 
-    public boolean isEnd()
+    public boolean isTerminal()
     {
         return this.is(CHARACTERS_1, CHARACTERS_9, CIRCLES_1, CIRCLES_9, BAMBOOS_1, BAMBOOS_9);
     }

@@ -154,18 +154,18 @@ public class MahjongShantenCounter
     {
         int res = 0;
         // Check ones, nines, winds/dragons.
-        if (TileKindUtils.isTerminal(hand[0]))
+        if (TileKindUtils.isTerminalOrHonour(hand[0]))
         {
             res++;
         }
         // Check non-pairs ones/nines, winds/dragons
         for (int i = 1; i < hand.length; i++)
         {
-            if (TileKindUtils.isTerminal(hand[i]) && hand[i - 1] != hand[i])
+            if (TileKindUtils.isTerminalOrHonour(hand[i]) && hand[i - 1] != hand[i])
             {
                 res++;
             }
-            if (TileKindUtils.isTerminal(hand[i]) && hand[i - 1] != hand[i])
+            if (TileKindUtils.isTerminalOrHonour(hand[i]) && hand[i - 1] != hand[i])
             {
                 res++;
             }
@@ -179,13 +179,13 @@ public class MahjongShantenCounter
         for (int i = 1; i < hand.length; i++)
         {
             // Count from second tile (index = 1)
-            if (TileKindUtils.isTerminal(hand[i]) && hand[i - 1] == hand[i])
+            if (TileKindUtils.isTerminalOrHonour(hand[i]) && hand[i - 1] == hand[i])
             {
                 res++;
             }
             // If three+ tiles, the line above adds, and the line below takes away. 
             // Distinct pair logic.
-            if (TileKindUtils.isTerminal(hand[i]) && hand[i - 2] == hand[i])
+            if (TileKindUtils.isTerminalOrHonour(hand[i]) && hand[i - 2] == hand[i])
             {
                 res--;
             }
@@ -318,7 +318,7 @@ public class MahjongShantenCounter
             {
                 return false;
             }
-            else if (TileKindUtils.isEnd(hand[i]))
+            else if (TileKindUtils.isTerminal(hand[i]))
             {
                 return false;
             }

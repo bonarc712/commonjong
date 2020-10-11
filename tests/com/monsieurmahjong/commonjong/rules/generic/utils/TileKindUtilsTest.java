@@ -25,28 +25,28 @@ public class TileKindUtilsTest
     public void testTileProperties()
     {
         // one of characters
-        Assertions.assertTrue(TileKindUtils.isEnd(0));
-        Assertions.assertTrue(TileKindUtils.isNumeral(0));
         Assertions.assertTrue(TileKindUtils.isTerminal(0));
+        Assertions.assertTrue(TileKindUtils.isNumeral(0));
+        Assertions.assertTrue(TileKindUtils.isTerminalOrHonour(0));
         Assertions.assertFalse(TileKindUtils.isHonor(0));
         // three of characters
-        Assertions.assertFalse(TileKindUtils.isEnd(2));
+        Assertions.assertFalse(TileKindUtils.isTerminal(2));
         Assertions.assertTrue(TileKindUtils.isNumeral(2));
         // nine of bamboos
+        Assertions.assertTrue(TileKindUtils.isTerminalOrHonour(26));
         Assertions.assertTrue(TileKindUtils.isTerminal(26));
-        Assertions.assertTrue(TileKindUtils.isEnd(26));
         Assertions.assertTrue(TileKindUtils.isNumeral(26));
         // west
         Assertions.assertTrue(TileKindUtils.isWind(29));
         Assertions.assertFalse(TileKindUtils.isDragon(29));
-        Assertions.assertTrue(TileKindUtils.isTerminal(29));
-        Assertions.assertFalse(TileKindUtils.isEnd(29));
+        Assertions.assertTrue(TileKindUtils.isTerminalOrHonour(29));
+        Assertions.assertFalse(TileKindUtils.isTerminal(29));
         Assertions.assertFalse(TileKindUtils.isNumeral(29));
         // white dragon
         Assertions.assertFalse(TileKindUtils.isWind(31));
         Assertions.assertTrue(TileKindUtils.isDragon(31));
-        Assertions.assertTrue(TileKindUtils.isTerminal(31));
-        Assertions.assertFalse(TileKindUtils.isEnd(31));
+        Assertions.assertTrue(TileKindUtils.isTerminalOrHonour(31));
+        Assertions.assertFalse(TileKindUtils.isTerminal(31));
         Assertions.assertFalse(TileKindUtils.isNumeral(31));
     }
 
