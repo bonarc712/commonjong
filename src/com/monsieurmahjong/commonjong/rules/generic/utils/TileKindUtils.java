@@ -99,7 +99,7 @@ public class TileKindUtils
     }
 
     /**
-     * An end tile is any tile that is a 1 or a 9.
+     * An terminal tile is any tile that is a 1 or a 9.
      */
     public static boolean isTerminal(int index)
     {
@@ -107,7 +107,7 @@ public class TileKindUtils
     }
 
     /**
-     * A terminal tile is any tile that is a 1, a 9,
+     * A terminal or honour tile is any tile that is a 1, a 9,
      * a wind or a dragon.
      */
     public static boolean isTerminalOrHonour(int index)
@@ -117,7 +117,7 @@ public class TileKindUtils
     }
 
     /**
-     * An ordinal tile is any tile is part of
+     * A numeral tile is any tile is part of
      * a family (characters, bamboos, dots)
      */
     public static boolean isNumeral(int index)

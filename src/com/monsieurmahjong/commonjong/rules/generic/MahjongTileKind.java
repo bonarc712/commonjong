@@ -64,6 +64,11 @@ public enum MahjongTileKind
 
     // UTIL METHODS
 
+    public int getIndex()
+    {
+        return ordinal();
+    }
+
     public boolean isHonour()
     {
         return this.isDragon() || this.isWind();

@@ -67,4 +67,14 @@ public class TileKindUtilsTest
         Assertions.assertFalse(TileKindUtils.areSameSuit(MahjongTileKind.EAST.ordinal(), MahjongTileKind.SOUTH.ordinal()));
         Assertions.assertFalse(TileKindUtils.areSameSuit(MahjongTileKind.EAST.ordinal(), MahjongTileKind.WHITE.ordinal()));
     }
+
+    @Test
+    public void testGetKindFromIndex()
+    {
+        Assertions.assertEquals(MahjongTileKind.CHARACTERS_1, TileKindUtils.getKindFromIndex(0));
+        Assertions.assertEquals(MahjongTileKind.CHARACTERS_3, TileKindUtils.getKindFromIndex(2));
+        Assertions.assertEquals(MahjongTileKind.BAMBOOS_9, TileKindUtils.getKindFromIndex(26));
+        Assertions.assertEquals(MahjongTileKind.WEST, TileKindUtils.getKindFromIndex(29));
+        Assertions.assertEquals(MahjongTileKind.WHITE, TileKindUtils.getKindFromIndex(31));
+    }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import com.monsieurmahjong.commonjong.game.Tile;
 
 /**
- * Winning shapes is meant has a way to validate if a
+ * Winning shapes is meant as a way to validate if a
  * hand has a winning shape or not. It may differ from
  * one type of mahjong ruleset to another.
  */
