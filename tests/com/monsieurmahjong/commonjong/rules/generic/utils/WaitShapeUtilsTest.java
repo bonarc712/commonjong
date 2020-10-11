@@ -7,7 +7,7 @@ import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 public class WaitShapeUtilsTest
 {
     @Test
-    public void isGroupTest()
+    public void testIsGroup()
     {
         Assertions.assertTrue(WaitShapeUtils.isGroup(MahjongTileKind.BAMBOOS_2.ordinal(), MahjongTileKind.BAMBOOS_3.ordinal(), MahjongTileKind.BAMBOOS_4.ordinal()));
         Assertions.assertTrue(WaitShapeUtils.isGroup(MahjongTileKind.BAMBOOS_2.ordinal(), MahjongTileKind.BAMBOOS_2.ordinal(), MahjongTileKind.BAMBOOS_2.ordinal()));
@@ -23,7 +23,7 @@ public class WaitShapeUtilsTest
     }
 
     @Test
-    public void isPairTest()
+    public void testIsPair()
     {
         Assertions.assertTrue(WaitShapeUtils.isPair(MahjongTileKind.BAMBOOS_2.ordinal(), MahjongTileKind.BAMBOOS_2.ordinal()));
         Assertions.assertTrue(WaitShapeUtils.isPair(MahjongTileKind.WEST.ordinal(), MahjongTileKind.WEST.ordinal()));
@@ -35,7 +35,7 @@ public class WaitShapeUtilsTest
     }
 
     @Test
-    public void isProtogroupTest()
+    public void testIsProtogroup()
     {
         Assertions.assertTrue(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_2.ordinal(), MahjongTileKind.BAMBOOS_3.ordinal()));
         Assertions.assertTrue(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_1.ordinal(), MahjongTileKind.BAMBOOS_3.ordinal()));

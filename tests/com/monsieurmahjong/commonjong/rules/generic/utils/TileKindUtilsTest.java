@@ -51,7 +51,7 @@ public class TileKindUtilsTest
     }
 
     @Test
-    public void areSameSuitTest()
+    public void testAreSameSuit()
     {
         Assertions.assertTrue(TileKindUtils.areSameSuit(MahjongTileKind.BAMBOOS_1.ordinal(), MahjongTileKind.BAMBOOS_9.ordinal()));
         Assertions.assertTrue(TileKindUtils.areSameSuit(MahjongTileKind.CIRCLES_6.ordinal(), MahjongTileKind.CIRCLES_6.ordinal()));

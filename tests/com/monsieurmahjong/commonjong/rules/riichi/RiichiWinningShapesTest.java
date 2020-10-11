@@ -13,7 +13,7 @@ import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 public class RiichiWinningShapesTest
 {
     @Test
-    public void riichiWinningShapesTest()
+    public void testRiichiWinningShapes()
     {
         RiichiWinningShapes winningShapes = new RiichiWinningShapes();
         List<Tile> hand1 = TileKindUtils.asHand("5z", "5z", "5z", "4z", "4z", "4z", "3z", "3z", "3z", "1z", "1z", "1z", "2z");
