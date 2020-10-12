@@ -99,7 +99,7 @@ public class TileKindUtils
     }
 
     /**
-     * An terminal tile is any tile that is a 1 or a 9.
+     * A terminal tile is any tile that is a 1 or a 9.
      */
     public static boolean isTerminal(int index)
     {
