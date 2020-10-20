@@ -171,4 +171,20 @@ public class TileKindUtils
                 firstTile.isBamboos() && secondTile.isBamboos();
     }
 
+    // ALIASES
+
+    public static boolean isYaochuu(int index)
+    {
+        return isTerminalOrHonour(index);
+    }
+
+    public static boolean isRoutou(int index)
+    {
+        return isTerminal(index);
+    }
+
+    public static boolean isEnd(int index)
+    {
+        return isTerminal(index);
+    }
 }
