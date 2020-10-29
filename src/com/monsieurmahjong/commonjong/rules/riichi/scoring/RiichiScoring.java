@@ -9,6 +9,18 @@ import com.monsieurmahjong.commonjong.utils.MathUtils;
 
 public class RiichiScoring implements Scoring
 {
+    private boolean kiriageMangan;
+
+    public RiichiScoring()
+    {
+        kiriageMangan = false;
+    }
+
+    public void setKiriageMangan(boolean kiriageMangan)
+    {
+        this.kiriageMangan = kiriageMangan;
+    }
+
     @Override
     public int getScore(MahjongGame game, Hand hand)
     {
@@ -120,11 +132,11 @@ public class RiichiScoring implements Scoring
                 return 192000;
             case NORMAL:
             default:
-                return calculateScore(han, fu, false);
+                return calculateScore(han, fu);
         }
     }
 
-    private int calculateScore(int han, int fu, boolean kiriageMangan)
+    private int calculateScore(int han, int fu)
     {
         if (kiriageMangan && han * fu >= 120)
         {
