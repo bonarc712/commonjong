@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.*;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.WaitShapeUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.*;
 
 public class WaitShapeEngine
 {
@@ -13,10 +13,11 @@ public class WaitShapeEngine
     private List<Tile> unmeldedTiles;
 
     // mid-computation variables [needed?]
-    private Set<List<Integer>> potentialRuns;
-    private Set<Integer> potentialTriplets;
-    private Set<Integer> pairs;
-    private Set<List<Integer>> protogroups;
+    //    private Set<List<Integer>> potentialRuns;
+    //    private Set<Integer> potentialTriplets;
+    //    private Set<Integer> pairs;
+    //    private Set<List<Integer>> protogroups;
+    private List<TileGroup> tileGroups;
 
     private List<MahjongTileKind> wait;
 
@@ -37,10 +38,11 @@ public class WaitShapeEngine
 
     private void mInit()
     {
-        potentialRuns = new HashSet<>();
-        potentialTriplets = new HashSet<>();
-        pairs = new HashSet<>();
-        protogroups = new HashSet<>();
+        //        potentialRuns = new HashSet<>();
+        //        potentialTriplets = new HashSet<>();
+        //        pairs = new HashSet<>();
+        //        protogroups = new HashSet<>();
+        tileGroups = new ArrayList<>();
 
         computeWait();
     }
@@ -89,41 +91,13 @@ public class WaitShapeEngine
 
     private void buildWait()
     {
-        List<Tile> tiles = getUnmeldedTiles();
-        for (Integer index : potentialTriplets)
+        for (TileGroup tileGroup : tileGroups)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                tiles.remove(tiles.stream().filter(tile -> indexOf(tile) == index).findFirst().get());
-            }
+            tileGroup.getWaitingTiles().forEach(index -> {
+                MahjongTileKind kind = TileKindUtils.getKindFromIndex(index);
+                wait.add(kind);
+            });
         }
-
-        for (List<Integer> run : potentialRuns)
-        {
-            for (Integer index : run)
-            {
-                tiles.remove(tiles.stream().filter(tile -> indexOf(tile) == index).findFirst().get());
-            }
-        }
-
-        if (pairs.size() == 1)
-        {
-            for (Integer index : pairs)
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    tiles.remove(tiles.stream().filter(tile -> indexOf(tile) == index).findFirst().get());
-                }
-            }
-        }
-
-        // Tanki wait
-        if (pairs.size() == 0)
-        {
-            wait.add(tiles.get(0).getTileKind());
-        }
-
-        // TODO : other wait forms
     }
 
     private List<Tile> getUnmeldedTiles()
@@ -133,12 +107,12 @@ public class WaitShapeEngine
 
     private void parseFamilyTiles(List<Tile> tiles)
     {
-        for (int i = 0; i < tiles.size(); i++)
+        int i = 0;
+        while (!tiles.isEmpty())
         {
             MahjongTileKind currentTileKind = tiles.get(i).getTileKind();
 
-            // check for pairs and triplets (quads are not checked, they should be melded)
-            if (!potentialTriplets.contains(currentTileKind.getIndex()) && !pairs.contains(currentTileKind.getIndex()))
+            if (!includedInAnExclusiveGroup(currentTileKind))
             {
                 parsePairsAndTriplets(tiles, currentTileKind);
             }
@@ -146,20 +120,45 @@ public class WaitShapeEngine
             // check for runs
             for (int j = i; j < tiles.size(); j++)
             {
-                if (WaitShapeUtils.isProtogroup(indexOf(tiles.get(i)), indexOf(tiles.get(j))))
-                {
-                    protogroups.add(Arrays.asList(indexOf(tiles.get(i)), indexOf(tiles.get(j))));
-                }
-
+                TileGroup runBasedGroup = new TileGroup();
                 for (int k = j; k < tiles.size(); k++)
                 {
                     if (WaitShapeUtils.isRun(indexOf(tiles.get(i)), indexOf(tiles.get(j)), indexOf(tiles.get(k))))
                     {
-                        potentialRuns.add(Arrays.asList(indexOf(tiles.get(i)), indexOf(tiles.get(j)), indexOf(tiles.get(k))));
+                        runBasedGroup.addAll(indexOf(tiles.get(i)), indexOf(tiles.get(j)), indexOf(tiles.get(k)));
+                        tileGroups.add(runBasedGroup);
+                    }
+                }
+
+                if (runBasedGroup.getIndices().isEmpty())
+                {
+                    if (WaitShapeUtils.isProtogroup(indexOf(tiles.get(i)), indexOf(tiles.get(j))))
+                    {
+                        runBasedGroup.addAll(indexOf(tiles.get(i)), indexOf(tiles.get(j)));
                     }
                 }
             }
+
+            // create a group for that tile
+            if (!includedInAGroup(currentTileKind))
+            {
+                TileGroup loneTile = new TileGroup();
+                loneTile.addAll(currentTileKind.getIndex());
+                tileGroups.add(loneTile);
+            }
+
+            tiles.remove(0);
         }
+    }
+
+    private boolean includedInAnExclusiveGroup(MahjongTileKind pCurrentTileKind)
+    {
+        return tileGroups.stream().anyMatch(group -> group.getIndices().get(0) == pCurrentTileKind.getIndex() && group.isExclusiveGroup());
+    }
+
+    private boolean includedInAGroup(MahjongTileKind pCurrentTileKind)
+    {
+        return tileGroups.stream().anyMatch(group -> group.getIndices().contains(pCurrentTileKind.getIndex()));
     }
 
     private void parseHonourTiles(List<Tile> tiles)
@@ -177,14 +176,12 @@ public class WaitShapeEngine
     private void parsePairsAndTriplets(List<Tile> tiles, MahjongTileKind tileKind)
     {
         int sameTileCount = (int) tiles.stream().filter(tile -> tile.getTileKind() == tileKind).count();
-        if (sameTileCount == 2)
-        {
-            pairs.add(tileKind.getIndex());
-        }
-        else if (sameTileCount >= 3)
-        {
-            potentialTriplets.add(tileKind.getIndex());
-        }
+        Integer[] indices = new Integer[sameTileCount];
+        Arrays.fill(indices, tileKind.getIndex());
+
+        TileGroup tileGroup = new TileGroup();
+        tileGroup.addAll(indices);
+        tileGroups.add(tileGroup);
     }
 
     private int indexOf(Tile tile)

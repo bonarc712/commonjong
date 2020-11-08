@@ -7,9 +7,8 @@ import java.util.*;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Tile;
-import com.monsieurmahjong.commonjong.rules.generic.*;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
-import com.monsieurmahjong.commonjong.rules.generic.waits.WaitShapeEngine;
 
 public class WaitShapeEngineTest
 {
@@ -23,12 +22,11 @@ public class WaitShapeEngineTest
         hand1Expected.add(MahjongTileKind.WHITE);
         assertEquals(hand1Expected, engine.getWait());
 
-        // This test will not work for now. There's still work to do on the wait shape engine.
-        //        List<Tile> hand2 = TileKindUtils.asHand("1112223334567z");
-        //        engine = new WaitShapeEngine(hand2);
-        //
-        //        List<MahjongTileKind> hand2Expected = new ArrayList<>();
-        //        hand2Expected.addAll(Arrays.asList(MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED));
-        //        assertEquals(hand2Expected, engine.getWait());
+        List<Tile> hand2 = TileKindUtils.asHand("1112223334567z");
+        engine = new WaitShapeEngine(hand2);
+
+        List<MahjongTileKind> hand2Expected = new ArrayList<>();
+        hand2Expected.addAll(Arrays.asList(MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED));
+        assertEquals(hand2Expected, engine.getWait());
     }
 }

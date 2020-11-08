@@ -13,9 +13,23 @@ public class TileGroup
         tileIndices = new ArrayList<>();
     }
 
+    public List<Integer> getIndices()
+    {
+        return tileIndices;
+    }
+
     public void addAll(Integer... indices)
     {
         tileIndices.addAll(Arrays.asList(indices));
+    }
+
+    /**
+     * An exclusive group is a group where all the tiles are
+     * the same (eg. lone tile, pair, triplet, quad, etc.)
+     */
+    public boolean isExclusiveGroup()
+    {
+        return tileIndices.stream().distinct().count() == 1;
     }
 
     public boolean isComplete()
