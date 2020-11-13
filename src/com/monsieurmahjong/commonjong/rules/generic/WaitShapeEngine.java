@@ -1,10 +1,9 @@
-package com.monsieurmahjong.commonjong.rules.generic.waits;
+package com.monsieurmahjong.commonjong.rules.generic;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.*;
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.WaitShapeUtils;
 
 public class WaitShapeEngine
@@ -12,11 +11,10 @@ public class WaitShapeEngine
     private Hand hand;
     private List<Tile> unmeldedTiles;
 
-    // mid-computation variables [needed?]
+    // mid-computation variables
     private Set<List<Integer>> potentialRuns;
     private Set<Integer> potentialTriplets;
-    private Set<Integer> pairs;
-    private Set<List<Integer>> protogroups;
+    private Set<Integer> potentialPairs;
 
     private List<MahjongTileKind> wait;
 
@@ -39,8 +37,7 @@ public class WaitShapeEngine
     {
         potentialRuns = new HashSet<>();
         potentialTriplets = new HashSet<>();
-        pairs = new HashSet<>();
-        protogroups = new HashSet<>();
+        potentialPairs = new HashSet<>();
 
         computeWait();
     }
@@ -106,9 +103,9 @@ public class WaitShapeEngine
             }
         }
 
-        if (pairs.size() == 1)
+        if (potentialPairs.size() == 1)
         {
-            for (Integer index : pairs)
+            for (Integer index : potentialPairs)
             {
                 for (int i = 0; i < 2; i++)
                 {
@@ -118,7 +115,7 @@ public class WaitShapeEngine
         }
 
         // Tanki wait
-        if (pairs.size() == 0)
+        if (potentialPairs.size() == 0)
         {
             wait.add(tiles.get(0).getTileKind());
         }
@@ -138,7 +135,7 @@ public class WaitShapeEngine
             MahjongTileKind currentTileKind = tiles.get(i).getTileKind();
 
             // check for pairs and triplets (quads are not checked, they should be melded)
-            if (!potentialTriplets.contains(currentTileKind.getIndex()) && !pairs.contains(currentTileKind.getIndex()))
+            if (!potentialTriplets.contains(currentTileKind.getIndex()) && !potentialPairs.contains(currentTileKind.getIndex()))
             {
                 parsePairsAndTriplets(tiles, currentTileKind);
             }
@@ -146,11 +143,6 @@ public class WaitShapeEngine
             // check for runs
             for (int j = i; j < tiles.size(); j++)
             {
-                if (WaitShapeUtils.isProtogroup(indexOf(tiles.get(i)), indexOf(tiles.get(j))))
-                {
-                    protogroups.add(Arrays.asList(indexOf(tiles.get(i)), indexOf(tiles.get(j))));
-                }
-
                 for (int k = j; k < tiles.size(); k++)
                 {
                     if (WaitShapeUtils.isRun(indexOf(tiles.get(i)), indexOf(tiles.get(j)), indexOf(tiles.get(k))))
@@ -179,7 +171,7 @@ public class WaitShapeEngine
         int sameTileCount = (int) tiles.stream().filter(tile -> tile.getTileKind() == tileKind).count();
         if (sameTileCount == 2)
         {
-            pairs.add(tileKind.getIndex());
+            potentialPairs.add(tileKind.getIndex());
         }
         else if (sameTileCount >= 3)
         {

@@ -1,4 +1,4 @@
-package com.monsieurmahjong.commonjong.rules.generic.waits;
+package com.monsieurmahjong.commonjong.rules.generic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,9 +7,7 @@ import java.util.*;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Tile;
-import com.monsieurmahjong.commonjong.rules.generic.*;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
-import com.monsieurmahjong.commonjong.rules.generic.waits.WaitShapeEngine;
 
 public class WaitShapeEngineTest
 {
