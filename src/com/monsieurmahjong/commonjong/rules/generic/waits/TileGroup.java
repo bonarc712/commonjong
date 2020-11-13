@@ -32,6 +32,16 @@ public class TileGroup
         return tileIndices.stream().distinct().count() == 1;
     }
 
+    public boolean isPair()
+    {
+        return isExclusiveGroup() && tileIndices.size() == 2;
+    }
+
+    public boolean isProtogroup()
+    {
+        return !isExclusiveGroup() && tileIndices.size() == 2;
+    }
+
     public boolean isComplete()
     {
         if (tileIndices.size() < 3)
@@ -125,5 +135,17 @@ public class TileGroup
         }
 
         return wait;
+    }
+
+    @Override
+    public String toString()
+    {
+        String toReturn = "TileGroup : ";
+        for (Integer index : tileIndices)
+        {
+            toReturn += TileKindUtils.getKindFromIndex(index).name() + " ";
+        }
+
+        return toReturn;
     }
 }

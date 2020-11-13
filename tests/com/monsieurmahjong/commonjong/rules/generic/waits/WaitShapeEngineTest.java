@@ -15,18 +15,23 @@ public class WaitShapeEngineTest
     @Test
     public void testGetWait()
     {
-        List<Tile> hand1 = TileKindUtils.asHand("1112223334445z");
-        WaitShapeEngine engine = new WaitShapeEngine(hand1);
+        // tenpai hands
+        testGetWait("1112223334445z", MahjongTileKind.WHITE);
+        testGetWait("123m23p12366s555z", MahjongTileKind.CIRCLES_1, MahjongTileKind.CIRCLES_4);
+        testGetWait("123m22p12366s555z", MahjongTileKind.CIRCLES_2, MahjongTileKind.BAMBOOS_6);
+        testGetWait("123m12p12366s555z", MahjongTileKind.CIRCLES_3);
 
-        List<MahjongTileKind> hand1Expected = new ArrayList<>();
-        hand1Expected.add(MahjongTileKind.WHITE);
-        assertEquals(hand1Expected, engine.getWait());
+        // non-tenpai hands
+        testGetWait("1112223334567z", MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED);
+    }
 
-        List<Tile> hand2 = TileKindUtils.asHand("1112223334567z");
-        engine = new WaitShapeEngine(hand2);
+    private void testGetWait(String startingHand, MahjongTileKind... expectedWait)
+    {
+        List<Tile> hand = TileKindUtils.asHand(startingHand);
+        WaitShapeEngine engine = new WaitShapeEngine(hand);
 
-        List<MahjongTileKind> hand2Expected = new ArrayList<>();
-        hand2Expected.addAll(Arrays.asList(MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED));
-        assertEquals(hand2Expected, engine.getWait());
+        List<MahjongTileKind> handExpected = new ArrayList<>();
+        handExpected.addAll(Arrays.asList(expectedWait));
+        assertEquals(handExpected, engine.getWait());
     }
 }
