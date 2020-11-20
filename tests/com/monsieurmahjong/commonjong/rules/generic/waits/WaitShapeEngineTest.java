@@ -20,6 +20,7 @@ public class WaitShapeEngineTest
         testGetWait("123m23p12366s555z", MahjongTileKind.CIRCLES_1, MahjongTileKind.CIRCLES_4);
         testGetWait("123m22p12366s555z", MahjongTileKind.CIRCLES_2, MahjongTileKind.BAMBOOS_6);
         testGetWait("123m12p12366s555z", MahjongTileKind.CIRCLES_3);
+        testGetWait("123m123p45666s55z", MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_6, MahjongTileKind.WHITE);
 
         // non-tenpai hands
         testGetWait("1112223334567z", MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED);
