@@ -4,7 +4,7 @@ import java.util.*;
 
 import com.monsieurmahjong.commonjong.rules.generic.utils.*;
 
-public class TileGroup
+public class TileGroup extends Object
 {
     private List<Integer> tileIndices;
 
@@ -13,9 +13,20 @@ public class TileGroup
         tileIndices = new ArrayList<>();
     }
 
+    public TileGroup(List<Integer> indices)
+    {
+        tileIndices = new ArrayList<>();
+        tileIndices.addAll(indices);
+    }
+
     public List<Integer> getIndices()
     {
         return tileIndices;
+    }
+
+    public void add(Integer index)
+    {
+        tileIndices.add(index);
     }
 
     public void addAll(Integer... indices)
@@ -135,6 +146,16 @@ public class TileGroup
         }
 
         return wait;
+    }
+
+    @Override
+    public boolean equals(Object other)
+    {
+        if (!(other instanceof TileGroup))
+        {
+            return false;
+        }
+        return tileIndices.equals(((TileGroup) other).tileIndices);
     }
 
     @Override
