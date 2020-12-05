@@ -13,7 +13,22 @@ public class TileParserTest
     @Test
     public void testParseHonourTiles()
     {
-        // should be easy
+        List<Tile> winds = TileKindUtils.asHand("1223334444z");
+        List<TileGroup> windsGroups = TileParser.parseHonourTiles(winds);
+        List<TileGroup> expectedWindsGroups = new ArrayList<>();
+        expectedWindsGroups.add(tileGroupOf(MahjongTileKind.EAST));
+        expectedWindsGroups.add(tileGroupOf(MahjongTileKind.SOUTH, MahjongTileKind.SOUTH));
+        expectedWindsGroups.add(tileGroupOf(MahjongTileKind.WEST, MahjongTileKind.WEST, MahjongTileKind.WEST));
+        expectedWindsGroups.add(tileGroupOf(MahjongTileKind.NORTH, MahjongTileKind.NORTH, MahjongTileKind.NORTH, MahjongTileKind.NORTH));
+        Assertions.assertEquals(expectedWindsGroups, windsGroups, "Winds do not work");
+
+        List<Tile> dragons = TileKindUtils.asHand("556677z");
+        List<TileGroup> dragonsGroups = TileParser.parseHonourTiles(dragons);
+        List<TileGroup> expectedDragonsGroups = new ArrayList<>();
+        expectedDragonsGroups.add(tileGroupOf(MahjongTileKind.WHITE, MahjongTileKind.WHITE));
+        expectedDragonsGroups.add(tileGroupOf(MahjongTileKind.GREEN, MahjongTileKind.GREEN));
+        expectedDragonsGroups.add(tileGroupOf(MahjongTileKind.RED, MahjongTileKind.RED));
+        Assertions.assertEquals(expectedDragonsGroups, dragonsGroups, "Winds do not work");
     }
 
     @Test
@@ -24,6 +39,22 @@ public class TileParserTest
         List<TileGroup> expectedRyanmenShapedProtogroup = new ArrayList<>();
         expectedRyanmenShapedProtogroup.add(tileGroupOf(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4));
         Assertions.assertEquals(expectedRyanmenShapedProtogroup, ryanmenShapedProtogroup, "Ryanmen shape does not work");
+
+        List<Tile> nobetanShape = TileKindUtils.asHand("2345s");
+        List<TileGroup> nobetanShapedProtogroup = TileParser.parseFamilyTiles(nobetanShape);
+        List<TileGroup> expectedNobetanShapedProtogroup = new ArrayList<>();
+        expectedNobetanShapedProtogroup.add(tileGroupOf(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4));
+        expectedNobetanShapedProtogroup.add(tileGroupOf(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_5));
+        Assertions.assertEquals(expectedNobetanShapedProtogroup, nobetanShapedProtogroup, "Ryanmen shape does not work");
+
+        List<Tile> doubleRyanmenShape = TileKindUtils.asHand("3344s");
+        List<TileGroup> doubleRyanmenShapedProtogroup = TileParser.parseFamilyTiles(doubleRyanmenShape);
+        List<TileGroup> expectedDoubleRyanmenShapedProtogroup = new ArrayList<>();
+        expectedDoubleRyanmenShapedProtogroup.add(tileGroupOf(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3));
+        expectedDoubleRyanmenShapedProtogroup.add(tileGroupOf(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4));
+        expectedDoubleRyanmenShapedProtogroup.add(tileGroupOf(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4));
+        expectedDoubleRyanmenShapedProtogroup.add(tileGroupOf(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4));
+        Assertions.assertEquals(expectedDoubleRyanmenShapedProtogroup, doubleRyanmenShapedProtogroup, "Ryanmen shape does not work");
 
         List<Tile> iipeikouShape = TileKindUtils.asHand("334455s");
         List<TileGroup> iipeikouShapedGroups = TileParser.parseFamilyTiles(iipeikouShape);

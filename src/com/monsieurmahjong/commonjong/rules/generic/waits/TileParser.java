@@ -84,7 +84,7 @@ public class TileParser
 
             if (!includedInAGroup(tileKind, tileGroups))
             {
-                parseLoneTiles(tileKind);
+                tileGroups.add(parseLoneTiles(tileKind));
             }
 
             tiles.removeIf(tile -> tile.getTileKind() == tileKind);
