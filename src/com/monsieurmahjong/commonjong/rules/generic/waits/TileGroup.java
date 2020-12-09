@@ -2,6 +2,7 @@ package com.monsieurmahjong.commonjong.rules.generic.waits;
 
 import java.util.*;
 
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.*;
 
 public class TileGroup extends Object
@@ -17,6 +18,17 @@ public class TileGroup extends Object
     {
         tileIndices = new ArrayList<>();
         tileIndices.addAll(indices);
+    }
+
+    public static TileGroup of(MahjongTileKind... tileKinds)
+    {
+        TileGroup tileGroup = new TileGroup();
+        for (MahjongTileKind tileKind : tileKinds)
+        {
+            int index = tileKind.getIndex();
+            tileGroup.add(index);
+        }
+        return tileGroup;
     }
 
     public List<Integer> getIndices()
@@ -146,6 +158,22 @@ public class TileGroup extends Object
         }
 
         return wait;
+    }
+
+    /**
+     * Return true if any tile index is the same in this group and in the other group.
+     * @param other TileGroup to compare with the current group
+     */
+    public boolean collidesWith(TileGroup other)
+    {
+        for (int index : other.getIndices())
+        {
+            if (tileIndices.contains(index))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

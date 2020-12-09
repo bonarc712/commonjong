@@ -43,7 +43,6 @@ public class TileParser
                     if (WaitShapeUtils.isRun(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j))))
                     {
                         runBasedGroup.addAll(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j)));
-
                         tileGroups.add(runBasedGroup);
                         break;
                     }
@@ -54,7 +53,19 @@ public class TileParser
                     if (!includedInARunGroup(indexOf(tiles.get(0)), indexOf(tiles.get(i)), tileGroups))
                     {
                         runBasedGroup.addAll(indexOf(tiles.get(0)), indexOf(tiles.get(i)));
-                        tileGroups.add(runBasedGroup);
+
+                        int occurrence = 4;
+                        for (int index : runBasedGroup.getIndices())
+                        {
+                            int currentTileOccurrence = (int) tiles.stream().filter(tile -> tile.getTileKind().getIndex() == index).count();
+                            occurrence = Math.min(occurrence, currentTileOccurrence);
+                        }
+
+                        for (int j = 0; j < occurrence; j++)
+                        {
+                            tileGroups.add(runBasedGroup);
+                        }
+                        break;
                     }
                 }
             }

@@ -50,20 +50,9 @@ public class WaitShapeEngine
         return wait;
     }
 
-    private void computeUnmeldedTiles()
-    {
-        List<Tile> allTiles = new ArrayList<>();
-        allTiles.addAll(hand.getTiles());
-        List<Tile> meldedTiles = hand.getMelds().stream().flatMap(List::stream).collect(Collectors.toList());
-
-        meldedTiles.forEach(tile -> allTiles.remove(tile));
-
-        unmeldedTiles = allTiles;
-    }
-
     private void computeWait()
     {
-        computeUnmeldedTiles();
+        unmeldedTiles = hand.getUnmeldedTiles();
 
         // get unmelded tiles
         List<Tile> characterTiles = getUnmeldedTiles().stream().filter(tile -> tile.getTileKind().isCharacters()).collect(Collectors.toList());
@@ -94,23 +83,8 @@ public class WaitShapeEngine
         // for now add just tileGroups directly (remove when combinations are good)
         handCombinations.add(tileGroups);
 
-        // first detect all groups that have collisions with each other 
-        List<List<TileGroup>> collisionList = new ArrayList<>();
-        System.out.println("There are " + tileGroups.size() + " tile groups");
-        for (TileGroup group : tileGroups)
-        {
-            System.out.println(group);
-            // be sure to include composite collisions (a collides with b which collides with c means that a, b and c are part of the same collision group)
-        }
-
-        // then dissect these groups to see the different possible pairings
-
-        // create hand combinations as different ways to look at the hand, with the different pairings
-        {
-            // if a tilegroup is not in any collision list, just add it directly
-
-            // else create a new combination for each possible pairing
-        }
+        HandConfigurationParser handParser = new HandConfigurationParser(hand);
+        handCombinations = handParser.getHandConfigurations(tileGroups);
     }
 
     private void buildWait()
