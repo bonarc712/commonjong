@@ -40,20 +40,48 @@ public class HandConfigurationParser
     {
         List<List<TileGroup>> handConfigurations = new ArrayList<>();
 
+        // first, create the collision list for all groups that collide with each other. All groups that have no collisions are not added in the list
         List<List<TileGroup>> collisionList = createCollisionList(tileGroups);
 
-        // then dissect these groups to see the different possible pairings
-
-        // create hand combinations as different ways to look at the hand, with the different pairings
+        // then dissect these collision groups to get the different possible pairings
+        List<List<TileGroup>> possiblePairings = new ArrayList<>();
+        for (List<TileGroup> collidingGroups : collisionList)
         {
-            // if a tilegroup is not in any collision list, just add it directly
-
-            // else create a new combination for each possible pairing
+            // create the pairings for the current group
+            createPossiblePairings(collidingGroups);
         }
+
+        //        // create hand combinations as different ways to look at the hand, with the different pairings
+        //        {
+        //            // if a tilegroup is not in any collision list, just add it directly
+        //
+        //            // else create a new combination for each possible pairing
+        //        }
 
         // add melded tiles to the result
         handConfigurations.forEach(list -> list.addAll(getMeldedTileGroups()));
         return handConfigurations;
+    }
+
+    /**
+     * This is package-private to ensure that this method can be unit tested.
+     * @param collidingGroups all groups that are part of one collision
+     * @return the different ways the colliding groups can be arranged
+     */
+    List<List<TileGroup>> createPossiblePairings(List<TileGroup> collidingGroups)
+    {
+        List<List<TileGroup>> possiblePairings = new ArrayList<>();
+
+        // create all pairings for the current colliding groups
+        for (int i = 0; i < collidingGroups.size(); i++)
+        {
+            // a composite for loop needs to be done so we can make sure we catch all combinations. The current tile group is the pivot.
+            List<TileGroup> currentPossiblePairing = new ArrayList<>();
+
+            possiblePairings.add(currentPossiblePairing);
+        }
+
+        return possiblePairings;
     }
 
     /**

@@ -31,6 +31,11 @@ public class TileGroup extends Object
         return tileGroup;
     }
 
+    public int getSize()
+    {
+        return tileIndices.size();
+    }
+
     public List<Integer> getIndices()
     {
         return tileIndices;
@@ -63,6 +68,11 @@ public class TileGroup extends Object
     public boolean isProtogroup()
     {
         return !isExclusiveGroup() && tileIndices.size() == 2;
+    }
+
+    public boolean isTriplet()
+    {
+        return isExclusiveGroup() && tileIndices.size() == 3;
     }
 
     public boolean isComplete()

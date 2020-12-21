@@ -87,13 +87,14 @@ public class WaitShapeEngine
         handCombinations = handParser.getHandConfigurations(tileGroups);
     }
 
+    // should probably return list of tiles
     private void buildWait()
     {
         List<MahjongTileKind> tilesToAddToWait = new ArrayList<>();
 
         for (List<TileGroup> handComposition : handCombinations)
         {
-            if (handComposition.size() == 5)
+            if (handComposition.size() == 5) // if (handComposition.isTenpai()) then ...
             {
                 int completeGroupCount = (int) handComposition.stream().filter(TileGroup::isComplete).count();
 
