@@ -23,7 +23,7 @@ public class WaitShapeEngine
     {
         this.hand = hand;
 
-        mInit();
+        init();
     }
 
     public WaitShapeEngine(List<Tile> tileList)
@@ -31,10 +31,10 @@ public class WaitShapeEngine
         hand = new Hand();
         hand.setTiles(tileList);
 
-        mInit();
+        init();
     }
 
-    private void mInit()
+    private void init()
     {
         tileGroups = new ArrayList<>();
         handCombinations = new ArrayList<>();
@@ -87,8 +87,10 @@ public class WaitShapeEngine
         handCombinations = handParser.getHandConfigurations(tileGroups);
     }
 
-    // should probably return list of tiles
-    private void buildWait()
+    /**
+     * @return wait
+     */
+    private List<MahjongTileKind> buildWait()
     {
         List<MahjongTileKind> tilesToAddToWait = new ArrayList<>();
 
@@ -148,6 +150,8 @@ public class WaitShapeEngine
         {
             wait.addAll(improvingTiles);
         }
+
+        return wait;
     }
 
     private void addTilesToWait(List<MahjongTileKind> waitList, List<Integer> indicesToAddToWaitList)

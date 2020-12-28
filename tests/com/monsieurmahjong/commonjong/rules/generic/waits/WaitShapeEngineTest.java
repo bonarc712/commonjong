@@ -7,7 +7,7 @@ import java.util.*;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Tile;
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.*;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
 public class WaitShapeEngineTest
@@ -21,6 +21,9 @@ public class WaitShapeEngineTest
         testGetWait("123m22p12366s555z", MahjongTileKind.CIRCLES_2, MahjongTileKind.BAMBOOS_6);
         testGetWait("123m12p12366s555z", MahjongTileKind.CIRCLES_3);
         testGetWait("123m123p45666s55z", MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_6, MahjongTileKind.WHITE);
+        testGetWait("2345666m123p777z", MahjongTileKind.CHARACTERS_1, MahjongTileKind.CHARACTERS_2, MahjongTileKind.CHARACTERS_4, MahjongTileKind.CHARACTERS_5, MahjongTileKind.CHARACTERS_7);
+        testGetWait("1112345678999s", MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_6,
+                MahjongTileKind.BAMBOOS_7, MahjongTileKind.BAMBOOS_8, MahjongTileKind.BAMBOOS_9);
 
         // non-tenpai hands
         testGetWait("1112223334567z", MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED);
@@ -30,9 +33,11 @@ public class WaitShapeEngineTest
     {
         List<Tile> hand = TileKindUtils.asHand(startingHand);
         WaitShapeEngine engine = new WaitShapeEngine(hand);
+        List<MahjongTileKind> waitResult = engine.getWait();
+        waitResult.sort(new MahjongTileKindComparator());
 
         List<MahjongTileKind> handExpected = new ArrayList<>();
         handExpected.addAll(Arrays.asList(expectedWait));
-        assertEquals(handExpected, engine.getWait());
+        assertEquals(handExpected, waitResult, "Hand " + startingHand + " does not give the expected result");
     }
 }

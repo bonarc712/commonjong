@@ -36,6 +36,11 @@ public class TileGroup extends Object
         return tileIndices.size();
     }
 
+    public boolean isEmpty()
+    {
+        return getSize() == 0;
+    }
+
     public List<Integer> getIndices()
     {
         return tileIndices;
