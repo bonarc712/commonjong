@@ -7,7 +7,7 @@ import com.monsieurmahjong.commonjong.rules.generic.utils.*;
 
 @Deprecated
 /**
- * @deprecated use {@link NewMahjongShantenCounter} instead
+ * @deprecated use {@link MahjongShantenCounter} instead
  */
 public class OldMahjongShantenCounter
 {

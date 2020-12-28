@@ -60,7 +60,7 @@ public class WaitShapeEngine
         int minimumShanten = Integer.MAX_VALUE;
         for (List<TileGroup> combination : handCombinations)
         {
-            int currentShanten = NewMahjongShantenCounter.countShanten(combination);
+            int currentShanten = MahjongShantenCounter.countShanten(combination);
             if (currentShanten < minimumShanten)
             {
                 minimumShanten = currentShanten;

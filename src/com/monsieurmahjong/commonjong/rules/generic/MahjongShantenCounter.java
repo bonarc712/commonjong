@@ -5,7 +5,7 @@ import java.util.*;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.*;
 
-public class NewMahjongShantenCounter
+public class MahjongShantenCounter
 {
     /**
      * This method counts all shanten for a specific hand combination. It does not count all
