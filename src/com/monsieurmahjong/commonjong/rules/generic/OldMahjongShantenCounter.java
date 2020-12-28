@@ -5,7 +5,11 @@ import java.util.List;
 import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.utils.*;
 
-public class MahjongShantenCounter
+@Deprecated
+/**
+ * @deprecated use {@link NewMahjongShantenCounter} instead
+ */
+public class OldMahjongShantenCounter
 {
     /*
      * Input may come in the following forms:
