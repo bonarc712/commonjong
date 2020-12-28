@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.*;
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.*;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
 public class WaitShapeEngine
@@ -48,6 +48,26 @@ public class WaitShapeEngine
     public List<MahjongTileKind> getWait()
     {
         return wait;
+    }
+
+    public int getShanten() throws IllegalStateException
+    {
+        if (handCombinations.isEmpty())
+        {
+            throw new IllegalStateException("The combinations need to be computed in order to determine shanten");
+        }
+
+        int minimumShanten = Integer.MAX_VALUE;
+        for (List<TileGroup> combination : handCombinations)
+        {
+            int currentShanten = NewMahjongShantenCounter.countShanten(combination);
+            if (currentShanten < minimumShanten)
+            {
+                minimumShanten = currentShanten;
+            }
+        }
+
+        return minimumShanten;
     }
 
     private void computeWait()
@@ -157,6 +177,7 @@ public class WaitShapeEngine
     private void addTilesToWait(List<MahjongTileKind> waitList, List<Integer> indicesToAddToWaitList)
     {
         indicesToAddToWaitList.forEach(index -> {
+            System.out.println(indicesToAddToWaitList);
             MahjongTileKind kind = TileKindUtils.getKindFromIndex(index);
             waitList.add(kind);
         });

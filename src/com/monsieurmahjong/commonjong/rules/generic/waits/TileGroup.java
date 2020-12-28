@@ -107,19 +107,19 @@ public class TileGroup extends Object
             int tileIndex = tileIndices.get(0);
             if (TileKindUtils.getKindFromIndex(tileIndex).isNumeral())
             {
-                if (tileIndex % 9 != 1 && tileIndex % 9 != 2) // tile is not a 1 or a 2
+                if (tileIndex % 9 != 0 && tileIndex % 9 != 1) // tile is not a 1 or a 2
                 {
                     improvingTiles.add(tileIndex - 2);
                 }
-                if (tileIndex % 9 != 1) // tile is not a 1
+                if (tileIndex % 9 != 0) // tile is not a 1
                 {
                     improvingTiles.add(tileIndex - 1);
                 }
-                if (tileIndex % 9 != 0) // tile is not a 9
+                if (tileIndex % 9 != 8) // tile is not a 9
                 {
                     improvingTiles.add(tileIndex + 1);
                 }
-                if (tileIndex % 9 != 0 && tileIndex % 9 != 8) // tile is not a 8 or a 9
+                if (tileIndex % 9 != 8 && tileIndex % 9 != 7) // tile is not a 8 or a 9
                 {
                     improvingTiles.add(tileIndex + 2);
                 }
