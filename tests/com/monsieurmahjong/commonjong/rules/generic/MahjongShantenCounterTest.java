@@ -166,5 +166,12 @@ public class MahjongShantenCounterTest
         expectedShanten = 5;
 
         Assertions.assertEquals(expectedShanten, resultShanten, "Wrong shanten for 111m258p258s1235z");
+
+        // other tests
+        waitEngine = new WaitShapeEngine(TileKindUtils.asHand("1566799m122345p"));
+        resultShanten = waitEngine.getShanten();
+        expectedShanten = 2;
+
+        Assertions.assertEquals(expectedShanten, resultShanten, "Wrong shanten for 1566799m122345p");
     }
 }

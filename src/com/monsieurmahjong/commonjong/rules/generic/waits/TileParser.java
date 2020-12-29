@@ -43,7 +43,25 @@ public class TileParser
                     if (WaitShapeUtils.isRun(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j))))
                     {
                         runBasedGroup.addAll(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j)));
-                        tileGroups.add(runBasedGroup);
+                        if (tileGroups.contains(runBasedGroup))
+                        {
+                            int occurrence = 4;
+                            for (int index : runBasedGroup.getIndices())
+                            {
+                                int currentTileOccurrence = (int) tiles.stream().filter(tile -> tile.getTileKind().getIndex() == index).count();
+                                occurrence = Math.min(occurrence, currentTileOccurrence);
+                            }
+                            int groupCount = (int) tileGroups.stream().filter(tileGroup -> tileGroup.equals(runBasedGroup)).count();
+
+                            if (groupCount < occurrence)
+                            {
+                                tileGroups.add(runBasedGroup);
+                            }
+                        }
+                        else
+                        {
+                            tileGroups.add(runBasedGroup);
+                        }
                         break;
                     }
                 }

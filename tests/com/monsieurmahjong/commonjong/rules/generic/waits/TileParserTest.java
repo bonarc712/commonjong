@@ -105,7 +105,16 @@ public class TileParserTest
         expectedCustomShape1Groups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_5));
         expectedCustomShape1Groups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5));
         expectedCustomShape1Groups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_6, MahjongTileKind.BAMBOOS_7));
-        Assertions.assertEquals(expectedCustomShape1Groups, customShape1Groups, "Custom shape does not work");
+        Assertions.assertEquals(expectedCustomShape1Groups, customShape1Groups, "Custom shape 135567s does not work");
+
+        List<Tile> customShape2 = TileKindUtils.asHand("566799s");
+        List<TileGroup> customShape2Groups = TileParser.parseFamilyTiles(customShape2);
+        List<TileGroup> expectedCustomShape2Groups = new ArrayList<>();
+        expectedCustomShape2Groups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_6, MahjongTileKind.BAMBOOS_7));
+        expectedCustomShape2Groups.add(TileGroup.of(MahjongTileKind.BAMBOOS_6, MahjongTileKind.BAMBOOS_6));
+        expectedCustomShape2Groups.add(TileGroup.of(MahjongTileKind.BAMBOOS_7, MahjongTileKind.BAMBOOS_9));
+        expectedCustomShape2Groups.add(TileGroup.of(MahjongTileKind.BAMBOOS_9, MahjongTileKind.BAMBOOS_9));
+        Assertions.assertEquals(expectedCustomShape2Groups, customShape2Groups, "Custom shape 566799s does not work");
     }
 
     @Test
