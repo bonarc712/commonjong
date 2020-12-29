@@ -94,8 +94,9 @@ public class WaitShapeEngine
         // interpret wait from parsing
         buildWait();
 
-        // remove doubles
+        // remove doubles and sort
         wait = wait.stream().distinct().collect(Collectors.toList());
+        wait.sort(new MahjongTileKindComparator());
     }
 
     private void createHandsCombinations()
@@ -177,7 +178,6 @@ public class WaitShapeEngine
     private void addTilesToWait(List<MahjongTileKind> waitList, List<Integer> indicesToAddToWaitList)
     {
         indicesToAddToWaitList.forEach(index -> {
-            System.out.println(indicesToAddToWaitList);
             MahjongTileKind kind = TileKindUtils.getKindFromIndex(index);
             waitList.add(kind);
         });

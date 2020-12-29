@@ -46,9 +46,19 @@ public abstract class Tileset
 
     public Tile draw()
     {
+        if (tiles.isEmpty())
+        {
+            return null;
+        }
+
         Tile drawnTile = tiles.remove(0);
         drawnTiles.add(drawnTile);
         return drawnTile;
+    }
+
+    public List<Tile> getTiles()
+    {
+        return tiles;
     }
 
     public abstract List<MahjongTileKind> getTileList();

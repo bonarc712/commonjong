@@ -3,6 +3,8 @@ package com.monsieurmahjong.commonjong.game;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileOrderingComparator;
+
 public class Hand
 {
     private List<Tile> tiles; // in hand
@@ -30,6 +32,11 @@ public class Hand
     public void setTiles(List<Tile> tiles)
     {
         this.tiles = tiles;
+    }
+
+    public void sortTiles()
+    {
+        tiles.sort(new MahjongTileOrderingComparator());
     }
 
     public List<List<Tile>> getMelds()

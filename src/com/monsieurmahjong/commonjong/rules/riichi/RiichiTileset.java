@@ -3,7 +3,7 @@ package com.monsieurmahjong.commonjong.rules.riichi;
 import java.util.*;
 
 import com.monsieurmahjong.commonjong.game.Tileset;
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.*;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
 public class RiichiTileset extends Tileset

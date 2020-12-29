@@ -7,7 +7,7 @@ import java.util.*;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Tile;
-import com.monsieurmahjong.commonjong.rules.generic.*;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
 public class WaitShapeEngineTest
@@ -27,6 +27,9 @@ public class WaitShapeEngineTest
 
         // non-tenpai hands
         testGetWait("1112223334567z", MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED);
+        testGetWait("1566799m122345p", MahjongTileKind.CHARACTERS_1, MahjongTileKind.CHARACTERS_2, MahjongTileKind.CHARACTERS_3, MahjongTileKind.CHARACTERS_4, MahjongTileKind.CHARACTERS_5,
+                MahjongTileKind.CHARACTERS_6, MahjongTileKind.CHARACTERS_7, MahjongTileKind.CHARACTERS_8, MahjongTileKind.CHARACTERS_9, MahjongTileKind.CIRCLES_1, MahjongTileKind.CIRCLES_2,
+                MahjongTileKind.CIRCLES_3, MahjongTileKind.CIRCLES_4, MahjongTileKind.CIRCLES_5, MahjongTileKind.CIRCLES_6, MahjongTileKind.CIRCLES_7);
     }
 
     private void testGetWait(String startingHand, MahjongTileKind... expectedWait)
@@ -34,7 +37,6 @@ public class WaitShapeEngineTest
         List<Tile> hand = TileKindUtils.asHand(startingHand);
         WaitShapeEngine engine = new WaitShapeEngine(hand);
         List<MahjongTileKind> waitResult = engine.getWait();
-        waitResult.sort(new MahjongTileKindComparator());
 
         List<MahjongTileKind> handExpected = new ArrayList<>();
         handExpected.addAll(Arrays.asList(expectedWait));

@@ -2,21 +2,18 @@ package com.monsieurmahjong.commonjong.game;
 
 import java.util.List;
 
-import com.monsieurmahjong.commonjong.game.mahjong.MahjongGame;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileOrderingComparator;
+import com.monsieurmahjong.commonjong.rules.generic.waits.WaitShapeEngine;
 
 public class Player
 {
     private String name;
     private Hand hand;
     private Seat seat;
-    @Deprecated // player should not have direct access to the game. It should be passed to him via play method
-    private MahjongGame game;
 
-    public Player(MahjongGame game)
+    public Player()
     {
         hand = new Hand();
-        this.game = game;
     }
 
     public String getName()
@@ -39,20 +36,16 @@ public class Player
         this.seat = seat;
     }
 
-    public void play()
+    public void draw(Tile tile)
     {
-        hand.getTiles().add(game.getTileset().draw());
+        hand.getTiles().add(tile);
     }
 
-    public void draw(MahjongGame game)
+    public Tile discard()
     {
-        // TODO draw from here
-        game.getTileset().draw();
-    }
-
-    public void discard()
-    {
-
+        // dummy discard
+        hand.sortTiles();
+        return hand.getTiles().remove(hand.getTiles().size() - 1);
     }
 
     public void call()
@@ -68,9 +61,12 @@ public class Player
     public void showHand()
     {
         hand.getTiles().sort(new MahjongTileOrderingComparator());
+        WaitShapeEngine engine = new WaitShapeEngine(hand);
+
         System.out.println("Je suis " + name);
         System.out.println("J'ai " + hand);
-        // System.out.println("Ma main a un shanten de " + MahjongShantenCounter.shantenCount(hand.getTiles()));
+        System.out.println("Ma main a un shanten de " + engine.getShanten());
+        System.out.println("Mes attentes sont " + engine.getWait());
         System.out.println();
     }
 }
