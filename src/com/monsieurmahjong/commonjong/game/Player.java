@@ -2,6 +2,7 @@ package com.monsieurmahjong.commonjong.game;
 
 import java.util.List;
 
+import com.monsieurmahjong.commonjong.game.discard.*;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileOrderingComparator;
 import com.monsieurmahjong.commonjong.rules.generic.waits.WaitShapeEngine;
 
@@ -11,9 +12,12 @@ public class Player
     private Hand hand;
     private Seat seat;
 
+    private DiscardStrategy discardStrategy;
+
     public Player()
     {
         hand = new Hand();
+        discardStrategy = new RightMostDiscardStrategy();
     }
 
     public String getName()
@@ -36,6 +40,11 @@ public class Player
         this.seat = seat;
     }
 
+    public void setDiscardStrategy(DiscardStrategy strategy)
+    {
+        discardStrategy = strategy;
+    }
+
     public void draw(Tile tile)
     {
         hand.getTiles().add(tile);
@@ -43,9 +52,7 @@ public class Player
 
     public Tile discard()
     {
-        // dummy discard
-        hand.sortTiles();
-        return hand.getTiles().remove(hand.getTiles().size() - 1);
+        return discardStrategy.discard(hand);
     }
 
     public void call()
