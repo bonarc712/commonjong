@@ -5,11 +5,17 @@ import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileOrderingComparator;
 
+/**
+ * A hand in the game sense : it includes all the tiles we have in front of us.
+ * The melds and bonus tiles are separate from the "hidden" tiles.
+ */
 public class Hand
 {
     private List<Tile> tiles; // in hand
     private List<List<Tile>> melds; // called tiles, they are not removed from hand
     private List<Tile> bonus; // flowers, peis, etc.
+
+    private int tileIndexToDiscard = -1; // tile to discard (first tile has index 0); -1 means no tile is discarded
 
     public Hand()
     {
@@ -58,6 +64,16 @@ public class Hand
         meldedTiles.forEach(tile -> unmeldedTiles.remove(tile));
 
         return unmeldedTiles;
+    }
+
+    public int getTileIndexToDiscard()
+    {
+        return tileIndexToDiscard;
+    }
+
+    public void setTileIndexToDiscard(int tileIndex)
+    {
+        tileIndexToDiscard = tileIndex;
     }
 
     @Override

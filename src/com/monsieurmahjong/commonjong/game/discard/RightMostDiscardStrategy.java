@@ -4,7 +4,7 @@ import com.monsieurmahjong.commonjong.game.*;
 
 /**
  * "Dummy" discard strategy. The goal here is to cut the tile that is most at the
- * right of the hand.
+ * right of the hand. The tiles within the hand are sorted prior to discarding.
  */
 public class RightMostDiscardStrategy implements DiscardStrategy
 {
