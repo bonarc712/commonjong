@@ -10,24 +10,13 @@ import com.monsieurmahjong.commonjong.game.players.Player;
 
 public class MahjongGameTest
 {
-    MahjongGame game;
-    Player player;
-
-    /**
-     * Mocks need to be built in a BeforeEach constructor for use on
-     * Travis CI.
-     */
-    @BeforeEach
-    public void buildMocks()
-    {
-        game = mock(MahjongGame.class);
-        player = mock(Player.class);
-    }
+    MahjongGame game = mock(MahjongGame.class);
+    Player player = mock(Player.class);
 
     @Test
     public void test_determineNextPlayer_afterEastPlays_shouldBeSouth()
     {
-        when(game.determineNextPlayer(any())).thenCallRealMethod();
+        when(game.determineNextPlayer(any(Player.class))).thenCallRealMethod();
         when(game.getAmountOfPlayers()).thenReturn(4);
         when(player.getSeat()).thenReturn(Seat.EAST);
 
@@ -39,7 +28,7 @@ public class MahjongGameTest
     @Test
     public void test_determineNextPlayer_afterSouthPlays_shouldBeWest()
     {
-        when(game.determineNextPlayer(any())).thenCallRealMethod();
+        when(game.determineNextPlayer(any(Player.class))).thenCallRealMethod();
         when(game.getAmountOfPlayers()).thenReturn(4);
         when(player.getSeat()).thenReturn(Seat.SOUTH);
 
@@ -51,7 +40,7 @@ public class MahjongGameTest
     @Test
     public void test_determineNextPlayer_afterWestPlays_shouldBeNorth()
     {
-        when(game.determineNextPlayer(any())).thenCallRealMethod();
+        when(game.determineNextPlayer(any(Player.class))).thenCallRealMethod();
         when(game.getAmountOfPlayers()).thenReturn(4);
         when(player.getSeat()).thenReturn(Seat.WEST);
 
@@ -63,7 +52,7 @@ public class MahjongGameTest
     @Test
     public void test_determineNextPlayer_afterNorthPlays_shouldBeEast()
     {
-        when(game.determineNextPlayer(any())).thenCallRealMethod();
+        when(game.determineNextPlayer(any(Player.class))).thenCallRealMethod();
         when(game.getAmountOfPlayers()).thenReturn(4);
         when(player.getSeat()).thenReturn(Seat.NORTH);
 
@@ -75,7 +64,7 @@ public class MahjongGameTest
     @Test
     public void test_determineNextPlayer_afterWestPlaysInSanma_shouldBeEast()
     {
-        when(game.determineNextPlayer(any())).thenCallRealMethod();
+        when(game.determineNextPlayer(any(Player.class))).thenCallRealMethod();
         when(game.getAmountOfPlayers()).thenReturn(3);
         when(player.getSeat()).thenReturn(Seat.WEST);
 
