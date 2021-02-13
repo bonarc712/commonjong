@@ -10,8 +10,19 @@ import com.monsieurmahjong.commonjong.game.players.Player;
 
 public class MahjongGameTest
 {
-    MahjongGame game = mock(MahjongGame.class);
-    Player player = mock(Player.class);
+    MahjongGame game;
+    Player player;
+
+    /**
+     * Mocks need to be built in a BeforeEach constructor for use on
+     * Travis CI.
+     */
+    @BeforeEach
+    public void buildMocks()
+    {
+        game = mock(MahjongGame.class);
+        player = mock(Player.class);
+    }
 
     @Test
     public void test_determineNextPlayer_afterEastPlays_shouldBeSouth()
