@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.players.Player;
 import com.monsieurmahjong.commonjong.rules.generic.RuleSet;
 import com.monsieurmahjong.commonjong.utils.NameGenerator;
 
@@ -64,7 +65,7 @@ public class MahjongGame
 
     private void assignSeat(Seat seat, int playerIndex)
     {
-        if (players.size() > playerIndex)
+        if (getAmountOfPlayers() > playerIndex)
         {
             players.get(playerIndex).setSeat(seat);
         }
@@ -111,14 +112,22 @@ public class MahjongGame
         players.forEach(player -> player.showHand());
     }
 
-    private Seat determineNextPlayer(Player currentPlayer)
+    /**
+     * This method is package-private so it can be unit-tested.
+     */
+    Seat determineNextPlayer(Player currentPlayer)
     {
         int seatIndex = currentPlayer.getSeat().ordinal();
-        if (players.size() - 1 == seatIndex)
+        if (getAmountOfPlayers() - 1 == seatIndex)
         {
             return Seat.EAST;
         }
         return Seat.values()[currentPlayer.getSeat().ordinal() + 1];
+    }
+
+    public int getAmountOfPlayers()
+    {
+        return players.size();
     }
 
     private boolean canNextTurnBePlayed()

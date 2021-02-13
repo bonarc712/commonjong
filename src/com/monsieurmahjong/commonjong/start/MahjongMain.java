@@ -5,7 +5,6 @@ import com.monsieurmahjong.commonjong.rules.riichi.RiichiStandardRuleSet;
 
 public class MahjongMain
 {
-
     public static void main(String[] args)
     {
         System.out.println("Initiating mahjong...");
@@ -14,5 +13,4 @@ public class MahjongMain
         MahjongGame game = new MahjongGame(null, new RiichiStandardRuleSet());
         game.startGame();
     }
-
 }

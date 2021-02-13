@@ -1,7 +1,8 @@
-package com.monsieurmahjong.commonjong.game;
+package com.monsieurmahjong.commonjong.game.players;
 
 import java.util.List;
 
+import com.monsieurmahjong.commonjong.game.*;
 import com.monsieurmahjong.commonjong.game.discard.*;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileOrderingComparator;
 import com.monsieurmahjong.commonjong.rules.generic.waits.WaitShapeEngine;

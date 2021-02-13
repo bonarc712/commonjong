@@ -15,13 +15,15 @@ public class Hand
     private List<List<Tile>> melds; // called tiles, they are not removed from hand
     private List<Tile> bonus; // flowers, peis, etc.
 
-    private int tileIndexToDiscard = -1; // tile to discard (first tile has index 0); -1 means no tile is discarded
+    private int tileIndexToDiscard; // tile to discard (first tile has index 0); -1 means no tile is discarded
 
     public Hand()
     {
         tiles = new ArrayList<>();
         melds = new ArrayList<>();
         bonus = new ArrayList<>();
+
+        tileIndexToDiscard = -1;
     }
 
     public Hand(List<Tile> tiles)
