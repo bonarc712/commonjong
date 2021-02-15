@@ -45,7 +45,7 @@ public class TileParserTest
         List<TileGroup> expectedNobetanShapedProtogroup = new ArrayList<>();
         expectedNobetanShapedProtogroup.add(TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4));
         expectedNobetanShapedProtogroup.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_5));
-        Assertions.assertEquals(expectedNobetanShapedProtogroup, nobetanShapedProtogroup, "Ryanmen shape does not work");
+        Assertions.assertEquals(expectedNobetanShapedProtogroup, nobetanShapedProtogroup, "Nobetan shape does not work");
 
         List<Tile> doubleRyanmenShape = TileKindUtils.asHand("3344s");
         List<TileGroup> doubleRyanmenShapedProtogroup = TileParser.parseFamilyTiles(doubleRyanmenShape);
@@ -65,6 +65,25 @@ public class TileParserTest
         expectedIipeikouShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4));
         expectedIipeikouShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5));
         Assertions.assertEquals(expectedIipeikouShapedGroups, iipeikouShapedGroups, "Iipeikou shape does not work");
+
+        List<Tile> iipeikouKanchanWait = TileKindUtils.asHand("33455s");
+        List<TileGroup> iipeikouKanchanGroups = TileParser.parseFamilyTiles(iipeikouKanchanWait);
+        List<TileGroup> expectedIipeikouKanchanGroups = new ArrayList<>();
+        expectedIipeikouKanchanGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3));
+        expectedIipeikouKanchanGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_5));
+        expectedIipeikouKanchanGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_5));
+        expectedIipeikouKanchanGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5));
+        Assertions.assertEquals(expectedIipeikouKanchanGroups, iipeikouKanchanGroups, "Iipeikou kanchan-wait shape does not work");
+
+        List<Tile> tatsumakiShape = TileKindUtils.asHand("3334555s");
+        List<TileGroup> tatsumakiShapedGroups = TileParser.parseFamilyTiles(tatsumakiShape);
+        List<TileGroup> expectedTatsumakiShapedGroups = new ArrayList<>();
+        expectedTatsumakiShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3));
+        expectedTatsumakiShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_5));
+        expectedTatsumakiShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_5));
+        expectedTatsumakiShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_5));
+        expectedTatsumakiShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5));
+        Assertions.assertEquals(expectedTatsumakiShapedGroups, tatsumakiShapedGroups, "Tatsumaki shape does not work");
 
         List<Tile> entotsuShape = TileKindUtils.asHand("34555s");
         List<TileGroup> entotsuShapedGroups = TileParser.parseFamilyTiles(entotsuShape);

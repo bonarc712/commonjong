@@ -166,12 +166,27 @@ public class MahjongShantenCounterTest
         expectedShanten = 5;
 
         Assertions.assertEquals(expectedShanten, resultShanten, "Wrong shanten for 111m258p258s1235z");
+    }
 
-        // other tests
-        waitEngine = new WaitShapeEngine(TileKindUtils.asHand("1566799m122345p"));
-        resultShanten = waitEngine.getShanten();
-        expectedShanten = 2;
+    /**
+     * Every hand that we've had that run on the commonjong engine and failed
+     * to give the shanten at some point (in commonjong tests, sanshoku or elsewhere)
+     * should be added here to make sure that they always succeed.
+     */
+    @Test
+    public void testMiscellaneousHands()
+    {
+        WaitShapeEngine waitEngine = new WaitShapeEngine(TileKindUtils.asHand("1566799m122345p"));
+        int resultShanten = waitEngine.getShanten();
+        int expectedShanten = 2;
 
         Assertions.assertEquals(expectedShanten, resultShanten, "Wrong shanten for 1566799m122345p");
+
+        waitEngine = new WaitShapeEngine(TileKindUtils.asHand("1244566789m112p"));
+        resultShanten = waitEngine.getShanten();
+        expectedShanten = 1;
+
+        Assertions.assertEquals(expectedShanten, resultShanten, "Wrong shanten for 1244566789m112p");
     }
+
 }

@@ -40,27 +40,49 @@ public class TileParser
                 TileGroup runBasedGroup = new TileGroup();
                 for (int j = i; j < tiles.size(); j++)
                 {
-                    if (WaitShapeUtils.isRun(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j))))
+                    if (WaitShapeUtils.isRun(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j)))
+                            && !tileGroups.contains(new TileGroup(Arrays.asList(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j))))))
                     {
                         runBasedGroup.addAll(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j)));
-                        if (tileGroups.contains(runBasedGroup))
-                        {
-                            int occurrence = 4;
-                            for (int index : runBasedGroup.getIndices())
-                            {
-                                int currentTileOccurrence = (int) tiles.stream().filter(tile -> tile.getTileKind().getIndex() == index).count();
-                                occurrence = Math.min(occurrence, currentTileOccurrence);
-                            }
-                            int groupCount = (int) tileGroups.stream().filter(tileGroup -> tileGroup.equals(runBasedGroup)).count();
 
-                            if (groupCount < occurrence)
-                            {
-                                tileGroups.add(runBasedGroup);
-                            }
+                        int occurrence = 4;
+                        for (int index : runBasedGroup.getIndices())
+                        {
+                            int currentTileOccurrence = getOccurrencesOfTileIndex(index, tiles);
+                            occurrence = Math.min(occurrence, currentTileOccurrence);
                         }
-                        else
+
+                        for (int k = 0; k < occurrence; k++)
                         {
                             tileGroups.add(runBasedGroup);
+                        }
+
+                        runBasedGroup = new TileGroup();
+
+                        int firstTileOccurrence = getOccurrencesOfTileIndex(tiles.get(0).getTileKind().getIndex(), tiles);
+                        if (firstTileOccurrence > occurrence) // there might be more protogroups that we could add from that
+                        {
+                            int secondTileOccurrence = getOccurrencesOfTileIndex(tiles.get(i).getTileKind().getIndex(), tiles);
+                            int thirdTileOccurrence = getOccurrencesOfTileIndex(tiles.get(j).getTileKind().getIndex(), tiles);
+
+                            if (secondTileOccurrence > occurrence)
+                            {
+                                runBasedGroup.addAll(indexOf(tiles.get(0)), indexOf(tiles.get(i)));
+                                int protogroupOccurrence = Math.min(firstTileOccurrence - occurrence, secondTileOccurrence - occurrence);
+                                for (int k = 0; k < protogroupOccurrence; k++)
+                                {
+                                    tileGroups.add(runBasedGroup);
+                                }
+                            }
+                            else if (thirdTileOccurrence > occurrence)
+                            {
+                                runBasedGroup.addAll(indexOf(tiles.get(0)), indexOf(tiles.get(j)));
+                                int protogroupOccurrence = Math.min(firstTileOccurrence - occurrence, thirdTileOccurrence - occurrence);
+                                for (int k = 0; k < protogroupOccurrence; k++)
+                                {
+                                    tileGroups.add(runBasedGroup);
+                                }
+                            }
                         }
                         break;
                     }
@@ -75,7 +97,7 @@ public class TileParser
                         int occurrence = 4;
                         for (int index : runBasedGroup.getIndices())
                         {
-                            int currentTileOccurrence = (int) tiles.stream().filter(tile -> tile.getTileKind().getIndex() == index).count();
+                            int currentTileOccurrence = getOccurrencesOfTileIndex(index, tiles);
                             occurrence = Math.min(occurrence, currentTileOccurrence);
                         }
 
@@ -99,6 +121,11 @@ public class TileParser
             previousTileKind = currentTileKind;
         }
         return tileGroups;
+    }
+
+    private static int getOccurrencesOfTileIndex(int index, List<Tile> tiles)
+    {
+        return (int) tiles.stream().filter(tile -> tile.getTileKind().getIndex() == index).count();
     }
 
     public static List<TileGroup> parseHonourTiles(List<Tile> tiles)
