@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.*;
 import com.monsieurmahjong.commonjong.game.players.Player;
+import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
 import com.monsieurmahjong.commonjong.rules.generic.RuleSet;
 import com.monsieurmahjong.commonjong.utils.NameGenerator;
 
@@ -12,12 +13,15 @@ public class MahjongGame
 {
     private RuleSet ruleSet;
     private Tileset tileSet;
+    private GameStateLog gameStateLog;
     private List<Player> players;
 
     public MahjongGame(List<Player> players, RuleSet ruleSet)
     {
         this.players = players;
         this.ruleSet = ruleSet;
+
+        gameStateLog = new GameStateLog();
     }
 
     public void startGame()
@@ -67,7 +71,9 @@ public class MahjongGame
     {
         if (getAmountOfPlayers() > playerIndex)
         {
-            players.get(playerIndex).setSeat(seat);
+            Player currentPlayer = players.get(playerIndex);
+            currentPlayer.setSeat(seat);
+            gameStateLog.log("Player " + currentPlayer.getName() + " is " + seat.getSeatName());
         }
     }
 
@@ -76,7 +82,9 @@ public class MahjongGame
         Player currentPlayer = getPlayerBySeat(activePlayer);
 
         // draw tile
-        currentPlayer.draw(tileSet.draw());
+        Tile drawnTile = tileSet.draw();
+        currentPlayer.draw(drawnTile);
+        gameStateLog.log(currentPlayer.getSeat().getSeatName() + " draws " + drawnTile.getTileKind().abbreviation);
 
         // do action with tile
 
@@ -110,6 +118,9 @@ public class MahjongGame
 
         // for now just show each hand
         players.forEach(player -> player.showHand());
+
+        // show log (but this is temporary)
+        gameStateLog.showWholeLog();
     }
 
     /**
@@ -138,7 +149,7 @@ public class MahjongGame
     private void waitForPlayerDiscard(Player currentPlayer)
     {
         Tile discardedTile = currentPlayer.discard();
-        //TODO add discardedTile to game log
+        gameStateLog.log(currentPlayer.getSeat().getSeatName() + " discards " + discardedTile.getTileKind().abbreviation);
     }
 
     private Player getPlayerBySeat(Seat seat)
