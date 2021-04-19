@@ -1,6 +1,8 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus;
 
-import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
@@ -21,7 +23,7 @@ public class TanyaoTest
 
         boolean tanyaoIsValid = tanyao.isValid();
 
-        Assertions.assertTrue(tanyaoIsValid, "234567m22345678p should be valid for tanyao");
+        assertTrue(tanyaoIsValid, "234567m22345678p should be valid for tanyao");
     }
 
     @Test
@@ -31,7 +33,7 @@ public class TanyaoTest
 
         boolean tanyaoIsValid = tanyao.isValid();
 
-        Assertions.assertTrue(tanyaoIsValid, "22345678p should be valid for tanyao");
+        assertTrue(tanyaoIsValid, "22345678p should be valid for tanyao");
     }
 
     @Test
@@ -41,7 +43,7 @@ public class TanyaoTest
 
         boolean tanyaoIsValid = tanyao.isValid();
 
-        Assertions.assertFalse(tanyaoIsValid, "123456m22345678p should not be valid for tanyao");
+        assertFalse(tanyaoIsValid, "123456m22345678p should not be valid for tanyao");
     }
 
     @Test
@@ -51,7 +53,7 @@ public class TanyaoTest
 
         boolean tanyaoIsValid = tanyao.isValid();
 
-        Assertions.assertFalse(tanyaoIsValid, "456789m should not be valid for tanyao");
+        assertFalse(tanyaoIsValid, "456789m should not be valid for tanyao");
     }
 
     @Test
@@ -61,6 +63,16 @@ public class TanyaoTest
 
         int tanyaoValue = tanyao.getHanValue();
 
-        Assertions.assertEquals(1, tanyaoValue, "Tanyao value should be 1");
+        assertEquals(1, tanyaoValue, "Tanyao value should be 1");
+    }
+
+    @Test
+    public void testValueOf_Tanyao_ShouldNotBeYakuman()
+    {
+        Yaku tanyao = new Tanyao(anyHand);
+
+        boolean tanyaoIsYakuman = tanyao.isYakuman();
+
+        assertFalse(tanyaoIsYakuman, "Tanyao should not be yakuman");
     }
 }
