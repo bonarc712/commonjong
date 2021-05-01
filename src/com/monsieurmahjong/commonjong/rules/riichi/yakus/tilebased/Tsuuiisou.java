@@ -1,8 +1,8 @@
-package com.monsieurmahjong.commonjong.rules.riichi.yakus;
+package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 
-public class Tsuuiisou extends HandBasedYaku
+public class Tsuuiisou extends TileBasedYaku
 {
     public Tsuuiisou(Hand hand)
     {

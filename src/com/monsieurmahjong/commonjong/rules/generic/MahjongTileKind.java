@@ -109,6 +109,27 @@ public enum MahjongTileKind
         return this.is(BAMBOOS_1, BAMBOOS_2, BAMBOOS_3, BAMBOOS_4, BAMBOOS_5, BAMBOOS_6, BAMBOOS_7, BAMBOOS_8, BAMBOOS_9);
     }
 
+    public TileFamily getFamily()
+    {
+        if (isCharacters())
+        {
+            return TileFamily.CHARACTERS;
+        }
+        if (isCircles())
+        {
+            return TileFamily.CIRCLES;
+        }
+        if (isBamboos())
+        {
+            return TileFamily.BAMBOOS;
+        }
+        if (isHonour())
+        {
+            return TileFamily.HONOURS;
+        }
+        return TileFamily.NONE;
+    }
+
     public static MahjongTileKind getMahjongTileByAbbreviation(String abbreviation)
     {
         for (MahjongTileKind tile : MahjongTileKind.values())

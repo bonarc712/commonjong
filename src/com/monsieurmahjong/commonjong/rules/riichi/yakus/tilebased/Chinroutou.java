@@ -1,8 +1,8 @@
-package com.monsieurmahjong.commonjong.rules.riichi.yakus;
+package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 
-public class Chinroutou extends HandBasedYaku
+public class Chinroutou extends TileBasedYaku
 {
     public Chinroutou(Hand hand)
     {

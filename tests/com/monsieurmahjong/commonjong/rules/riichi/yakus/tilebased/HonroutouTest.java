@@ -1,4 +1,4 @@
-package com.monsieurmahjong.commonjong.rules.riichi.yakus;
+package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.rules.riichi.yakus.*;
+import com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased.Honroutou;
 
 public class HonroutouTest
 {

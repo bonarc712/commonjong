@@ -78,6 +78,12 @@ public class Hand
         tileIndexToDiscard = tileIndex;
     }
 
+    // TODO : make sure closed kan is not considered as open
+    public boolean isOpen()
+    {
+        return !melds.isEmpty();
+    }
+
     @Override
     public String toString()
     {

@@ -1,8 +1,8 @@
-package com.monsieurmahjong.commonjong.rules.riichi.yakus;
+package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 
-public class Tanyao extends HandBasedYaku
+public class Tanyao extends TileBasedYaku
 {
     public Tanyao(Hand hand)
     {
