@@ -22,4 +22,22 @@ public class TileGroupUtils
 
         return tileGroupList;
     }
+
+    public static List<Tile> getTilesFromTileGroups(List<TileGroup> groups)
+    {
+        List<Tile> tiles = new ArrayList<>();
+
+        for (TileGroup group : groups)
+        {
+            for (int index : group.getIndices())
+            {
+                Tile tile = new Tile(TileKindUtils.getKindFromIndex(index));
+                tiles.add(tile);
+            }
+        }
+        // order by tile kind index ascending
+        tiles.sort((first, second) -> first.getTileKind().getIndex() - second.getTileKind().getIndex());
+
+        return tiles;
+    }
 }

@@ -5,6 +5,9 @@ import java.util.*;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.*;
 
+/**
+ * A tile group represents a simple group of several tiles (for instance a pair, a triplet or a sequence)
+ */
 public class TileGroup extends Object
 {
     private List<Integer> tileIndices;
@@ -78,6 +81,18 @@ public class TileGroup extends Object
     public boolean isTriplet()
     {
         return isExclusiveGroup() && tileIndices.size() == 3;
+    }
+
+    /**
+     * A run is a sequence of three tiles (eg. 345m)
+     */
+    public boolean isRun()
+    {
+        if (tileIndices.size() < 3)
+        {
+            return false;
+        }
+        return WaitShapeUtils.isRun(tileIndices.get(0), tileIndices.get(1), tileIndices.get(2));
     }
 
     public boolean isComplete()

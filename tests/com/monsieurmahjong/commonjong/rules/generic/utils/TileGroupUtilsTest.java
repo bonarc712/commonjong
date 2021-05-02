@@ -1,9 +1,12 @@
 package com.monsieurmahjong.commonjong.rules.generic.utils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.*;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 
+import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
@@ -17,6 +20,21 @@ public class TileGroupUtilsTest
         expectedTileGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4));
         expectedTileGroups.add(TileGroup.of(MahjongTileKind.RED, MahjongTileKind.RED));
 
-        Assertions.assertEquals(expectedTileGroups, tileGroups, "234s and 77z weren't properly grouped together.");
+        assertEquals(expectedTileGroups, tileGroups, "234s and 77z weren't properly grouped together.");
+    }
+
+    @Test
+    public void testGetTileFromTileGroups()
+    {
+        testTileSpecificTileGroups("234s77z", "234s", "77z");
+        testTileSpecificTileGroups("123456m22345678p", "123m", "456m", "22p", "345p", "678p");
+        testTileSpecificTileGroups("223344m777p456s11z", "234m", "234m", "777p", "456s", "11z");
+    }
+
+    private static void testTileSpecificTileGroups(String tiles, String... tileGroups)
+    {
+        List<TileGroup> tileGroups1 = TileGroupUtils.tileGroupsOf(tileGroups);
+        List<Tile> tileList1 = TileGroupUtils.getTilesFromTileGroups(tileGroups1);
+        assertEquals(TileKindUtils.asHand(tiles), tileList1);
     }
 }
