@@ -36,4 +36,21 @@ public class TileGroupTest
         assertFalse(bambooProtogroup34.isRun(), "34s ryanmen is not a run");
         assertFalse(loneRed.isRun(), "7z tile is not a run");
     }
+
+    @Test
+    public void testContains()
+    {
+        TileGroup bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        TileGroup loneRed = TileGroup.of(MahjongTileKind.RED);
+
+        assertTrue(bambooRun123.contains(MahjongTileKind::isTerminal), "123s contains a terminal");
+        assertTrue(bambooRun123.contains(MahjongTileKind::isNonTerminalNumeral), "123s contains a non-terminal numeral");
+        assertTrue(bambooRun123.contains(MahjongTileKind::isBamboos), "123s contains a bamboo");
+        assertFalse(bambooRun123.contains(MahjongTileKind::isCharacters), "123s does not contain a character");
+        assertFalse(bambooRun123.contains(MahjongTileKind::isHonour), "123s does not contain an honour");
+
+        assertTrue(loneRed.contains(MahjongTileKind::isHonour), "7z contains an honour");
+        assertFalse(loneRed.contains(MahjongTileKind::isCircles), "7z does not contain a circle");
+        assertFalse(loneRed.contains(MahjongTileKind::isTerminal), "7z does not contain a terminal");
+    }
 }

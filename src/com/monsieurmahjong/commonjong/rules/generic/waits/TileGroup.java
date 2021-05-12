@@ -1,6 +1,7 @@
 package com.monsieurmahjong.commonjong.rules.generic.waits;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.*;
@@ -57,6 +58,22 @@ public class TileGroup extends Object
     public void addAll(Integer... indices)
     {
         tileIndices.addAll(Arrays.asList(indices));
+    }
+
+    /**
+     * @return true if one of the tiles matches the predicate; false otherwise
+     */
+    public boolean contains(Predicate<MahjongTileKind> predicate)
+    {
+        for (int index : tileIndices)
+        {
+            MahjongTileKind tileKind = TileKindUtils.getKindFromIndex(index);
+            if (predicate.test(tileKind))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
