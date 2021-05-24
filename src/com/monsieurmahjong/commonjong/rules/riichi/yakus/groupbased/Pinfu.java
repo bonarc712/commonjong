@@ -2,37 +2,35 @@ package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
 import java.util.*;
 
-import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.*;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.WaitShapeUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.*;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class Pinfu extends GroupBasedYaku
 {
-    private MahjongTileKind winningTile;
-
-    public Pinfu(Hand hand, List<TileGroup> groups, MahjongTileKind winningTile)
+    public Pinfu(Hand hand, List<TileGroup> groups)
     {
         super(hand, groups);
-        this.winningTile = winningTile;
     }
 
     @Override
     public boolean isValid()
     {
         List<TileGroup> groupsThatContainTheWinningTile = new ArrayList<>();
-        boolean pairFound = false;
+        TileGroup pair = null;
+        MahjongTileKind winningTile = hand.getWinningTile();
 
         for (TileGroup group : groups)
         {
             if (group.isPair())
             {
-                if (pairFound)
+                if (pair != null)
                 {
                     return false;
                 }
                 // else
-                pairFound = true;
+                pair = group;
             }
             else if (group.isRun())
             {
@@ -63,6 +61,28 @@ public class Pinfu extends GroupBasedYaku
         }
 
         // verify whether the pair gives minipoints
+        if (pair == null)
+        {
+            return false;
+        }
+        MahjongTileKind pairKind = TileKindUtils.getKindFromIndex(pair.getIndices().get(0));
+        if (pairKind.isDragon())
+        {
+            return false;
+        }
+        if (pairKind.isWind())
+        {
+            Seat pairSeat = TileKindUtils.getSeatFromTileKind(pairKind);
+            if (hand.isTableWind(pairSeat))
+            {
+                return false;
+            }
+            if (hand.isSeatWind(pairSeat))
+            {
+                return false;
+            }
+        }
+
         return true;
     }
 

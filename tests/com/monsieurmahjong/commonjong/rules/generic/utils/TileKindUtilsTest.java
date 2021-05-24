@@ -4,7 +4,7 @@ import java.util.*;
 
 import org.junit.jupiter.api.*;
 
-import com.monsieurmahjong.commonjong.game.Tile;
+import com.monsieurmahjong.commonjong.game.*;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 
 public class TileKindUtilsTest
@@ -76,5 +76,24 @@ public class TileKindUtilsTest
         Assertions.assertEquals(MahjongTileKind.BAMBOOS_9, TileKindUtils.getKindFromIndex(26));
         Assertions.assertEquals(MahjongTileKind.WEST, TileKindUtils.getKindFromIndex(29));
         Assertions.assertEquals(MahjongTileKind.WHITE, TileKindUtils.getKindFromIndex(31));
+    }
+
+    @Test
+    public void testGetSeatFromTileKind()
+    {
+        Assertions.assertEquals(Seat.EAST, TileKindUtils.getSeatFromTileKind(MahjongTileKind.EAST));
+        Assertions.assertEquals(Seat.SOUTH, TileKindUtils.getSeatFromTileKind(MahjongTileKind.SOUTH));
+        Assertions.assertEquals(Seat.WEST, TileKindUtils.getSeatFromTileKind(MahjongTileKind.WEST));
+        Assertions.assertEquals(Seat.NORTH, TileKindUtils.getSeatFromTileKind(MahjongTileKind.NORTH));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> TileKindUtils.getSeatFromTileKind(MahjongTileKind.BAMBOOS_3));
+    }
+
+    @Test
+    public void testGetTileKindFromSeat()
+    {
+        Assertions.assertEquals(MahjongTileKind.EAST, TileKindUtils.getTileKindFromSeat(Seat.EAST));
+        Assertions.assertEquals(MahjongTileKind.SOUTH, TileKindUtils.getTileKindFromSeat(Seat.SOUTH));
+        Assertions.assertEquals(MahjongTileKind.WEST, TileKindUtils.getTileKindFromSeat(Seat.WEST));
+        Assertions.assertEquals(MahjongTileKind.NORTH, TileKindUtils.getTileKindFromSeat(Seat.NORTH));
     }
 }

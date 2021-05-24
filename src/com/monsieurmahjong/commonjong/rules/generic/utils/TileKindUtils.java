@@ -2,7 +2,7 @@ package com.monsieurmahjong.commonjong.rules.generic.utils;
 
 import java.util.*;
 
-import com.monsieurmahjong.commonjong.game.Tile;
+import com.monsieurmahjong.commonjong.game.*;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 
 public class TileKindUtils
@@ -175,6 +175,40 @@ public class TileKindUtils
         return firstTile.isCharacters() && secondTile.isCharacters() || //
                 firstTile.isCircles() && secondTile.isCircles() || //
                 firstTile.isBamboos() && secondTile.isBamboos();
+    }
+
+    public static Seat getSeatFromTileKind(MahjongTileKind kind)
+    {
+        switch (kind)
+        {
+            case EAST:
+                return Seat.EAST;
+            case SOUTH:
+                return Seat.SOUTH;
+            case WEST:
+                return Seat.WEST;
+            case NORTH:
+                return Seat.NORTH;
+            default:
+                throw new IllegalArgumentException("Tile kind should be a wind");
+        }
+    }
+
+    public static MahjongTileKind getTileKindFromSeat(Seat seat)
+    {
+        switch (seat)
+        {
+            case EAST:
+                return MahjongTileKind.EAST;
+            case SOUTH:
+                return MahjongTileKind.SOUTH;
+            case WEST:
+                return MahjongTileKind.WEST;
+            case NORTH:
+                return MahjongTileKind.NORTH;
+            default:
+                throw new IllegalArgumentException("Seat should be a wind");
+        }
     }
 
     // ALIASES

@@ -117,11 +117,6 @@ public class Hand
         seatWind = seat;
     }
 
-    public void setSeat(Seat seat)
-    {
-        seatWind = seat;
-    }
-
     public boolean isTableWind(Seat seat)
     {
         return tableWinds.contains(seat);
