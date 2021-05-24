@@ -11,7 +11,7 @@ public class Player
 {
     private String name;
     private Hand hand;
-    private Seat seat;
+    private Seat seat; // still needed?
 
     private DiscardStrategy discardStrategy;
 

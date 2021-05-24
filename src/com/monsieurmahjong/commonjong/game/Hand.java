@@ -3,11 +3,13 @@ package com.monsieurmahjong.commonjong.game;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileOrderingComparator;
+import com.monsieurmahjong.commonjong.rules.generic.*;
 
 /**
  * A hand in the game sense : it includes all the tiles we have in front of us.
- * The melds and bonus tiles are separate from the "hidden" tiles.
+ * The melds and bonus tiles are separate from the "hidden" tiles. It also contains
+ * information relative to the current hand that is played (winning tile, table
+ * wind, seat wind, etc.)
  */
 public class Hand
 {
@@ -15,6 +17,10 @@ public class Hand
     private List<List<Tile>> melds; // called tiles, they are not removed from hand
     private List<Tile> bonus; // flowers, peis, etc.
 
+    private List<Seat> tableWinds; // TODO : check whether we can rename Seat to Wind... I feel it works worse with the table wind
+    private Seat seatWind;
+
+    private MahjongTileKind winningTile;
     private int tileIndexToDiscard; // tile to discard (first tile has index 0); -1 means no tile is discarded
 
     public Hand()
@@ -22,6 +28,8 @@ public class Hand
         tiles = new ArrayList<>();
         melds = new ArrayList<>();
         bonus = new ArrayList<>();
+
+        tableWinds = new ArrayList<>();
 
         tileIndexToDiscard = -1;
     }
@@ -78,6 +86,16 @@ public class Hand
         tileIndexToDiscard = tileIndex;
     }
 
+    public MahjongTileKind getWinningTile()
+    {
+        return winningTile;
+    }
+
+    public void setWinningTile(MahjongTileKind winningTile)
+    {
+        this.winningTile = winningTile;
+    }
+
     public boolean isOpen()
     {
         return !isClosed();
@@ -89,10 +107,34 @@ public class Hand
         return melds.isEmpty();
     }
 
+    public void addTableWind(Seat seat)
+    {
+        tableWinds.add(seat);
+    }
+
+    public void setSeatWind(Seat seat)
+    {
+        seatWind = seat;
+    }
+
+    public void setSeat(Seat seat)
+    {
+        seatWind = seat;
+    }
+
+    public boolean isTableWind(Seat seat)
+    {
+        return tableWinds.contains(seat);
+    }
+
+    public boolean isSeatWind(Seat seat)
+    {
+        return seatWind == seat;
+    }
+
     @Override
     public String toString()
     {
         return tiles.toString();
     }
-
 }
