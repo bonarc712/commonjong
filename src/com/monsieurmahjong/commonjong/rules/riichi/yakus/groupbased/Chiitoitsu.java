@@ -26,7 +26,7 @@ public class Chiitoitsu extends GroupBasedYaku
             }
             else
             {
-                MahjongTileKind tileKind = TileKindUtils.getKindFromIndex(group.getIndices().get(0));
+                MahjongTileKind tileKind = group.getTileKindAt(0);
                 if (knownTileKinds.contains(tileKind))
                 {
                     return false;

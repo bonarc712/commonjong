@@ -50,6 +50,21 @@ public class TileGroup extends Object
         return tileIndices;
     }
 
+    public MahjongTileKind getTileKindAt(int index)
+    {
+        return TileKindUtils.getKindFromIndex(tileIndices.get(index));
+    }
+
+    public List<MahjongTileKind> getTileKinds()
+    {
+        List<MahjongTileKind> tileKinds = new ArrayList<>();
+        for (int index : tileIndices)
+        {
+            tileKinds.add(TileKindUtils.getKindFromIndex(index));
+        }
+        return tileKinds;
+    }
+
     public void add(Integer index)
     {
         tileIndices.add(index);

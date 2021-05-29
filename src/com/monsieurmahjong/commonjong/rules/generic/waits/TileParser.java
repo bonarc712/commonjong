@@ -173,7 +173,7 @@ public class TileParser
 
     protected static boolean includedInAnExclusiveGroup(MahjongTileKind currentTileKind, List<TileGroup> tileGroups)
     {
-        return tileGroups.stream().anyMatch(group -> group.getIndices().get(0) == currentTileKind.getIndex() && group.isExclusiveGroup());
+        return tileGroups.stream().anyMatch(group -> group.getTileKindAt(0) == currentTileKind && group.isExclusiveGroup());
     }
 
     protected static boolean includedInAGroup(MahjongTileKind currentTileKind, List<TileGroup> tileGroups)

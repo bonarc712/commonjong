@@ -2,6 +2,8 @@ package com.monsieurmahjong.commonjong.rules.generic.waits;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.*;
+
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
@@ -92,5 +94,33 @@ public class TileGroupTest
         assertTrue(loneRed.contains(MahjongTileKind::isHonour), "7z contains an honour");
         assertFalse(loneRed.contains(MahjongTileKind::isCircles), "7z does not contain a circle");
         assertFalse(loneRed.contains(MahjongTileKind::isTerminal), "7z does not contain a terminal");
+    }
+
+    @Test
+    public void testGetTileKindsAt()
+    {
+        TileGroup bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        TileGroup loneRed = TileGroup.of(MahjongTileKind.RED);
+
+        assertEquals(MahjongTileKind.BAMBOOS_2, bambooRun123.getTileKindAt(1), "Second tile kind should be 2 of bamboos");
+        assertThrows(IndexOutOfBoundsException.class, () -> loneRed.getTileKindAt(1), "Red has only one tile");
+    }
+
+    @Test
+    public void testGetTileKinds()
+    {
+        TileGroup bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        TileGroup loneRed = TileGroup.of(MahjongTileKind.RED);
+
+        List<MahjongTileKind> bambooRun123Kinds = new ArrayList<>();
+        bambooRun123Kinds.add(MahjongTileKind.BAMBOOS_1);
+        bambooRun123Kinds.add(MahjongTileKind.BAMBOOS_2);
+        bambooRun123Kinds.add(MahjongTileKind.BAMBOOS_3);
+
+        List<MahjongTileKind> loneRedKinds = new ArrayList<>();
+        loneRedKinds.add(MahjongTileKind.RED);
+
+        assertEquals(bambooRun123Kinds, bambooRun123.getTileKinds(), "Tile kinds should be 1, 2 and 3 of bamboos");
+        assertEquals(loneRedKinds, loneRed.getTileKinds(), "Tile kinds should be red (only)");
     }
 }

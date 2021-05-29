@@ -37,7 +37,7 @@ public class MahjongShantenCounter
             {
                 if (group.isPair() || group.isTriplet()) // check also for triplets, they can also influence shanten
                 {
-                    MahjongTileKind kind = TileKindUtils.getKindFromIndex(group.getIndices().get(0));
+                    MahjongTileKind kind = group.getTileKindAt(0);
                     boolean isRemoved = terminalAndHonourCatalog.remove(kind);
                     if (isRemoved)
                     {

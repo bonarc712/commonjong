@@ -21,7 +21,7 @@ public abstract class DragonYakuhai extends GroupBasedYaku
     {
         for (TileGroup group : groups)
         {
-            if (group.isCompleteExclusiveGroup() && getYakuhaiTile().getIndex() == group.getIndices().get(0))
+            if (group.isCompleteExclusiveGroup() && getYakuhaiTile() == group.getTileKindAt(0))
             {
                 return true;
             }

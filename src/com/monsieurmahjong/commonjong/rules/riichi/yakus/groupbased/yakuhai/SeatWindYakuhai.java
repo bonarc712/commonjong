@@ -22,7 +22,7 @@ public class SeatWindYakuhai extends GroupBasedYaku
         {
             if (group.isCompleteExclusiveGroup())
             {
-                MahjongTileKind currentTile = TileKindUtils.getKindFromIndex(group.getIndices().get(0));
+                MahjongTileKind currentTile = group.getTileKindAt(0);
                 if (currentTile.isWind() && hand.isSeatWind(TileKindUtils.getSeatFromTileKind(currentTile)))
                 {
                     return true;
