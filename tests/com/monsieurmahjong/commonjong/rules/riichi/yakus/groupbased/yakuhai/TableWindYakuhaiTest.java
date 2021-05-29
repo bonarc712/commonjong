@@ -21,6 +21,7 @@ public class TableWindYakuhaiTest
     private List<TileGroup> incompleteTableWindYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("111m", "11z", "333z");
     private List<TileGroup> completeNonTableWindYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p");
     private List<TileGroup> incompleteNonTableWindYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("111m", "567p", "11s");
+    private List<TileGroup> completeTableWindKanYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("111m", "888p", "999s", "11z", "3333z");
 
     private Seat tableWind = Seat.WEST;
 
@@ -79,6 +80,18 @@ public class TableWindYakuhaiTest
         boolean tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
 
         assertTrue(tableWindYakuhaiIsValid, "111m888p999s11333z should be valid for table wind yakuhai in tonshaba");
+    }
+
+    @Test
+    public void testValidityOf_HandWithTableWindKanYakuhaiTiles_ShouldBeTrue()
+    {
+        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeTableWindKanYakuhaiHandGroups));
+        hand.addTableWind(tableWind);
+        Yaku tableWindYakuhai = new TableWindYakuhai(hand, completeTableWindKanYakuhaiHandGroups);
+
+        boolean tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
+
+        assertTrue(tableWindYakuhaiIsValid, "111888p999s113333z should be valid for table wind yakuhai");
     }
 
     @Test

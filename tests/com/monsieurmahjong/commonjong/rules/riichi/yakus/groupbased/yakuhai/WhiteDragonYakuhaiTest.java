@@ -11,7 +11,6 @@ import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.yakuhai.WhiteDragonYakuhai;
 
 public class WhiteDragonYakuhaiTest
 {
@@ -22,6 +21,7 @@ public class WhiteDragonYakuhaiTest
     private List<TileGroup> incompleteWhiteDragonYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("111m", "11z", "555z");
     private List<TileGroup> completeNonWhiteDragonYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p");
     private List<TileGroup> incompleteNonWhiteDragonYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("111m", "567p", "11s");
+    private List<TileGroup> completeWhiteDragonKanYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("111m", "888p", "999s", "11z", "5555z");
 
     @Test
     public void testValidityOf_HandWithFourteenWhiteDragonYakuhaiTiles_ShouldBeTrue()
@@ -61,6 +61,16 @@ public class WhiteDragonYakuhaiTest
         boolean whiteDragonYakuhaiIsValid = whiteDragonYakuhai.isValid();
 
         assertFalse(whiteDragonYakuhaiIsValid, "111m567p11s should not be valid for white dragon yakuhai");
+    }
+
+    @Test
+    public void testValidityOf_HandWithWhiteDragonKanYakuhaiTiles_ShouldBeTrue()
+    {
+        Yaku whiteDragonYakuhai = new WhiteDragonYakuhai(new Hand(TileGroupUtils.getTilesFromTileGroups(completeWhiteDragonKanYakuhaiHandGroups)), completeWhiteDragonKanYakuhaiHandGroups);
+
+        boolean whiteDragonYakuhaiIsValid = whiteDragonYakuhai.isValid();
+
+        assertTrue(whiteDragonYakuhaiIsValid, "111888p999s117777z should be valid for white dragon yakuhai");
     }
 
     @Test

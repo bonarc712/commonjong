@@ -21,6 +21,7 @@ public class GreenDragonYakuhaiTest
     private List<TileGroup> incompleteGreenDragonYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("111m", "11z", "666z");
     private List<TileGroup> completeNonGreenDragonYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p");
     private List<TileGroup> incompleteNonGreenDragonYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("111m", "567p", "11s");
+    private List<TileGroup> completeGreenDragonKanYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("111m", "888p", "999s", "11z", "6666z");
 
     @Test
     public void testValidityOf_HandWithFourteenGreenDragonYakuhaiTiles_ShouldBeTrue()
@@ -60,6 +61,16 @@ public class GreenDragonYakuhaiTest
         boolean greenDragonYakuhaiIsValid = greenDragonYakuhai.isValid();
 
         assertFalse(greenDragonYakuhaiIsValid, "111m567p11s should not be valid for green dragon yakuhai");
+    }
+
+    @Test
+    public void testValidityOf_HandWithGreenDragonKanYakuhaiTiles_ShouldBeTrue()
+    {
+        Yaku greenDragonYakuhai = new GreenDragonYakuhai(new Hand(TileGroupUtils.getTilesFromTileGroups(completeGreenDragonKanYakuhaiHandGroups)), completeGreenDragonKanYakuhaiHandGroups);
+
+        boolean greenDragonYakuhaiIsValid = greenDragonYakuhai.isValid();
+
+        assertTrue(greenDragonYakuhaiIsValid, "111888p999s116666z should be valid for green dragon yakuhai");
     }
 
     @Test

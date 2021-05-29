@@ -100,6 +100,21 @@ public class TileGroup extends Object
         return isExclusiveGroup() && tileIndices.size() == 3;
     }
 
+    public boolean isQuad()
+    {
+        return isExclusiveGroup() && tileIndices.size() == 4;
+    }
+
+    /**
+     * A complete exclusive group is a group that is formed of one tile kind and
+     * that contains at least three tiles. A triplet, a quad or a quint (with jokers) form
+     * up a complete exclusive group.
+     */
+    public boolean isCompleteExclusiveGroup()
+    {
+        return isExclusiveGroup() && tileIndices.size() >= 3;
+    }
+
     /**
      * A run is a sequence of three tiles (eg. 345m)
      */

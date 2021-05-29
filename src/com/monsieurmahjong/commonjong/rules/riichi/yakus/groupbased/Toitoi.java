@@ -26,7 +26,7 @@ public class Toitoi extends GroupBasedYaku
                     return false;
                 }
             }
-            else if (!group.isTriplet())
+            else if (!group.isCompleteExclusiveGroup())
             {
                 return false;
             }

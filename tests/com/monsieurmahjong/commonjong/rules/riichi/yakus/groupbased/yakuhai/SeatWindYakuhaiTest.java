@@ -22,6 +22,7 @@ public class SeatWindYakuhaiTest
     private List<TileGroup> completeNonSeatWindYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p");
     private List<TileGroup> incompleteNonSeatWindYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("111m", "567p", "11s");
     private List<TileGroup> completeOtherWindYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("111m", "888p", "999s", "11z", "222z");
+    private List<TileGroup> completeSeatWindKanYakuhaiHandGroups = TileGroupUtils.tileGroupsOf("111m", "888p", "999s", "11z", "3333z");
 
     private Seat seatWind = Seat.WEST;
 
@@ -79,6 +80,18 @@ public class SeatWindYakuhaiTest
         boolean seatWindYakuhaiIsValid = seatWindYakuhai.isValid();
 
         assertFalse(seatWindYakuhaiIsValid, "111m888p999s11222z should not be valid for seat wind yakuhai");
+    }
+
+    @Test
+    public void testValidityOf_HandWithSeatWindKanYakuhaiTiles_ShouldBeTrue()
+    {
+        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeSeatWindKanYakuhaiHandGroups));
+        hand.setSeatWind(seatWind);
+        Yaku seatWindYakuhai = new SeatWindYakuhai(hand, completeSeatWindKanYakuhaiHandGroups);
+
+        boolean seatWindYakuhaiIsValid = seatWindYakuhai.isValid();
+
+        assertTrue(seatWindYakuhaiIsValid, "111888p999s113333z should be valid for seat wind yakuhai");
     }
 
     @Test

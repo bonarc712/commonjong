@@ -20,7 +20,7 @@ public class TableWindYakuhai extends GroupBasedYaku
     {
         for (TileGroup group : groups)
         {
-            if (group.isTriplet())
+            if (group.isCompleteExclusiveGroup())
             {
                 MahjongTileKind currentTile = TileKindUtils.getKindFromIndex(group.getIndices().get(0));
                 if (currentTile.isWind() && hand.isTableWind(TileKindUtils.getSeatFromTileKind(currentTile)))

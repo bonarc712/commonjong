@@ -22,6 +22,7 @@ public class ToitoiTest
     private List<TileGroup> completeNonToitoiHandGroups = TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p");
     private List<TileGroup> incompleteNonToitoiHandGroups = TileGroupUtils.tileGroupsOf("111m", "567p", "11s");
     private List<TileGroup> completeChiitoiHandGroups = TileGroupUtils.tileGroupsOf("11m", "11p", "77p", "99p", "11s", "99s", "11z");
+    private List<TileGroup> completeToitoiWithKansHandGroups = TileGroupUtils.tileGroupsOf("111m", "7777m", "888p", "9999s", "11z");
 
     @Test
     public void testValidityOf_HandWithFourteenToitoiTiles_ShouldBeTrue()
@@ -71,6 +72,16 @@ public class ToitoiTest
         boolean toitoiIsValid = toitoi.isValid();
 
         assertFalse(toitoiIsValid, "11m117799p1199s11z should not be valid for toitoi");
+    }
+
+    @Test
+    public void testValidityOf_HandWithToitoiTilesWithKans_ShouldBeTrue()
+    {
+        Yaku toitoi = new Toitoi(new Hand(TileGroupUtils.getTilesFromTileGroups(completeToitoiWithKansHandGroups)), completeToitoiWithKansHandGroups);
+
+        boolean toitoiIsValid = toitoi.isValid();
+
+        assertTrue(toitoiIsValid, "1117777m888p9999s11z should be valid for toitoi");
     }
 
     @Test

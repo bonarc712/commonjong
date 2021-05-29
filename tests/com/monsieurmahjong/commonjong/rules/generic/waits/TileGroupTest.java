@@ -38,6 +38,46 @@ public class TileGroupTest
     }
 
     @Test
+    public void testIsQuad()
+    {
+        TileGroup bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        TileGroup ryanzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
+        TileGroup suuzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+        TileGroup suuzouQuad = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+        TileGroup suuzouPair = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+        TileGroup bambooProtogroup34 = TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4);
+        TileGroup loneRed = TileGroup.of(MahjongTileKind.RED);
+
+        assertFalse(bambooRun123.isQuad(), "123s run is not a quad");
+        assertFalse(ryanzouTriplet.isQuad(), "222s triplet is not a quad");
+        assertFalse(suuzouTriplet.isQuad(), "444s triplet is not a quad");
+        assertTrue(suuzouQuad.isQuad(), "4444s quad is a quad");
+        assertFalse(suuzouPair.isQuad(), "44s pair is not a quad");
+        assertFalse(bambooProtogroup34.isQuad(), "34s ryanmen is not a quad");
+        assertFalse(loneRed.isQuad(), "7z tile is not a quad");
+    }
+
+    @Test
+    public void testIsCompleteExclusiveGroup()
+    {
+        TileGroup bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        TileGroup ryanzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
+        TileGroup suuzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+        TileGroup suuzouQuad = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+        TileGroup suuzouPair = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+        TileGroup bambooProtogroup34 = TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4);
+        TileGroup loneRed = TileGroup.of(MahjongTileKind.RED);
+
+        assertFalse(bambooRun123.isCompleteExclusiveGroup(), "123s run is not a complete exclusive group");
+        assertTrue(ryanzouTriplet.isCompleteExclusiveGroup(), "222s triplet is a complete exclusive group");
+        assertTrue(suuzouTriplet.isCompleteExclusiveGroup(), "444s triplet is a complete exclusive group");
+        assertTrue(suuzouQuad.isCompleteExclusiveGroup(), "4444s quad is a complete exclusive group");
+        assertFalse(suuzouPair.isCompleteExclusiveGroup(), "44s pair is not a complete exclusive group");
+        assertFalse(bambooProtogroup34.isCompleteExclusiveGroup(), "34s ryanmen is not a complete exclusive group");
+        assertFalse(loneRed.isCompleteExclusiveGroup(), "7z tile is not a complete exclusive group");
+    }
+
+    @Test
     public void testContains()
     {
         TileGroup bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
