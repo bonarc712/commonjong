@@ -65,6 +65,16 @@ public class TileGroup extends Object
         return tileKinds;
     }
 
+    public List<Integer> getTileNumbers()
+    {
+        List<Integer> tileNumbers = new ArrayList<>();
+        for (MahjongTileKind tileKind : getTileKinds())
+        {
+            tileNumbers.add(tileKind.getTileNumber());
+        }
+        return tileNumbers;
+    }
+
     public void add(Integer index)
     {
         tileIndices.add(index);

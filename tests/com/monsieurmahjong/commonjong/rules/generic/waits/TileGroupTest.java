@@ -123,4 +123,26 @@ public class TileGroupTest
         assertEquals(bambooRun123Kinds, bambooRun123.getTileKinds(), "Tile kinds should be 1, 2 and 3 of bamboos");
         assertEquals(loneRedKinds, loneRed.getTileKinds(), "Tile kinds should be red (only)");
     }
+
+    @Test
+    public void testGetTileNumbers()
+    {
+        TileGroup bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        TileGroup bambooTriplet333 = TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3);
+        TileGroup loneRed = TileGroup.of(MahjongTileKind.RED);
+
+        List<Integer> bambooRun123Numbers = new ArrayList<>();
+        bambooRun123Numbers.add(1);
+        bambooRun123Numbers.add(2);
+        bambooRun123Numbers.add(3);
+
+        List<Integer> bambooTriplet333Numbers = new ArrayList<>();
+        bambooTriplet333Numbers.add(3);
+        bambooTriplet333Numbers.add(3);
+        bambooTriplet333Numbers.add(3);
+
+        assertEquals(bambooRun123Numbers, bambooRun123.getTileNumbers(), "Tile numbers should be 1, 2 and 3");
+        assertEquals(bambooTriplet333Numbers, bambooTriplet333.getTileNumbers(), "Tile numbers should be 3, 3 and 3");
+        assertThrows(IllegalArgumentException.class, () -> loneRed.getTileNumbers(), "This tile doesn't have an associated number");
+    }
 }

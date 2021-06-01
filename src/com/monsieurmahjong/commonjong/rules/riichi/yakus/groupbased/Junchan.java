@@ -22,7 +22,7 @@ public class Junchan extends GroupBasedYaku
         {
             if (group.contains(MahjongTileKind::isTerminal))
             {
-                if (group.isRun() && group.contains(MahjongTileKind::isNonTerminalNumeral))
+                if (group.isRun())
                 {
                     nonTerminalFound = true;
                 }

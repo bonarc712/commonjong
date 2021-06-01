@@ -69,6 +69,19 @@ public enum MahjongTileKind
         return ordinal();
     }
 
+    /**
+     * Get the tile number of a specific tile, eg. a 4 of bamboos will return 4.
+     * @throws IllegalArgumentException when calling for a non-numbered tile (eg honours)
+     */
+    public int getTileNumber()
+    {
+        if (!isNumeral())
+        {
+            throw new IllegalArgumentException("Tile is not a numbered tile");
+        }
+        return Character.getNumericValue(abbreviation.charAt(0));
+    }
+
     public boolean isHonour()
     {
         return this.isDragon() || this.isWind();
