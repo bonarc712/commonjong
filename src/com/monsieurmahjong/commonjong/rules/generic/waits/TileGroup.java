@@ -284,4 +284,16 @@ public class TileGroup extends Object
 
         return toReturn;
     }
+
+    public String toMPSZNotation()
+    {
+        String toReturn = "";
+        for (Integer index : tileIndices)
+        {
+            toReturn += TileKindUtils.getKindFromIndex(index).getMPSZNumber();
+        }
+        toReturn += TileKindUtils.getKindFromIndex(tileIndices.get(0)).getMPSZFamily();
+
+        return toReturn;
+    }
 }

@@ -1,9 +1,10 @@
 package com.monsieurmahjong.commonjong.rules.generic.utils;
 
 import java.util.*;
+import java.util.function.BiFunction;
 
 import com.monsieurmahjong.commonjong.game.*;
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.*;
 
 public class TileKindUtils
 {
@@ -76,6 +77,31 @@ public class TileKindUtils
         }
 
         return hand;
+    }
+
+    public static String getHandAsMPSZNotation(List<Tile> hand)
+    {
+        StringBuilder mpszStringBuilder = new StringBuilder();
+        hand.stream().map(tile -> tile.getTileKind()).sorted(new MahjongTileKindComparator()).forEach(tileKind -> {
+            mpszStringBuilder.append(tileKind.abbreviation);
+        });
+
+        String resultString = mpszStringBuilder.toString();
+
+        BiFunction<String, String, String> replaceLettersInString = ((originalString, letterToReplace) -> {
+            while (originalString.indexOf(letterToReplace) != originalString.lastIndexOf(letterToReplace))
+            {
+                originalString = originalString.replaceFirst(letterToReplace, "");
+            }
+            return originalString;
+        });
+
+        resultString = replaceLettersInString.apply(resultString, "m");
+        resultString = replaceLettersInString.apply(resultString, "p");
+        resultString = replaceLettersInString.apply(resultString, "s");
+        resultString = replaceLettersInString.apply(resultString, "z");
+
+        return resultString;
     }
 
     public static MahjongTileKind getKindFromIndex(int index)

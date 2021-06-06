@@ -145,4 +145,24 @@ public class TileGroupTest
         assertEquals(bambooTriplet333Numbers, bambooTriplet333.getTileNumbers(), "Tile numbers should be 3, 3 and 3");
         assertThrows(IllegalArgumentException.class, () -> loneRed.getTileNumbers(), "This tile doesn't have an associated number");
     }
+
+    @Test
+    public void testToMPSZNotation()
+    {
+        TileGroup bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        TileGroup ryanzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
+        TileGroup suuzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+        TileGroup suuzouQuad = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+        TileGroup suuzouPair = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+        TileGroup bambooProtogroup34 = TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4);
+        TileGroup loneRed = TileGroup.of(MahjongTileKind.RED);
+
+        assertEquals("123s", bambooRun123.toMPSZNotation(), "123s run notation is incorrect");
+        assertEquals("222s", ryanzouTriplet.toMPSZNotation(), "222s triplet notation is incorrect");
+        assertEquals("444s", suuzouTriplet.toMPSZNotation(), "444s triplet notation is incorrect");
+        assertEquals("4444s", suuzouQuad.toMPSZNotation(), "4444s quad notation is incorrect");
+        assertEquals("44s", suuzouPair.toMPSZNotation(), "44s pair notation is incorrect");
+        assertEquals("34s", bambooProtogroup34.toMPSZNotation(), "34s ryanmen notation is incorrect");
+        assertEquals("7z", loneRed.toMPSZNotation(), "7z tile notation is incorrect");
+    }
 }

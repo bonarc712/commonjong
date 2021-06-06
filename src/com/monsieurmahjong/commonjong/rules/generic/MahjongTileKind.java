@@ -82,6 +82,22 @@ public enum MahjongTileKind
         return Character.getNumericValue(abbreviation.charAt(0));
     }
 
+    /**
+     * This should be used only for MPSZ notation needs.
+     */
+    public int getMPSZNumber()
+    {
+        return Character.getNumericValue(abbreviation.charAt(0));
+    }
+
+    /**
+     * This should be used only for MPSZ notation needs.
+     */
+    public char getMPSZFamily()
+    {
+        return abbreviation.charAt(1);
+    }
+
     public boolean isHonour()
     {
         return this.isDragon() || this.isWind();
