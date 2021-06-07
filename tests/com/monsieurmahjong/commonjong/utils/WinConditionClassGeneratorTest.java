@@ -33,9 +33,6 @@ public class WinConditionClassGeneratorTest
 
         String resultTestCode = classGenerator.createWinConditionTest("SanshokuDoujun", GroupBasedYaku.class, 2, testCases);
 
-        System.out.println(resultTestCode);
-        System.out.println(getTestCodeForSanshokuDoujun());
-
         assertEquals(getTestCodeForSanshokuDoujun(), resultTestCode, "Sources don't match");
     }
 

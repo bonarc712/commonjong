@@ -60,6 +60,11 @@ public class Hand
         return melds;
     }
 
+    public void setMelds(List<List<Tile>> melds)
+    {
+        this.melds = melds;
+    }
+
     public List<Tile> getBonus()
     {
         return bonus;

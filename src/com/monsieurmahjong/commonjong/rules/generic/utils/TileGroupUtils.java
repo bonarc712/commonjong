@@ -23,6 +23,13 @@ public class TileGroupUtils
         return tileGroupList;
     }
 
+    public static List<Tile> getTilesFromTileGroup(TileGroup group)
+    {
+        List<TileGroup> tileGroups = new ArrayList<>();
+        tileGroups.add(group);
+        return getTilesFromTileGroups(tileGroups);
+    }
+
     public static List<Tile> getTilesFromTileGroups(List<TileGroup> groups)
     {
         List<Tile> tiles = new ArrayList<>();
@@ -39,5 +46,12 @@ public class TileGroupUtils
         tiles.sort((first, second) -> first.getTileKind().getIndex() - second.getTileKind().getIndex());
 
         return tiles;
+    }
+
+    public static TileGroup getTileGroupFromTiles(List<Tile> tiles)
+    {
+        TileGroup group = new TileGroup();
+        tiles.stream().map(tile -> tile.getTileKind().getIndex()).forEach(group::add);
+        return group;
     }
 }

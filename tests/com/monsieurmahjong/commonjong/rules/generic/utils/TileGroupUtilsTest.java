@@ -37,4 +37,16 @@ public class TileGroupUtilsTest
         List<Tile> tileList1 = TileGroupUtils.getTilesFromTileGroups(tileGroups1);
         assertEquals(TileKindUtils.asHand(tiles), tileList1);
     }
+
+    @Test
+    public void testGetTileGroupFromTiles()
+    {
+        TileGroup bambooRun234 = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4);
+        TileGroup redPair = TileGroup.of(MahjongTileKind.RED, MahjongTileKind.RED);
+
+        TileGroup group = TileGroupUtils.getTileGroupFromTiles(TileKindUtils.asHand("234s"));
+        assertEquals(bambooRun234, group);
+        group = TileGroupUtils.getTileGroupFromTiles(TileKindUtils.asHand("77z"));
+        assertEquals(redPair, group);
+    }
 }
