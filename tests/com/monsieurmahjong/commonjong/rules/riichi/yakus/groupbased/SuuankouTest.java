@@ -5,7 +5,7 @@ import static org.mockito.Mockito.mock;
 
 import java.util.*;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.*;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
@@ -22,18 +22,9 @@ public class SuuankouTest
     private List<TileGroup> incompleteSuuankouHandGroups = TileGroupUtils.tileGroupsOf("1111m", "222p", "222s", "111z");
     private List<TileGroup> completeNonSuuankouHandGroups = TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p");
     private List<TileGroup> incompleteNonSuuankouHandGroups = TileGroupUtils.tileGroupsOf("111m", "555p", "11s");
-
     private List<TileGroup> toitoiHandGroups = TileGroupUtils.tileGroupsOf("4444m", "555p", "777s", "999s", "11z");
-    private static List<List<Tile>> toitoiHandMelds = new ArrayList<>();
 
     private MahjongTileKind tankiWinningTile = MahjongTileKind.EAST;
-
-    @BeforeAll
-    public static void initialize()
-    {
-        toitoiHandMelds.add(TileGroupUtils.getTilesFromTileGroups(TileGroupUtils.tileGroupsOf("4444m")));
-        toitoiHandMelds.add(TileGroupUtils.getTilesFromTileGroups(TileGroupUtils.tileGroupsOf("777s")));
-    }
 
     @Test
     public void testValidityOf_CompleteSuuankouHand_ShouldBeTrue()
@@ -79,6 +70,9 @@ public class SuuankouTest
     public void testValidityOf_ToitoiHand_ShouldBeFalse()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(toitoiHandGroups));
+        List<List<Tile>> toitoiHandMelds = new ArrayList<>();
+        toitoiHandMelds.add(TileGroupUtils.getTilesFromTileGroups(TileGroupUtils.tileGroupsOf("4444m")));
+        toitoiHandMelds.add(TileGroupUtils.getTilesFromTileGroups(TileGroupUtils.tileGroupsOf("777s")));
         hand.setMelds(toitoiHandMelds);
         Yaku suuankou = new Suuankou(hand, toitoiHandGroups);
 

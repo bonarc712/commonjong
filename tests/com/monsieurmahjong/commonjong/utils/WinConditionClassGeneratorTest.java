@@ -12,7 +12,7 @@ import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.GroupBasedYa
 public class WinConditionClassGeneratorTest
 {
     @Test
-    public void creatingAWinConditionClass_UsingSanshokuDoujunAsAnExample_ShouldReturnABarrenSourceCodeClass()
+    public void testCreatingAWinConditionClass_UsingSanshokuDoujunAsAnExample_ShouldReturnABarrenSourceCodeClass()
     {
         WinConditionClassGenerator classGenerator = new WinConditionClassGenerator();
 
@@ -22,7 +22,7 @@ public class WinConditionClassGeneratorTest
     }
 
     @Test
-    public void creatingAWinConditionTest_UsingSanshokuDoujunAsAnExample_ShouldReturnACompleteTestCase()
+    public void testCreatingAWinConditionTest_UsingSanshokuDoujunAsAnExample_ShouldReturnACompleteTestCase()
     {
         WinConditionClassGenerator classGenerator = new WinConditionClassGenerator();
         List<GroupBasedWinConditionTestCase> testCases = new ArrayList<>();
