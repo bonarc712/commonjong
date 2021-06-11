@@ -43,7 +43,7 @@ public class KokushiMusou extends GroupBasedYaku
                 }
             }
         }
-        return true;
+        return terminalAndHonourCatalog.isEmpty();
     }
 
     @Override
