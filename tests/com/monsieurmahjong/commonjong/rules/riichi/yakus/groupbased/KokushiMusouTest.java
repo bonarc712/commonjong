@@ -22,6 +22,7 @@ public class KokushiMusouTest
     private List<TileGroup> completeNonKokushiHandGroups = TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p");
     private List<TileGroup> incompleteNonKokushiHandGroups = TileGroupUtils.tileGroupsOf("111m", "555p", "11s");
     private List<TileGroup> subsetOfKokushiTilesIsNotKokushi = TileGroupUtils.tileGroupsOf("11m", "9m", "1p", "9p", "1s", "9s");
+    private List<TileGroup> juusanmenMachiKokushiTenpaiIsNotKokushi = TileGroupUtils.tileGroupsOf("1m", "9m", "1p", "9p", "1s", "9s", "1z", "2z", "3z", "4z", "5z", "6z", "7z");
 
     private MahjongTileKind juusanmenMachiWinningTile = MahjongTileKind.CHARACTERS_1;
 
@@ -63,6 +64,16 @@ public class KokushiMusouTest
         boolean kokushiMusouIsValid = kokushiMusou.isValid();
 
         assertFalse(kokushiMusouIsValid, "119m19p19s should not be valid for KokushiMusou");
+    }
+
+    @Test
+    public void testValidityOf_KokushiTenpaiHand_ShouldBeFalse()
+    {
+        Yaku kokushiMusou = new KokushiMusou(new Hand(TileGroupUtils.getTilesFromTileGroups(juusanmenMachiKokushiTenpaiIsNotKokushi)), juusanmenMachiKokushiTenpaiIsNotKokushi);
+
+        boolean kokushiMusouIsValid = kokushiMusou.isValid();
+
+        assertFalse(kokushiMusouIsValid, "19m19p19s1234567z should not be valid for KokushiMusou");
     }
 
     @Test
