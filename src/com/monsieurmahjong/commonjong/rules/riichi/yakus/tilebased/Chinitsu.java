@@ -37,7 +37,7 @@ public class Chinitsu extends TileBasedYaku
             }
         }
 
-        return chosenFamily != TileFamily.NONE;
+        return true;
     }
 
     @Override

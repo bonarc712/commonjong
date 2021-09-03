@@ -17,6 +17,7 @@ public class ChinitsuTest
     private Hand incompleteChinitsuHand = new Hand(TileKindUtils.asHand("11123477m"));
     private Hand completeNonChinitsuHand = new Hand(TileKindUtils.asHand("123456m22345678p"));
     private Hand incompleteNonChinitsuHand = new Hand(TileKindUtils.asHand("111p111s22z"));
+    private Hand completeHonitsuHand = new Hand(TileKindUtils.asHand("111234455667m55z"));
 
     @Test
     public void testValidityOf_HandWithFourteenChinitsuTiles_ShouldBeTrue()
@@ -56,6 +57,16 @@ public class ChinitsuTest
         boolean chinitsuIsValid = chinitsu.isValid();
 
         assertFalse(chinitsuIsValid, "111p111s22z should not be valid for chinitsu");
+    }
+
+    @Test
+    public void testValidityOf_CompleteHonitsuHand_ShouldBeFalse()
+    {
+        Yaku chinitsu = new Chinitsu(completeHonitsuHand);
+
+        boolean chinitsuIsValid = chinitsu.isValid();
+
+        assertFalse(chinitsuIsValid, "111234455667m55z should not be valid for chinitsu");
     }
 
     @Test
