@@ -117,6 +117,11 @@ public class Hand
         tableWinds.add(seat);
     }
 
+    public Seat getSeatWind()
+    {
+        return seatWind;
+    }
+
     public void setSeatWind(Seat seat)
     {
         seatWind = seat;

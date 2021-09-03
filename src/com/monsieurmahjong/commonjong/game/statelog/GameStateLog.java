@@ -2,6 +2,8 @@ package com.monsieurmahjong.commonjong.game.statelog;
 
 import java.util.*;
 
+import com.monsieurmahjong.commonjong.game.Seat;
+
 public class GameStateLog
 {
     private List<String> logs;
@@ -25,5 +27,10 @@ public class GameStateLog
         {
             System.out.println(log);
         }
+    }
+
+    public boolean hasPlayerDeclaredRiichi(Seat playerWind)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
