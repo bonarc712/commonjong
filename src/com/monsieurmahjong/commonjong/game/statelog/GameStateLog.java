@@ -33,4 +33,9 @@ public class GameStateLog
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+    public boolean doesPlayerWinOnIppatsu(Seat playerWind)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
