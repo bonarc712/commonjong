@@ -45,6 +45,6 @@ public class RinshanKaihouTest
 
         int hanValue = rinshanKaihou.getHanValue();
 
-        assertEquals(hanValue, 1, "Menzen tsumo value should be 1");
+        assertEquals(hanValue, 1, "Rinshan kaihou value should be 1");
     }
 }

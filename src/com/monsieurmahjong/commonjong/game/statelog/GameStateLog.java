@@ -63,4 +63,24 @@ public class GameStateLog
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+    public boolean doesPlayerWinOnChankan(Seat playerWind)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public boolean doesPlayerWinOnHaitei(Seat playerWind)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public boolean doesPlayerWinOnHoutei(Seat playerWind)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public boolean doesPlayerWinOnNagashiMangan(Seat playerWind)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
