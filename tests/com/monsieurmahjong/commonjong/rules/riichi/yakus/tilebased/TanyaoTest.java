@@ -2,12 +2,14 @@ package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.*;
+
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.*;
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased.Tanyao;
+import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
 
 public class TanyaoTest
 {
@@ -56,6 +58,34 @@ public class TanyaoTest
         boolean tanyaoIsValid = tanyao.isValid();
 
         assertFalse(tanyaoIsValid, "456789m should not be valid for tanyao");
+    }
+
+    @Test
+    public void testValidityOf_OpenTanyaoShapeWithKuitanNashi_ShouldBeFalse()
+    {
+        List<Tile> meld = new ArrayList<>();
+        meld.add(new Tile(MahjongTileKind.CHARACTERS_2));
+        meld.add(new Tile(MahjongTileKind.CHARACTERS_3));
+        meld.add(new Tile(MahjongTileKind.CHARACTERS_4));
+        completeTanyaoHand.setMelds(Arrays.asList(meld));
+        Tanyao tanyao = new Tanyao(completeTanyaoHand);
+        tanyao.setKuitan(false);
+
+        boolean tanyaoIsValid = tanyao.isValid();
+
+        assertFalse(tanyaoIsValid, "234567m22345678p with open 234m and kuitan nashi should not be valid for tanyao");
+    }
+
+    @Test
+    public void testValidityOf_ClosedTanyaoShapeWithKuitanNashi_ShouldBeTrue()
+    {
+        completeTanyaoHand.setMelds(Collections.EMPTY_LIST);
+        Tanyao tanyao = new Tanyao(completeTanyaoHand);
+        tanyao.setKuitan(false);
+
+        boolean tanyaoIsValid = tanyao.isValid();
+
+        assertTrue(tanyaoIsValid, "234567m22345678p with no melds and kuitan nashi should be valid for tanyao");
     }
 
     @Test

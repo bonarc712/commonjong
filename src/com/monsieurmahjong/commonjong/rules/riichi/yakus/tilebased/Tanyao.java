@@ -4,6 +4,9 @@ import com.monsieurmahjong.commonjong.game.Hand;
 
 public class Tanyao extends TileBasedYaku
 {
+    // should tanyao be open, default is true
+    private boolean kuitan = true;
+
     public Tanyao(Hand hand)
     {
         super(hand);
@@ -12,6 +15,10 @@ public class Tanyao extends TileBasedYaku
     @Override
     public boolean isValid()
     {
+        if (!kuitan && hand.isOpen())
+        {
+            return false;
+        }
         return hand.getTiles().stream().allMatch(tile -> tile.getTileKind().isNumeral() && !tile.getTileKind().isTerminal());
     }
 
@@ -19,5 +26,10 @@ public class Tanyao extends TileBasedYaku
     public int getHanValue()
     {
         return 1;
+    }
+
+    public void setKuitan(boolean kuitan)
+    {
+        this.kuitan = kuitan;
     }
 }
