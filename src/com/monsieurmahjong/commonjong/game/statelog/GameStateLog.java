@@ -38,4 +38,19 @@ public class GameStateLog
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+    public boolean doesPlayerWinOnTenhou(Seat playerWind)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public boolean doesPlayerWinOnChihou(Seat playerWind)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public boolean doesPlayerWinOnRenhou(Seat playerWind)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }

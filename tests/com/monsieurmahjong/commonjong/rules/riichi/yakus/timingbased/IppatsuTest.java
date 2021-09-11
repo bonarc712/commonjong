@@ -15,7 +15,7 @@ public class IppatsuTest
     GameStateLog anyLog = mock(GameStateLog.class);
 
     @Test
-    public void testValidityOfIppatsu_WhenDeclared_ShouldBeTrue()
+    public void testValidityOfIppatsu_WhenObtained_ShouldBeTrue()
     {
         Ippatsu ippatsu = new Ippatsu(anyHand, anyLog);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
@@ -23,11 +23,11 @@ public class IppatsuTest
 
         boolean isValid = ippatsu.isValid();
 
-        assertTrue(isValid, "Ippatsu should be valid when declared");
+        assertTrue(isValid, "Ippatsu should be valid when it is obtained");
     }
 
     @Test
-    public void testValidityOfIppatsu_WhenNotDeclared_ShouldBeFalse()
+    public void testValidityOfIppatsu_WhenNotObtained_ShouldBeFalse()
     {
         Ippatsu ippatsu = new Ippatsu(anyHand, anyLog);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
@@ -35,7 +35,7 @@ public class IppatsuTest
 
         boolean isValid = ippatsu.isValid();
 
-        assertFalse(isValid, "Ippatsu should not be valid when not declared");
+        assertFalse(isValid, "Ippatsu should not be valid when it is not obtained");
     }
 
     @Test
