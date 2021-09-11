@@ -53,4 +53,9 @@ public class GameStateLog
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+    public boolean doesPlayerWinOnMenzenTsumo(Seat playerWind)
+    {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
