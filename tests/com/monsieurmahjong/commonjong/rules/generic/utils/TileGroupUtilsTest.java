@@ -24,6 +24,16 @@ public class TileGroupUtilsTest
     }
 
     @Test
+    public void testGetTilesFromMPSZNotation()
+    {
+        List<Tile> tiles = TileGroupUtils.getTilesFromMPSZNotation("234s");
+        List<Tile> expectedTiles = Arrays.asList(new Tile(MahjongTileKind.BAMBOOS_2), //
+                new Tile(MahjongTileKind.BAMBOOS_3), new Tile(MahjongTileKind.BAMBOOS_4));
+
+        assertEquals(expectedTiles, tiles, "234s should give 234s as tiles");
+    }
+
+    @Test
     public void testGetTileFromTileGroups()
     {
         testTileSpecificTileGroups("234s77z", "234s", "77z");

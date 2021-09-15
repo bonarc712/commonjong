@@ -1,6 +1,6 @@
 package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -80,5 +80,15 @@ public class BaseMinipointsTest
         int fuValue = minipoints.getFuValue();
 
         assertEquals(20, fuValue, "Base minipoints should be 20 on open tsumo");
+    }
+
+    @Test
+    public void mBaseMinipoints_IsAlwaysValid()
+    {
+        BaseMinipoints minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups, anyLog);
+
+        boolean valid = minipoints.isValid();
+
+        assertTrue(valid, "Base minipoints are always valid");
     }
 }

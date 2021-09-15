@@ -21,6 +21,12 @@ public class BaseMinipoints implements Fu
     }
 
     @Override
+    public boolean isValid()
+    {
+        return true;
+    }
+
+    @Override
     public int getFuValue()
     {
         if (isSevenPairs())

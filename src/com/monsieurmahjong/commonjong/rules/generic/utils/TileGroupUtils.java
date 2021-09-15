@@ -23,6 +23,11 @@ public class TileGroupUtils
         return tileGroupList;
     }
 
+    public static List<Tile> getTilesFromMPSZNotation(String... groups)
+    {
+        return getTilesFromTileGroups(tileGroupsOf(groups));
+    }
+
     public static List<Tile> getTilesFromTileGroup(TileGroup group)
     {
         List<TileGroup> tileGroups = new ArrayList<>();
