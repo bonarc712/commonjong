@@ -1,20 +1,16 @@
 package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 import java.util.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class DragonPairTest
 {
-    private Hand anyHand = mock(Hand.class);
-
     private List<TileGroup> completeGreenDragonPairHandGroups = TileGroupUtils.tileGroupsOf("111m", "888p", "999s", "111z", "66z");
     private List<TileGroup> incompleteGreenDragonPairHandGroups = TileGroupUtils.tileGroupsOf("111m", "111z", "66z");
     private List<TileGroup> completeNonGreenDragonPairHandGroups = TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p");
@@ -27,7 +23,7 @@ public class DragonPairTest
 
         boolean isValid = dragonPair.isValid();
 
-        assertTrue(isValid, "Dragon pair should be a valid for a hand that contains a dragon pair");
+        assertTrue(isValid, "Dragon pair should be valid for a hand that contains a dragon pair");
     }
 
     @Test
@@ -37,7 +33,7 @@ public class DragonPairTest
 
         boolean isValid = dragonPair.isValid();
 
-        assertTrue(isValid, "Dragon pair should be a valid for a hand that contains a dragon pair");
+        assertTrue(isValid, "Dragon pair should be valid for a hand that contains a dragon pair");
     }
 
     @Test
@@ -47,7 +43,7 @@ public class DragonPairTest
 
         boolean isValid = dragonPair.isValid();
 
-        assertFalse(isValid, "Dragon pair should be a valid for a hand that contains a dragon pair");
+        assertFalse(isValid, "Dragon pair should not be valid for a hand that doesn't contain a dragon pair");
     }
 
     @Test
@@ -57,7 +53,7 @@ public class DragonPairTest
 
         boolean isValid = dragonPair.isValid();
 
-        assertFalse(isValid, "Dragon pair should be a valid for a seven pairs hand that contains a dragon pair");
+        assertFalse(isValid, "Dragon pair should not be valid for a seven pairs hand that contains a dragon pair");
     }
 
     @Test
