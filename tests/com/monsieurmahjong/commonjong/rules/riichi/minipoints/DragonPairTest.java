@@ -17,7 +17,7 @@ public class DragonPairTest
     private List<TileGroup> completeChiitoitsuWithDragonPairHandGroups = TileGroupUtils.tileGroupsOf("11m", "33m", "77m", "77p", "99p", "99s", "77z");
 
     @Test
-    public void mWithAHandWithADragonPair_DragonPairFu_IsValid()
+    public void withAHandWithADragonPair_DragonPairFu_IsValid()
     {
         DragonPair dragonPair = new DragonPair(completeGreenDragonPairHandGroups);
 
@@ -27,7 +27,7 @@ public class DragonPairTest
     }
 
     @Test
-    public void mWithAnIncompleteHandWithADragonPair_DragonPairFu_IsValid()
+    public void withAnIncompleteHandWithADragonPair_DragonPairFu_IsValid()
     {
         DragonPair dragonPair = new DragonPair(incompleteGreenDragonPairHandGroups);
 
@@ -37,7 +37,7 @@ public class DragonPairTest
     }
 
     @Test
-    public void mWithAHandWithoutADragonPair_DragonPairFu_IsNotValid()
+    public void withAHandWithoutADragonPair_DragonPairFu_IsNotValid()
     {
         DragonPair dragonPair = new DragonPair(completeNonGreenDragonPairHandGroups);
 
@@ -47,7 +47,7 @@ public class DragonPairTest
     }
 
     @Test
-    public void mWithASevenPairsHandWithADragonPair_DragonPairFu_IsNotValid()
+    public void withASevenPairsHandWithADragonPair_DragonPairFu_IsNotValid()
     {
         DragonPair dragonPair = new DragonPair(completeChiitoitsuWithDragonPairHandGroups);
 
@@ -57,7 +57,7 @@ public class DragonPairTest
     }
 
     @Test
-    public void mGetFuValue_ForDragonPair_IsTwo()
+    public void getFuValue_ForDragonPair_IsTwo()
     {
         DragonPair dragonPair = new DragonPair(new ArrayList<>());
 

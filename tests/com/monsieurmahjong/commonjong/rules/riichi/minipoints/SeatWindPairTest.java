@@ -23,7 +23,7 @@ public class SeatWindPairTest
     private List<TileGroup> completeChiitoitsuWithSeatWindPairHandGroups = TileGroupUtils.tileGroupsOf("11m", "33m", "77m", "77p", "99p", "99s", "33z");
 
     @Test
-    public void mWithAHandWithASeatWindPair_SeatWindPairFu_IsValid()
+    public void withAHandWithASeatWindPair_SeatWindPairFu_IsValid()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeSeatWindPairHandGroups));
         hand.setSeatWind(seatWind);
@@ -35,7 +35,7 @@ public class SeatWindPairTest
     }
 
     @Test
-    public void mWithAnIncompleteHandWithASeatWindPair_SeatWindPairFu_IsValid()
+    public void withAnIncompleteHandWithASeatWindPair_SeatWindPairFu_IsValid()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteSeatWindPairHandGroups));
         hand.setSeatWind(seatWind);
@@ -47,7 +47,7 @@ public class SeatWindPairTest
     }
 
     @Test
-    public void mWithAHandWithoutASeatWindPair_SeatWindPairFu_IsNotValid()
+    public void withAHandWithoutASeatWindPair_SeatWindPairFu_IsNotValid()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonSeatWindPairHandGroups));
         hand.setSeatWind(seatWind);
@@ -59,7 +59,7 @@ public class SeatWindPairTest
     }
 
     @Test
-    public void mWithASevenPairsHandWithASeatWindPair_SeatWindPairFu_IsNotValid()
+    public void withASevenPairsHandWithASeatWindPair_SeatWindPairFu_IsNotValid()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuWithSeatWindPairHandGroups));
         hand.setSeatWind(seatWind);
@@ -71,7 +71,7 @@ public class SeatWindPairTest
     }
 
     @Test
-    public void mGetFuValue_ForSeatWindPair_IsTwo()
+    public void getFuValue_ForSeatWindPair_IsTwo()
     {
         SeatWindPair seatWindPair = new SeatWindPair(anyHand, new ArrayList<>());
 

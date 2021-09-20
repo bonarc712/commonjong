@@ -23,7 +23,7 @@ public class TableWindPairTest
     private List<TileGroup> completeChiitoitsuWithTableWindPairHandGroups = TileGroupUtils.tileGroupsOf("11m", "33m", "77m", "77p", "99p", "99s", "22z");
 
     @Test
-    public void mWithAHandWithATableWindPair_TableWindPairFu_IsValid()
+    public void withAHandWithATableWindPair_TableWindPairFu_IsValid()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeTableWindPairHandGroups));
         hand.addTableWind(tableWind);
@@ -35,7 +35,7 @@ public class TableWindPairTest
     }
 
     @Test
-    public void mWithAnIncompleteHandWithATableWindPair_TableWindPairFu_IsValid()
+    public void withAnIncompleteHandWithATableWindPair_TableWindPairFu_IsValid()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteTableWindPairHandGroups));
         hand.addTableWind(tableWind);
@@ -59,7 +59,7 @@ public class TableWindPairTest
     }
 
     @Test
-    public void mWithASevenPairsHandWithATableWindPair_TableWindPairFu_IsNotValid()
+    public void withASevenPairsHandWithATableWindPair_TableWindPairFu_IsNotValid()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuWithTableWindPairHandGroups));
         hand.addTableWind(tableWind);
@@ -71,7 +71,7 @@ public class TableWindPairTest
     }
 
     @Test
-    public void mGetFuValue_ForTableWindPair_IsTwo()
+    public void getFuValue_ForTableWindPair_IsTwo()
     {
         TableWindPair tableWindPair = new TableWindPair(anyHand, new ArrayList<>());
 

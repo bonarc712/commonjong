@@ -22,7 +22,7 @@ public class BaseMinipointsTest
     private List<TileGroup> completeNonChiitoitsuHandGroups = TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p");
 
     @Test
-    public void mBaseMinipoints_IfPlayerWonOnClosedRon_IsThirty()
+    public void baseMinipoints_IfPlayerWonOnClosedRon_IsThirty()
     {
         BaseMinipoints minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups, anyLog);
         when(anyLog.doesPlayerWinOnRon(any())).thenReturn(true);
@@ -33,7 +33,7 @@ public class BaseMinipointsTest
     }
 
     @Test
-    public void mBaseMinipoints_IfPlayerWonOnSevenPairs_IsTwentyFive()
+    public void baseMinipoints_IfPlayerWonOnSevenPairs_IsTwentyFive()
     {
         BaseMinipoints minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuHandGroups)), completeChiitoitsuHandGroups, anyLog);
 
@@ -43,7 +43,7 @@ public class BaseMinipointsTest
     }
 
     @Test
-    public void mBaseMinipoints_IfPlayerWonOnOpenRon_IsTwenty()
+    public void baseMinipoints_IfPlayerWonOnOpenRon_IsTwenty()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
         List<Tile> meld = Arrays.asList(new Tile(MahjongTileKind.CIRCLES_3), new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5));
@@ -57,7 +57,7 @@ public class BaseMinipointsTest
     }
 
     @Test
-    public void mBaseMinipoints_IfPlayerWonOnClosedTsumo_IsTwenty()
+    public void baseMinipoints_IfPlayerWonOnClosedTsumo_IsTwenty()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
         BaseMinipoints minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyLog);
@@ -69,7 +69,7 @@ public class BaseMinipointsTest
     }
 
     @Test
-    public void mBaseMinipoints_IfPlayerWonOnOpenTsumo_IsTwenty()
+    public void baseMinipoints_IfPlayerWonOnOpenTsumo_IsTwenty()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
         List<Tile> meld = Arrays.asList(new Tile(MahjongTileKind.CIRCLES_3), new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5));
@@ -83,7 +83,7 @@ public class BaseMinipointsTest
     }
 
     @Test
-    public void mBaseMinipoints_IsAlwaysValid()
+    public void baseMinipoints_IsAlwaysValid()
     {
         BaseMinipoints minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups, anyLog);
 

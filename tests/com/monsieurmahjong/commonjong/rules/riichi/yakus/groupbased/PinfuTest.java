@@ -34,8 +34,8 @@ public class PinfuTest
     private MahjongTileKind winningTileForIncompleteNonPinfuGroups = MahjongTileKind.BAMBOOS_1;
     private MahjongTileKind penchanWinningTileForCompleteGroups = MahjongTileKind.CHARACTERS_3;
     private MahjongTileKind kanchanWinningTileForCompleteGroups = MahjongTileKind.CHARACTERS_2;
-    private MahjongTileKind tableWind = MahjongTileKind.EAST;
-    private MahjongTileKind seatWind = MahjongTileKind.WEST;
+    private Seat tableWind = Seat.EAST;
+    private Seat seatWind = Seat.WEST;
 
     @Test
     public void testValidityOf_HandWithFourteenPinfuTiles_ShouldBeTrue()
@@ -138,7 +138,7 @@ public class PinfuTest
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeHandWithTableWindPairGroups));
         hand.setWinningTile(ryanmenWinningTileForCompleteGroups);
-        hand.addTableWind(Seat.EAST);
+        hand.addTableWind(tableWind);
         Yaku pinfu = new Pinfu(hand, completeHandWithTableWindPairGroups);
 
         boolean pinfuIsValid = pinfu.isValid();
@@ -151,7 +151,7 @@ public class PinfuTest
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeHandWithSeatWindPairGroups));
         hand.setWinningTile(ryanmenWinningTileForCompleteGroups);
-        hand.setSeatWind(Seat.WEST);
+        hand.setSeatWind(seatWind);
         Yaku pinfu = new Pinfu(hand, completeHandWithSeatWindPairGroups);
 
         boolean pinfuIsValid = pinfu.isValid();
@@ -164,7 +164,7 @@ public class PinfuTest
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeHandWithValuelessWindPairGroups));
         hand.setWinningTile(ryanmenWinningTileForCompleteGroups);
-        hand.setSeatWind(Seat.WEST);
+        hand.setSeatWind(seatWind);
         Yaku pinfu = new Pinfu(hand, completeHandWithValuelessWindPairGroups);
 
         boolean pinfuIsValid = pinfu.isValid();

@@ -21,7 +21,7 @@ public class OpenPinfuTest
     private List<TileGroup> completeHandGroups = TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p");
 
     @Test
-    public void mWhenInitialFuIs20AndHandIsOpen_OpenPinfu_IsValid()
+    public void whenInitialFuIs20AndHandIsOpen_OpenPinfu_IsValid()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeHandGroups));
         hand.addMeld(TileGroupUtils.getTilesFromMPSZNotation("345m"));
@@ -33,7 +33,7 @@ public class OpenPinfuTest
     }
 
     @Test
-    public void mWhenInitialFuIs40AndHandIsOpen_OpenPinfu_IsNotValid()
+    public void whenInitialFuIs40AndHandIsOpen_OpenPinfu_IsNotValid()
     {
         Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeHandGroups));
         hand.addMeld(TileGroupUtils.getTilesFromMPSZNotation("345m"));
@@ -45,7 +45,7 @@ public class OpenPinfuTest
     }
 
     @Test
-    public void mWhenInitialFuIs40AndHandIsClosed_OpenPinfu_IsNotValid()
+    public void whenInitialFuIs40AndHandIsClosed_OpenPinfu_IsNotValid()
     {
         OpenPinfu openPinfu = new OpenPinfu(new Hand(TileGroupUtils.getTilesFromTileGroups(completeHandGroups)), INITIAL_FU_NOT_TWENTY);
 
@@ -55,7 +55,7 @@ public class OpenPinfuTest
     }
 
     @Test
-    public void mForAClosedHand_OpenPinfu_IsNotValid()
+    public void forAClosedHand_OpenPinfu_IsNotValid()
     {
         OpenPinfu openPinfu = new OpenPinfu(new Hand(TileGroupUtils.getTilesFromTileGroups(completeHandGroups)), INITIAL_FU_TWENTY);
 
@@ -65,7 +65,7 @@ public class OpenPinfuTest
     }
 
     @Test
-    public void mGetFuValue_ForOpenPinfu_IsTwo()
+    public void getFuValue_ForOpenPinfu_IsTwo()
     {
         OpenPinfu openPinfu = new OpenPinfu(anyHand, ANY_FU);
 
