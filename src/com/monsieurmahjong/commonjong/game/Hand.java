@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.rules.generic.*;
+import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
+import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 /**
  * A hand in the game sense : it includes all the tiles we have in front of us.
@@ -38,6 +40,11 @@ public class Hand
     {
         this();
         this.tiles = tiles;
+    }
+
+    public static Hand of(List<TileGroup> tileGroups)
+    {
+        return new Hand(TileGroupUtils.getTilesFromTileGroups(tileGroups));
     }
 
     public List<Tile> getTiles()
