@@ -14,6 +14,7 @@ import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 public class WaitFuTest
 {
     private List<TileGroup> completeChiitoitsuHandGroups = TileGroupUtils.tileGroupsOf("11m", "33m", "77m", "22p", "99p", "99s", "33z");
+    private List<TileGroup> completeKokushiHandGroups = TileGroupUtils.tileGroupsOf("1m", "9m", "1p", "9p", "1s", "9s", "11z", "2z", "3z", "4z", "5z", "6z", "7z");
     private List<TileGroup> completeNonChiitoitsuHandGroups = TileGroupUtils.tileGroupsOf("123m", "444m", "22p", "345p", "678p");
 
     private TileGroup winningTileGroupTanki = TileGroup.of(MahjongTileKind.CIRCLES_2, MahjongTileKind.CIRCLES_2);
@@ -30,6 +31,9 @@ public class WaitFuTest
 
     private TileGroup winningTileGroupRyanmen = TileGroup.of(MahjongTileKind.CHARACTERS_1, MahjongTileKind.CHARACTERS_2, MahjongTileKind.CHARACTERS_3);
     private MahjongTileKind winningTileRyanmen = MahjongTileKind.CHARACTERS_1;
+
+    private TileGroup winningTileGroupKokushi = TileGroup.of(MahjongTileKind.EAST, MahjongTileKind.EAST);
+    private MahjongTileKind winningTileKokushi = MahjongTileKind.EAST;
 
     @Test
     public void withTankiWait_WaitFu_ShouldBeCounted()
@@ -99,6 +103,18 @@ public class WaitFuTest
         boolean isValid = waitFu.isValid();
 
         assertFalse(isValid, "Wait fu should not be counted with a chiitoi hand");
+    }
+
+    @Test
+    public void withJuusanmenmachiKokushi_WaitFu_ShouldNotBeCounted()
+    {
+        Hand hand = Hand.of(completeKokushiHandGroups);
+        hand.setWinningTile(winningTileKokushi);
+        WaitFu waitFu = new WaitFu(hand, completeKokushiHandGroups, winningTileGroupKokushi);
+
+        boolean isValid = waitFu.isValid();
+
+        assertFalse(isValid, "Wait fu should not be counted with a juusanmenmachi (13-way wait) kokushi hand");
     }
 
     @Test

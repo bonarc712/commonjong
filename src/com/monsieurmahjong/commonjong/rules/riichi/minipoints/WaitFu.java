@@ -23,7 +23,7 @@ public class WaitFu implements Fu
     @Override
     public boolean isValid()
     {
-        if (isChiitoitsu())
+        if (isChiitoitsu() || isKokushi())
         {
             return false;
         }
@@ -46,6 +46,11 @@ public class WaitFu implements Fu
         }
 
         return false;
+    }
+
+    private boolean isKokushi()
+    {
+        return tileGroups.size() == 13;
     }
 
     private boolean isChiitoitsu()
