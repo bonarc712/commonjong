@@ -1,8 +1,10 @@
 package com.monsieurmahjong.commonjong.rules.generic;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.rules.generic.utils.*;
+import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.WaitShapeEngine;
 
 public class MahjongShantenCounterTest
@@ -11,46 +13,54 @@ public class MahjongShantenCounterTest
     public void testMahjongShantenCounter()
     {
         // kokushi
-        int shanten = MahjongShantenCounter.countShanten(TileGroupUtils.tileGroupsOf("1m", "9m", "1p", "9p", "1s", "9s", "1z", "2z", "3z", "4z", "5z", "6z", "7z"));
+        int shanten = MahjongShantenCounter.countShanten(TileGroupUtils.tileGroupsOf("1m", "9m", "1p", "9p", "1s", "9s",
+                "1z", "2z", "3z", "4z", "5z", "6z", "7z"));
         int expected = 0;
         Assertions.assertEquals(expected, shanten, "Shanten for 19m19p19s1234567z does not give the correct result");
 
-        shanten = MahjongShantenCounter.countShanten(TileGroupUtils.tileGroupsOf("11m", "45m", "1p", "9p", "1s", "9s", "1z", "2z", "3z", "5z", "6z"));
+        shanten = MahjongShantenCounter.countShanten(
+                TileGroupUtils.tileGroupsOf("11m", "45m", "1p", "9p", "1s", "9s", "1z", "2z", "3z", "5z", "6z"));
         expected = 2;
         Assertions.assertEquals(expected, shanten, "Shanten for 1145m19p19s12356z does not give the correct result");
 
-        shanten = MahjongShantenCounter.countShanten(TileGroupUtils.tileGroupsOf("11m", "9m", "1p", "9p", "1s", "9s", "1z", "2z", "3z", "4z", "5z", "6z", "7z"));
+        shanten = MahjongShantenCounter.countShanten(TileGroupUtils.tileGroupsOf("11m", "9m", "1p", "9p", "1s", "9s",
+                "1z", "2z", "3z", "4z", "5z", "6z", "7z"));
         expected = -1;
         Assertions.assertEquals(expected, shanten, "Shanten for 119m19p19s1234567z does not give the correct result");
 
         // seven pairs
-        shanten = MahjongShantenCounter.countShanten(TileGroupUtils.tileGroupsOf("11m", "99m", "11p", "99p", "11s", "99s", "7z"));
+        shanten = MahjongShantenCounter
+                .countShanten(TileGroupUtils.tileGroupsOf("11m", "99m", "11p", "99p", "11s", "99s", "7z"));
         expected = 0;
         Assertions.assertEquals(expected, shanten, "Shanten for 1199m1199p1199s7z does not give the correct result");
 
-        shanten = MahjongShantenCounter.countShanten(TileGroupUtils.tileGroupsOf("1m", "3m", "99m", "11p", "99p", "11s", "99s", "7z"));
+        shanten = MahjongShantenCounter
+                .countShanten(TileGroupUtils.tileGroupsOf("1m", "3m", "99m", "11p", "99p", "11s", "99s", "7z"));
         expected = 1;
         Assertions.assertEquals(expected, shanten, "Shanten for 1399m1199p1199s7z does not give the correct result");
 
-        shanten = MahjongShantenCounter.countShanten(TileGroupUtils.tileGroupsOf("11m", "99m", "11p", "99p", "11s", "99s", "77z"));
+        shanten = MahjongShantenCounter
+                .countShanten(TileGroupUtils.tileGroupsOf("11m", "99m", "11p", "99p", "11s", "99s", "77z"));
         expected = -1;
         Assertions.assertEquals(expected, shanten, "Shanten for 1199m1199p1199s77z does not give the correct result");
 
         // 4 groups + 1 pair
 
-        shanten = MahjongShantenCounter.countShanten(TileGroupUtils.tileGroupsOf("123m", "567m", "123p", "123s", "55z"));
+        shanten = MahjongShantenCounter
+                .countShanten(TileGroupUtils.tileGroupsOf("123m", "567m", "123p", "123s", "55z"));
         expected = -1;
         Assertions.assertEquals(expected, shanten, "Shanten for 123567m123p123s55z does not give the correct result");
 
-        shanten = MahjongShantenCounter.countShanten(TileGroupUtils.tileGroupsOf("789m", "1p", "4p", "789p", "789s", "77z"));
+        shanten = MahjongShantenCounter
+                .countShanten(TileGroupUtils.tileGroupsOf("789m", "1p", "4p", "789p", "789s", "77z"));
         expected = 1;
-        Assertions.assertEquals(expected, shanten, "Shanten for 1199m1199p1199s77z does not give the correct result");
+        Assertions.assertEquals(expected, shanten, "Shanten for 789m14789p789s77z does not give the correct result");
     }
 
     /**
-     * Integration test including the wait shape engine and the
-     * mahjong shanten counter. The tests that are included here
-     * come from {@link http://arcturus.su/wiki/Mahjong_programming_tests}.
+     * Integration test including the wait shape engine and the mahjong shanten
+     * counter. The tests that are included here come from
+     * {@link http://arcturus.su/wiki/Mahjong_programming_tests}.
      */
     @Test
     public void testArcturusProgrammingTests()
@@ -169,8 +179,8 @@ public class MahjongShantenCounterTest
     }
 
     /**
-     * Every hand that we've had that run on the commonjong engine and failed
-     * to give the shanten at some point (in commonjong tests, sanshoku or elsewhere)
+     * Every hand that we've had that run on the commonjong engine and failed to
+     * give the shanten at some point (in commonjong tests, sanshoku or elsewhere)
      * should be added here to make sure that they always succeed.
      */
     @Test
