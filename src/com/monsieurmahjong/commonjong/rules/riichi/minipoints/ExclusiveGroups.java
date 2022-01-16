@@ -41,6 +41,11 @@ public class ExclusiveGroups implements Fu
                     groupValue *= 2;
                 }
 
+                if (tileGroup.isQuad())
+                {
+                    groupValue *= 4;
+                }
+
                 totalFuValue += groupValue;
             }
         }
