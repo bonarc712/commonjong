@@ -1,3 +1,8 @@
 language: java
 jdk:
-  - openjdk11
+- openjdk11
+notifications:
+  slack:
+    if: branch = master
+    rooms:
+      - monsieurmahjo-7ov7889:LzYyuiGljzdRuf4Mvzp8McqS#commonjong
