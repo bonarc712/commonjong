@@ -1,6 +1,12 @@
 language: java
 jdk:
 - openjdk11
+script:
+  # Install Java 17 to use instead of Java 11
+  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+  - chmod +x $TRAVIS_BUILD_DIR/install-jdk.sh
+  - export JAVA_HOME=$HOME/openjdk11
+  - $TRAVIS_BUILD_DIR/install-jdk.sh -F 17 --target $JAVA_HOME
 notifications:
   slack:
     if: branch = master
