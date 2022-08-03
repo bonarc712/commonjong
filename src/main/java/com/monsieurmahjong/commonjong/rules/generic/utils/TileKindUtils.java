@@ -82,7 +82,7 @@ public class TileKindUtils
     public static String getHandAsMPSZNotation(List<Tile> hand)
     {
         StringBuilder mpszStringBuilder = new StringBuilder();
-        hand.stream().map(tile -> tile.getTileKind()).sorted(new MahjongTileKindComparator()).forEach(tileKind -> {
+        hand.stream().map(Tile::getTileKind).sorted(new MahjongTileKindComparator()).forEach(tileKind -> {
             mpszStringBuilder.append(tileKind.abbreviation);
         });
 
