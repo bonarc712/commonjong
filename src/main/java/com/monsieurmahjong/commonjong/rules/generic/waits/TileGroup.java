@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
-import com.monsieurmahjong.commonjong.rules.generic.utils.WaitShapeUtils;
 
 /**
  * A tile group represents a simple group of several tiles (for instance a pair,
@@ -195,6 +194,42 @@ public class TileGroup
         return (lowestIndex + 1 == highestIndex || lowestIndex + 2 == highestIndex) && TileKindUtils.areSameSuit(tileIndices.get(0), tileIndices.get(1));
     }
 
+    /**
+     * This method checks for a double-sided block (that waits on a ryanmen). This
+     * is a protogroup characterized by a wait on both sides, for instance 34 is
+     * waiting for 2 or 5, so it qualifies as a double sided wait.
+     */
+    public boolean isDoubleSidedBlock()
+    {
+        int first = tileIndices.get(0);
+        int second = tileIndices.get(1);
+        return Math.abs(first - second) == 1 && TileKindUtils.areSameSuit(first, second) && !TileKindUtils.isTerminal(first) && !TileKindUtils.isTerminal(second);
+    }
+
+    /**
+     * This method checks for an end block (that waits on a penchan). This is a
+     * protogroup characterized by a wait on a 3 or a 7 only, as it is either a
+     * 12(3) or (7)89.
+     */
+    public boolean isEndBlock()
+    {
+        int first = tileIndices.get(0);
+        int second = tileIndices.get(1);
+        return Math.abs(first - second) == 1 && TileKindUtils.areSameSuit(first, second) && (TileKindUtils.isTerminal(first) || TileKindUtils.isTerminal(second));
+    }
+
+    /**
+     * This method checks for an inside block (that waits on a kanchan). This is a
+     * protogroup characterized by a wait on the middle tile. For instance, 35 waits
+     * on 4.
+     */
+    public boolean isInsideBlock()
+    {
+        int first = tileIndices.get(0);
+        int second = tileIndices.get(1);
+        return Math.abs(first - second) == 2 && TileKindUtils.areSameSuit(first, second);
+    }
+
     public boolean isComplete()
     {
         if (tileIndices.size() < 3)
@@ -260,20 +295,20 @@ public class TileGroup
 
             if (isPair())
             {
-                wait.add(tileIndices.get(0));
+                wait.add(first);
             }
             else if (isProtogroup())
             {
-                if (WaitShapeUtils.isDoubleSidedBlock(first, second))
+                if (isDoubleSidedBlock())
                 {
                     wait.add(first - 1);
                     wait.add(second + 1);
                 }
-                else if (WaitShapeUtils.isInsideBlock(first, second))
+                else if (isInsideBlock())
                 {
                     wait.add(first + 1);
                 }
-                else if (WaitShapeUtils.isEndBlock(first, second))
+                else if (isEndBlock())
                 {
                     if (TileKindUtils.isTerminal(first))
                     {

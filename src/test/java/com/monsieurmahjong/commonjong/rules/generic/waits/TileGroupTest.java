@@ -176,6 +176,86 @@ public class TileGroupTest
     }
 
     @Test
+    public void testIsDoubleSidedBlock()
+    {
+        var ryanmen23s = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        var reversedRyanmen23s = TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_2);
+        var ryanmen67m = TileGroup.of(MahjongTileKind.CHARACTERS_6, MahjongTileKind.CHARACTERS_7);
+
+        var kanchan13s = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_3);
+        var reverseKanchan13s = TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_1);
+        var innerKanchan24s = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_4);
+        var penchan89m = TileGroup.of(MahjongTileKind.CHARACTERS_8, MahjongTileKind.CHARACTERS_9);
+        var ryanzouPair = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
+        var _1s9p = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.CIRCLES_9);
+        var westAndSouth = TileGroup.of(MahjongTileKind.WEST, MahjongTileKind.SOUTH);
+
+        assertThat(ryanmen23s.isDoubleSidedBlock(), is(true));
+        assertThat(reversedRyanmen23s.isDoubleSidedBlock(), is(true));
+        assertThat(ryanmen67m.isDoubleSidedBlock(), is(true));
+
+        assertThat(kanchan13s.isDoubleSidedBlock(), is(false));
+        assertThat(reverseKanchan13s.isDoubleSidedBlock(), is(false));
+        assertThat(innerKanchan24s.isDoubleSidedBlock(), is(false));
+        assertThat(penchan89m.isDoubleSidedBlock(), is(false));
+        assertThat(ryanzouPair.isDoubleSidedBlock(), is(false));
+        assertThat(_1s9p.isDoubleSidedBlock(), is(false));
+        assertThat(westAndSouth.isDoubleSidedBlock(), is(false));
+    }
+
+    @Test
+    public void testIsEndBlock()
+    {
+        var penchan89m = TileGroup.of(MahjongTileKind.CHARACTERS_8, MahjongTileKind.CHARACTERS_9);
+        var penchan12s = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2);
+        var reversedPenchan12p = TileGroup.of(MahjongTileKind.CIRCLES_2, MahjongTileKind.CIRCLES_1);
+
+        var ryanmen23s = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        var kanchan13s = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_3);
+        var reverseKanchan13s = TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_1);
+        var innerKanchan24s = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_4);
+        var ryanzouPair = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
+        var _1s9p = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.CIRCLES_9);
+        var westAndSouth = TileGroup.of(MahjongTileKind.WEST, MahjongTileKind.SOUTH);
+
+        assertThat(penchan89m.isEndBlock(), is(true));
+        assertThat(penchan12s.isEndBlock(), is(true));
+        assertThat(reversedPenchan12p.isEndBlock(), is(true));
+
+        assertThat(ryanmen23s.isEndBlock(), is(false));
+        assertThat(kanchan13s.isEndBlock(), is(false));
+        assertThat(reverseKanchan13s.isEndBlock(), is(false));
+        assertThat(innerKanchan24s.isEndBlock(), is(false));
+        assertThat(ryanzouPair.isEndBlock(), is(false));
+        assertThat(_1s9p.isEndBlock(), is(false));
+        assertThat(westAndSouth.isEndBlock(), is(false));
+    }
+
+    @Test
+    public void testIsInsideBlock()
+    {
+        var kanchan13s = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_3);
+        var reverseKanchan13s = TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_1);
+        var innerKanchan24s = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_4);
+
+        var penchan89m = TileGroup.of(MahjongTileKind.CHARACTERS_8, MahjongTileKind.CHARACTERS_9);
+        var ryanmen23s = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        var ryanzouPair = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
+        var _1s9p = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.CIRCLES_9);
+        var westAndSouth = TileGroup.of(MahjongTileKind.WEST, MahjongTileKind.SOUTH);
+
+        assertThat(kanchan13s.isInsideBlock(), is(true));
+        assertThat(reverseKanchan13s.isInsideBlock(), is(true));
+        assertThat(innerKanchan24s.isInsideBlock(), is(true));
+
+        assertThat(penchan89m.isInsideBlock(), is(false));
+        assertThat(ryanmen23s.isInsideBlock(), is(false));
+        assertThat(ryanzouPair.isInsideBlock(), is(false));
+        assertThat(_1s9p.isInsideBlock(), is(false));
+        assertThat(westAndSouth.isInsideBlock(), is(false));
+    }
+
+    @Test
     public void testContains()
     {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);

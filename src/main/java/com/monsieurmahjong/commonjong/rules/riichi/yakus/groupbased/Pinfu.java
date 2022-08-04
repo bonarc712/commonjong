@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
-import com.monsieurmahjong.commonjong.rules.generic.utils.WaitShapeUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class Pinfu extends GroupBasedYaku
@@ -53,7 +52,7 @@ public class Pinfu extends GroupBasedYaku
             groupIndices.remove(Integer.valueOf(winningTile.getIndex()));
             if (groupIndices.size() == 2)
             {
-                winningTileIsRyanmen |= WaitShapeUtils.isDoubleSidedBlock(groupIndices.get(0).intValue(), groupIndices.get(1).intValue());
+                winningTileIsRyanmen |= new TileGroup(groupIndices.get(0).intValue(), groupIndices.get(1).intValue()).isDoubleSidedBlock();
             }
         }
         if (!winningTileIsRyanmen)

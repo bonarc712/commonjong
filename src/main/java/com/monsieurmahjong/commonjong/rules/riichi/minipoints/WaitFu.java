@@ -3,7 +3,6 @@ package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.utils.WaitShapeUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class WaitFu implements Fu
@@ -34,17 +33,7 @@ public class WaitFu implements Fu
             return true;
         }
 
-        if (WaitShapeUtils.isEndBlock(tileGroupBeforeWinning.getIndices().get(0), tileGroupBeforeWinning.getIndices().get(1)))
-        {
-            return true;
-        }
-
-        if (WaitShapeUtils.isInsideBlock(tileGroupBeforeWinning.getIndices().get(0), tileGroupBeforeWinning.getIndices().get(1)))
-        {
-            return true;
-        }
-
-        return false;
+        return tileGroupBeforeWinning.isEndBlock() || tileGroupBeforeWinning.isInsideBlock();
     }
 
     private boolean isKokushi()
