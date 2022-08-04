@@ -7,25 +7,6 @@ package com.monsieurmahjong.commonjong.rules.generic.utils;
 public class WaitShapeUtils
 {
     /**
-     * This method checks for a protogroup. A protogroup is two tiles that can form
-     * a group, for instance 1-2 in wait of a 3, 3-5 in wait of a 4, or 6-7 in wait
-     * of a 5 or an 8.
-     *
-     * By definition, a pair is not a protogroup.
-     */
-    public static boolean isProtogroup(int first, int second)
-    {
-        var highestIndex = Math.max(first, second);
-        var lowestIndex = Math.min(first, second);
-
-        // Same suit check required. 17 and 19 are two apart, but refer to 9-pin and
-        // 2-sou.
-        // Protogroups (taatsu) do not exist for winds, all pairs are considered
-        // separate entities.
-        return (lowestIndex + 1 == highestIndex || lowestIndex + 2 == highestIndex) && TileKindUtils.areSameSuit(first, second);
-    }
-
-    /**
      * This method checks for a double-sided block (that waits on a ryanmen). This
      * is a protogroup characterized by a wait on both sides, for instance 34 is
      * waiting for 2 or 5, so it qualifies as a double sided wait.

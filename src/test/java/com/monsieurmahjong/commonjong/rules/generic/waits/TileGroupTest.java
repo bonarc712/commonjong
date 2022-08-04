@@ -152,6 +152,30 @@ public class TileGroupTest
     }
 
     @Test
+    public void testIsProtogroup()
+    {
+        var ryanmen23s = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        var kanchan13s = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_3);
+        var reverseKanchan13s = TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_1);
+        var innerKanchan24s = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_4);
+        var penchan89m = TileGroup.of(MahjongTileKind.CHARACTERS_8, MahjongTileKind.CHARACTERS_9);
+
+        var ryanzouPair = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
+        var _1s9p = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.CIRCLES_9);
+        var westAndSouth = TileGroup.of(MahjongTileKind.WEST, MahjongTileKind.SOUTH);
+
+        assertThat(ryanmen23s.isProtogroup(), is(true));
+        assertThat(kanchan13s.isProtogroup(), is(true));
+        assertThat(reverseKanchan13s.isProtogroup(), is(true));
+        assertThat(innerKanchan24s.isProtogroup(), is(true));
+        assertThat(penchan89m.isProtogroup(), is(true));
+
+        assertThat(ryanzouPair.isProtogroup(), is(false));
+        assertThat(_1s9p.isProtogroup(), is(false));
+        assertThat(westAndSouth.isProtogroup(), is(false));
+    }
+
+    @Test
     public void testContains()
     {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);

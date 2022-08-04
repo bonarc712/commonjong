@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.WaitShapeUtils;
 
 /**
  * All parsing methods (for runs, pairs, triplets, etc.) for tiles are here.
@@ -94,7 +93,8 @@ public class TileParser
                     }
                 }
 
-                if (runBasedGroup.getIndices().isEmpty() && WaitShapeUtils.isProtogroup(indexOf(tiles.get(0)), indexOf(tiles.get(i))))
+                var analyzedSubGroup = new TileGroup(indexOf(tiles.get(0)), indexOf(tiles.get(i)));
+                if (runBasedGroup.getIndices().isEmpty() && analyzedSubGroup.isProtogroup())
                 {
                     if (!includedInARunGroup(indexOf(tiles.get(0)), indexOf(tiles.get(i)), tileGroups))
                     {

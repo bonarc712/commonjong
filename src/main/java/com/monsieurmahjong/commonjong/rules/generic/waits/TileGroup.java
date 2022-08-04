@@ -28,6 +28,15 @@ public class TileGroup
         tileIndices.addAll(indices);
     }
 
+    public TileGroup(Integer... indices)
+    {
+        tileIndices = new ArrayList<>();
+        for (var index : indices)
+        {
+            tileIndices.add(index);
+        }
+    }
+
     public static TileGroup of(MahjongTileKind... tileKinds)
     {
         var tileGroup = new TileGroup();
@@ -119,11 +128,6 @@ public class TileGroup
         return isExclusiveGroup() && tileIndices.size() == 2;
     }
 
-    public boolean isProtogroup()
-    {
-        return !isExclusiveGroup() && tileIndices.size() == 2;
-    }
-
     public boolean isTriplet()
     {
         return isExclusiveGroup() && tileIndices.size() == 3;
@@ -170,6 +174,25 @@ public class TileGroup
             }
         }
         return false;
+    }
+
+    /**
+     * This method checks for a protogroup. A protogroup is two tiles that can form
+     * a group, for instance 1-2 in wait of a 3, 3-5 in wait of a 4, or 6-7 in wait
+     * of a 5 or an 8.
+     *
+     * By definition, a pair is not a protogroup.
+     */
+    public boolean isProtogroup()
+    {
+        var highestIndex = Math.max(tileIndices.get(0), tileIndices.get(1));
+        var lowestIndex = Math.min(tileIndices.get(0), tileIndices.get(1));
+
+        // Same suit check required. 17 and 19 are two apart, but refer to 9-pin and
+        // 2-sou.
+        // Protogroups (taatsu) do not exist for winds, all pairs are considered
+        // separate entities.
+        return (lowestIndex + 1 == highestIndex || lowestIndex + 2 == highestIndex) && TileKindUtils.areSameSuit(tileIndices.get(0), tileIndices.get(1));
     }
 
     public boolean isComplete()
@@ -239,7 +262,7 @@ public class TileGroup
             {
                 wait.add(tileIndices.get(0));
             }
-            else if (WaitShapeUtils.isProtogroup(first, second))
+            else if (isProtogroup())
             {
                 if (WaitShapeUtils.isDoubleSidedBlock(first, second))
                 {

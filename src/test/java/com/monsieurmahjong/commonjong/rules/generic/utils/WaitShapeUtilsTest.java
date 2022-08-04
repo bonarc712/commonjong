@@ -8,28 +8,6 @@ import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 public class WaitShapeUtilsTest
 {
     @Test
-    public void testIsProtogroup()
-    {
-        Assertions.assertTrue(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_2.ordinal(), MahjongTileKind.BAMBOOS_3.ordinal()));
-        Assertions.assertTrue(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_1.ordinal(), MahjongTileKind.BAMBOOS_3.ordinal()));
-        Assertions.assertTrue(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_3.ordinal(), MahjongTileKind.BAMBOOS_1.ordinal()));
-        Assertions.assertTrue(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_2.ordinal(), MahjongTileKind.BAMBOOS_4.ordinal()));
-        Assertions.assertTrue(WaitShapeUtils.isProtogroup(MahjongTileKind.CHARACTERS_8.ordinal(), MahjongTileKind.CHARACTERS_9.ordinal()));
-        Assertions.assertTrue(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_2.getIndex(), MahjongTileKind.BAMBOOS_3.getIndex()));
-        Assertions.assertTrue(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_1.getIndex(), MahjongTileKind.BAMBOOS_3.getIndex()));
-        Assertions.assertTrue(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_3.getIndex(), MahjongTileKind.BAMBOOS_1.getIndex()));
-        Assertions.assertTrue(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_2.getIndex(), MahjongTileKind.BAMBOOS_4.getIndex()));
-        Assertions.assertTrue(WaitShapeUtils.isProtogroup(MahjongTileKind.CHARACTERS_8.getIndex(), MahjongTileKind.CHARACTERS_9.getIndex()));
-
-        Assertions.assertFalse(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_2.ordinal(), MahjongTileKind.BAMBOOS_2.ordinal()));
-        Assertions.assertFalse(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_1.ordinal(), MahjongTileKind.CIRCLES_9.ordinal()));
-        Assertions.assertFalse(WaitShapeUtils.isProtogroup(MahjongTileKind.WEST.ordinal(), MahjongTileKind.SOUTH.ordinal()));
-        Assertions.assertFalse(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_2.getIndex(), MahjongTileKind.BAMBOOS_2.getIndex()));
-        Assertions.assertFalse(WaitShapeUtils.isProtogroup(MahjongTileKind.BAMBOOS_1.getIndex(), MahjongTileKind.CIRCLES_9.getIndex()));
-        Assertions.assertFalse(WaitShapeUtils.isProtogroup(MahjongTileKind.WEST.getIndex(), MahjongTileKind.SOUTH.getIndex()));
-    }
-
-    @Test
     public void testIsDoubleSidedBlock()
     {
         Assertions.assertTrue(WaitShapeUtils.isDoubleSidedBlock(MahjongTileKind.BAMBOOS_2.getIndex(), MahjongTileKind.BAMBOOS_3.getIndex()));
