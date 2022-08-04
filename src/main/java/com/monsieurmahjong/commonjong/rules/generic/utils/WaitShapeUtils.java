@@ -6,11 +6,6 @@ package com.monsieurmahjong.commonjong.rules.generic.utils;
 @Deprecated
 public class WaitShapeUtils
 {
-    public static boolean isPair(int first, int second)
-    {
-        return first == second;
-    }
-
     /**
      * This method checks for a protogroup. A protogroup is two tiles that can form
      * a group, for instance 1-2 in wait of a 3, 3-5 in wait of a 4, or 6-7 in wait

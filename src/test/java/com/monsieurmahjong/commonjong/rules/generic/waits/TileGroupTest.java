@@ -28,6 +28,24 @@ public class TileGroupTest
     }
 
     @Test
+    public void testIsPair()
+    {
+        var ryanzouPair = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
+        var westPair = TileGroup.of(MahjongTileKind.WEST, MahjongTileKind.WEST);
+        var sanpinPair = TileGroup.of(MahjongTileKind.CIRCLES_3, MahjongTileKind.CIRCLES_3);
+        var _3p2s = TileGroup.of(MahjongTileKind.CIRCLES_3, MahjongTileKind.BAMBOOS_2);
+        var _34p = TileGroup.of(MahjongTileKind.CIRCLES_3, MahjongTileKind.CIRCLES_4);
+        var _35z = TileGroup.of(MahjongTileKind.WEST, MahjongTileKind.WHITE);
+
+        assertThat(ryanzouPair.isPair(), is(true));
+        assertThat(westPair.isPair(), is(true));
+        assertThat(sanpinPair.isPair(), is(true));
+        assertThat(_3p2s.isPair(), is(false));
+        assertThat(_34p.isPair(), is(false));
+        assertThat(_35z.isPair(), is(false));
+    }
+
+    @Test
     public void testIsRun()
     {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);

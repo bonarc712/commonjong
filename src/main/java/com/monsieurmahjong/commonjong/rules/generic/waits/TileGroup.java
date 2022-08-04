@@ -235,9 +235,9 @@ public class TileGroup
             var first = Math.min(tileIndices.get(0), tileIndices.get(1));
             var second = Math.max(tileIndices.get(0), tileIndices.get(1));
 
-            if (WaitShapeUtils.isPair(first, second))
+            if (isPair())
             {
-                wait.add(first);
+                wait.add(tileIndices.get(0));
             }
             else if (WaitShapeUtils.isProtogroup(first, second))
             {

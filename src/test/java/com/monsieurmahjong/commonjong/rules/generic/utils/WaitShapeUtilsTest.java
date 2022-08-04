@@ -1,30 +1,12 @@
 package com.monsieurmahjong.commonjong.rules.generic.utils;
 
-import com.monsieurmahjong.commonjong.rules.generic.utils.WaitShapeUtils;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 
 public class WaitShapeUtilsTest
 {
-    @Test
-    public void testIsPair()
-    {
-        Assertions.assertTrue(WaitShapeUtils.isPair(MahjongTileKind.BAMBOOS_2.ordinal(), MahjongTileKind.BAMBOOS_2.ordinal()));
-        Assertions.assertTrue(WaitShapeUtils.isPair(MahjongTileKind.WEST.ordinal(), MahjongTileKind.WEST.ordinal()));
-        Assertions.assertTrue(WaitShapeUtils.isPair(MahjongTileKind.CIRCLES_3.ordinal(), MahjongTileKind.CIRCLES_3.ordinal()));
-        Assertions.assertTrue(WaitShapeUtils.isPair(MahjongTileKind.BAMBOOS_2.getIndex(), MahjongTileKind.BAMBOOS_2.getIndex()));
-        Assertions.assertTrue(WaitShapeUtils.isPair(MahjongTileKind.WEST.getIndex(), MahjongTileKind.WEST.getIndex()));
-        Assertions.assertTrue(WaitShapeUtils.isPair(MahjongTileKind.CIRCLES_3.getIndex(), MahjongTileKind.CIRCLES_3.getIndex()));
-
-        Assertions.assertFalse(WaitShapeUtils.isPair(MahjongTileKind.CIRCLES_3.ordinal(), MahjongTileKind.BAMBOOS_2.ordinal()));
-        Assertions.assertFalse(WaitShapeUtils.isPair(MahjongTileKind.CIRCLES_3.ordinal(), MahjongTileKind.CIRCLES_4.ordinal()));
-        Assertions.assertFalse(WaitShapeUtils.isPair(MahjongTileKind.WEST.ordinal(), MahjongTileKind.WHITE.ordinal()));
-        Assertions.assertFalse(WaitShapeUtils.isPair(MahjongTileKind.CIRCLES_3.getIndex(), MahjongTileKind.BAMBOOS_2.getIndex()));
-        Assertions.assertFalse(WaitShapeUtils.isPair(MahjongTileKind.CIRCLES_3.getIndex(), MahjongTileKind.CIRCLES_4.getIndex()));
-        Assertions.assertFalse(WaitShapeUtils.isPair(MahjongTileKind.WEST.getIndex(), MahjongTileKind.WHITE.getIndex()));
-    }
-
     @Test
     public void testIsProtogroup()
     {
