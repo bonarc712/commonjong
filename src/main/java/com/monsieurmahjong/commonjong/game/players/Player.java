@@ -2,8 +2,11 @@ package com.monsieurmahjong.commonjong.game.players;
 
 import java.util.List;
 
-import com.monsieurmahjong.commonjong.game.*;
-import com.monsieurmahjong.commonjong.game.discard.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Seat;
+import com.monsieurmahjong.commonjong.game.Tile;
+import com.monsieurmahjong.commonjong.game.discard.DiscardStrategy;
+import com.monsieurmahjong.commonjong.game.discard.RightMostDiscardStrategy;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileOrderingComparator;
 import com.monsieurmahjong.commonjong.rules.generic.waits.WaitShapeEngine;
 
@@ -69,7 +72,7 @@ public class Player
     public void showHand()
     {
         hand.getTiles().sort(new MahjongTileOrderingComparator());
-        WaitShapeEngine engine = new WaitShapeEngine(hand);
+        var engine = new WaitShapeEngine(hand);
 
         System.out.println("Je suis " + name);
         System.out.println("J'ai " + hand);

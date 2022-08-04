@@ -1,27 +1,29 @@
 package com.monsieurmahjong.commonjong.rules.generic.waits;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import com.monsieurmahjong.commonjong.rules.generic.waits.HandConfigurationParser;
-import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.*;
+import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
 public class HandConfigurationParserTest
 {
     @Test
     public void testGetHandConfigurations()
     {
-        Hand hand1 = new Hand(TileKindUtils.asHand("135567s77z"));
+        var hand1 = new Hand(TileKindUtils.asHand("135567s77z"));
 
-        List<TileGroup> tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s", "77z");
+        var tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s", "77z");
 
-        HandConfigurationParser parser = new HandConfigurationParser(hand1);
-        List<List<TileGroup>> resultConfigurations = parser.getHandConfigurations(tileGroups);
+        var parser = new HandConfigurationParser(hand1);
+        var resultConfigurations = parser.getHandConfigurations(tileGroups);
         List<List<TileGroup>> expectedResultConfigurations = new ArrayList<>();
 
         expectedResultConfigurations.add(TileGroupUtils.tileGroupsOf("13s", "5s", "5s", "67s", "77z"));
@@ -40,10 +42,10 @@ public class HandConfigurationParserTest
     public void testFindCollisionPairs()
     {
         // 135567s case
-        List<TileGroup> tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
+        var tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
-        HandConfigurationParser parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
-        List<List<TileGroup>> collisionPairs = parser.findCollisionPairs(tileGroups);
+        var parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
+        var collisionPairs = parser.findCollisionPairs(tileGroups);
         List<List<TileGroup>> expectedCollisionPairs = new ArrayList<>();
 
         expectedCollisionPairs.add(TileGroupUtils.tileGroupsOf("13s", "35s"));
@@ -57,8 +59,8 @@ public class HandConfigurationParserTest
         List<TileGroup> tileGroups2 = new ArrayList<>();
         tileGroups.add(TileGroup.of(MahjongTileKind.RED, MahjongTileKind.RED));
 
-        HandConfigurationParser parser2 = new HandConfigurationParser(new Hand(TileKindUtils.asHand("77z")));
-        List<List<TileGroup>> collisionPairs2 = parser2.findCollisionPairs(tileGroups2);
+        var parser2 = new HandConfigurationParser(new Hand(TileKindUtils.asHand("77z")));
+        var collisionPairs2 = parser2.findCollisionPairs(tileGroups2);
         List<List<TileGroup>> expectedCollisionPairs2 = new ArrayList<>();
 
         Assertions.assertEquals(expectedCollisionPairs2, collisionPairs2, "There should be not collision pair for 77z");
@@ -68,10 +70,10 @@ public class HandConfigurationParserTest
     public void testCreateCollisionList()
     {
         // 135567s case
-        List<TileGroup> tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
+        var tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
-        HandConfigurationParser parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
-        List<List<TileGroup>> collisionList = parser.createCollisionList(tileGroups);
+        var parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
+        var collisionList = parser.createCollisionList(tileGroups);
 
         List<List<TileGroup>> expectedResultCollisionList = new ArrayList<>();
         expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s"));
@@ -83,10 +85,10 @@ public class HandConfigurationParserTest
     public void testCreatePossiblePairings()
     {
         // 135567s case
-        List<TileGroup> collisionList = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
+        var collisionList = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
-        HandConfigurationParser parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
-        List<List<TileGroup>> possiblePairings = parser.createPossiblePairings(collisionList);
+        var parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
+        var possiblePairings = parser.createPossiblePairings(collisionList);
         List<List<TileGroup>> expectedPossiblePairings = new ArrayList<>();
 
         expectedPossiblePairings.add(TileGroupUtils.tileGroupsOf("13s", "5s", "5s", "67s"));
@@ -101,8 +103,8 @@ public class HandConfigurationParserTest
         Assertions.assertEquals(expectedPossiblePairings, possiblePairings, "Possible pairings for 135567s is not as expected");
 
         // 135567s case with 77z also in the hand
-        HandConfigurationParser parser2 = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s77z")));
-        List<List<TileGroup>> possiblePairings2 = parser2.createPossiblePairings(collisionList);
+        var parser2 = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s77z")));
+        var possiblePairings2 = parser2.createPossiblePairings(collisionList);
 
         Assertions.assertEquals(expectedPossiblePairings, possiblePairings2, "Possible pairings for 135567s77z is not as expected");
     }
@@ -111,7 +113,7 @@ public class HandConfigurationParserTest
     public void testGetFlagsForTilesToKeep()
     {
         List<Integer> indicesForCollidingGroups = TileKindUtils.asHand("13567s").stream().map(tile -> tile.getTileKind().getIndex()).collect(Collectors.toList());
-        List<TileGroup> collidingGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
+        var collidingGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
         List<List<TileGroup>> combination = new ArrayList<>();
         combination.add(TileGroupUtils.tileGroupsOf("13s"));
@@ -120,8 +122,8 @@ public class HandConfigurationParserTest
         combination.add(TileGroupUtils.tileGroupsOf("567s"));
         combination.add(TileGroupUtils.tileGroupsOf("567s"));
 
-        HandConfigurationParser parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
-        List<List<Boolean>> resultFlags = parser.getFlagsForTilesToKeep(indicesForCollidingGroups, combination, collidingGroups);
+        var parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
+        var resultFlags = parser.getFlagsForTilesToKeep(indicesForCollidingGroups, combination, collidingGroups);
 
         List<List<Boolean>> expectedFlags = new ArrayList<>();
         expectedFlags.add(Arrays.asList(true, true));
@@ -186,10 +188,10 @@ public class HandConfigurationParserTest
     @Test
     public void testAddPossiblePairings()
     {
-        List<TileGroup> groupsToSelectFrom = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
+        var groupsToSelectFrom = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
-        HandConfigurationParser parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
-        List<List<TileGroup>> possiblePairings = parser.addPossiblePairings(MahjongTileKind.BAMBOOS_5, 2, groupsToSelectFrom, new ArrayList<>(), new ArrayList<>());
+        var parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
+        var possiblePairings = parser.addPossiblePairings(MahjongTileKind.BAMBOOS_5, 2, groupsToSelectFrom, new ArrayList<>(), new ArrayList<>());
 
         List<List<TileGroup>> expectedPairings = new ArrayList<>();
         expectedPairings.add(TileGroupUtils.tileGroupsOf("35s", "55s"));
@@ -224,8 +226,8 @@ public class HandConfigurationParserTest
         pairingsOf7s.add(TileGroupUtils.tileGroupsOf("567s"));
         knownPairings.add(pairingsOf7s);
 
-        HandConfigurationParser parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
-        List<List<List<TileGroup>>> resultGroups = parser.listDifferentCombinations(knownPairings, new ArrayList<>(), new ArrayList<>());
+        var parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
+        var resultGroups = parser.listDifferentCombinations(knownPairings, new ArrayList<>(), new ArrayList<>());
 
         List<List<List<TileGroup>>> expectedGroups = new ArrayList<>();
         expectedGroups.add(getExpectedListOfList(TileGroupUtils.tileGroupsOf("13s"), TileGroupUtils.tileGroupsOf("13s"), TileGroupUtils.tileGroupsOf("35s", "55s"), TileGroupUtils.tileGroupsOf("567s"),

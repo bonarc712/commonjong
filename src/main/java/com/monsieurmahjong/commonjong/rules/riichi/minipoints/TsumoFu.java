@@ -48,7 +48,7 @@ public class TsumoFu implements Fu
 
     private boolean isPinfu()
     {
-        Pinfu pinfu = new Pinfu(hand, groups);
+        var pinfu = new Pinfu(hand, groups);
         return pinfu.isValid();
     }
 

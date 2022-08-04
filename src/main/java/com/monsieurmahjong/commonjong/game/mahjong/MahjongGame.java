@@ -1,9 +1,11 @@
 package com.monsieurmahjong.commonjong.game.mahjong;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Seat;
+import com.monsieurmahjong.commonjong.game.Tileset;
 import com.monsieurmahjong.commonjong.game.players.Player;
 import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
 import com.monsieurmahjong.commonjong.rules.generic.RuleSet;
@@ -37,9 +39,9 @@ public class MahjongGame
         if (players == null || players.isEmpty())
         {
             players = new ArrayList<>(4);
-            for (int i = 0; i < 4; i++)
+            for (var i = 0; i < 4; i++)
             {
-                Player player = new Player();
+                var player = new Player();
                 player.setName(NameGenerator.generateNameOtherThan(getPlayerNames()));
                 players.add(player);
             }
@@ -52,7 +54,7 @@ public class MahjongGame
     private void drawStartingTiles()
     {
         players.forEach(player -> {
-            for (int i = 0; i < 13; i++)
+            for (var i = 0; i < 13; i++)
             {
                 player.draw(tileSet.draw());
             }
@@ -71,7 +73,7 @@ public class MahjongGame
     {
         if (getAmountOfPlayers() > playerIndex)
         {
-            Player currentPlayer = players.get(playerIndex);
+            var currentPlayer = players.get(playerIndex);
             currentPlayer.setSeat(seat);
             gameStateLog.log("Player " + currentPlayer.getName() + " is " + seat.getSeatName());
         }
@@ -79,10 +81,10 @@ public class MahjongGame
 
     private void playTurn(Seat activePlayer)
     {
-        Player currentPlayer = getPlayerBySeat(activePlayer);
+        var currentPlayer = getPlayerBySeat(activePlayer);
 
         // draw tile
-        Tile drawnTile = tileSet.draw();
+        var drawnTile = tileSet.draw();
         currentPlayer.draw(drawnTile);
         gameStateLog.log(currentPlayer.getSeat().getSeatName() + " draws " + drawnTile.getTileKind().abbreviation);
 
@@ -92,23 +94,23 @@ public class MahjongGame
         waitForPlayerDiscard(currentPlayer);
 
         // let other players do action with tile
-        // if a player makes an action other than winning, they become the current player
+        // if a player makes an action other than winning, they become the current
+        // player
 
         // check if next turn is played
         if (canNextTurnBePlayed())
         {
-            Seat nextPlayer = determineNextPlayer(currentPlayer);
+            var nextPlayer = determineNextPlayer(currentPlayer);
             playTurn(nextPlayer);
-        }
-        else
+        } else
         {
             finishGame();
         }
     }
 
     /**
-     * Right now there is no finish hand method. There is just a finish
-     * game, the two will be split later on in the game loop epic story.
+     * Right now there is no finish hand method. There is just a finish game, the
+     * two will be split later on in the game loop epic story.
      */
     private void finishGame()
     {
@@ -128,7 +130,7 @@ public class MahjongGame
      */
     public Seat determineNextPlayer(Player currentPlayer)
     {
-        int seatIndex = currentPlayer.getSeat().ordinal();
+        var seatIndex = currentPlayer.getSeat().ordinal();
         if (getAmountOfPlayers() - 1 == seatIndex)
         {
             return Seat.EAST;
@@ -148,7 +150,7 @@ public class MahjongGame
 
     private void waitForPlayerDiscard(Player currentPlayer)
     {
-        Tile discardedTile = currentPlayer.discard();
+        var discardedTile = currentPlayer.discard();
         gameStateLog.log(currentPlayer.getSeat().getSeatName() + " discards " + discardedTile.getTileKind().abbreviation);
     }
 
@@ -160,9 +162,8 @@ public class MahjongGame
     private List<String> getPlayerNames()
     {
         return players.stream() //
-                .filter(player -> player.getName() != null && !player.getName().equals("")) //
+                .filter(player -> player.getName() != null && !"".equals(player.getName())) //
                 .map(Player::getName) //
                 .collect(Collectors.toList());
     }
-
 }

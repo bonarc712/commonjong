@@ -1,13 +1,16 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased.Riichi;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
 
 public class RiichiTest
@@ -18,11 +21,11 @@ public class RiichiTest
     @Test
     public void testValidityOfRiichi_WhenDeclared_ShouldBeTrue()
     {
-        Riichi riichi = new Riichi(anyHand, anyLog);
+        var riichi = new Riichi(anyHand, anyLog);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
         when(anyLog.hasPlayerDeclaredRiichi(any())).thenReturn(true);
 
-        boolean isValid = riichi.isValid();
+        var isValid = riichi.isValid();
 
         assertTrue(isValid, "Riichi should be valid when declared");
     }
@@ -30,11 +33,11 @@ public class RiichiTest
     @Test
     public void testValidityOfRiichi_WhenNotDeclared_ShouldBeFalse()
     {
-        Riichi riichi = new Riichi(anyHand, anyLog);
+        var riichi = new Riichi(anyHand, anyLog);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
         when(anyLog.hasPlayerDeclaredRiichi(any())).thenReturn(false);
 
-        boolean isValid = riichi.isValid();
+        var isValid = riichi.isValid();
 
         assertFalse(isValid, "Riichi should not be valid when not declared");
     }
@@ -42,9 +45,9 @@ public class RiichiTest
     @Test
     public void testValueOf_Riichi_ShouldBeOne()
     {
-        Riichi riichi = new Riichi(anyHand, anyLog);
+        var riichi = new Riichi(anyHand, anyLog);
 
-        int hanValue = riichi.getHanValue();
+        var hanValue = riichi.getHanValue();
 
         assertEquals(hanValue, 1, "Riichi value should be 1");
     }

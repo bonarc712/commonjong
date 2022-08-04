@@ -1,6 +1,7 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
@@ -17,12 +18,12 @@ public class KokushiMusou extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        List<MahjongTileKind> terminalAndHonourCatalog = new ArrayList<>(TileKindUtils.getAllTerminalsAndHonours());
-        boolean pairFound = false;
+        var terminalAndHonourCatalog = new ArrayList<>(TileKindUtils.getAllTerminalsAndHonours());
+        var pairFound = false;
 
-        for (TileGroup group : groups)
+        for (var group : groups)
         {
-            for (MahjongTileKind kind : group.getTileKinds())
+            for (var kind : group.getTileKinds())
             {
                 if (kind.isNonTerminalNumeral())
                 {
@@ -49,8 +50,8 @@ public class KokushiMusou extends GroupBasedYaku
     @Override
     public int getHanValue()
     {
-        MahjongTileKind winningTile = hand.getWinningTile();
-        int tileCount = (int) groups.stream().map(group -> group.getTileKinds()).flatMap(List::stream).filter(kind -> kind == winningTile).count();
+        var winningTile = hand.getWinningTile();
+        var tileCount = (int) groups.stream().map(group -> group.getTileKinds()).flatMap(List::stream).filter(kind -> kind == winningTile).count();
         return tileCount == 2 ? 26 : 13;
     }
 }

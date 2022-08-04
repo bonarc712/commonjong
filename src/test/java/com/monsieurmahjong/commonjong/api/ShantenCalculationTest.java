@@ -1,6 +1,5 @@
 package com.monsieurmahjong.commonjong.api;
 
-import com.monsieurmahjong.commonjong.api.ShantenCalculation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,7 @@ public class ShantenCalculationTest
     public void testShantenCalculation()
     {
         // kokushi
-        int shanten = ShantenCalculation.countShanten("19m19p19s1234567z");
+        var shanten = ShantenCalculation.countShanten("19m19p19s1234567z");
         Assertions.assertEquals(0, shanten, "Shanten for 19m19p19s1234567z does not give the correct result");
 
         shanten = ShantenCalculation.countShanten("1145m19p19s12356z");
@@ -47,7 +46,7 @@ public class ShantenCalculationTest
     public void testArcturusProgrammingTests()
     {
         // 6-shanten. All crap, 4 terminals.
-        int resultShanten = ShantenCalculation.countShanten("258m258p258s1235z");
+        var resultShanten = ShantenCalculation.countShanten("258m258p258s1235z");
         Assertions.assertEquals(6, resultShanten, "Wrong shanten for 258m258p258s1235z");
 
         // 5-shanten. 3 protogroups, 5 terminals.
@@ -119,7 +118,7 @@ public class ShantenCalculationTest
     @Test
     public void testMiscellaneousHands()
     {
-        int resultShanten = ShantenCalculation.countShanten("1566799m122345p");
+        var resultShanten = ShantenCalculation.countShanten("1566799m122345p");
         Assertions.assertEquals(2, resultShanten, "Wrong shanten for 1566799m122345p");
 
         resultShanten = ShantenCalculation.countShanten("1244566789m112p");

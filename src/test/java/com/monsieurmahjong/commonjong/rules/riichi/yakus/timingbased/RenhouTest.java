@@ -1,13 +1,16 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased.Renhou;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
 
 public class RenhouTest
@@ -18,11 +21,11 @@ public class RenhouTest
     @Test
     public void testValidityOfRenhou_WhenObtained_ShouldBeTrue()
     {
-        Renhou renhou = new Renhou(anyHand, anyLog);
+        var renhou = new Renhou(anyHand, anyLog);
         when(anyHand.getSeatWind()).thenReturn(Seat.NORTH);
         when(anyLog.doesPlayerWinOnRenhou(any())).thenReturn(true);
 
-        boolean isValid = renhou.isValid();
+        var isValid = renhou.isValid();
 
         assertTrue(isValid, "Renhou should be valid when obtained");
     }
@@ -30,11 +33,11 @@ public class RenhouTest
     @Test
     public void testValidityOfRenhou_WhenNotObtained_ShouldBeFalse()
     {
-        Renhou renhou = new Renhou(anyHand, anyLog);
+        var renhou = new Renhou(anyHand, anyLog);
         when(anyHand.getSeatWind()).thenReturn(Seat.NORTH);
         when(anyLog.doesPlayerWinOnRenhou(any())).thenReturn(false);
 
-        boolean isValid = renhou.isValid();
+        var isValid = renhou.isValid();
 
         assertFalse(isValid, "Renhou should not be valid when not obtained");
     }
@@ -42,9 +45,9 @@ public class RenhouTest
     @Test
     public void testValueOf_Renhou_ShouldBeFive()
     {
-        Renhou renhou = new Renhou(anyHand, anyLog);
+        var renhou = new Renhou(anyHand, anyLog);
 
-        int hanValue = renhou.getHanValue();
+        var hanValue = renhou.getHanValue();
 
         assertEquals(hanValue, 5, "Renhou value should be 5");
     }
@@ -52,9 +55,9 @@ public class RenhouTest
     @Test
     public void testValueOf_Renhou_ShouldNotBeYakuman()
     {
-        Renhou renhou = new Renhou(anyHand, anyLog);
+        var renhou = new Renhou(anyHand, anyLog);
 
-        boolean isYakuman = renhou.isYakuman();
+        var isYakuman = renhou.isYakuman();
 
         assertFalse(isYakuman, "Renhou should not be yakuman");
     }
@@ -62,10 +65,10 @@ public class RenhouTest
     @Test
     public void testValueOf_RenhouWhenSetToYakuman_ShouldBeThirteen()
     {
-        Renhou renhou = new Renhou(anyHand, anyLog);
+        var renhou = new Renhou(anyHand, anyLog);
         renhou.setHanValue(13);
 
-        int hanValue = renhou.getHanValue();
+        var hanValue = renhou.getHanValue();
 
         assertEquals(hanValue, 13, "Renhou value should be 13");
     }
@@ -73,10 +76,10 @@ public class RenhouTest
     @Test
     public void testValueOf_RenhouWhenSetToYakuman_ShouldBeYakuman()
     {
-        Renhou renhou = new Renhou(anyHand, anyLog);
+        var renhou = new Renhou(anyHand, anyLog);
         renhou.setHanValue(13);
 
-        boolean isYakuman = renhou.isYakuman();
+        var isYakuman = renhou.isYakuman();
 
         assertTrue(isYakuman, "Renhou should be yakuman");
     }

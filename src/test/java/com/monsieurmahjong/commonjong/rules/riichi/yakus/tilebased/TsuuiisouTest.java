@@ -1,13 +1,14 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.*;
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased.Tsuuiisou;
+import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
 
 public class TsuuiisouTest
 {
@@ -23,7 +24,7 @@ public class TsuuiisouTest
     {
         Yaku tsuuiisou = new Tsuuiisou(completeTsuuiisouHand);
 
-        boolean tsuuiisouIsValid = tsuuiisou.isValid();
+        var tsuuiisouIsValid = tsuuiisou.isValid();
 
         assertTrue(tsuuiisouIsValid, "111999m111999p11s should be valid for tsuuiisou");
     }
@@ -33,7 +34,7 @@ public class TsuuiisouTest
     {
         Yaku tsuuiisou = new Tsuuiisou(incompleteTsuuiisouHand);
 
-        boolean tsuuiisouIsValid = tsuuiisou.isValid();
+        var tsuuiisouIsValid = tsuuiisou.isValid();
 
         assertTrue(tsuuiisouIsValid, "111999m11p should be valid for tsuuiisou");
     }
@@ -43,7 +44,7 @@ public class TsuuiisouTest
     {
         Yaku tsuuiisou = new Tsuuiisou(completeNonTsuuiisouHand);
 
-        boolean tsuuiisouIsValid = tsuuiisou.isValid();
+        var tsuuiisouIsValid = tsuuiisou.isValid();
 
         assertFalse(tsuuiisouIsValid, "123456m22345678p should not be valid for tsuuiisou");
     }
@@ -53,7 +54,7 @@ public class TsuuiisouTest
     {
         Yaku tsuuiisou = new Tsuuiisou(incompleteNonTsuuiisouHand);
 
-        boolean tsuuiisouIsValid = tsuuiisou.isValid();
+        var tsuuiisouIsValid = tsuuiisou.isValid();
 
         assertFalse(tsuuiisouIsValid, "111p11122z should not be valid for tsuuiisou");
     }
@@ -63,7 +64,7 @@ public class TsuuiisouTest
     {
         Yaku tsuuiisou = new Tsuuiisou(anyHand);
 
-        int tsuuiisouValue = tsuuiisou.getHanValue();
+        var tsuuiisouValue = tsuuiisou.getHanValue();
 
         assertEquals(13, tsuuiisouValue, "Tsuuiisou value should be 13");
     }
@@ -73,7 +74,7 @@ public class TsuuiisouTest
     {
         Yaku tsuuiisou = new Tsuuiisou(anyHand);
 
-        boolean tsuuiisouIsYakuman = tsuuiisou.isYakuman();
+        var tsuuiisouIsYakuman = tsuuiisou.isYakuman();
 
         assertTrue(tsuuiisouIsYakuman, "Tsuuiisou should be yakuman");
     }

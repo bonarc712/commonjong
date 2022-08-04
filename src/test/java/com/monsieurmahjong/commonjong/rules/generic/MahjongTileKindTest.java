@@ -2,9 +2,6 @@ package com.monsieurmahjong.commonjong.rules.generic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.TileFamily;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class MahjongTileKindTest
@@ -16,7 +13,7 @@ public class MahjongTileKindTest
     @Test
     public void testGetIndex()
     {
-        Assertions.assertEquals(0, MahjongTileKind.CHARACTERS_1.getIndex());
+        assertEquals(0, MahjongTileKind.CHARACTERS_1.getIndex());
         assertEquals(2, MahjongTileKind.CHARACTERS_3.getIndex());
         assertEquals(26, MahjongTileKind.BAMBOOS_9.getIndex());
         assertEquals(29, MahjongTileKind.WEST.getIndex());
@@ -26,7 +23,7 @@ public class MahjongTileKindTest
     @Test
     public void testGetFamily()
     {
-        Assertions.assertEquals(TileFamily.BAMBOOS, MahjongTileKind.BAMBOOS_1.getFamily());
+        assertEquals(TileFamily.BAMBOOS, MahjongTileKind.BAMBOOS_1.getFamily());
         assertEquals(TileFamily.BAMBOOS, MahjongTileKind.BAMBOOS_3.getFamily());
         assertEquals(TileFamily.BAMBOOS, MahjongTileKind.BAMBOOS_7.getFamily());
         assertEquals(TileFamily.CHARACTERS, MahjongTileKind.CHARACTERS_1.getFamily());

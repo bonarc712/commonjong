@@ -1,6 +1,7 @@
 package com.monsieurmahjong.commonjong.rules.generic.utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.Tile;
@@ -14,9 +15,9 @@ public class TileGroupUtils
 
         for (String group : groups)
         {
-            List<Tile> tiles = TileKindUtils.asHand(group);
+            var tiles = TileKindUtils.asHand(group);
             List<Integer> tileIndices = tiles.stream().map(tile -> tile.getTileKind().getIndex()).collect(Collectors.toList());
-            TileGroup tileGroup = new TileGroup(tileIndices);
+            var tileGroup = new TileGroup(tileIndices);
             tileGroupList.add(tileGroup);
         }
 
@@ -43,7 +44,7 @@ public class TileGroupUtils
         {
             for (int index : group.getIndices())
             {
-                Tile tile = new Tile(TileKindUtils.getKindFromIndex(index));
+                var tile = new Tile(TileKindUtils.getKindFromIndex(index));
                 tiles.add(tile);
             }
         }
@@ -55,7 +56,7 @@ public class TileGroupUtils
 
     public static TileGroup getTileGroupFromTiles(List<Tile> tiles)
     {
-        TileGroup group = new TileGroup();
+        var group = new TileGroup();
         tiles.stream().map(tile -> tile.getTileKind().getIndex()).forEach(group::add);
         return group;
     }

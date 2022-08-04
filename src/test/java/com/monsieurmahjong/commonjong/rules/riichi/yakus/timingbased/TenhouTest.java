@@ -1,13 +1,16 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased.Tenhou;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
 
 public class TenhouTest
@@ -18,11 +21,11 @@ public class TenhouTest
     @Test
     public void testValidityOfTenhou_WhenObtained_ShouldBeTrue()
     {
-        Tenhou tenhou = new Tenhou(anyHand, anyLog);
+        var tenhou = new Tenhou(anyHand, anyLog);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
         when(anyLog.doesPlayerWinOnTenhou(any())).thenReturn(true);
 
-        boolean isValid = tenhou.isValid();
+        var isValid = tenhou.isValid();
 
         assertTrue(isValid, "Tenhou should be valid when obtained");
     }
@@ -30,11 +33,11 @@ public class TenhouTest
     @Test
     public void testValidityOfTenhou_WhenNotObtained_ShouldBeFalse()
     {
-        Tenhou tenhou = new Tenhou(anyHand, anyLog);
+        var tenhou = new Tenhou(anyHand, anyLog);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
         when(anyLog.doesPlayerWinOnTenhou(any())).thenReturn(false);
 
-        boolean isValid = tenhou.isValid();
+        var isValid = tenhou.isValid();
 
         assertFalse(isValid, "Tenhou should not be valid when not obtained");
     }
@@ -42,9 +45,9 @@ public class TenhouTest
     @Test
     public void testValueOf_Tenhou_ShouldBeThirteen()
     {
-        Tenhou tenhou = new Tenhou(anyHand, anyLog);
+        var tenhou = new Tenhou(anyHand, anyLog);
 
-        int hanValue = tenhou.getHanValue();
+        var hanValue = tenhou.getHanValue();
 
         assertEquals(hanValue, 13, "Tenhou value should be 13");
     }
@@ -52,9 +55,9 @@ public class TenhouTest
     @Test
     public void testValueOf_Tenhou_ShouldBeYakuman()
     {
-        Tenhou tenhou = new Tenhou(anyHand, anyLog);
+        var tenhou = new Tenhou(anyHand, anyLog);
 
-        boolean isYakuman = tenhou.isYakuman();
+        var isYakuman = tenhou.isYakuman();
 
         assertTrue(isYakuman, "Tenhou should be yakuman");
     }

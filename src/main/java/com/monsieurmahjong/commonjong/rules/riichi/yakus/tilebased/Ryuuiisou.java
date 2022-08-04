@@ -1,6 +1,6 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 
 public class Ryuuiisou extends TileBasedYaku
@@ -13,7 +13,7 @@ public class Ryuuiisou extends TileBasedYaku
     @Override
     public boolean isValid()
     {
-        for (Tile tile : hand.getTiles())
+        for (var tile : hand.getTiles())
         {
             if (!tile.getTileKind().is(MahjongTileKind.BAMBOOS_2, //
                     MahjongTileKind.BAMBOOS_3, //

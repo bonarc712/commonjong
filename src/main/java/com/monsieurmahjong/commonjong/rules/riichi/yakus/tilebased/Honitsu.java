@@ -1,6 +1,6 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.TileFamily;
 
 public class Honitsu extends TileBasedYaku
@@ -13,10 +13,10 @@ public class Honitsu extends TileBasedYaku
     @Override
     public boolean isValid()
     {
-        boolean honourFound = false;
-        TileFamily chosenFamily = TileFamily.NONE;
+        var honourFound = false;
+        var chosenFamily = TileFamily.NONE;
 
-        for (Tile tile : hand.getTiles())
+        for (var tile : hand.getTiles())
         {
             if (tile.getTileKind().isHonour())
             {

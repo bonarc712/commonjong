@@ -16,8 +16,8 @@ public class Chanta extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        boolean honourFound = false;
-        boolean nonTerminalFound = false;
+        var honourFound = false;
+        var nonTerminalFound = false;
 
         for (TileGroup group : groups)
         {

@@ -1,6 +1,9 @@
 package com.monsieurmahjong.commonjong.rules.generic.waits;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
@@ -19,7 +22,7 @@ public class TileParser
 
         while (!tiles.isEmpty())
         {
-            MahjongTileKind currentTileKind = tiles.get(0).getTileKind();
+            var currentTileKind = tiles.get(0).getTileKind();
 
             if (currentTileKind == previousTileKind)
             {
@@ -35,41 +38,41 @@ public class TileParser
             }
 
             // check for runs
-            for (int i = 1; i < tiles.size(); i++)
+            for (var i = 1; i < tiles.size(); i++)
             {
-                TileGroup runBasedGroup = new TileGroup();
-                for (int j = i; j < tiles.size(); j++)
+                var runBasedGroup = new TileGroup();
+                for (var j = i; j < tiles.size(); j++)
                 {
                     if (WaitShapeUtils.isRun(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j)))
                             && !tileGroups.contains(new TileGroup(Arrays.asList(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j))))))
                     {
                         runBasedGroup.addAll(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j)));
 
-                        int occurrence = 4;
+                        var occurrence = 4;
                         for (int index : runBasedGroup.getIndices())
                         {
-                            int currentTileOccurrence = getOccurrencesOfTileIndex(index, tiles);
+                            var currentTileOccurrence = getOccurrencesOfTileIndex(index, tiles);
                             occurrence = Math.min(occurrence, currentTileOccurrence);
                         }
 
-                        for (int k = 0; k < occurrence; k++)
+                        for (var k = 0; k < occurrence; k++)
                         {
                             tileGroups.add(runBasedGroup);
                         }
 
                         runBasedGroup = new TileGroup();
 
-                        int firstTileOccurrence = getOccurrencesOfTileIndex(tiles.get(0).getTileKind().getIndex(), tiles);
+                        var firstTileOccurrence = getOccurrencesOfTileIndex(tiles.get(0).getTileKind().getIndex(), tiles);
                         if (firstTileOccurrence > occurrence) // there might be more protogroups that we could add from that
                         {
-                            int secondTileOccurrence = getOccurrencesOfTileIndex(tiles.get(i).getTileKind().getIndex(), tiles);
-                            int thirdTileOccurrence = getOccurrencesOfTileIndex(tiles.get(j).getTileKind().getIndex(), tiles);
+                            var secondTileOccurrence = getOccurrencesOfTileIndex(tiles.get(i).getTileKind().getIndex(), tiles);
+                            var thirdTileOccurrence = getOccurrencesOfTileIndex(tiles.get(j).getTileKind().getIndex(), tiles);
 
                             if (secondTileOccurrence > occurrence)
                             {
                                 runBasedGroup.addAll(indexOf(tiles.get(0)), indexOf(tiles.get(i)));
-                                int protogroupOccurrence = Math.min(firstTileOccurrence - occurrence, secondTileOccurrence - occurrence);
-                                for (int k = 0; k < protogroupOccurrence; k++)
+                                var protogroupOccurrence = Math.min(firstTileOccurrence - occurrence, secondTileOccurrence - occurrence);
+                                for (var k = 0; k < protogroupOccurrence; k++)
                                 {
                                     tileGroups.add(runBasedGroup);
                                 }
@@ -77,8 +80,8 @@ public class TileParser
                             else if (thirdTileOccurrence > occurrence)
                             {
                                 runBasedGroup.addAll(indexOf(tiles.get(0)), indexOf(tiles.get(j)));
-                                int protogroupOccurrence = Math.min(firstTileOccurrence - occurrence, thirdTileOccurrence - occurrence);
-                                for (int k = 0; k < protogroupOccurrence; k++)
+                                var protogroupOccurrence = Math.min(firstTileOccurrence - occurrence, thirdTileOccurrence - occurrence);
+                                for (var k = 0; k < protogroupOccurrence; k++)
                                 {
                                     tileGroups.add(runBasedGroup);
                                 }
@@ -94,14 +97,14 @@ public class TileParser
                     {
                         runBasedGroup.addAll(indexOf(tiles.get(0)), indexOf(tiles.get(i)));
 
-                        int occurrence = 4;
+                        var occurrence = 4;
                         for (int index : runBasedGroup.getIndices())
                         {
-                            int currentTileOccurrence = getOccurrencesOfTileIndex(index, tiles);
+                            var currentTileOccurrence = getOccurrencesOfTileIndex(index, tiles);
                             occurrence = Math.min(occurrence, currentTileOccurrence);
                         }
 
-                        for (int j = 0; j < occurrence; j++)
+                        for (var j = 0; j < occurrence; j++)
                         {
                             tileGroups.add(runBasedGroup);
                         }
@@ -134,7 +137,7 @@ public class TileParser
 
         while (!tiles.isEmpty())
         {
-            MahjongTileKind tileKind = tiles.get(0).getTileKind();
+            var tileKind = tiles.get(0).getTileKind();
 
             parsePairsAndTriplets(tiles, tileKind).ifPresent(tileGroups::add);
 
@@ -151,13 +154,13 @@ public class TileParser
 
     protected static Optional<TileGroup> parsePairsAndTriplets(List<Tile> tiles, MahjongTileKind tileKind)
     {
-        int sameTileCount = (int) tiles.stream().filter(tile -> tile.getTileKind() == tileKind).count();
+        var sameTileCount = (int) tiles.stream().filter(tile -> tile.getTileKind() == tileKind).count();
         if (sameTileCount > 1)
         {
-            Integer[] indices = new Integer[sameTileCount];
+            var indices = new Integer[sameTileCount];
             Arrays.fill(indices, tileKind.getIndex());
 
-            TileGroup tileGroup = new TileGroup();
+            var tileGroup = new TileGroup();
             tileGroup.addAll(indices);
             return Optional.of(tileGroup);
         }
@@ -166,7 +169,7 @@ public class TileParser
 
     protected static TileGroup parseLoneTiles(MahjongTileKind currentTileKind)
     {
-        TileGroup loneTile = new TileGroup();
+        var loneTile = new TileGroup();
         loneTile.addAll(currentTileKind.getIndex());
         return loneTile;
     }

@@ -8,7 +8,7 @@ public class StringUtils
         {
             return baseString.toUpperCase();
         }
-        String firstLetter = baseString.substring(0, 1);
+        var firstLetter = baseString.substring(0, 1);
         return firstLetter.toUpperCase() + baseString.substring(1);
     }
 
@@ -18,7 +18,7 @@ public class StringUtils
         {
             return baseString.toLowerCase();
         }
-        String firstLetter = baseString.substring(0, 1);
+        var firstLetter = baseString.substring(0, 1);
         return firstLetter.toLowerCase() + baseString.substring(1);
     }
 }

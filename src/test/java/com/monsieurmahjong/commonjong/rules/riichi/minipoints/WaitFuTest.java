@@ -1,10 +1,11 @@
 package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.minipoints.WaitFu;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -39,11 +40,11 @@ public class WaitFuTest
     @Test
     public void withTankiWait_WaitFu_ShouldBeCounted()
     {
-        Hand hand = Hand.of(completeNonChiitoitsuHandGroups);
+        var hand = Hand.of(completeNonChiitoitsuHandGroups);
         hand.setWinningTile(winningTileTanki);
-        WaitFu waitFu = new WaitFu(hand, completeNonChiitoitsuHandGroups, winningTileGroupTanki);
+        var waitFu = new WaitFu(hand, completeNonChiitoitsuHandGroups, winningTileGroupTanki);
 
-        boolean isValid = waitFu.isValid();
+        var isValid = waitFu.isValid();
 
         assertTrue(isValid, "Wait fu should be counted with a tanki wait");
     }
@@ -51,11 +52,11 @@ public class WaitFuTest
     @Test
     public void withPenchanWait_WaitFu_ShouldBeCounted()
     {
-        Hand hand = Hand.of(completeNonChiitoitsuHandGroups);
+        var hand = Hand.of(completeNonChiitoitsuHandGroups);
         hand.setWinningTile(winningTilePenchan);
-        WaitFu waitFu = new WaitFu(hand, completeNonChiitoitsuHandGroups, winningTileGroupPenchan);
+        var waitFu = new WaitFu(hand, completeNonChiitoitsuHandGroups, winningTileGroupPenchan);
 
-        boolean isValid = waitFu.isValid();
+        var isValid = waitFu.isValid();
 
         assertTrue(isValid, "Wait fu should be counted with a penchan wait");
     }
@@ -63,11 +64,11 @@ public class WaitFuTest
     @Test
     public void withKanchanWait_WaitFu_ShouldBeCounted()
     {
-        Hand hand = Hand.of(completeNonChiitoitsuHandGroups);
+        var hand = Hand.of(completeNonChiitoitsuHandGroups);
         hand.setWinningTile(winningTileKanchan);
-        WaitFu waitFu = new WaitFu(hand, completeNonChiitoitsuHandGroups, winningTileGroupKanchan);
+        var waitFu = new WaitFu(hand, completeNonChiitoitsuHandGroups, winningTileGroupKanchan);
 
-        boolean isValid = waitFu.isValid();
+        var isValid = waitFu.isValid();
 
         assertTrue(isValid, "Wait fu should be counted with a kanchan wait");
     }
@@ -75,11 +76,11 @@ public class WaitFuTest
     @Test
     public void withShanponWait_WaitFu_ShouldNotBeCounted()
     {
-        Hand hand = Hand.of(completeNonChiitoitsuHandGroups);
+        var hand = Hand.of(completeNonChiitoitsuHandGroups);
         hand.setWinningTile(winningTileShanpon);
-        WaitFu waitFu = new WaitFu(hand, completeNonChiitoitsuHandGroups, winningTileGroupShanpon);
+        var waitFu = new WaitFu(hand, completeNonChiitoitsuHandGroups, winningTileGroupShanpon);
 
-        boolean isValid = waitFu.isValid();
+        var isValid = waitFu.isValid();
 
         assertFalse(isValid, "Wait fu should not be counted with a shanpon wait");
     }
@@ -87,11 +88,11 @@ public class WaitFuTest
     @Test
     public void withRyanmenWait_WaitFu_ShouldNotBeCounted()
     {
-        Hand hand = Hand.of(completeNonChiitoitsuHandGroups);
+        var hand = Hand.of(completeNonChiitoitsuHandGroups);
         hand.setWinningTile(winningTileRyanmen);
-        WaitFu waitFu = new WaitFu(hand, completeNonChiitoitsuHandGroups, winningTileGroupRyanmen);
+        var waitFu = new WaitFu(hand, completeNonChiitoitsuHandGroups, winningTileGroupRyanmen);
 
-        boolean isValid = waitFu.isValid();
+        var isValid = waitFu.isValid();
 
         assertFalse(isValid, "Wait fu should not be counted with a ryanmen wait");
     }
@@ -99,9 +100,9 @@ public class WaitFuTest
     @Test
     public void withChiitoitsu_WaitFu_ShouldNotBeCounted()
     {
-        WaitFu waitFu = new WaitFu(Hand.of(completeChiitoitsuHandGroups), completeChiitoitsuHandGroups, winningTileGroupTanki);
+        var waitFu = new WaitFu(Hand.of(completeChiitoitsuHandGroups), completeChiitoitsuHandGroups, winningTileGroupTanki);
 
-        boolean isValid = waitFu.isValid();
+        var isValid = waitFu.isValid();
 
         assertFalse(isValid, "Wait fu should not be counted with a chiitoi hand");
     }
@@ -109,11 +110,11 @@ public class WaitFuTest
     @Test
     public void withJuusanmenmachiKokushi_WaitFu_ShouldNotBeCounted()
     {
-        Hand hand = Hand.of(completeKokushiHandGroups);
+        var hand = Hand.of(completeKokushiHandGroups);
         hand.setWinningTile(winningTileKokushi);
-        WaitFu waitFu = new WaitFu(hand, completeKokushiHandGroups, winningTileGroupKokushi);
+        var waitFu = new WaitFu(hand, completeKokushiHandGroups, winningTileGroupKokushi);
 
-        boolean isValid = waitFu.isValid();
+        var isValid = waitFu.isValid();
 
         assertFalse(isValid, "Wait fu should not be counted with a juusanmenmachi (13-way wait) kokushi hand");
     }
@@ -121,9 +122,9 @@ public class WaitFuTest
     @Test
     public void fuForWait_ShouldAlwaysBeTwo()
     {
-        WaitFu waitFu = new WaitFu(null, null, null);
+        var waitFu = new WaitFu(null, null, null);
 
-        int fuValue = waitFu.getFuValue();
+        var fuValue = waitFu.getFuValue();
 
         assertEquals(2, fuValue, "Wait fu should be 2");
     }

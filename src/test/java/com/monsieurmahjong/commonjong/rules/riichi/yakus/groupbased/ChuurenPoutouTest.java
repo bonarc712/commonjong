@@ -1,14 +1,18 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.ChuurenPoutou;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
@@ -31,7 +35,7 @@ public class ChuurenPoutouTest
     {
         Yaku chuurenPoutou = new ChuurenPoutou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeChuurenHandGroups)), completeChuurenHandGroups);
 
-        boolean chuurenPoutouIsValid = chuurenPoutou.isValid();
+        var chuurenPoutouIsValid = chuurenPoutou.isValid();
 
         assertTrue(chuurenPoutouIsValid, "11123445678999m should be valid for ChuurenPoutou");
     }
@@ -41,7 +45,7 @@ public class ChuurenPoutouTest
     {
         Yaku chuurenPoutou = new ChuurenPoutou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChuurenHandGroups)), completeNonChuurenHandGroups);
 
-        boolean chuurenPoutouIsValid = chuurenPoutou.isValid();
+        var chuurenPoutouIsValid = chuurenPoutou.isValid();
 
         assertFalse(chuurenPoutouIsValid, "123345m22345678p should not be valid for ChuurenPoutou");
     }
@@ -51,7 +55,7 @@ public class ChuurenPoutouTest
     {
         Yaku chuurenPoutou = new ChuurenPoutou(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonChuurenHandGroups)), incompleteNonChuurenHandGroups);
 
-        boolean chuurenPoutouIsValid = chuurenPoutou.isValid();
+        var chuurenPoutouIsValid = chuurenPoutou.isValid();
 
         assertFalse(chuurenPoutouIsValid, "111m555p11s should not be valid for ChuurenPoutou");
     }
@@ -59,13 +63,13 @@ public class ChuurenPoutouTest
     @Test
     public void testValidityOf_OpenChuurenHand_ShouldBeFalse()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(openChuurenHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(openChuurenHandGroups));
         List<List<Tile>> openChuurenMelds = new ArrayList<>();
         openChuurenMelds.add(TileGroupUtils.getTilesFromTileGroups(TileGroupUtils.tileGroupsOf("234m")));
         hand.setMelds(openChuurenMelds);
         Yaku chuurenPoutou = new ChuurenPoutou(hand, openChuurenHandGroups);
 
-        boolean chuurenPoutouIsValid = chuurenPoutou.isValid();
+        var chuurenPoutouIsValid = chuurenPoutou.isValid();
 
         assertFalse(chuurenPoutouIsValid, "11123445678999m with an open chii should not be valid for ChuurenPoutou");
     }
@@ -76,7 +80,7 @@ public class ChuurenPoutouTest
         Yaku chuurenPoutou = new ChuurenPoutou(anyHand, anyGroups);
         when(anyHand.getWinningTile()).thenReturn(nonJunseiWinningTile);
 
-        int chuurenPoutouValue = chuurenPoutou.getHanValue();
+        var chuurenPoutouValue = chuurenPoutou.getHanValue();
 
         assertEquals(13, chuurenPoutouValue, "ChuurenPoutou value should be 13");
     }
@@ -84,11 +88,11 @@ public class ChuurenPoutouTest
     @Test
     public void testValueOf_ChuurenPoutouWaitingOnAnyTile_ShouldBeTwentySix()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeChuurenHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeChuurenHandGroups));
         hand.setWinningTile(junseiChuurenWinningTile);
         Yaku junseiChuurenPoutou = new ChuurenPoutou(hand, completeChuurenHandGroups);
 
-        int chuurenPoutouValue = junseiChuurenPoutou.getHanValue();
+        var chuurenPoutouValue = junseiChuurenPoutou.getHanValue();
 
         assertEquals(26, chuurenPoutouValue, "Junsei ChuurenPoutou value should be 26");
     }
@@ -99,7 +103,7 @@ public class ChuurenPoutouTest
         Yaku chuurenPoutou = new ChuurenPoutou(anyHand, anyGroups);
         when(anyHand.getWinningTile()).thenReturn(nonJunseiWinningTile);
 
-        boolean chuurenPoutouIsYakuman = chuurenPoutou.isYakuman();
+        var chuurenPoutouIsYakuman = chuurenPoutou.isYakuman();
 
         assertTrue(chuurenPoutouIsYakuman, "ChuurenPoutou should be yakuman");
     }
@@ -107,11 +111,11 @@ public class ChuurenPoutouTest
     @Test
     public void testValueOf_JunseiChuurenPoutou_ShouldBeDoubleYakuman()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeChuurenHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeChuurenHandGroups));
         hand.setWinningTile(junseiChuurenWinningTile);
         Yaku chuurenPoutou = new ChuurenPoutou(hand, completeChuurenHandGroups);
 
-        boolean junseiChuurenPoutouIsDoubleYakuman = chuurenPoutou.isDoubleYakuman();
+        var junseiChuurenPoutouIsDoubleYakuman = chuurenPoutou.isDoubleYakuman();
 
         assertTrue(junseiChuurenPoutouIsDoubleYakuman, "Junsei chuuren poutou should be double yakuman");
     }

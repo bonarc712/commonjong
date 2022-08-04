@@ -1,14 +1,17 @@
 package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.minipoints.TableWindPair;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
@@ -26,11 +29,11 @@ public class TableWindPairTest
     @Test
     public void withAHandWithATableWindPair_TableWindPairFu_IsValid()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeTableWindPairHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeTableWindPairHandGroups));
         hand.addTableWind(tableWind);
-        TableWindPair tableWindPair = new TableWindPair(hand, completeTableWindPairHandGroups);
+        var tableWindPair = new TableWindPair(hand, completeTableWindPairHandGroups);
 
-        boolean isValid = tableWindPair.isValid();
+        var isValid = tableWindPair.isValid();
 
         assertTrue(isValid, "Table wind pair should be valid for a hand that contains a table wind pair");
     }
@@ -38,11 +41,11 @@ public class TableWindPairTest
     @Test
     public void withAnIncompleteHandWithATableWindPair_TableWindPairFu_IsValid()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteTableWindPairHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteTableWindPairHandGroups));
         hand.addTableWind(tableWind);
-        TableWindPair tableWindPair = new TableWindPair(hand, incompleteTableWindPairHandGroups);
+        var tableWindPair = new TableWindPair(hand, incompleteTableWindPairHandGroups);
 
-        boolean isValid = tableWindPair.isValid();
+        var isValid = tableWindPair.isValid();
 
         assertTrue(isValid, "Table wind pair should be valid for a hand that contains a table wind pair");
     }
@@ -50,11 +53,11 @@ public class TableWindPairTest
     @Test
     public void mWithAHandWithoutATableWindPair_TableWindPairFu_IsNotValid()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonTableWindPairHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonTableWindPairHandGroups));
         hand.addTableWind(tableWind);
-        TableWindPair tableWindPair = new TableWindPair(hand, completeNonTableWindPairHandGroups);
+        var tableWindPair = new TableWindPair(hand, completeNonTableWindPairHandGroups);
 
-        boolean isValid = tableWindPair.isValid();
+        var isValid = tableWindPair.isValid();
 
         assertFalse(isValid, "Table wind pair should not be valid for a hand that doesn't contain a table wind pair");
     }
@@ -62,11 +65,11 @@ public class TableWindPairTest
     @Test
     public void withASevenPairsHandWithATableWindPair_TableWindPairFu_IsNotValid()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuWithTableWindPairHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuWithTableWindPairHandGroups));
         hand.addTableWind(tableWind);
-        TableWindPair tableWindPair = new TableWindPair(hand, completeChiitoitsuWithTableWindPairHandGroups);
+        var tableWindPair = new TableWindPair(hand, completeChiitoitsuWithTableWindPairHandGroups);
 
-        boolean isValid = tableWindPair.isValid();
+        var isValid = tableWindPair.isValid();
 
         assertFalse(isValid, "Table wind pair should not be valid for a seven pairs hand that contains a table wind pair");
     }
@@ -74,9 +77,9 @@ public class TableWindPairTest
     @Test
     public void getFuValue_ForTableWindPair_IsTwo()
     {
-        TableWindPair tableWindPair = new TableWindPair(anyHand, new ArrayList<>());
+        var tableWindPair = new TableWindPair(anyHand, new ArrayList<>());
 
-        int value = tableWindPair.getFuValue();
+        var value = tableWindPair.getFuValue();
 
         assertEquals(2, value, "Table wind pair value should be 2");
     }

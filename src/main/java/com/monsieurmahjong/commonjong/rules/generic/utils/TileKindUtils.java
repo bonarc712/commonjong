@@ -1,17 +1,20 @@
 package com.monsieurmahjong.commonjong.rules.generic.utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiFunction;
 
-import com.monsieurmahjong.commonjong.game.*;
-import com.monsieurmahjong.commonjong.rules.generic.*;
+import com.monsieurmahjong.commonjong.game.Seat;
+import com.monsieurmahjong.commonjong.game.Tile;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKindComparator;
 
 public class TileKindUtils
 {
     /**
-     * This method returns a hand made of the tiles in input. 
-     * The strings in input must make use of the
-     * {@link MahjongTileKind} abbreviation, which falls under
+     * This method returns a hand made of the tiles in input. The strings in input
+     * must make use of the {@link MahjongTileKind} abbreviation, which falls under
      * the Tenhou notation (1m, 2m, 3m, 1p, etc.)
      * 
      * @param tiles : all the tiles that make up the hand
@@ -23,11 +26,10 @@ public class TileKindUtils
         {
             try
             {
-                MahjongTileKind kind = MahjongTileKind.getMahjongTileByAbbreviation(tileName);
-                Tile tile = new Tile(kind);
+                var kind = MahjongTileKind.getMahjongTileByAbbreviation(tileName);
+                var tile = new Tile(kind);
                 hand.add(tile);
-            }
-            catch (IllegalArgumentException e)
+            } catch (IllegalArgumentException e)
             {
                 continue;
             }
@@ -36,39 +38,36 @@ public class TileKindUtils
     }
 
     /**
-     * This method returns a hand made of the tiles in input. 
-     * The strings in input must use the Tenhou notation in
-     * one block, eg. 345m345p345s1155z.
+     * This method returns a hand made of the tiles in input. The strings in input
+     * must use the Tenhou notation in one block, eg. 345m345p345s1155z.
      * 
      * @param tileText : all the tiles that make up the hand
      */
     public static List<Tile> asHand(String tileText)
     {
         List<Tile> hand = new ArrayList<>();
-        String remainingText = new String(tileText);
-        String currentSuitNumbers = "";
+        var remainingText = new String(tileText);
+        var currentSuitNumbers = "";
 
         while (!remainingText.isEmpty())
         {
-            char firstCharacter = remainingText.charAt(0);
+            var firstCharacter = remainingText.charAt(0);
             if (Character.isDigit(firstCharacter))
             {
                 currentSuitNumbers += firstCharacter;
-            }
-            else if (Character.isAlphabetic(firstCharacter))
+            } else if (Character.isAlphabetic(firstCharacter))
             {
-                for (int i = 0; i < currentSuitNumbers.length(); i++)
+                for (var i = 0; i < currentSuitNumbers.length(); i++)
                 {
-                    StringBuilder builder = new StringBuilder(currentSuitNumbers.substring(i, i + 1));
+                    var builder = new StringBuilder(currentSuitNumbers.substring(i, i + 1));
                     builder.append(firstCharacter); // suit name
 
-                    MahjongTileKind kind = MahjongTileKind.getMahjongTileByAbbreviation(builder.toString());
-                    Tile tile = new Tile(kind);
+                    var kind = MahjongTileKind.getMahjongTileByAbbreviation(builder.toString());
+                    var tile = new Tile(kind);
                     hand.add(tile);
                 }
                 currentSuitNumbers = "";
-            }
-            else
+            } else
             {
                 throw new IllegalArgumentException("Invalid input");
             }
@@ -81,12 +80,12 @@ public class TileKindUtils
 
     public static String getHandAsMPSZNotation(List<Tile> hand)
     {
-        StringBuilder mpszStringBuilder = new StringBuilder();
+        var mpszStringBuilder = new StringBuilder();
         hand.stream().map(Tile::getTileKind).sorted(new MahjongTileKindComparator()).forEach(tileKind -> {
             mpszStringBuilder.append(tileKind.abbreviation);
         });
 
-        String resultString = mpszStringBuilder.toString();
+        var resultString = mpszStringBuilder.toString();
 
         BiFunction<String, String, String> replaceLettersInString = ((originalString, letterToReplace) -> {
             while (originalString.indexOf(letterToReplace) != originalString.lastIndexOf(letterToReplace))
@@ -133,18 +132,16 @@ public class TileKindUtils
     }
 
     /**
-     * A terminal or honour tile is any tile that is a 1, a 9,
-     * a wind or a dragon.
+     * A terminal or honour tile is any tile that is a 1, a 9, a wind or a dragon.
      */
     public static boolean isTerminalOrHonour(int index)
     {
-        MahjongTileKind tileKind = getKindFromIndex(index);
+        var tileKind = getKindFromIndex(index);
         return tileKind.isHonour() || tileKind.isTerminal();
     }
 
     /**
-     * A numeral tile is any tile is part of
-     * a family (characters, bamboos, dots)
+     * A numeral tile is any tile is part of a family (characters, bamboos, dots)
      */
     public static boolean isNumeral(int index)
     {
@@ -152,12 +149,11 @@ public class TileKindUtils
     }
 
     /**
-     * A simple tile is any tile that is between
-     * 2 and 8, inclusive.
+     * A simple tile is any tile that is between 2 and 8, inclusive.
      */
     public static boolean isSimple(int index)
     {
-        MahjongTileKind tileKind = getKindFromIndex(index);
+        var tileKind = getKindFromIndex(index);
         return tileKind.isNumeral() && !tileKind.isTerminal();
     }
 
@@ -195,8 +191,8 @@ public class TileKindUtils
      */
     public static boolean areSameSuit(int first, int second)
     {
-        MahjongTileKind firstTile = getKindFromIndex(first);
-        MahjongTileKind secondTile = getKindFromIndex(second);
+        var firstTile = getKindFromIndex(first);
+        var secondTile = getKindFromIndex(second);
 
         return firstTile.isCharacters() && secondTile.isCharacters() || //
                 firstTile.isCircles() && secondTile.isCircles() || //
@@ -207,16 +203,16 @@ public class TileKindUtils
     {
         switch (kind)
         {
-            case EAST:
-                return Seat.EAST;
-            case SOUTH:
-                return Seat.SOUTH;
-            case WEST:
-                return Seat.WEST;
-            case NORTH:
-                return Seat.NORTH;
-            default:
-                throw new IllegalArgumentException("Tile kind should be a wind");
+        case EAST:
+            return Seat.EAST;
+        case SOUTH:
+            return Seat.SOUTH;
+        case WEST:
+            return Seat.WEST;
+        case NORTH:
+            return Seat.NORTH;
+        default:
+            throw new IllegalArgumentException("Tile kind should be a wind");
         }
     }
 
@@ -224,16 +220,16 @@ public class TileKindUtils
     {
         switch (seat)
         {
-            case EAST:
-                return MahjongTileKind.EAST;
-            case SOUTH:
-                return MahjongTileKind.SOUTH;
-            case WEST:
-                return MahjongTileKind.WEST;
-            case NORTH:
-                return MahjongTileKind.NORTH;
-            default:
-                throw new IllegalArgumentException("Seat should be a wind");
+        case EAST:
+            return MahjongTileKind.EAST;
+        case SOUTH:
+            return MahjongTileKind.SOUTH;
+        case WEST:
+            return MahjongTileKind.WEST;
+        case NORTH:
+            return MahjongTileKind.NORTH;
+        default:
+            throw new IllegalArgumentException("Seat should be a wind");
         }
     }
 

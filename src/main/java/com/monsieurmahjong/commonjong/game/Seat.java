@@ -3,8 +3,8 @@ package com.monsieurmahjong.commonjong.game;
 public enum Seat
 {
     EAST, // Dealer
-    SOUTH,
-    WEST,
+    SOUTH, //
+    WEST, //
     NORTH;
 
     public String getSeatName()

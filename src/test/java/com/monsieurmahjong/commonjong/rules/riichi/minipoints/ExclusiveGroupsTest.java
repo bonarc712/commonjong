@@ -1,13 +1,15 @@
 package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.minipoints.ExclusiveGroups;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
@@ -25,10 +27,10 @@ public class ExclusiveGroupsTest
     @Test
     public void exclusiveGroupsValue_WithNoExclusiveGroup_ShouldBe0()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(noExclusiveGroupsHand));
-        ExclusiveGroups exclusiveGroups = new ExclusiveGroups(hand, noExclusiveGroupsHand);
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(noExclusiveGroupsHand));
+        var exclusiveGroups = new ExclusiveGroups(hand, noExclusiveGroupsHand);
 
-        int value = exclusiveGroups.getFuValue();
+        var value = exclusiveGroups.getFuValue();
 
         assertEquals(0, value, "Value of exclusive groups with no exclusive group should be 0");
     }
@@ -36,13 +38,13 @@ public class ExclusiveGroupsTest
     @Test
     public void exclusiveGroupsValue_WithASimpleMinkou_ShouldBe2()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneSimpleTripletGroupsHand));
-        List<List<Tile>> melds = new ArrayList<>();
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneSimpleTripletGroupsHand));
+        var melds = new ArrayList<List<Tile>>();
         melds.add(TileGroupUtils.getTilesFromMPSZNotation("222m"));
         hand.setMelds(melds);
-        ExclusiveGroups exclusiveGroups = new ExclusiveGroups(hand, oneSimpleTripletGroupsHand);
+        var exclusiveGroups = new ExclusiveGroups(hand, oneSimpleTripletGroupsHand);
 
-        int value = exclusiveGroups.getFuValue();
+        var value = exclusiveGroups.getFuValue();
 
         assertEquals(2, value, "Value of exclusive groups with a simple minkou should be 2");
     }
@@ -50,10 +52,10 @@ public class ExclusiveGroupsTest
     @Test
     public void exclusiveGroupsValue_WithASimpleAnkou_ShouldBe4()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneSimpleTripletGroupsHand));
-        ExclusiveGroups exclusiveGroups = new ExclusiveGroups(hand, oneSimpleTripletGroupsHand);
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneSimpleTripletGroupsHand));
+        var exclusiveGroups = new ExclusiveGroups(hand, oneSimpleTripletGroupsHand);
 
-        int value = exclusiveGroups.getFuValue();
+        var value = exclusiveGroups.getFuValue();
 
         assertEquals(4, value, "Value of exclusive groups with a simple ankou should be 4");
     }
@@ -61,13 +63,13 @@ public class ExclusiveGroupsTest
     @Test
     public void exclusiveGroupsValue_WithANonSimpleMinkou_ShouldBe4()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneNonSimpleTripletGroupsHand));
-        List<List<Tile>> melds = new ArrayList<>();
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneNonSimpleTripletGroupsHand));
+        var melds = new ArrayList<List<Tile>>();
         melds.add(TileGroupUtils.getTilesFromMPSZNotation("111m"));
         hand.setMelds(melds);
-        ExclusiveGroups exclusiveGroups = new ExclusiveGroups(hand, oneNonSimpleTripletGroupsHand);
+        var exclusiveGroups = new ExclusiveGroups(hand, oneNonSimpleTripletGroupsHand);
 
-        int value = exclusiveGroups.getFuValue();
+        var value = exclusiveGroups.getFuValue();
 
         assertEquals(4, value, "Value of exclusive groups with a non-simple minkou should be 4");
     }
@@ -75,10 +77,10 @@ public class ExclusiveGroupsTest
     @Test
     public void exclusiveGroupsValue_WithANonSimpleAnkou_ShouldBe8()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneNonSimpleTripletGroupsHand));
-        ExclusiveGroups exclusiveGroups = new ExclusiveGroups(hand, oneNonSimpleTripletGroupsHand);
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneNonSimpleTripletGroupsHand));
+        var exclusiveGroups = new ExclusiveGroups(hand, oneNonSimpleTripletGroupsHand);
 
-        int value = exclusiveGroups.getFuValue();
+        var value = exclusiveGroups.getFuValue();
 
         assertEquals(8, value, "Value of exclusive groups with a non-simple ankou should be 8");
     }
@@ -86,13 +88,13 @@ public class ExclusiveGroupsTest
     @Test
     public void exclusiveGroupsValue_WithASimpleMinkan_ShouldBe8()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneSimpleQuadGroupsHand));
-        List<List<Tile>> melds = new ArrayList<>();
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneSimpleQuadGroupsHand));
+        var melds = new ArrayList<List<Tile>>();
         melds.add(TileGroupUtils.getTilesFromMPSZNotation("2222m"));
         hand.setMelds(melds);
-        ExclusiveGroups exclusiveGroups = new ExclusiveGroups(hand, oneSimpleQuadGroupsHand);
+        var exclusiveGroups = new ExclusiveGroups(hand, oneSimpleQuadGroupsHand);
 
-        int value = exclusiveGroups.getFuValue();
+        var value = exclusiveGroups.getFuValue();
 
         assertEquals(8, value, "Value of exclusive groups with a simple minkan should be 8");
     }
@@ -100,10 +102,10 @@ public class ExclusiveGroupsTest
     @Test
     public void exclusiveGroupsValue_WithASimpleAnkan_ShouldBe16()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneSimpleQuadGroupsHand));
-        ExclusiveGroups exclusiveGroups = new ExclusiveGroups(hand, oneSimpleQuadGroupsHand);
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneSimpleQuadGroupsHand));
+        var exclusiveGroups = new ExclusiveGroups(hand, oneSimpleQuadGroupsHand);
 
-        int value = exclusiveGroups.getFuValue();
+        var value = exclusiveGroups.getFuValue();
 
         assertEquals(16, value, "Value of exclusive groups with a simple ankan should be 16");
     }
@@ -111,13 +113,13 @@ public class ExclusiveGroupsTest
     @Test
     public void exclusiveGroupsValue_WithANonSimpleMinkan_ShouldBe16()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneNonSimpleQuadGroupsHand));
-        List<List<Tile>> melds = new ArrayList<>();
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneNonSimpleQuadGroupsHand));
+        var melds = new ArrayList<List<Tile>>();
         melds.add(TileGroupUtils.getTilesFromMPSZNotation("1111m"));
         hand.setMelds(melds);
-        ExclusiveGroups exclusiveGroups = new ExclusiveGroups(hand, oneNonSimpleQuadGroupsHand);
+        var exclusiveGroups = new ExclusiveGroups(hand, oneNonSimpleQuadGroupsHand);
 
-        int value = exclusiveGroups.getFuValue();
+        var value = exclusiveGroups.getFuValue();
 
         assertEquals(16, value, "Value of exclusive groups with a simple minkan should be 16");
     }
@@ -125,10 +127,10 @@ public class ExclusiveGroupsTest
     @Test
     public void exclusiveGroupsValue_WithANonSimpleAnkan_ShouldBe32()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneNonSimpleQuadGroupsHand));
-        ExclusiveGroups exclusiveGroups = new ExclusiveGroups(hand, oneNonSimpleQuadGroupsHand);
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(oneNonSimpleQuadGroupsHand));
+        var exclusiveGroups = new ExclusiveGroups(hand, oneNonSimpleQuadGroupsHand);
 
-        int value = exclusiveGroups.getFuValue();
+        var value = exclusiveGroups.getFuValue();
 
         assertEquals(32, value, "Value of exclusive groups with a simple ankan should be 32");
     }
@@ -136,14 +138,14 @@ public class ExclusiveGroupsTest
     @Test
     public void exclusiveGroupsValue_ForAMeltingPotToitoiHand_ShouldBeAsCalculatedByPlayer()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(randomToitoiGroups));
-        List<List<Tile>> melds = new ArrayList<>();
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(randomToitoiGroups));
+        var melds = new ArrayList<List<Tile>>();
         melds.add(TileGroupUtils.getTilesFromMPSZNotation("2222s"));
         melds.add(TileGroupUtils.getTilesFromMPSZNotation("777p"));
         hand.setMelds(melds);
-        ExclusiveGroups exclusiveGroups = new ExclusiveGroups(hand, randomToitoiGroups);
+        var exclusiveGroups = new ExclusiveGroups(hand, randomToitoiGroups);
 
-        int value = exclusiveGroups.getFuValue();
+        var value = exclusiveGroups.getFuValue();
 
         assertEquals(50, value, "Value of exclusive groups with the hand 1111m777999p2222s33z, where 2222s and 777p are open, should be 50 (32 + 2 + 8 + 8)");
     }
@@ -151,9 +153,9 @@ public class ExclusiveGroupsTest
     @Test
     public void exclusiveGroups_Validity_IsAlwaysTrue()
     {
-        ExclusiveGroups exclusiveGroups = new ExclusiveGroups(ANY_HAND, null);
+        var exclusiveGroups = new ExclusiveGroups(ANY_HAND, null);
 
-        boolean isValid = exclusiveGroups.isValid();
+        var isValid = exclusiveGroups.isValid();
 
         assertTrue(isValid, "Exclusive groups is always valid");
     }

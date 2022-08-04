@@ -1,11 +1,13 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Shousangen;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -30,7 +32,7 @@ public class ShousangenTest
     {
         Yaku shousangen = new Shousangen(new Hand(TileGroupUtils.getTilesFromTileGroups(completeShousangenHandGroups)), completeShousangenHandGroups);
 
-        boolean shousangenIsValid = shousangen.isValid();
+        var shousangenIsValid = shousangen.isValid();
 
         assertTrue(shousangenIsValid, "111m1155566677z should be valid for shousangen");
     }
@@ -40,7 +42,7 @@ public class ShousangenTest
     {
         Yaku shousangen = new Shousangen(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteShousangenHandGroups)), incompleteShousangenHandGroups);
 
-        boolean shousangenIsValid = shousangen.isValid();
+        var shousangenIsValid = shousangen.isValid();
 
         assertTrue(shousangenIsValid, "55566777z should be valid for shousangen");
     }
@@ -50,7 +52,7 @@ public class ShousangenTest
     {
         Yaku shousangen = new Shousangen(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonShousangenHandGroups)), completeNonShousangenHandGroups);
 
-        boolean shousangenIsValid = shousangen.isValid();
+        var shousangenIsValid = shousangen.isValid();
 
         assertFalse(shousangenIsValid, "123345m22345678p should not be valid for shousangen");
     }
@@ -60,7 +62,7 @@ public class ShousangenTest
     {
         Yaku shousangen = new Shousangen(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonShousangenHandGroups)), incompleteNonShousangenHandGroups);
 
-        boolean shousangenIsValid = shousangen.isValid();
+        var shousangenIsValid = shousangen.isValid();
 
         assertFalse(shousangenIsValid, "111m567p11s should not be valid for shousangen");
     }
@@ -70,7 +72,7 @@ public class ShousangenTest
     {
         Yaku shousangen = new Shousangen(new Hand(TileGroupUtils.getTilesFromTileGroups(completeShousangenKanHandGroups)), completeShousangenKanHandGroups);
 
-        boolean shousangenIsValid = shousangen.isValid();
+        var shousangenIsValid = shousangen.isValid();
 
         assertTrue(shousangenIsValid, "111m111556666777z should be valid for shousangen");
     }
@@ -80,7 +82,7 @@ public class ShousangenTest
     {
         Yaku shousangen = new Shousangen(new Hand(TileGroupUtils.getTilesFromTileGroups(completeDaisangenHandGroups)), completeDaisangenHandGroups);
 
-        boolean shousangenIsValid = shousangen.isValid();
+        var shousangenIsValid = shousangen.isValid();
 
         assertFalse(shousangenIsValid, "111m11555666777z should not be valid for shousangen");
     }
@@ -90,7 +92,7 @@ public class ShousangenTest
     {
         Yaku shousangen = new Shousangen(anyHand, anyGroups);
 
-        int shousangenValue = shousangen.getHanValue();
+        var shousangenValue = shousangen.getHanValue();
 
         assertEquals(2, shousangenValue, "Shousangen value should be 2");
     }

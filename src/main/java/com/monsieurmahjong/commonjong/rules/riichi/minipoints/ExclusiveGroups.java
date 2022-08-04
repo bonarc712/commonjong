@@ -3,12 +3,13 @@ package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.utils.*;
+import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 /**
- * By exclusive groups, we mean minkou (open pon), ankou (closed pon), 
- * minkan (open kan) and ankan (closed kan).
+ * By exclusive groups, we mean minkou (open pon), ankou (closed pon), minkan
+ * (open kan) and ankan (closed kan).
  */
 public class ExclusiveGroups implements Fu
 {
@@ -24,12 +25,12 @@ public class ExclusiveGroups implements Fu
     @Override
     public int getFuValue()
     {
-        int totalFuValue = 0;
+        var totalFuValue = 0;
         for (TileGroup tileGroup : tileGroups)
         {
             if (tileGroup.isCompleteExclusiveGroup())
             {
-                int groupValue = 2;
+                var groupValue = 2;
 
                 if (isClosed(tileGroup))
                 {
@@ -59,7 +60,7 @@ public class ExclusiveGroups implements Fu
 
     private boolean isClosed(TileGroup tileGroup)
     {
-        boolean hasThisGroupOpen = hand.getMelds() //
+        var hasThisGroupOpen = hand.getMelds() //
                 .stream() //
                 .filter(tileList -> TileGroupUtils.getTilesFromTileGroup(tileGroup).equals(tileList)) //
                 .findAny() //

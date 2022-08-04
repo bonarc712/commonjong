@@ -2,8 +2,7 @@ package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
 import java.util.List;
 
-import com.monsieurmahjong.commonjong.game.*;
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
@@ -17,14 +16,14 @@ public class Suuankou extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        List<List<Tile>> melds = hand.getMelds();
-        int ankouCount = 0;
+        var melds = hand.getMelds();
+        var ankouCount = 0;
 
-        for (TileGroup group : groups)
+        for (var group : groups)
         {
             if (group.isCompleteExclusiveGroup())
             {
-                List<Tile> groupAsTiles = TileGroupUtils.getTilesFromTileGroup(group);
+                var groupAsTiles = TileGroupUtils.getTilesFromTileGroup(group);
                 if (!melds.contains(groupAsTiles))
                 {
                     ankouCount++;
@@ -38,8 +37,8 @@ public class Suuankou extends GroupBasedYaku
     @Override
     public int getHanValue()
     {
-        MahjongTileKind winningTile = hand.getWinningTile();
-        for (TileGroup group : groups)
+        var winningTile = hand.getWinningTile();
+        for (var group : groups)
         {
             if (group.isPair() && group.getTileKindAt(0) == winningTile)
             {

@@ -2,8 +2,6 @@ package com.monsieurmahjong.commonjong.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.monsieurmahjong.commonjong.utils.StringUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class StringUtilsTest
@@ -11,7 +9,7 @@ public class StringUtilsTest
     @Test
     public void testUcFirst()
     {
-        Assertions.assertEquals("Bob", StringUtils.ucFirst("bob"));
+        assertEquals("Bob", StringUtils.ucFirst("bob"));
         assertEquals("Bob", StringUtils.ucFirst("Bob"));
         assertEquals("1234", StringUtils.ucFirst("1234"));
         assertEquals("", StringUtils.ucFirst(""));

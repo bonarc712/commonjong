@@ -1,11 +1,14 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Ittsu;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -30,7 +33,7 @@ public class IttsuTest
     {
         Yaku ittsu = new Ittsu(new Hand(TileGroupUtils.getTilesFromTileGroups(completeIttsuHandGroups)), completeIttsuHandGroups);
 
-        boolean ittsuIsValid = ittsu.isValid();
+        var ittsuIsValid = ittsu.isValid();
 
         assertTrue(ittsuIsValid, "123456789m999s11z should be valid for ittsu");
     }
@@ -40,7 +43,7 @@ public class IttsuTest
     {
         Yaku ittsu = new Ittsu(new Hand(TileGroupUtils.getTilesFromTileGroups(completeIttsuHandGroupsButBamboo)), completeIttsuHandGroupsButBamboo);
 
-        boolean ittsuIsValid = ittsu.isValid();
+        var ittsuIsValid = ittsu.isValid();
 
         assertTrue(ittsuIsValid, "123456789s11666z should be valid for ittsu");
     }
@@ -50,7 +53,7 @@ public class IttsuTest
     {
         Yaku ittsu = new Ittsu(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteIttsuHandGroups)), incompleteIttsuHandGroups);
 
-        boolean ittsuIsValid = ittsu.isValid();
+        var ittsuIsValid = ittsu.isValid();
 
         assertTrue(ittsuIsValid, "123456789m11z should be valid for ittsu");
     }
@@ -60,7 +63,7 @@ public class IttsuTest
     {
         Yaku ittsu = new Ittsu(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonIttsuHandGroups)), completeNonIttsuHandGroups);
 
-        boolean ittsuIsValid = ittsu.isValid();
+        var ittsuIsValid = ittsu.isValid();
 
         assertFalse(ittsuIsValid, "123345m22345678p should not be valid for ittsu");
     }
@@ -70,7 +73,7 @@ public class IttsuTest
     {
         Yaku ittsu = new Ittsu(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonIttsuHandGroups)), incompleteNonIttsuHandGroups);
 
-        boolean ittsuIsValid = ittsu.isValid();
+        var ittsuIsValid = ittsu.isValid();
 
         assertFalse(ittsuIsValid, "111m555p11s should not be valid for ittsu");
     }
@@ -80,7 +83,7 @@ public class IttsuTest
     {
         Yaku ittsu = new Ittsu(new Hand(TileGroupUtils.getTilesFromTileGroups(allTilesFromAFamilyButNotIttsingHandGroups)), allTilesFromAFamilyButNotIttsingHandGroups);
 
-        boolean ittsuIsValid = ittsu.isValid();
+        var ittsuIsValid = ittsu.isValid();
 
         assertFalse(ittsuIsValid, "111234567789m11z should not be valid for ittsu");
     }
@@ -91,7 +94,7 @@ public class IttsuTest
         Yaku ittsu = new Ittsu(anyHand, anyGroups);
         when(anyHand.isClosed()).thenReturn(false);
 
-        int ittsuValue = ittsu.getHanValue();
+        var ittsuValue = ittsu.getHanValue();
 
         assertEquals(1, ittsuValue, "Open ittsu value should be 1");
     }
@@ -102,7 +105,7 @@ public class IttsuTest
         Yaku ittsu = new Ittsu(anyHand, anyGroups);
         when(anyHand.isClosed()).thenReturn(true);
 
-        int ittsuValue = ittsu.getHanValue();
+        var ittsuValue = ittsu.getHanValue();
 
         assertEquals(2, ittsuValue, "Closed ittsu value should be 2");
     }

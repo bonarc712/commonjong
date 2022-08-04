@@ -1,6 +1,6 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
 
 public class Honroutou extends TileBasedYaku
 {
@@ -15,10 +15,10 @@ public class Honroutou extends TileBasedYaku
     @Override
     public boolean isValid()
     {
-        boolean terminalFound = false;
-        boolean honourFound = false;
+        var terminalFound = false;
+        var honourFound = false;
 
-        for (Tile tile : hand.getTiles())
+        for (var tile : hand.getTiles())
         {
             if (tile.getTileKind().isTerminal())
             {

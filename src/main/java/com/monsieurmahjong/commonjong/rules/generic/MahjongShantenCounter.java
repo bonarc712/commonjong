@@ -1,27 +1,30 @@
 package com.monsieurmahjong.commonjong.rules.generic;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
-import com.monsieurmahjong.commonjong.rules.generic.waits.*;
+import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
+import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroupLengthComparator;
+import com.monsieurmahjong.commonjong.rules.generic.waits.WaitShapeEngine;
 
 public class MahjongShantenCounter
 {
     /**
-     * This method counts all shanten for a specific hand combination. It does not count all
-     * combinations that are possible for the current hand. See {@link WaitShapeEngine} for
-     * hand parsing.
-     * 
+     * This method counts all shanten for a specific hand combination. It does not
+     * count all combinations that are possible for the current hand. See
+     * {@link WaitShapeEngine} for hand parsing.
+     *
      * @param tileGroups
      * @return shanten count. 0 is tenpai, -1 is mahjong-complete
      */
     public static int countShanten(List<TileGroup> tileGroups)
     {
-        int kokushiShantenCount = countKokushiShanten(tileGroups);
-        int sevenPairsShantenCount = countSevenPairsShanten(tileGroups);
-        int fourGroupsOnePairShantenCount = countFourGroupsOnePairShanten(tileGroups);
+        var kokushiShantenCount = countKokushiShanten(tileGroups);
+        var sevenPairsShantenCount = countSevenPairsShanten(tileGroups);
+        var fourGroupsOnePairShantenCount = countFourGroupsOnePairShanten(tileGroups);
 
-        int lowestShantenCount = Math.min(kokushiShantenCount, sevenPairsShantenCount);
+        var lowestShantenCount = Math.min(kokushiShantenCount, sevenPairsShantenCount);
         lowestShantenCount = Math.min(lowestShantenCount, fourGroupsOnePairShantenCount);
         return lowestShantenCount;
     }
@@ -29,7 +32,7 @@ public class MahjongShantenCounter
     private static int countKokushiShanten(List<TileGroup> tileGroups)
     {
         List<MahjongTileKind> terminalAndHonourCatalog = new ArrayList<>(TileKindUtils.getAllTerminalsAndHonours());
-        boolean pairFound = false;
+        var pairFound = false;
 
         for (TileGroup group : tileGroups)
         {
@@ -37,8 +40,8 @@ public class MahjongShantenCounter
             {
                 if (group.isPair() || group.isTriplet()) // check also for triplets, they can also influence shanten
                 {
-                    MahjongTileKind kind = group.getTileKindAt(0);
-                    boolean isRemoved = terminalAndHonourCatalog.remove(kind);
+                    var kind = group.getTileKindAt(0);
+                    var isRemoved = terminalAndHonourCatalog.remove(kind);
                     if (isRemoved)
                     {
                         pairFound = true;
@@ -47,19 +50,19 @@ public class MahjongShantenCounter
                 }
             }
 
-            Optional<Integer> currentTerminalOrHonour = group.getIndices().stream().filter(index -> {
-                MahjongTileKind kind = TileKindUtils.getKindFromIndex(index);
+            var currentTerminalOrHonour = group.getIndices().stream().filter(index -> {
+                var kind = TileKindUtils.getKindFromIndex(index);
                 return kind.isTerminal() || kind.isHonour();
             }).findFirst();
 
             if (currentTerminalOrHonour.isPresent())
             {
-                MahjongTileKind kind = TileKindUtils.getKindFromIndex(currentTerminalOrHonour.get());
+                var kind = TileKindUtils.getKindFromIndex(currentTerminalOrHonour.get());
                 terminalAndHonourCatalog.remove(kind);
             }
         }
 
-        int shantenCount = terminalAndHonourCatalog.size();
+        var shantenCount = terminalAndHonourCatalog.size();
         if (pairFound)
         {
             shantenCount--;
@@ -69,7 +72,7 @@ public class MahjongShantenCounter
 
     private static int countSevenPairsShanten(List<TileGroup> tileGroups)
     {
-        int amountOfPairs = 0;
+        var amountOfPairs = 0;
 
         for (TileGroup group : tileGroups)
         {
@@ -84,19 +87,19 @@ public class MahjongShantenCounter
 
     private static int countFourGroupsOnePairShanten(List<TileGroup> tileGroups)
     {
-        int shanten = 8;
-        boolean pairFound = false;
+        var shanten = 8;
+        var pairFound = false;
 
         tileGroups.sort(new TileGroupLengthComparator());
-        for (int i = 0; i < Math.min(tileGroups.size(), 5); i++)
+        for (var i = 0; i < Math.min(tileGroups.size(), 5); i++)
         {
-            TileGroup currentGroup = tileGroups.get(i);
+            var currentGroup = tileGroups.get(i);
             if (!pairFound && currentGroup.isPair())
             {
                 pairFound = true;
             }
 
-            int currentGroupSize = Math.min(currentGroup.getSize(), 3);
+            var currentGroupSize = Math.min(currentGroup.getSize(), 3);
             shanten = shanten - (currentGroupSize - 1);
         }
 

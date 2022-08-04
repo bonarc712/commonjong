@@ -1,9 +1,10 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.*;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class Ittsu extends GroupBasedYaku
@@ -16,29 +17,29 @@ public class Ittsu extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        List<TileGroup> charactersRunsCatalog = new ArrayList<>();
-        List<TileGroup> circlesRunsCatalog = new ArrayList<>();
-        List<TileGroup> bamboosRunsCatalog = new ArrayList<>();
+        var charactersRunsCatalog = new ArrayList<TileGroup>();
+        var circlesRunsCatalog = new ArrayList<TileGroup>();
+        var bamboosRunsCatalog = new ArrayList<TileGroup>();
 
-        for (TileGroup group : groups)
+        for (var group : groups)
         {
             if (group.isRun())
             {
-                MahjongTileKind firstTile = group.getTileKindAt(0);
-                TileFamily family = firstTile.getFamily();
+                var firstTile = group.getTileKindAt(0);
+                var family = firstTile.getFamily();
                 switch (family)
                 {
-                    case CHARACTERS:
-                        charactersRunsCatalog.add(group);
-                        break;
-                    case CIRCLES:
-                        circlesRunsCatalog.add(group);
-                        break;
-                    case BAMBOOS:
-                        bamboosRunsCatalog.add(group);
-                        break;
-                    default:
-                        break;
+                case CHARACTERS:
+                    charactersRunsCatalog.add(group);
+                    break;
+                case CIRCLES:
+                    circlesRunsCatalog.add(group);
+                    break;
+                case BAMBOOS:
+                    bamboosRunsCatalog.add(group);
+                    break;
+                default:
+                    break;
                 }
             }
         }

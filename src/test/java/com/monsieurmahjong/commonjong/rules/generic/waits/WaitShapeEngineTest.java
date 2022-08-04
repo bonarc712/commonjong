@@ -2,12 +2,11 @@ package com.monsieurmahjong.commonjong.rules.generic.waits;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import com.monsieurmahjong.commonjong.rules.generic.waits.WaitShapeEngine;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
@@ -36,11 +35,11 @@ public class WaitShapeEngineTest
 
     private void testGetWait(String startingHand, MahjongTileKind... expectedWait)
     {
-        List<Tile> hand = TileKindUtils.asHand(startingHand);
-        WaitShapeEngine engine = new WaitShapeEngine(hand);
-        List<MahjongTileKind> waitResult = engine.getWait();
+        var hand = TileKindUtils.asHand(startingHand);
+        var engine = new WaitShapeEngine(hand);
+        var waitResult = engine.getWait();
 
-        List<MahjongTileKind> handExpected = new ArrayList<>();
+        var handExpected = new ArrayList<MahjongTileKind>();
         handExpected.addAll(Arrays.asList(expectedWait));
         assertEquals(handExpected, waitResult, "Hand " + startingHand + " does not give the expected result");
     }

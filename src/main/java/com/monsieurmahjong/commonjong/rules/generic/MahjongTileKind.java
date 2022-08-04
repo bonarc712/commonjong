@@ -1,8 +1,8 @@
 package com.monsieurmahjong.commonjong.rules.generic;
 
 /**
- * The mahjong tile kinds are in the rules because it's a
- * definition of a game element.
+ * The mahjong tile kinds are in the rules because it's a definition of a game
+ * element.
  */
 public enum MahjongTileKind
 {
@@ -71,7 +71,9 @@ public enum MahjongTileKind
 
     /**
      * Get the tile number of a specific tile, eg. a 4 of bamboos will return 4.
-     * @throws IllegalArgumentException when calling for a non-numbered tile (eg honours)
+     *
+     * @throws IllegalArgumentException when calling for a non-numbered tile (eg
+     *                                  honours)
      */
     public int getTileNumber()
     {
@@ -166,7 +168,7 @@ public enum MahjongTileKind
 
     public static MahjongTileKind getMahjongTileByAbbreviation(String abbreviation)
     {
-        for (MahjongTileKind tile : MahjongTileKind.values())
+        for (var tile : MahjongTileKind.values())
         {
             if (tile.abbreviation.equals(abbreviation))
             {

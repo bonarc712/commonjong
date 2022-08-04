@@ -1,9 +1,11 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased.Honitsu;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -29,7 +31,7 @@ public class HonitsuTest
     {
         Yaku honitsu = new Honitsu(completeHonitsuHand);
 
-        boolean honitsuIsValid = honitsu.isValid();
+        var honitsuIsValid = honitsu.isValid();
 
         assertTrue(honitsuIsValid, "111234567m11177z should be valid for honitsu");
     }
@@ -39,7 +41,7 @@ public class HonitsuTest
     {
         Yaku honitsu = new Honitsu(incompleteHonitsuHand);
 
-        boolean honitsuIsValid = honitsu.isValid();
+        var honitsuIsValid = honitsu.isValid();
 
         assertTrue(honitsuIsValid, "111234m77z should be valid for honitsu");
     }
@@ -49,7 +51,7 @@ public class HonitsuTest
     {
         Yaku honitsu = new Honitsu(completeNonHonitsuHand);
 
-        boolean honitsuIsValid = honitsu.isValid();
+        var honitsuIsValid = honitsu.isValid();
 
         assertFalse(honitsuIsValid, "123456m22345678p should not be valid for honitsu");
     }
@@ -59,7 +61,7 @@ public class HonitsuTest
     {
         Yaku honitsu = new Honitsu(incompleteNonHonitsuHand);
 
-        boolean honitsuIsValid = honitsu.isValid();
+        var honitsuIsValid = honitsu.isValid();
 
         assertFalse(honitsuIsValid, "111p111s22z should not be valid for honitsu");
     }
@@ -69,7 +71,7 @@ public class HonitsuTest
     {
         Yaku honitsu = new Honitsu(chinitsuHand);
 
-        boolean honitsuIsValid = honitsu.isValid();
+        var honitsuIsValid = honitsu.isValid();
 
         assertFalse(honitsuIsValid, "11123445678999m should not be valid for honitsu");
     }
@@ -79,7 +81,7 @@ public class HonitsuTest
     {
         Yaku honitsu = new Honitsu(tsuuiisouHand);
 
-        boolean honitsuIsValid = honitsu.isValid();
+        var honitsuIsValid = honitsu.isValid();
 
         assertFalse(honitsuIsValid, "11122233344455z should not be valid for honitsu");
     }
@@ -89,7 +91,7 @@ public class HonitsuTest
     {
         Yaku honitsu = new Honitsu(circlesHonitsuHand);
 
-        boolean honitsuIsValid = honitsu.isValid();
+        var honitsuIsValid = honitsu.isValid();
 
         assertTrue(honitsuIsValid, "11123456p111333z should be valid for honitsu");
     }
@@ -99,7 +101,7 @@ public class HonitsuTest
     {
         Yaku honitsu = new Honitsu(bamboosHonitsuHand);
 
-        boolean honitsuIsValid = honitsu.isValid();
+        var honitsuIsValid = honitsu.isValid();
 
         assertTrue(honitsuIsValid, "44456789s111666z should be valid for honitsu");
     }
@@ -109,7 +111,7 @@ public class HonitsuTest
     {
         Yaku honitsu = new Honitsu(terminalLessHonitsuHand);
 
-        boolean honitsuIsValid = honitsu.isValid();
+        var honitsuIsValid = honitsu.isValid();
 
         assertTrue(honitsuIsValid, "34445678s111666z should be valid for honitsu");
     }
@@ -120,7 +122,7 @@ public class HonitsuTest
         Yaku honitsu = new Honitsu(anyHand);
         when(anyHand.isOpen()).thenReturn(true);
 
-        int honitsuValue = honitsu.getHanValue();
+        var honitsuValue = honitsu.getHanValue();
 
         assertEquals(2, honitsuValue, "Honitsu value should be 2");
     }
@@ -131,7 +133,7 @@ public class HonitsuTest
         Yaku honitsu = new Honitsu(anyHand);
         when(anyHand.isOpen()).thenReturn(false);
 
-        int honitsuValue = honitsu.getHanValue();
+        var honitsuValue = honitsu.getHanValue();
 
         assertEquals(3, honitsuValue, "Honitsu value should be 3");
     }

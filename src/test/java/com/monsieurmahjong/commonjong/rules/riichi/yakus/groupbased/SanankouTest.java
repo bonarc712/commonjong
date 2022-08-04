@@ -1,14 +1,18 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Sanankou;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
@@ -42,7 +46,7 @@ public class SanankouTest
     {
         Yaku sanankou = new Sanankou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeSanankouHandGroups)), completeSanankouHandGroups);
 
-        boolean sanankouIsValid = sanankou.isValid();
+        var sanankouIsValid = sanankou.isValid();
 
         assertTrue(sanankouIsValid, "444m555p7777789s11z should be valid for Sanankou");
     }
@@ -52,7 +56,7 @@ public class SanankouTest
     {
         Yaku sanankou = new Sanankou(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteSanankouHandGroups)), incompleteSanankouHandGroups);
 
-        boolean sanankouIsValid = sanankou.isValid();
+        var sanankouIsValid = sanankou.isValid();
 
         assertTrue(sanankouIsValid, "111m222p222s11z should be valid for Sanankou");
     }
@@ -62,7 +66,7 @@ public class SanankouTest
     {
         Yaku sanankou = new Sanankou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonSanankouHandGroups)), completeNonSanankouHandGroups);
 
-        boolean sanankouIsValid = sanankou.isValid();
+        var sanankouIsValid = sanankou.isValid();
 
         assertFalse(sanankouIsValid, "123345m22345678p should not be valid for Sanankou");
     }
@@ -72,7 +76,7 @@ public class SanankouTest
     {
         Yaku sanankou = new Sanankou(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonSanankouHandGroups)), incompleteNonSanankouHandGroups);
 
-        boolean sanankouIsValid = sanankou.isValid();
+        var sanankouIsValid = sanankou.isValid();
 
         assertFalse(sanankouIsValid, "111m555p11s should not be valid for Sanankou");
     }
@@ -82,7 +86,7 @@ public class SanankouTest
     {
         Yaku sanankou = new Sanankou(new Hand(TileGroupUtils.getTilesFromTileGroups(suuankouHandGroups)), suuankouHandGroups);
 
-        boolean sanankouIsValid = sanankou.isValid();
+        var sanankouIsValid = sanankou.isValid();
 
         assertFalse(sanankouIsValid, "444m5555p7777999s11z should not be valid for Sanankou");
     }
@@ -90,11 +94,11 @@ public class SanankouTest
     @Test
     public void testValidityOf_RyanankouHand_ShouldBeFalse()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(ryanankouHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(ryanankouHandGroups));
         hand.setMelds(ryanankouHandMelds);
         Yaku sanankou = new Sanankou(hand, ryanankouHandGroups);
 
-        boolean sanankouIsValid = sanankou.isValid();
+        var sanankouIsValid = sanankou.isValid();
 
         assertFalse(sanankouIsValid, "444m555p7777999s11z should not be valid for Sanankou");
     }
@@ -102,11 +106,11 @@ public class SanankouTest
     @Test
     public void testValidityOf_SanankouWithOpenRunHand_ShouldBeTrue()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(sanankouWithOpenRunHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(sanankouWithOpenRunHandGroups));
         hand.setMelds(sanankouWithOpenRunHandMelds);
         Yaku sanankou = new Sanankou(hand, sanankouWithOpenRunHandGroups);
 
-        boolean sanankouIsValid = sanankou.isValid();
+        var sanankouIsValid = sanankou.isValid();
 
         assertTrue(sanankouIsValid, "444m555p777789s11z should be valid for Sanankou");
     }
@@ -116,7 +120,7 @@ public class SanankouTest
     {
         Yaku sanankou = new Sanankou(anyHand, anyGroups);
 
-        int sanankouValue = sanankou.getHanValue();
+        var sanankouValue = sanankou.getHanValue();
 
         assertEquals(2, sanankouValue, "Sanankou value should be 2");
     }

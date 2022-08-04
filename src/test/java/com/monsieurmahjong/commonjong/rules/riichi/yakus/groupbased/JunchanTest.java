@@ -1,11 +1,14 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Junchan;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -30,7 +33,7 @@ public class JunchanTest
     {
         Yaku junchan = new Junchan(new Hand(TileGroupUtils.getTilesFromTileGroups(completeJunchanHandGroups)), completeJunchanHandGroups);
 
-        boolean junchanIsValid = junchan.isValid();
+        var junchanIsValid = junchan.isValid();
 
         assertTrue(junchanIsValid, "123789m789p11999s should be valid for junchan");
     }
@@ -40,7 +43,7 @@ public class JunchanTest
     {
         Yaku junchan = new Junchan(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteJunchanHandGroups)), incompleteJunchanHandGroups);
 
-        boolean junchanIsValid = junchan.isValid();
+        var junchanIsValid = junchan.isValid();
 
         assertTrue(junchanIsValid, "112233m11s should be valid for junchan");
     }
@@ -50,7 +53,7 @@ public class JunchanTest
     {
         Yaku junchan = new Junchan(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonJunchanHandGroups)), completeNonJunchanHandGroups);
 
-        boolean junchanIsValid = junchan.isValid();
+        var junchanIsValid = junchan.isValid();
 
         assertFalse(junchanIsValid, "123345m22345678p should not be valid for junchan");
     }
@@ -60,7 +63,7 @@ public class JunchanTest
     {
         Yaku junchan = new Junchan(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonJunchanHandGroups)), incompleteNonJunchanHandGroups);
 
-        boolean junchanIsValid = junchan.isValid();
+        var junchanIsValid = junchan.isValid();
 
         assertFalse(junchanIsValid, "111m555p11s should not be valid for junchan");
     }
@@ -70,7 +73,7 @@ public class JunchanTest
     {
         Yaku junchan = new Junchan(new Hand(TileGroupUtils.getTilesFromTileGroups(completeChantaHandGroups)), completeChantaHandGroups);
 
-        boolean junchanIsValid = junchan.isValid();
+        var junchanIsValid = junchan.isValid();
 
         assertFalse(junchanIsValid, "111m111789p111s55z should not be valid for junchan");
     }
@@ -80,7 +83,7 @@ public class JunchanTest
     {
         Yaku junchan = new Junchan(new Hand(TileGroupUtils.getTilesFromTileGroups(completeChinroutouHandGroups)), completeChinroutouHandGroups);
 
-        boolean junchanIsValid = junchan.isValid();
+        var junchanIsValid = junchan.isValid();
 
         assertFalse(junchanIsValid, "111999m11p111999s should not be valid for junchan");
     }
@@ -91,7 +94,7 @@ public class JunchanTest
         Yaku junchan = new Junchan(anyHand, anyGroups);
         when(anyHand.isClosed()).thenReturn(false);
 
-        int junchanValue = junchan.getHanValue();
+        var junchanValue = junchan.getHanValue();
 
         assertEquals(2, junchanValue, "Open junchan value should be 2");
     }
@@ -102,7 +105,7 @@ public class JunchanTest
         Yaku junchan = new Junchan(anyHand, anyGroups);
         when(anyHand.isClosed()).thenReturn(true);
 
-        int junchanValue = junchan.getHanValue();
+        var junchanValue = junchan.getHanValue();
 
         assertEquals(3, junchanValue, "Closed junchan value should be 3");
     }

@@ -10,7 +10,7 @@ public class MahjongMain
         System.out.println("Initiating mahjong...");
         System.out.println();
 
-        MahjongGame game = new MahjongGame(null, new RiichiStandardRuleSet());
+        var game = new MahjongGame(null, new RiichiStandardRuleSet());
         game.startGame();
     }
 }

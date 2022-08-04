@@ -2,10 +2,8 @@ package com.monsieurmahjong.commonjong.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import com.monsieurmahjong.commonjong.utils.GroupBasedWinConditionTestCase;
-import com.monsieurmahjong.commonjong.utils.WinConditionClassGenerator;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
@@ -16,9 +14,9 @@ public class WinConditionClassGeneratorTest
     @Test
     public void testCreatingAWinConditionClass_UsingSanshokuDoujunAsAnExample_ShouldReturnABarrenSourceCodeClass()
     {
-        WinConditionClassGenerator classGenerator = new WinConditionClassGenerator();
+        var classGenerator = new WinConditionClassGenerator();
 
-        String resultSourceCode = classGenerator.createWinConditionClass("SanshokuDoujun", GroupBasedYaku.class, 2);
+        var resultSourceCode = classGenerator.createWinConditionClass("SanshokuDoujun", GroupBasedYaku.class, 2);
 
         assertEquals(getSourceCodeForSanshokuDoujun(), resultSourceCode, "Sources don't match");
     }
@@ -26,14 +24,14 @@ public class WinConditionClassGeneratorTest
     @Test
     public void testCreatingAWinConditionTest_UsingSanshokuDoujunAsAnExample_ShouldReturnACompleteTestCase()
     {
-        WinConditionClassGenerator classGenerator = new WinConditionClassGenerator();
-        List<GroupBasedWinConditionTestCase> testCases = new ArrayList<>();
+        var classGenerator = new WinConditionClassGenerator();
+        var testCases = new ArrayList<GroupBasedWinConditionTestCase>();
         testCases.add(new GroupBasedWinConditionTestCase("completeSanshokuDoujunHand", TileGroupUtils.tileGroupsOf("456m", "456p", "456s", "999s", "11z"), true));
         testCases.add(new GroupBasedWinConditionTestCase("incompleteSanshokuDoujunHand", TileGroupUtils.tileGroupsOf("123m", "123p", "123s", "11z"), true));
         testCases.add(new GroupBasedWinConditionTestCase("completeNonSanshokuDoujunHand", TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p"), false));
         testCases.add(new GroupBasedWinConditionTestCase("incompleteNonSanshokuDoujunHand", TileGroupUtils.tileGroupsOf("111m", "555p", "11s"), false));
 
-        String resultTestCode = classGenerator.createWinConditionTest("SanshokuDoujun", GroupBasedYaku.class, 2, testCases);
+        var resultTestCode = classGenerator.createWinConditionTest("SanshokuDoujun", GroupBasedYaku.class, 2, testCases);
 
         assertEquals(getTestCodeForSanshokuDoujun(), resultTestCode, "Sources don't match");
     }

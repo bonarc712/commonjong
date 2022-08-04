@@ -1,9 +1,11 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased.Chinitsu;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -25,7 +27,7 @@ public class ChinitsuTest
     {
         Yaku chinitsu = new Chinitsu(completeChinitsuHand);
 
-        boolean chinitsuIsValid = chinitsu.isValid();
+        var chinitsuIsValid = chinitsu.isValid();
 
         assertTrue(chinitsuIsValid, "11123445566799m should be valid for chinitsu");
     }
@@ -35,7 +37,7 @@ public class ChinitsuTest
     {
         Yaku chinitsu = new Chinitsu(incompleteChinitsuHand);
 
-        boolean chinitsuIsValid = chinitsu.isValid();
+        var chinitsuIsValid = chinitsu.isValid();
 
         assertTrue(chinitsuIsValid, "11123477m should be valid for chinitsu");
     }
@@ -45,7 +47,7 @@ public class ChinitsuTest
     {
         Yaku chinitsu = new Chinitsu(completeNonChinitsuHand);
 
-        boolean chinitsuIsValid = chinitsu.isValid();
+        var chinitsuIsValid = chinitsu.isValid();
 
         assertFalse(chinitsuIsValid, "123456m22345678p should not be valid for chinitsu");
     }
@@ -55,7 +57,7 @@ public class ChinitsuTest
     {
         Yaku chinitsu = new Chinitsu(incompleteNonChinitsuHand);
 
-        boolean chinitsuIsValid = chinitsu.isValid();
+        var chinitsuIsValid = chinitsu.isValid();
 
         assertFalse(chinitsuIsValid, "111p111s22z should not be valid for chinitsu");
     }
@@ -65,7 +67,7 @@ public class ChinitsuTest
     {
         Yaku chinitsu = new Chinitsu(completeHonitsuHand);
 
-        boolean chinitsuIsValid = chinitsu.isValid();
+        var chinitsuIsValid = chinitsu.isValid();
 
         assertFalse(chinitsuIsValid, "111234455667m55z should not be valid for chinitsu");
     }
@@ -76,7 +78,7 @@ public class ChinitsuTest
         Yaku chinitsu = new Chinitsu(anyHand);
         when(anyHand.isOpen()).thenReturn(true);
 
-        int chinitsuValue = chinitsu.getHanValue();
+        var chinitsuValue = chinitsu.getHanValue();
 
         assertEquals(5, chinitsuValue, "Chinitsu value should be 5");
     }
@@ -87,7 +89,7 @@ public class ChinitsuTest
         Yaku chinitsu = new Chinitsu(anyHand);
         when(anyHand.isOpen()).thenReturn(false);
 
-        int chinitsuValue = chinitsu.getHanValue();
+        var chinitsuValue = chinitsu.getHanValue();
 
         assertEquals(6, chinitsuValue, "Chinitsu value should be 6");
     }

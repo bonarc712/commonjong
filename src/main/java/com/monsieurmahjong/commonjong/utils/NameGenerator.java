@@ -1,6 +1,7 @@
 package com.monsieurmahjong.commonjong.utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NameGenerator
 {
@@ -11,14 +12,14 @@ public class NameGenerator
 
     public static String generateNameOtherThan(List<String> names)
     {
-        List<String> possibleNames = getPossibleNames();
+        var possibleNames = getPossibleNames();
         possibleNames.removeAll(names);
         return possibleNames.get((int) (Math.random() * possibleNames.size()));
     }
 
     private static List<String> getPossibleNames()
     {
-        List<String> possibleNames = new ArrayList<>();
+        var possibleNames = new ArrayList<String>();
         possibleNames.add("A");
         possibleNames.add("B");
         possibleNames.add("C");

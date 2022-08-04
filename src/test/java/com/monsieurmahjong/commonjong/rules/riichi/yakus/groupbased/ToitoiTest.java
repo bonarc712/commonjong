@@ -1,11 +1,13 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Toitoi;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -30,7 +32,7 @@ public class ToitoiTest
     {
         Yaku toitoi = new Toitoi(new Hand(TileGroupUtils.getTilesFromTileGroups(completeToitoiHandGroups)), completeToitoiHandGroups);
 
-        boolean toitoiIsValid = toitoi.isValid();
+        var toitoiIsValid = toitoi.isValid();
 
         assertTrue(toitoiIsValid, "111777m888p999s11z should be valid for toitoi");
     }
@@ -40,7 +42,7 @@ public class ToitoiTest
     {
         Yaku toitoi = new Toitoi(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteToitoiHandGroups)), incompleteToitoiHandGroups);
 
-        boolean toitoiIsValid = toitoi.isValid();
+        var toitoiIsValid = toitoi.isValid();
 
         assertTrue(toitoiIsValid, "111333m11z should be valid for toitoi");
     }
@@ -50,7 +52,7 @@ public class ToitoiTest
     {
         Yaku toitoi = new Toitoi(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonToitoiHandGroups)), completeNonToitoiHandGroups);
 
-        boolean toitoiIsValid = toitoi.isValid();
+        var toitoiIsValid = toitoi.isValid();
 
         assertFalse(toitoiIsValid, "123345m22345678p should not be valid for toitoi");
     }
@@ -60,7 +62,7 @@ public class ToitoiTest
     {
         Yaku toitoi = new Toitoi(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonToitoiHandGroups)), incompleteNonToitoiHandGroups);
 
-        boolean toitoiIsValid = toitoi.isValid();
+        var toitoiIsValid = toitoi.isValid();
 
         assertFalse(toitoiIsValid, "111m567p11s should not be valid for toitoi");
     }
@@ -70,7 +72,7 @@ public class ToitoiTest
     {
         Yaku toitoi = new Toitoi(new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoiHandGroups)), completeChiitoiHandGroups);
 
-        boolean toitoiIsValid = toitoi.isValid();
+        var toitoiIsValid = toitoi.isValid();
 
         assertFalse(toitoiIsValid, "11m117799p1199s11z should not be valid for toitoi");
     }
@@ -80,7 +82,7 @@ public class ToitoiTest
     {
         Yaku toitoi = new Toitoi(new Hand(TileGroupUtils.getTilesFromTileGroups(completeToitoiWithKansHandGroups)), completeToitoiWithKansHandGroups);
 
-        boolean toitoiIsValid = toitoi.isValid();
+        var toitoiIsValid = toitoi.isValid();
 
         assertTrue(toitoiIsValid, "1117777m888p9999s11z should be valid for toitoi");
     }
@@ -90,7 +92,7 @@ public class ToitoiTest
     {
         Yaku toitoi = new Toitoi(anyHand, anyGroups);
 
-        int toitoiValue = toitoi.getHanValue();
+        var toitoiValue = toitoi.getHanValue();
 
         assertEquals(2, toitoiValue, "Toitoi value should be 2");
     }

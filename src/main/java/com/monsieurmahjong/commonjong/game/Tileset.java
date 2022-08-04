@@ -1,6 +1,8 @@
 package com.monsieurmahjong.commonjong.game;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 
@@ -18,11 +20,11 @@ public abstract class Tileset
 
     protected void initTileset()
     {
-        List<MahjongTileKind> mahjongTiles = getTileList();
+        var mahjongTiles = getTileList();
         mahjongTiles.forEach(tile -> {
-            for (int i = 0; i < 4; ++i)
+            for (var i = 0; i < 4; ++i)
             {
-                Tile physicalTile = new Tile(tile);
+                var physicalTile = new Tile(tile);
                 tiles.add(physicalTile);
             }
         });
@@ -51,7 +53,7 @@ public abstract class Tileset
             return null;
         }
 
-        Tile drawnTile = tiles.remove(0);
+        var drawnTile = tiles.remove(0);
         drawnTiles.add(drawnTile);
         return drawnTile;
     }

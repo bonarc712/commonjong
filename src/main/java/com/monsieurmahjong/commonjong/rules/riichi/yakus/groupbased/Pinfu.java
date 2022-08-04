@@ -1,10 +1,11 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.game.*;
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.WaitShapeUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class Pinfu extends GroupBasedYaku
@@ -17,11 +18,11 @@ public class Pinfu extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        List<TileGroup> groupsThatContainTheWinningTile = new ArrayList<>();
+        var groupsThatContainTheWinningTile = new ArrayList<TileGroup>();
+        var winningTile = hand.getWinningTile();
         TileGroup pair = null;
-        MahjongTileKind winningTile = hand.getWinningTile();
 
-        for (TileGroup group : groups)
+        for (var group : groups)
         {
             if (group.isPair())
             {
@@ -45,7 +46,7 @@ public class Pinfu extends GroupBasedYaku
             }
         }
 
-        boolean winningTileIsRyanmen = false;
+        var winningTileIsRyanmen = false;
         for (TileGroup candidateGroup : groupsThatContainTheWinningTile)
         {
             List<Integer> groupIndices = new ArrayList<>(candidateGroup.getIndices());
@@ -65,14 +66,14 @@ public class Pinfu extends GroupBasedYaku
         {
             return false;
         }
-        MahjongTileKind pairKind = TileKindUtils.getKindFromIndex(pair.getIndices().get(0));
+        var pairKind = TileKindUtils.getKindFromIndex(pair.getIndices().get(0));
         if (pairKind.isDragon())
         {
             return false;
         }
         if (pairKind.isWind())
         {
-            Seat pairSeat = TileKindUtils.getSeatFromTileKind(pairKind);
+            var pairSeat = TileKindUtils.getSeatFromTileKind(pairKind);
             if (hand.isTableWind(pairSeat))
             {
                 return false;

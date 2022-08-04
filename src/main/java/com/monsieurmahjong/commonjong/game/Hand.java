@@ -1,17 +1,19 @@
 package com.monsieurmahjong.commonjong.game;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import com.monsieurmahjong.commonjong.rules.generic.*;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileOrderingComparator;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 /**
  * A hand in the game sense : it includes all the tiles we have in front of us.
- * The melds and bonus tiles are separate from the "hidden" tiles. It also contains
- * information relative to the current hand that is played (winning tile, table
- * wind, seat wind, etc.)
+ * The melds and bonus tiles are separate from the "hidden" tiles. It also
+ * contains information relative to the current hand that is played (winning
+ * tile, table wind, seat wind, etc.)
  */
 public class Hand
 {
@@ -19,7 +21,8 @@ public class Hand
     private List<List<Tile>> melds; // called tiles, they are not removed from hand
     private List<Tile> bonus; // flowers, peis, etc.
 
-    private List<Seat> tableWinds; // TODO : check whether we can rename Seat to Wind... I feel it works worse with the table wind
+    private List<Seat> tableWinds; // TODO : check whether we can rename Seat to Wind... I feel it works worse with
+                                   // the table wind
     private Seat seatWind;
 
     private MahjongTileKind winningTile;

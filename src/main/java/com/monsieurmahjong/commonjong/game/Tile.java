@@ -41,7 +41,7 @@ public class Tile
         {
             return false;
         }
-        Tile otherTile = (Tile) other;
+        var otherTile = (Tile) other;
         return tileKind == otherTile.tileKind && red == otherTile.red;
     }
 }

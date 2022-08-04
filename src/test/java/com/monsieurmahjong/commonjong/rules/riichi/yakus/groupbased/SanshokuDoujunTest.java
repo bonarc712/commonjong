@@ -1,11 +1,14 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.SanshokuDoujun;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -30,7 +33,7 @@ public class SanshokuDoujunTest
     {
         Yaku sanshokuDoujun = new SanshokuDoujun(new Hand(TileGroupUtils.getTilesFromTileGroups(completeSanshokuDoujunHandGroups)), completeSanshokuDoujunHandGroups);
 
-        boolean sanshokuDoujunIsValid = sanshokuDoujun.isValid();
+        var sanshokuDoujunIsValid = sanshokuDoujun.isValid();
 
         assertTrue(sanshokuDoujunIsValid, "456m456p456999s11z should be valid for sanshoku doujun");
     }
@@ -40,7 +43,7 @@ public class SanshokuDoujunTest
     {
         Yaku sanshokuDoujun = new SanshokuDoujun(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteSanshokuDoujunHandGroups)), incompleteSanshokuDoujunHandGroups);
 
-        boolean sanshokuDoujunIsValid = sanshokuDoujun.isValid();
+        var sanshokuDoujunIsValid = sanshokuDoujun.isValid();
 
         assertTrue(sanshokuDoujunIsValid, "123m123p123s11z should be valid for sanshoku doujun");
     }
@@ -50,7 +53,7 @@ public class SanshokuDoujunTest
     {
         Yaku sanshokuDoujun = new SanshokuDoujun(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonSanshokuDoujunHandGroups)), completeNonSanshokuDoujunHandGroups);
 
-        boolean sanshokuDoujunIsValid = sanshokuDoujun.isValid();
+        var sanshokuDoujunIsValid = sanshokuDoujun.isValid();
 
         assertFalse(sanshokuDoujunIsValid, "123345m22345678p should not be valid for sanshoku doujun");
     }
@@ -60,7 +63,7 @@ public class SanshokuDoujunTest
     {
         Yaku sanshokuDoujun = new SanshokuDoujun(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonSanshokuDoujunHandGroups)), incompleteNonSanshokuDoujunHandGroups);
 
-        boolean sanshokuDoujunIsValid = sanshokuDoujun.isValid();
+        var sanshokuDoujunIsValid = sanshokuDoujun.isValid();
 
         assertFalse(sanshokuDoujunIsValid, "111m555p11s should not be valid for sanshoku doujun");
     }
@@ -70,7 +73,7 @@ public class SanshokuDoujunTest
     {
         Yaku sanshokuDoujun = new SanshokuDoujun(new Hand(TileGroupUtils.getTilesFromTileGroups(sanshokuIsTheLastThreeRunsHandGroups)), sanshokuIsTheLastThreeRunsHandGroups);
 
-        boolean sanshokuDoujunIsValid = sanshokuDoujun.isValid();
+        var sanshokuDoujunIsValid = sanshokuDoujun.isValid();
 
         assertTrue(sanshokuDoujunIsValid, "12344789m789p789s should be valid for sanshoku doujun");
     }
@@ -80,7 +83,7 @@ public class SanshokuDoujunTest
     {
         Yaku sanshokuDoujun = new SanshokuDoujun(new Hand(TileGroupUtils.getTilesFromTileGroups(ryanshokuIipeikouAKAFakeSanshokuHandGroups)), ryanshokuIipeikouAKAFakeSanshokuHandGroups);
 
-        boolean sanshokuDoujunIsValid = sanshokuDoujun.isValid();
+        var sanshokuDoujunIsValid = sanshokuDoujun.isValid();
 
         assertFalse(sanshokuDoujunIsValid, "12344778899p789s should not be valid for sanshoku doujun");
     }
@@ -91,7 +94,7 @@ public class SanshokuDoujunTest
         Yaku sanshokuDoujun = new SanshokuDoujun(anyHand, anyGroups);
         when(anyHand.isClosed()).thenReturn(false);
 
-        int sanshokuDoujunValue = sanshokuDoujun.getHanValue();
+        var sanshokuDoujunValue = sanshokuDoujun.getHanValue();
 
         assertEquals(1, sanshokuDoujunValue, "Open sanshoku doujun value should be 1");
     }
@@ -102,7 +105,7 @@ public class SanshokuDoujunTest
         Yaku sanshokuDoujun = new SanshokuDoujun(anyHand, anyGroups);
         when(anyHand.isClosed()).thenReturn(true);
 
-        int sanshokuDoujunValue = sanshokuDoujun.getHanValue();
+        var sanshokuDoujunValue = sanshokuDoujun.getHanValue();
 
         assertEquals(2, sanshokuDoujunValue, "Closed sanshoku doujun value should be 2");
     }

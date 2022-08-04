@@ -1,11 +1,13 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.yakuhai;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.yakuhai.GreenDragonYakuhai;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -29,7 +31,7 @@ public class GreenDragonYakuhaiTest
     {
         Yaku greenDragonYakuhai = new GreenDragonYakuhai(new Hand(TileGroupUtils.getTilesFromTileGroups(completeGreenDragonYakuhaiHandGroups)), completeGreenDragonYakuhaiHandGroups);
 
-        boolean greenDragonYakuhaiIsValid = greenDragonYakuhai.isValid();
+        var greenDragonYakuhaiIsValid = greenDragonYakuhai.isValid();
 
         assertTrue(greenDragonYakuhaiIsValid, "111888p999s11666z should be valid for green dragon yakuhai");
     }
@@ -39,7 +41,7 @@ public class GreenDragonYakuhaiTest
     {
         Yaku greenDragonYakuhai = new GreenDragonYakuhai(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteGreenDragonYakuhaiHandGroups)), incompleteGreenDragonYakuhaiHandGroups);
 
-        boolean greenDragonYakuhaiIsValid = greenDragonYakuhai.isValid();
+        var greenDragonYakuhaiIsValid = greenDragonYakuhai.isValid();
 
         assertTrue(greenDragonYakuhaiIsValid, "111m11666z should be valid for green dragon yakuhai");
     }
@@ -49,7 +51,7 @@ public class GreenDragonYakuhaiTest
     {
         Yaku greenDragonYakuhai = new GreenDragonYakuhai(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonGreenDragonYakuhaiHandGroups)), completeNonGreenDragonYakuhaiHandGroups);
 
-        boolean greenDragonYakuhaiIsValid = greenDragonYakuhai.isValid();
+        var greenDragonYakuhaiIsValid = greenDragonYakuhai.isValid();
 
         assertFalse(greenDragonYakuhaiIsValid, "123345m22345678p should not be valid for green dragon yakuhai");
     }
@@ -59,7 +61,7 @@ public class GreenDragonYakuhaiTest
     {
         Yaku greenDragonYakuhai = new GreenDragonYakuhai(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonGreenDragonYakuhaiHandGroups)), incompleteNonGreenDragonYakuhaiHandGroups);
 
-        boolean greenDragonYakuhaiIsValid = greenDragonYakuhai.isValid();
+        var greenDragonYakuhaiIsValid = greenDragonYakuhai.isValid();
 
         assertFalse(greenDragonYakuhaiIsValid, "111m567p11s should not be valid for green dragon yakuhai");
     }
@@ -69,7 +71,7 @@ public class GreenDragonYakuhaiTest
     {
         Yaku greenDragonYakuhai = new GreenDragonYakuhai(new Hand(TileGroupUtils.getTilesFromTileGroups(completeGreenDragonKanYakuhaiHandGroups)), completeGreenDragonKanYakuhaiHandGroups);
 
-        boolean greenDragonYakuhaiIsValid = greenDragonYakuhai.isValid();
+        var greenDragonYakuhaiIsValid = greenDragonYakuhai.isValid();
 
         assertTrue(greenDragonYakuhaiIsValid, "111888p999s116666z should be valid for green dragon yakuhai");
     }
@@ -79,7 +81,7 @@ public class GreenDragonYakuhaiTest
     {
         Yaku greenDragonYakuhai = new GreenDragonYakuhai(anyHand, anyGroups);
 
-        int greenDragonYakuhaiValue = greenDragonYakuhai.getHanValue();
+        var greenDragonYakuhaiValue = greenDragonYakuhai.getHanValue();
 
         assertEquals(1, greenDragonYakuhaiValue, "GreenDragonYakuhai value should be 1");
     }

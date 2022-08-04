@@ -14,9 +14,11 @@ import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 
-public class TileGroupTest {
+public class TileGroupTest
+{
     @Test
-    public void testCollidesWith() {
+    public void testCollidesWith()
+    {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
         var ryanzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
         var suuzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
@@ -26,7 +28,8 @@ public class TileGroupTest {
     }
 
     @Test
-    public void testIsRun() {
+    public void testIsRun()
+    {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
         var ryanzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
         var suuzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
@@ -43,7 +46,8 @@ public class TileGroupTest {
     }
 
     @Test
-    public void testIsQuad() {
+    public void testIsQuad()
+    {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
         var ryanzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
         var suuzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
@@ -62,7 +66,8 @@ public class TileGroupTest {
     }
 
     @Test
-    public void testIsComplete() {
+    public void testIsComplete()
+    {
         var bambooRun234 = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4);
         var ryanzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
         var westTriplet = TileGroup.of(MahjongTileKind.WEST, MahjongTileKind.WEST, MahjongTileKind.WEST);
@@ -89,7 +94,8 @@ public class TileGroupTest {
     }
 
     @Test
-    public void testIsCompleteExclusiveGroup() {
+    public void testIsCompleteExclusiveGroup()
+    {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
         var ryanzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
         var suuzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
@@ -108,7 +114,8 @@ public class TileGroupTest {
     }
 
     @Test
-    public void testContains() {
+    public void testContains()
+    {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
         var loneRed = TileGroup.of(MahjongTileKind.RED);
 
@@ -124,7 +131,8 @@ public class TileGroupTest {
     }
 
     @Test
-    public void testGetTileKindsAt() {
+    public void testGetTileKindsAt()
+    {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
         var loneRed = TileGroup.of(MahjongTileKind.RED);
 
@@ -133,7 +141,8 @@ public class TileGroupTest {
     }
 
     @Test
-    public void testGetTileKinds() {
+    public void testGetTileKinds()
+    {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
         var loneRed = TileGroup.of(MahjongTileKind.RED);
 
@@ -150,7 +159,8 @@ public class TileGroupTest {
     }
 
     @Test
-    public void testGetTileNumbers() {
+    public void testGetTileNumbers()
+    {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
         var bambooTriplet333 = TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3);
         var loneRed = TileGroup.of(MahjongTileKind.RED);
@@ -171,7 +181,8 @@ public class TileGroupTest {
     }
 
     @Test
-    public void testToMPSZNotation() {
+    public void testToMPSZNotation()
+    {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
         var ryanzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
         var suuzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);

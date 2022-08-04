@@ -1,11 +1,13 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Ryanpeikou;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -27,7 +29,7 @@ public class RyanpeikouTest
     {
         Yaku ryanpeikou = new Ryanpeikou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeRyanpeikouHandGroups)), completeRyanpeikouHandGroups);
 
-        boolean ryanpeikouIsValid = ryanpeikou.isValid();
+        var ryanpeikouIsValid = ryanpeikou.isValid();
 
         assertTrue(ryanpeikouIsValid, "223344m445566s11z should be valid for ryanpeikou");
     }
@@ -37,7 +39,7 @@ public class RyanpeikouTest
     {
         Yaku ryanpeikou = new Ryanpeikou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonRyanpeikouHandGroups)), completeNonRyanpeikouHandGroups);
 
-        boolean ryanpeikouIsValid = ryanpeikou.isValid();
+        var ryanpeikouIsValid = ryanpeikou.isValid();
 
         assertFalse(ryanpeikouIsValid, "112233m22345678p should not be valid for ryanpeikou");
     }
@@ -47,7 +49,7 @@ public class RyanpeikouTest
     {
         Yaku ryanpeikou = new Ryanpeikou(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonRyanpeikouHandGroups)), incompleteNonRyanpeikouHandGroups);
 
-        boolean ryanpeikouIsValid = ryanpeikou.isValid();
+        var ryanpeikouIsValid = ryanpeikou.isValid();
 
         assertFalse(ryanpeikouIsValid, "111p111s11z should not be valid for ryanpeikou");
     }
@@ -57,7 +59,7 @@ public class RyanpeikouTest
     {
         Yaku ryanpeikou = new Ryanpeikou(anyHand, anyGroups);
 
-        int ryanpeikouValue = ryanpeikou.getHanValue();
+        var ryanpeikouValue = ryanpeikou.getHanValue();
 
         assertEquals(3, ryanpeikouValue, "Ryanpeikou value should be 3");
     }

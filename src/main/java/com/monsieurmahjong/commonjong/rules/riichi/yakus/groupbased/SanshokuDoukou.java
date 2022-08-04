@@ -1,6 +1,8 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.TileFamily;
@@ -16,10 +18,11 @@ public class SanshokuDoukou extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        // using term triplets even though it can also apply to other complete exclusive groups
-        List<TileGroup> tripletsCatalog = new ArrayList<>();
+        // using term triplets even though it can also apply to other complete exclusive
+        // groups
+        var tripletsCatalog = new ArrayList<TileGroup>();
 
-        for (TileGroup group : groups)
+        for (var group : groups)
         {
             if (group.isCompleteExclusiveGroup())
             {
@@ -30,12 +33,12 @@ public class SanshokuDoukou extends GroupBasedYaku
         while (tripletsCatalog.size() >= 3)
         {
             // pop first run
-            TileGroup firstTriplet = tripletsCatalog.remove(0);
-            Set<TileFamily> families = new HashSet<>();
+            var firstTriplet = tripletsCatalog.remove(0);
+            var families = new HashSet<TileFamily>();
             families.add(firstTriplet.getTileKindAt(0).getFamily());
 
             // test against other runs
-            for (TileGroup group : tripletsCatalog)
+            for (var group : tripletsCatalog)
             {
                 if (group.getTileKindAt(0).getTileNumber() == firstTriplet.getTileKindAt(0).getTileNumber())
                 {

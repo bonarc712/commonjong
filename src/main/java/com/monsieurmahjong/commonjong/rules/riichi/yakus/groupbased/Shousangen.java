@@ -3,7 +3,6 @@ package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class Shousangen extends GroupBasedYaku
@@ -16,16 +15,16 @@ public class Shousangen extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        boolean hasGreen = false;
-        boolean hasRed = false;
-        boolean hasWhite = false;
-        boolean pairIsDragon = false;
+        var hasGreen = false;
+        var hasRed = false;
+        var hasWhite = false;
+        var pairIsDragon = false;
 
-        for (TileGroup group : groups)
+        for (var group : groups)
         {
             if (group.isExclusiveGroup())
             {
-                MahjongTileKind tileKind = group.getTileKindAt(0);
+                var tileKind = group.getTileKindAt(0);
                 if (tileKind.isDragon())
                 {
                     if (group.isPair())
@@ -43,17 +42,17 @@ public class Shousangen extends GroupBasedYaku
 
                     switch (tileKind)
                     {
-                        case GREEN:
-                            hasGreen = true;
-                            break;
-                        case RED:
-                            hasRed = true;
-                            break;
-                        case WHITE:
-                            hasWhite = true;
-                            break;
-                        default:
-                            break;
+                    case GREEN:
+                        hasGreen = true;
+                        break;
+                    case RED:
+                        hasRed = true;
+                        break;
+                    case WHITE:
+                        hasWhite = true;
+                        break;
+                    default:
+                        break;
                     }
                 }
             }

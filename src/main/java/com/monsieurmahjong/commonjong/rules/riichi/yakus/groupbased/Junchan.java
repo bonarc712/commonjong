@@ -16,9 +16,9 @@ public class Junchan extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        boolean nonTerminalFound = false;
+        var nonTerminalFound = false;
 
-        for (TileGroup group : groups)
+        for (var group : groups)
         {
             if (group.contains(MahjongTileKind::isTerminal))
             {

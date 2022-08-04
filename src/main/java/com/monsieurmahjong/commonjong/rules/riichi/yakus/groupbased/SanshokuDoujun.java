@@ -1,6 +1,8 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.TileFamily;
@@ -16,9 +18,9 @@ public class SanshokuDoujun extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        List<TileGroup> runsCatalog = new ArrayList<>();
+        var runsCatalog = new ArrayList<TileGroup>();
 
-        for (TileGroup group : groups)
+        for (var group : groups)
         {
             if (group.isRun())
             {
@@ -29,12 +31,12 @@ public class SanshokuDoujun extends GroupBasedYaku
         while (runsCatalog.size() >= 3)
         {
             // pop first run
-            TileGroup firstRun = runsCatalog.remove(0);
-            Set<TileFamily> families = new HashSet<>();
+            var firstRun = runsCatalog.remove(0);
+            var families = new HashSet<TileFamily>();
             families.add(firstRun.getTileKindAt(0).getFamily());
 
             // test against other runs
-            for (TileGroup group : runsCatalog)
+            for (var group : runsCatalog)
             {
                 if (group.getTileNumbers().equals(firstRun.getTileNumbers()))
                 {

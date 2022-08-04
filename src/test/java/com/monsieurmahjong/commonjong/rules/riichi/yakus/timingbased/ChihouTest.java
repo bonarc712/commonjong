@@ -1,13 +1,16 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased.Chihou;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
 
 public class ChihouTest
@@ -18,11 +21,11 @@ public class ChihouTest
     @Test
     public void testValidityOfChihou_WhenObtained_ShouldBeTrue()
     {
-        Chihou chihou = new Chihou(anyHand, anyLog);
+        var chihou = new Chihou(anyHand, anyLog);
         when(anyHand.getSeatWind()).thenReturn(Seat.SOUTH);
         when(anyLog.doesPlayerWinOnChihou(any())).thenReturn(true);
 
-        boolean isValid = chihou.isValid();
+        var isValid = chihou.isValid();
 
         assertTrue(isValid, "Chihou should be valid when obtained");
     }
@@ -30,11 +33,11 @@ public class ChihouTest
     @Test
     public void testValidityOfChihou_WhenNotObtained_ShouldBeFalse()
     {
-        Chihou chihou = new Chihou(anyHand, anyLog);
+        var chihou = new Chihou(anyHand, anyLog);
         when(anyHand.getSeatWind()).thenReturn(Seat.SOUTH);
         when(anyLog.doesPlayerWinOnChihou(any())).thenReturn(false);
 
-        boolean isValid = chihou.isValid();
+        var isValid = chihou.isValid();
 
         assertFalse(isValid, "Chihou should not be valid when not obtained");
     }
@@ -42,9 +45,9 @@ public class ChihouTest
     @Test
     public void testValueOf_Chihou_ShouldBeThirteen()
     {
-        Chihou chihou = new Chihou(anyHand, anyLog);
+        var chihou = new Chihou(anyHand, anyLog);
 
-        int hanValue = chihou.getHanValue();
+        var hanValue = chihou.getHanValue();
 
         assertEquals(hanValue, 13, "Chihou value should be 13");
     }
@@ -52,9 +55,9 @@ public class ChihouTest
     @Test
     public void testValueOf_Chihou_ShouldBeYakuman()
     {
-        Chihou chihou = new Chihou(anyHand, anyLog);
+        var chihou = new Chihou(anyHand, anyLog);
 
-        boolean isYakuman = chihou.isYakuman();
+        var isYakuman = chihou.isYakuman();
 
         assertTrue(isYakuman, "Chihou should be yakuman");
     }

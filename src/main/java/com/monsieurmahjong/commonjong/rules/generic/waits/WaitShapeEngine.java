@@ -1,10 +1,14 @@
 package com.monsieurmahjong.commonjong.rules.generic.waits;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import com.monsieurmahjong.commonjong.game.*;
-import com.monsieurmahjong.commonjong.rules.generic.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Tile;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongShantenCounter;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKindComparator;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
 public class WaitShapeEngine
@@ -13,7 +17,8 @@ public class WaitShapeEngine
     private List<Tile> unmeldedTiles;
 
     private List<TileGroup> tileGroups;
-    // Hand combinations are different ways in which the tiles can be ordered to account for all hand possibilities
+    // Hand combinations are different ways in which the tiles can be ordered to
+    // account for all hand possibilities
     private List<List<TileGroup>> handCombinations;
 
     private List<MahjongTileKind> wait;
@@ -57,10 +62,10 @@ public class WaitShapeEngine
             throw new IllegalStateException("The combinations need to be computed in order to determine shanten");
         }
 
-        int minimumShanten = Integer.MAX_VALUE;
+        var minimumShanten = Integer.MAX_VALUE;
         for (List<TileGroup> combination : handCombinations)
         {
-            int currentShanten = MahjongShantenCounter.countShanten(combination);
+            var currentShanten = MahjongShantenCounter.countShanten(combination);
             if (currentShanten < minimumShanten)
             {
                 minimumShanten = currentShanten;
@@ -88,7 +93,8 @@ public class WaitShapeEngine
 
         tileGroups.addAll(TileParser.parseHonourTiles(honourTiles));
 
-        // create possible hands (so we can differ between triplet in run in cases like 34555)
+        // create possible hands (so we can differ between triplet in run in cases like
+        // 34555)
         createHandsCombinations();
 
         // interpret wait from parsing
@@ -104,7 +110,7 @@ public class WaitShapeEngine
         // for now add just tileGroups directly (remove when combinations are good)
         handCombinations.add(tileGroups);
 
-        HandConfigurationParser handParser = new HandConfigurationParser(hand);
+        var handParser = new HandConfigurationParser(hand);
         handCombinations = handParser.getHandConfigurations(tileGroups);
     }
 
@@ -119,14 +125,14 @@ public class WaitShapeEngine
         {
             if (handComposition.size() == 5) // if (handComposition.isTenpai()) then ...
             {
-                int completeGroupCount = (int) handComposition.stream().filter(TileGroup::isComplete).count();
+                var completeGroupCount = (int) handComposition.stream().filter(TileGroup::isComplete).count();
 
                 if (completeGroupCount == 4)
                 {
                     if (handComposition.stream().filter(group -> group.getIndices().size() == 1).count() == 1)
                     {
                         // build pair (tanki) wait
-                        TileGroup loneTile = handComposition.stream().filter(group -> group.getIndices().size() == 1).findFirst().get();
+                        var loneTile = handComposition.stream().filter(group -> group.getIndices().size() == 1).findFirst().get();
                         addTilesToWait(tilesToAddToWait, loneTile.getWaitingTiles());
                     }
                 }
@@ -136,7 +142,7 @@ public class WaitShapeEngine
                     {
                         List<TileGroup> incompleteTileGroups = handComposition.stream().filter(group -> group.getIndices().size() == 2).collect(Collectors.toList());
 
-                        Optional<TileGroup> protogroup = incompleteTileGroups.stream().filter(TileGroup::isProtogroup).findFirst();
+                        var protogroup = incompleteTileGroups.stream().filter(TileGroup::isProtogroup).findFirst();
                         if (protogroup.isPresent())
                         {
                             // build protogroup-based (ryanmen/kanchan/penchan) wait
@@ -166,7 +172,8 @@ public class WaitShapeEngine
             tilesToAddToWait.clear();
         }
 
-        // no combinations were tenpai, the "wait" are the tiles that improve the hand instead
+        // no combinations were tenpai, the "wait" are the tiles that improve the hand
+        // instead
         if (wait.isEmpty())
         {
             wait.addAll(improvingTiles);
@@ -178,7 +185,7 @@ public class WaitShapeEngine
     private void addTilesToWait(List<MahjongTileKind> waitList, List<Integer> indicesToAddToWaitList)
     {
         indicesToAddToWaitList.forEach(index -> {
-            MahjongTileKind kind = TileKindUtils.getKindFromIndex(index);
+            var kind = TileKindUtils.getKindFromIndex(index);
             waitList.add(kind);
         });
     }

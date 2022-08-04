@@ -1,6 +1,7 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
@@ -20,7 +21,7 @@ public class Iipeikou extends GroupBasedYaku
             List<TileGroup> sequencesFound = new ArrayList<>();
             List<TileGroup> matchesFound = new ArrayList<>(); // a match found is any sequence that is present at least twice
 
-            for (TileGroup group : groups)
+            for (var group : groups)
             {
                 if (group.isRun())
                 {

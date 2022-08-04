@@ -3,7 +3,6 @@ package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.WaitShapeUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
@@ -28,7 +27,7 @@ public class WaitFu implements Fu
             return false;
         }
 
-        TileGroup tileGroupBeforeWinning = getWinningTileGroupWithoutWinningTile();
+        var tileGroupBeforeWinning = getWinningTileGroupWithoutWinningTile();
 
         if (tileGroupBeforeWinning.getSize() == 1) // tanki wait
         {
@@ -60,9 +59,9 @@ public class WaitFu implements Fu
 
     private TileGroup getWinningTileGroupWithoutWinningTile()
     {
-        MahjongTileKind winningTile = hand.getWinningTile();
+        var winningTile = hand.getWinningTile();
 
-        List<Integer> groupIndices = winningGroup.getIndices();
+        var groupIndices = winningGroup.getIndices();
         groupIndices.remove(Integer.valueOf(winningTile.getIndex()));
 
         return new TileGroup(groupIndices);

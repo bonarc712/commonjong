@@ -1,13 +1,16 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased.MenzenTsumo;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
 
 public class MenzenTsumoTest
@@ -18,11 +21,11 @@ public class MenzenTsumoTest
     @Test
     public void testValidityOfMenzenTsumo_WhenObtained_ShouldBeTrue()
     {
-        MenzenTsumo menzenTsumo = new MenzenTsumo(anyHand, anyLog);
+        var menzenTsumo = new MenzenTsumo(anyHand, anyLog);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
         when(anyLog.doesPlayerWinOnMenzenTsumo(any())).thenReturn(true);
 
-        boolean isValid = menzenTsumo.isValid();
+        var isValid = menzenTsumo.isValid();
 
         assertTrue(isValid, "Menzen tsumo should be valid when it is obtained");
     }
@@ -30,11 +33,11 @@ public class MenzenTsumoTest
     @Test
     public void testValidityOfMenzenTsumo_WhenNotObtained_ShouldBeFalse()
     {
-        MenzenTsumo menzenTsumo = new MenzenTsumo(anyHand, anyLog);
+        var menzenTsumo = new MenzenTsumo(anyHand, anyLog);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
         when(anyLog.doesPlayerWinOnMenzenTsumo(any())).thenReturn(false);
 
-        boolean isValid = menzenTsumo.isValid();
+        var isValid = menzenTsumo.isValid();
 
         assertFalse(isValid, "Menzen tsumo should not be valid when it is not obtained");
     }
@@ -42,9 +45,9 @@ public class MenzenTsumoTest
     @Test
     public void testValueOf_MenzenTsumo_ShouldBeOne()
     {
-        MenzenTsumo menzenTsumo = new MenzenTsumo(anyHand, anyLog);
+        var menzenTsumo = new MenzenTsumo(anyHand, anyLog);
 
-        int hanValue = menzenTsumo.getHanValue();
+        var hanValue = menzenTsumo.getHanValue();
 
         assertEquals(hanValue, 1, "Menzen tsumo value should be 1");
     }

@@ -1,11 +1,14 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.KokushiMusou;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -32,7 +35,7 @@ public class KokushiMusouTest
     {
         Yaku kokushiMusou = new KokushiMusou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeKokushiHandGroups)), completeKokushiHandGroups);
 
-        boolean kokushiMusouIsValid = kokushiMusou.isValid();
+        var kokushiMusouIsValid = kokushiMusou.isValid();
 
         assertTrue(kokushiMusouIsValid, "119m19p19s1234567z should be valid for KokushiMusou");
     }
@@ -42,7 +45,7 @@ public class KokushiMusouTest
     {
         Yaku kokushiMusou = new KokushiMusou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonKokushiHandGroups)), completeNonKokushiHandGroups);
 
-        boolean kokushiMusouIsValid = kokushiMusou.isValid();
+        var kokushiMusouIsValid = kokushiMusou.isValid();
 
         assertFalse(kokushiMusouIsValid, "123345m22345678p should not be valid for KokushiMusou");
     }
@@ -52,7 +55,7 @@ public class KokushiMusouTest
     {
         Yaku kokushiMusou = new KokushiMusou(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonKokushiHandGroups)), incompleteNonKokushiHandGroups);
 
-        boolean kokushiMusouIsValid = kokushiMusou.isValid();
+        var kokushiMusouIsValid = kokushiMusou.isValid();
 
         assertFalse(kokushiMusouIsValid, "111m555p11s should not be valid for KokushiMusou");
     }
@@ -62,7 +65,7 @@ public class KokushiMusouTest
     {
         Yaku kokushiMusou = new KokushiMusou(new Hand(TileGroupUtils.getTilesFromTileGroups(subsetOfKokushiTilesIsNotKokushi)), subsetOfKokushiTilesIsNotKokushi);
 
-        boolean kokushiMusouIsValid = kokushiMusou.isValid();
+        var kokushiMusouIsValid = kokushiMusou.isValid();
 
         assertFalse(kokushiMusouIsValid, "119m19p19s should not be valid for KokushiMusou");
     }
@@ -72,7 +75,7 @@ public class KokushiMusouTest
     {
         Yaku kokushiMusou = new KokushiMusou(new Hand(TileGroupUtils.getTilesFromTileGroups(juusanmenMachiKokushiTenpaiIsNotKokushi)), juusanmenMachiKokushiTenpaiIsNotKokushi);
 
-        boolean kokushiMusouIsValid = kokushiMusou.isValid();
+        var kokushiMusouIsValid = kokushiMusou.isValid();
 
         assertFalse(kokushiMusouIsValid, "19m19p19s1234567z should not be valid for KokushiMusou");
     }
@@ -83,7 +86,7 @@ public class KokushiMusouTest
         Yaku kokushiMusou = new KokushiMusou(anyHand, anyGroups);
         when(anyHand.getWinningTile()).thenReturn(juusanmenMachiWinningTile);
 
-        int kokushiMusouValue = kokushiMusou.getHanValue();
+        var kokushiMusouValue = kokushiMusou.getHanValue();
 
         assertEquals(13, kokushiMusouValue, "KokushiMusou value should be 13");
     }
@@ -94,7 +97,7 @@ public class KokushiMusouTest
         Yaku kokushiMusou = new KokushiMusou(anyHand, completeKokushiHandGroups);
         when(anyHand.getWinningTile()).thenReturn(juusanmenMachiWinningTile);
 
-        int kokushiMusouValue = kokushiMusou.getHanValue();
+        var kokushiMusouValue = kokushiMusou.getHanValue();
 
         assertEquals(26, kokushiMusouValue, "Juusanmenmachi KokushiMusou value should be 26");
     }
@@ -104,7 +107,7 @@ public class KokushiMusouTest
     {
         Yaku kokushiMusou = new KokushiMusou(anyHand, anyGroups);
 
-        boolean kokushiMusouIsYakuman = kokushiMusou.isYakuman();
+        var kokushiMusouIsYakuman = kokushiMusou.isYakuman();
 
         assertTrue(kokushiMusouIsYakuman, "KokushiMusou value should be yakuman");
     }
@@ -115,7 +118,7 @@ public class KokushiMusouTest
         Yaku kokushiMusou = new KokushiMusou(anyHand, completeKokushiHandGroups);
         when(anyHand.getWinningTile()).thenReturn(juusanmenMachiWinningTile);
 
-        boolean juusanmenMachiKokushiMusouIsDoubleYakuman = kokushiMusou.isDoubleYakuman();
+        var juusanmenMachiKokushiMusouIsDoubleYakuman = kokushiMusou.isDoubleYakuman();
 
         assertTrue(juusanmenMachiKokushiMusouIsDoubleYakuman, "Juusanmenmachi KokushiMusou value should be double yakuman");
     }

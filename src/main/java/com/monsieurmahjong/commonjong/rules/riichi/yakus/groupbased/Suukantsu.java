@@ -15,8 +15,8 @@ public class Suukantsu extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        int quadCount = 0;
-        for (TileGroup group : groups)
+        var quadCount = 0;
+        for (var group : groups)
         {
             if (group.isQuad())
             {

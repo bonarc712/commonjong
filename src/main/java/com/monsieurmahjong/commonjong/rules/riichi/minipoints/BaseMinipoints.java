@@ -47,7 +47,7 @@ public class BaseMinipoints implements Fu
 
     private boolean isSevenPairs()
     {
-        Chiitoitsu chiitoitsu = new Chiitoitsu(hand, groups);
+        var chiitoitsu = new Chiitoitsu(hand, groups);
         return chiitoitsu.isValid();
     }
 }

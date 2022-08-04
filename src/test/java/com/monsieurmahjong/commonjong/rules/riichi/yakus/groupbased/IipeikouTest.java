@@ -1,11 +1,13 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Iipeikou;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -30,7 +32,7 @@ public class IipeikouTest
     {
         Yaku iipeikou = new Iipeikou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeIipeikouHandGroups)), completeIipeikouHandGroups);
 
-        boolean iipeikouIsValid = iipeikou.isValid();
+        var iipeikouIsValid = iipeikou.isValid();
 
         assertTrue(iipeikouIsValid, "223344m777p456s11z should be valid for iipeikou");
     }
@@ -40,7 +42,7 @@ public class IipeikouTest
     {
         Yaku iipeikou = new Iipeikou(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteIipeikouHandGroups)), incompleteIipeikouHandGroups);
 
-        boolean iipeikouIsValid = iipeikou.isValid();
+        var iipeikouIsValid = iipeikou.isValid();
 
         assertTrue(iipeikouIsValid, "223344m11z should be valid for iipeikou");
     }
@@ -50,7 +52,7 @@ public class IipeikouTest
     {
         Yaku iipeikou = new Iipeikou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonIipeikouHandGroups)), completeNonIipeikouHandGroups);
 
-        boolean iipeikouIsValid = iipeikou.isValid();
+        var iipeikouIsValid = iipeikou.isValid();
 
         assertFalse(iipeikouIsValid, "123345m22345678p should not be valid for iipeikou");
     }
@@ -60,7 +62,7 @@ public class IipeikouTest
     {
         Yaku iipeikou = new Iipeikou(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonIipeikouHandGroups)), incompleteNonIipeikouHandGroups);
 
-        boolean iipeikouIsValid = iipeikou.isValid();
+        var iipeikouIsValid = iipeikou.isValid();
 
         assertFalse(iipeikouIsValid, "111p111s11z should not be valid for iipeikou");
     }
@@ -70,7 +72,7 @@ public class IipeikouTest
     {
         Yaku iipeikou = new Iipeikou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeRyanpeikouHandGroups)), completeRyanpeikouHandGroups);
 
-        boolean iipeikouIsValid = iipeikou.isValid();
+        var iipeikouIsValid = iipeikou.isValid();
 
         assertFalse(iipeikouIsValid, "223344m445566s11z should not be valid for iipeikou");
     }
@@ -80,7 +82,7 @@ public class IipeikouTest
     {
         Yaku iipeikou = new Iipeikou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeSanrenkouHandGroups)), completeSanrenkouHandGroups);
 
-        boolean iipeikouIsValid = iipeikou.isValid();
+        var iipeikouIsValid = iipeikou.isValid();
 
         assertTrue(iipeikouIsValid, "222333444m456s11z should be valid for iipeikou");
     }
@@ -90,7 +92,7 @@ public class IipeikouTest
     {
         Yaku iipeikou = new Iipeikou(anyHand, anyGroups);
 
-        int iipeikouValue = iipeikou.getHanValue();
+        var iipeikouValue = iipeikou.getHanValue();
 
         assertEquals(1, iipeikouValue, "Iipeikou value should be 1");
     }

@@ -1,10 +1,9 @@
 package com.monsieurmahjong.commonjong.rules.generic.waits;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
-import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroupLengthComparator;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
@@ -14,7 +13,7 @@ public class TileGroupLengthComparatorTest
     @Test
     public void testCompare()
     {
-        List<TileGroup> groups = new ArrayList<>();
+        var groups = new ArrayList<TileGroup>();
         groups.addAll(TileGroupUtils.tileGroupsOf("123m", "111m", "11m"));
         groups.sort(new TileGroupLengthComparator());
 

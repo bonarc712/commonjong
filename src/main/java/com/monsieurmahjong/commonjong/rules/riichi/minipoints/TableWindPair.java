@@ -2,8 +2,7 @@ package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 
 import java.util.List;
 
-import com.monsieurmahjong.commonjong.game.*;
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
@@ -26,12 +25,12 @@ public class TableWindPair implements Fu
             return false;
         }
 
-        for (TileGroup group : groups)
+        for (var group : groups)
         {
             if (group.isPair() && group.getTileKindAt(0).isWind())
             {
-                MahjongTileKind windTile = group.getTileKindAt(0);
-                Seat wind = TileKindUtils.getSeatFromTileKind(windTile);
+                var windTile = group.getTileKindAt(0);
+                var wind = TileKindUtils.getSeatFromTileKind(windTile);
                 if (hand.isTableWind(wind))
                 {
                     return true;

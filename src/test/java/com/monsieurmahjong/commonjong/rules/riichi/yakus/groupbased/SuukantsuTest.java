@@ -1,11 +1,13 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Suukantsu;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -29,7 +31,7 @@ public class SuukantsuTest
     {
         Yaku suukantsu = new Suukantsu(new Hand(TileGroupUtils.getTilesFromTileGroups(completeSuukantsuHandGroups)), completeSuukantsuHandGroups);
 
-        boolean suukantsuIsValid = suukantsu.isValid();
+        var suukantsuIsValid = suukantsu.isValid();
 
         assertTrue(suukantsuIsValid, "4444m5555p77779999s11z should be valid for Suukantsu");
     }
@@ -39,7 +41,7 @@ public class SuukantsuTest
     {
         Yaku suukantsu = new Suukantsu(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteSuukantsuHandGroups)), incompleteSuukantsuHandGroups);
 
-        boolean suukantsuIsValid = suukantsu.isValid();
+        var suukantsuIsValid = suukantsu.isValid();
 
         assertTrue(suukantsuIsValid, "1111m2222p2222s1111z should be valid for Suukantsu");
     }
@@ -49,7 +51,7 @@ public class SuukantsuTest
     {
         Yaku suukantsu = new Suukantsu(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonSuukantsuHandGroups)), completeNonSuukantsuHandGroups);
 
-        boolean suukantsuIsValid = suukantsu.isValid();
+        var suukantsuIsValid = suukantsu.isValid();
 
         assertFalse(suukantsuIsValid, "123345m22345678p should not be valid for Suukantsu");
     }
@@ -59,7 +61,7 @@ public class SuukantsuTest
     {
         Yaku suukantsu = new Suukantsu(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonSuukantsuHandGroups)), incompleteNonSuukantsuHandGroups);
 
-        boolean suukantsuIsValid = suukantsu.isValid();
+        var suukantsuIsValid = suukantsu.isValid();
 
         assertFalse(suukantsuIsValid, "111m555p11s should not be valid for Suukantsu");
     }
@@ -69,7 +71,7 @@ public class SuukantsuTest
     {
         Yaku suukantsu = new Suukantsu(new Hand(TileGroupUtils.getTilesFromTileGroups(sankantsuHandGroups)), sankantsuHandGroups);
 
-        boolean suukantsuIsValid = suukantsu.isValid();
+        var suukantsuIsValid = suukantsu.isValid();
 
         assertFalse(suukantsuIsValid, "4444m5555p7777999s11z should not be valid for Suukantsu");
     }
@@ -79,7 +81,7 @@ public class SuukantsuTest
     {
         Yaku suukantsu = new Suukantsu(anyHand, anyGroups);
 
-        int suukantsuValue = suukantsu.getHanValue();
+        var suukantsuValue = suukantsu.getHanValue();
 
         assertEquals(13, suukantsuValue, "Suukantsu value should be 13");
     }
@@ -89,7 +91,7 @@ public class SuukantsuTest
     {
         Yaku suukantsu = new Suukantsu(anyHand, anyGroups);
 
-        boolean suukantsuIsYakuman = suukantsu.isYakuman();
+        var suukantsuIsYakuman = suukantsu.isYakuman();
 
         assertTrue(suukantsuIsYakuman, "Suukantsu should be yakuman");
     }

@@ -1,10 +1,9 @@
 package com.monsieurmahjong.commonjong.game.discard;
 
-import com.monsieurmahjong.commonjong.game.discard.DiscardStrategy;
-import com.monsieurmahjong.commonjong.game.discard.IndexBasedDiscardStrategy;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
@@ -15,9 +14,9 @@ public class IndexBasedDiscardStrategyTest
     {
         DiscardStrategy strategy = new IndexBasedDiscardStrategy();
 
-        Hand hand = new Hand(TileKindUtils.asHand("123456789s123p11m"));
+        var hand = new Hand(TileKindUtils.asHand("123456789s123p11m"));
         hand.setTileIndexToDiscard(10);
-        Tile discardedTile = strategy.discard(hand);
+        var discardedTile = strategy.discard(hand);
 
         Assertions.assertEquals(MahjongTileKind.CIRCLES_2, discardedTile.getTileKind(), "Wrong discard for 123456789s123p11m, it should be 2p");
 

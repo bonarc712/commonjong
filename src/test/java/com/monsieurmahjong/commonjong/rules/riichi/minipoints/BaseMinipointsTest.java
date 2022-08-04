@@ -1,15 +1,18 @@
 package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.minipoints.BaseMinipoints;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
@@ -25,10 +28,10 @@ public class BaseMinipointsTest
     @Test
     public void baseMinipoints_IfPlayerWonOnClosedRon_IsThirty()
     {
-        BaseMinipoints minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups, anyLog);
+        var minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups, anyLog);
         when(anyLog.doesPlayerWinOnRon(any())).thenReturn(true);
 
-        int fuValue = minipoints.getFuValue();
+        var fuValue = minipoints.getFuValue();
 
         assertEquals(30, fuValue, "Base minipoints should be 30 on closed ron");
     }
@@ -36,9 +39,9 @@ public class BaseMinipointsTest
     @Test
     public void baseMinipoints_IfPlayerWonOnSevenPairs_IsTwentyFive()
     {
-        BaseMinipoints minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuHandGroups)), completeChiitoitsuHandGroups, anyLog);
+        var minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuHandGroups)), completeChiitoitsuHandGroups, anyLog);
 
-        int fuValue = minipoints.getFuValue();
+        var fuValue = minipoints.getFuValue();
 
         assertEquals(25, fuValue, "Base minipoints should be 25 on seven pairs");
     }
@@ -46,13 +49,13 @@ public class BaseMinipointsTest
     @Test
     public void baseMinipoints_IfPlayerWonOnOpenRon_IsTwenty()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
-        List<Tile> meld = Arrays.asList(new Tile(MahjongTileKind.CIRCLES_3), new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
+        var meld = Arrays.asList(new Tile(MahjongTileKind.CIRCLES_3), new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5));
         hand.addMeld(meld);
-        BaseMinipoints minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyLog);
+        var minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyLog);
         when(anyLog.doesPlayerWinOnRon(any())).thenReturn(true);
 
-        int fuValue = minipoints.getFuValue();
+        var fuValue = minipoints.getFuValue();
 
         assertEquals(20, fuValue, "Base minipoints should be 20 on open ron");
     }
@@ -60,11 +63,11 @@ public class BaseMinipointsTest
     @Test
     public void baseMinipoints_IfPlayerWonOnClosedTsumo_IsTwenty()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
-        BaseMinipoints minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyLog);
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
+        var minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyLog);
         when(anyLog.doesPlayerWinOnRon(any())).thenReturn(false);
 
-        int fuValue = minipoints.getFuValue();
+        var fuValue = minipoints.getFuValue();
 
         assertEquals(20, fuValue, "Base minipoints should be 20 on closed tsumo");
     }
@@ -72,13 +75,13 @@ public class BaseMinipointsTest
     @Test
     public void baseMinipoints_IfPlayerWonOnOpenTsumo_IsTwenty()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
-        List<Tile> meld = Arrays.asList(new Tile(MahjongTileKind.CIRCLES_3), new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
+        var meld = Arrays.asList(new Tile(MahjongTileKind.CIRCLES_3), new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5));
         hand.addMeld(meld);
-        BaseMinipoints minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyLog);
+        var minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyLog);
         when(anyLog.doesPlayerWinOnRon(any())).thenReturn(false);
 
-        int fuValue = minipoints.getFuValue();
+        var fuValue = minipoints.getFuValue();
 
         assertEquals(20, fuValue, "Base minipoints should be 20 on open tsumo");
     }
@@ -86,9 +89,9 @@ public class BaseMinipointsTest
     @Test
     public void baseMinipoints_IsAlwaysValid()
     {
-        BaseMinipoints minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups, anyLog);
+        var minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups, anyLog);
 
-        boolean valid = minipoints.isValid();
+        var valid = minipoints.isValid();
 
         assertTrue(valid, "Base minipoints are always valid");
     }

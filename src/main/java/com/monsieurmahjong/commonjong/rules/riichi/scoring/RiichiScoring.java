@@ -1,8 +1,10 @@
 package com.monsieurmahjong.commonjong.rules.riichi.scoring;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.game.mahjong.MahjongGame;
 import com.monsieurmahjong.commonjong.rules.generic.Scoring;
 import com.monsieurmahjong.commonjong.utils.MathUtils;
@@ -37,21 +39,21 @@ public class RiichiScoring implements Scoring
     {
         Map<Seat, Integer> seatPayments = new HashMap<>();
 
-        int baseScore = (yakuman > 0) //
+        var baseScore = yakuman > 0 //
                 ? getYakumanBaseScore(yakuman) //
                 : getBaseScore(han, fu);
 
         if (winner == Seat.EAST)
         {
-            int paidScore = MathUtils.roundToUpperHundred(baseScore / 2);
+            var paidScore = MathUtils.roundToUpperHundred(baseScore / 2);
             seatPayments.put(Seat.SOUTH, paidScore);
             seatPayments.put(Seat.WEST, paidScore);
             seatPayments.put(Seat.NORTH, paidScore);
         }
         else
         {
-            int dealerScore = MathUtils.roundToUpperHundred(baseScore / 2);
-            int nonDealerScore = MathUtils.roundToUpperHundred(baseScore / 4);
+            var dealerScore = MathUtils.roundToUpperHundred(baseScore / 2);
+            var nonDealerScore = MathUtils.roundToUpperHundred(baseScore / 4);
 
             seatPayments.put(Seat.EAST, dealerScore);
             seatPayments.put(Seat.SOUTH, nonDealerScore);
@@ -70,7 +72,7 @@ public class RiichiScoring implements Scoring
 
     public int getRonScore(int han, int fu, int yakuman, boolean dealer)
     {
-        int baseScore = (yakuman > 0) //
+        var baseScore = yakuman > 0 //
                 ? getYakumanBaseScore(yakuman) //
                 : getBaseScore(han, fu);
 
@@ -88,51 +90,51 @@ public class RiichiScoring implements Scoring
             return 0;
         }
 
-        ScoringTier scoringTier = getScoringTier(han);
-        int baseScore = getBaseScore(han, fu, scoringTier);
+        var scoringTier = getScoringTier(han);
+        var baseScore = getBaseScore(han, fu, scoringTier);
 
         return baseScore;
     }
 
     private int getYakumanBaseScore(int yakuman)
     {
-        ScoringTier scoringTier = getYakumanScoringTier(yakuman);
-        int baseScore = getBaseScore(0, 0, scoringTier);
+        var scoringTier = getYakumanScoringTier(yakuman);
+        var baseScore = getBaseScore(0, 0, scoringTier);
 
         return baseScore;
     }
 
     /**
-     * The base score is the score someone gets on ron,
-     * as non-dealer, without rounding to the upper hundred
+     * The base score is the score someone gets on ron, as non-dealer, without
+     * rounding to the upper hundred
      */
     private int getBaseScore(int han, int fu, ScoringTier scoringTier)
     {
         switch (scoringTier)
         {
-            case MANGAN:
-                return 8000;
-            case HANEMAN:
-                return 12000;
-            case BAIMAN:
-                return 16000;
-            case SANBAIMAN:
-                return 24000;
-            case YAKUMAN:
-                return 32000;
-            case DOUBLE_YAKUMAN:
-                return 64000;
-            case TRIPLE_YAKUMAN:
-                return 96000;
-            case QUADRUPLE_YAKUMAN:
-                return 128000;
-            case QUINTUPLE_YAKUMAN:
-                return 160000;
-            case SEXTUPLE_YAKUMAN:
-                return 192000;
-            case NORMAL:
-            default:
-                return calculateScore(han, fu);
+        case MANGAN:
+            return 8000;
+        case HANEMAN:
+            return 12000;
+        case BAIMAN:
+            return 16000;
+        case SANBAIMAN:
+            return 24000;
+        case YAKUMAN:
+            return 32000;
+        case DOUBLE_YAKUMAN:
+            return 64000;
+        case TRIPLE_YAKUMAN:
+            return 96000;
+        case QUADRUPLE_YAKUMAN:
+            return 128000;
+        case QUINTUPLE_YAKUMAN:
+            return 160000;
+        case SEXTUPLE_YAKUMAN:
+            return 192000;
+        case NORMAL:
+        default:
+            return calculateScore(han, fu);
         }
     }
 
@@ -143,7 +145,7 @@ public class RiichiScoring implements Scoring
             return 8000;
         }
 
-        int score = (int) (32 * fu * Math.pow(2, han - 1));
+        var score = (int) (32 * fu * Math.pow(2, han - 1));
         return Math.min(score, 8000);
     }
 

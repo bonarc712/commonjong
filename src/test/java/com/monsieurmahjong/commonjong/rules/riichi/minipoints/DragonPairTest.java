@@ -1,10 +1,12 @@
 package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.minipoints.DragonPair;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
@@ -20,9 +22,9 @@ public class DragonPairTest
     @Test
     public void withAHandWithADragonPair_DragonPairFu_IsValid()
     {
-        DragonPair dragonPair = new DragonPair(completeGreenDragonPairHandGroups);
+        var dragonPair = new DragonPair(completeGreenDragonPairHandGroups);
 
-        boolean isValid = dragonPair.isValid();
+        var isValid = dragonPair.isValid();
 
         assertTrue(isValid, "Dragon pair should be valid for a hand that contains a dragon pair");
     }
@@ -30,9 +32,9 @@ public class DragonPairTest
     @Test
     public void withAnIncompleteHandWithADragonPair_DragonPairFu_IsValid()
     {
-        DragonPair dragonPair = new DragonPair(incompleteGreenDragonPairHandGroups);
+        var dragonPair = new DragonPair(incompleteGreenDragonPairHandGroups);
 
-        boolean isValid = dragonPair.isValid();
+        var isValid = dragonPair.isValid();
 
         assertTrue(isValid, "Dragon pair should be valid for a hand that contains a dragon pair");
     }
@@ -40,9 +42,9 @@ public class DragonPairTest
     @Test
     public void withAHandWithoutADragonPair_DragonPairFu_IsNotValid()
     {
-        DragonPair dragonPair = new DragonPair(completeNonGreenDragonPairHandGroups);
+        var dragonPair = new DragonPair(completeNonGreenDragonPairHandGroups);
 
-        boolean isValid = dragonPair.isValid();
+        var isValid = dragonPair.isValid();
 
         assertFalse(isValid, "Dragon pair should not be valid for a hand that doesn't contain a dragon pair");
     }
@@ -50,9 +52,9 @@ public class DragonPairTest
     @Test
     public void withASevenPairsHandWithADragonPair_DragonPairFu_IsNotValid()
     {
-        DragonPair dragonPair = new DragonPair(completeChiitoitsuWithDragonPairHandGroups);
+        var dragonPair = new DragonPair(completeChiitoitsuWithDragonPairHandGroups);
 
-        boolean isValid = dragonPair.isValid();
+        var isValid = dragonPair.isValid();
 
         assertFalse(isValid, "Dragon pair should not be valid for a seven pairs hand that contains a dragon pair");
     }
@@ -60,9 +62,9 @@ public class DragonPairTest
     @Test
     public void getFuValue_ForDragonPair_IsTwo()
     {
-        DragonPair dragonPair = new DragonPair(new ArrayList<>());
+        var dragonPair = new DragonPair(new ArrayList<>());
 
-        int value = dragonPair.getFuValue();
+        var value = dragonPair.getFuValue();
 
         assertEquals(2, value, "Dragon pair value should be 2");
     }

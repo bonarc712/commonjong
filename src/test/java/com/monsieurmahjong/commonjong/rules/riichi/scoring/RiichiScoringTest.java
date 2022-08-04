@@ -2,9 +2,9 @@ package com.monsieurmahjong.commonjong.rules.riichi.scoring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoring;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Seat;
@@ -14,7 +14,7 @@ public class RiichiScoringTest
     @Test
     public void testTsumoScoring()
     {
-        RiichiScoring scoring = new RiichiScoring();
+        var scoring = new RiichiScoring();
 
         // dealer
         assertEquals(makeScoreMap(Seat.SOUTH, 2000, Seat.WEST, 2000, Seat.NORTH, 2000), scoring.getTsumoScore(3, 30, Seat.EAST));
@@ -40,7 +40,7 @@ public class RiichiScoringTest
 
     private Map<Seat, Integer> makeScoreMap(Seat firstSeat, int firstScore, Seat secondSeat, int secondScore, Seat thirdSeat, int thirdScore)
     {
-        Map<Seat, Integer> scoreMap = new HashMap<>();
+        var scoreMap = new HashMap<Seat, Integer>();
         scoreMap.put(firstSeat, firstScore);
         scoreMap.put(secondSeat, secondScore);
         scoreMap.put(thirdSeat, thirdScore);
@@ -51,7 +51,7 @@ public class RiichiScoringTest
     @Test
     public void testRonScoring()
     {
-        RiichiScoring scoring = new RiichiScoring();
+        var scoring = new RiichiScoring();
 
         // dealer
         assertEquals(12000, scoring.getRonScore(4, 40, true));

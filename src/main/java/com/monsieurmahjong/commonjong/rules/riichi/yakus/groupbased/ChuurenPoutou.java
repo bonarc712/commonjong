@@ -3,7 +3,7 @@ package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.*;
+import com.monsieurmahjong.commonjong.rules.generic.TileFamily;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class ChuurenPoutou extends GroupBasedYaku
@@ -20,13 +20,13 @@ public class ChuurenPoutou extends GroupBasedYaku
         {
             return false;
         }
-        int[] amountOfEachNumber = new int[9];
-        boolean duplicateFound = false;
-        TileFamily family = TileFamily.NONE;
+        var amountOfEachNumber = new int[9];
+        var duplicateFound = false;
+        var family = TileFamily.NONE;
 
-        for (TileGroup group : groups)
+        for (var group : groups)
         {
-            for (MahjongTileKind kind : group.getTileKinds())
+            for (var kind : group.getTileKinds())
             {
                 if (family == TileFamily.NONE)
                 {
@@ -44,7 +44,7 @@ public class ChuurenPoutou extends GroupBasedYaku
                     return false;
                 }
 
-                int currentNumber = kind.getTileNumber();
+                var currentNumber = kind.getTileNumber();
                 amountOfEachNumber[currentNumber - 1] = amountOfEachNumber[currentNumber - 1]++;
                 if ((currentNumber == 1 || currentNumber == 9) && amountOfEachNumber[currentNumber - 1] >= 4)
                 {
@@ -77,10 +77,10 @@ public class ChuurenPoutou extends GroupBasedYaku
     @Override
     public int getHanValue()
     {
-        MahjongTileKind winningTile = hand.getWinningTile();
+        var winningTile = hand.getWinningTile();
         if (winningTile.isNumeral())
         {
-            int tileCount = (int) groups.stream().map(group -> group.getTileKinds()).flatMap(List::stream).filter(kind -> kind.getTileNumber() == winningTile.getTileNumber()).count();
+            var tileCount = (int) groups.stream().map(group -> group.getTileKinds()).flatMap(List::stream).filter(kind -> kind.getTileNumber() == winningTile.getTileNumber()).count();
             if (winningTile.getTileNumber() == 1 || winningTile.getTileNumber() == 9)
             {
                 return tileCount == 4 ? 26 : 13;

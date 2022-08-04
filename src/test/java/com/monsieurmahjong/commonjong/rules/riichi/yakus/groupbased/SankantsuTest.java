@@ -1,11 +1,13 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Sankantsu;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -30,7 +32,7 @@ public class SankantsuTest
     {
         Yaku sankantsu = new Sankantsu(new Hand(TileGroupUtils.getTilesFromTileGroups(completeSankantsuHandGroups)), completeSankantsuHandGroups);
 
-        boolean sankantsuIsValid = sankantsu.isValid();
+        var sankantsuIsValid = sankantsu.isValid();
 
         assertTrue(sankantsuIsValid, "4444m5555p7777999s11z should be valid for Sankantsu");
     }
@@ -40,7 +42,7 @@ public class SankantsuTest
     {
         Yaku sankantsu = new Sankantsu(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteSankantsuHandGroups)), incompleteSankantsuHandGroups);
 
-        boolean sankantsuIsValid = sankantsu.isValid();
+        var sankantsuIsValid = sankantsu.isValid();
 
         assertTrue(sankantsuIsValid, "1111m2222p2222s11z should be valid for Sankantsu");
     }
@@ -50,7 +52,7 @@ public class SankantsuTest
     {
         Yaku sankantsu = new Sankantsu(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonSankantsuHandGroups)), completeNonSankantsuHandGroups);
 
-        boolean sankantsuIsValid = sankantsu.isValid();
+        var sankantsuIsValid = sankantsu.isValid();
 
         assertFalse(sankantsuIsValid, "123345m22345678p should not be valid for Sankantsu");
     }
@@ -60,7 +62,7 @@ public class SankantsuTest
     {
         Yaku sankantsu = new Sankantsu(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonSankantsuHandGroups)), incompleteNonSankantsuHandGroups);
 
-        boolean sankantsuIsValid = sankantsu.isValid();
+        var sankantsuIsValid = sankantsu.isValid();
 
         assertFalse(sankantsuIsValid, "111m555p11s should not be valid for Sankantsu");
     }
@@ -70,7 +72,7 @@ public class SankantsuTest
     {
         Yaku sankantsu = new Sankantsu(new Hand(TileGroupUtils.getTilesFromTileGroups(ryankantsuWithFourOfAnotherTileHandGroups)), ryankantsuWithFourOfAnotherTileHandGroups);
 
-        boolean sankantsuIsValid = sankantsu.isValid();
+        var sankantsuIsValid = sankantsu.isValid();
 
         assertFalse(sankantsuIsValid, "4444m5555p777789s11z should not be valid for Sankantsu");
     }
@@ -80,7 +82,7 @@ public class SankantsuTest
     {
         Yaku sankantsu = new Sankantsu(new Hand(TileGroupUtils.getTilesFromTileGroups(suukantsuHandGroups)), suukantsuHandGroups);
 
-        boolean sankantsuIsValid = sankantsu.isValid();
+        var sankantsuIsValid = sankantsu.isValid();
 
         assertFalse(sankantsuIsValid, "4444m5555p77779999s11z should not be valid for Sankantsu");
     }
@@ -90,7 +92,7 @@ public class SankantsuTest
     {
         Yaku sankantsu = new Sankantsu(anyHand, anyGroups);
 
-        int sankantsuValue = sankantsu.getHanValue();
+        var sankantsuValue = sankantsu.getHanValue();
 
         assertEquals(2, sankantsuValue, "Sankantsu value should be 2");
     }

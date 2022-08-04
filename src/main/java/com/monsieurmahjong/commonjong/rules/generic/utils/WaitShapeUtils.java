@@ -17,8 +17,8 @@ public class WaitShapeUtils
         {
             if (first != second && first != third && second != third)
             {
-                int highestIndex = Math.max(first, Math.max(second, third));
-                int lowestIndex = Math.min(first, Math.min(second, third));
+                var highestIndex = Math.max(first, Math.max(second, third));
+                var lowestIndex = Math.min(first, Math.min(second, third));
 
                 // difference must be exactly two
                 return highestIndex - lowestIndex == 2;
@@ -33,26 +33,28 @@ public class WaitShapeUtils
     }
 
     /**
-     * This method checks for a protogroup. A protogroup is two tiles
-     * that can form a group, for instance 1-2 in wait of a 3, 3-5 in
-     * wait of a 4, or 6-7 in wait of a 5 or an 8.
+     * This method checks for a protogroup. A protogroup is two tiles that can form
+     * a group, for instance 1-2 in wait of a 3, 3-5 in wait of a 4, or 6-7 in wait
+     * of a 5 or an 8.
      * 
      * By definition, a pair is not a protogroup.
      */
     public static boolean isProtogroup(int first, int second)
     {
-        int highestIndex = Math.max(first, second);
-        int lowestIndex = Math.min(first, second);
+        var highestIndex = Math.max(first, second);
+        var lowestIndex = Math.min(first, second);
 
-        // Same suit check required. 17 and 19 are two apart, but refer to 9-pin and 2-sô.
-        // Protogroups (taatsu) do not exist for winds, all pairs are considered separate entities.
+        // Same suit check required. 17 and 19 are two apart, but refer to 9-pin and
+        // 2-sou.
+        // Protogroups (taatsu) do not exist for winds, all pairs are considered
+        // separate entities.
         return (lowestIndex + 1 == highestIndex || lowestIndex + 2 == highestIndex) && TileKindUtils.areSameSuit(first, second);
     }
 
     /**
-     * This method checks for a double-sided block (that waits on a ryanmen). This is a protogroup characterized
-     * by a wait on both sides, for instance 34 is waiting for 2 or 5, so it qualifies as a double
-     * sided wait.
+     * This method checks for a double-sided block (that waits on a ryanmen). This
+     * is a protogroup characterized by a wait on both sides, for instance 34 is
+     * waiting for 2 or 5, so it qualifies as a double sided wait.
      */
     public static boolean isDoubleSidedBlock(int first, int second)
     {
@@ -60,8 +62,9 @@ public class WaitShapeUtils
     }
 
     /**
-     * This method checks for an end block (that waits on a penchan). This is a protogroup characterized
-     * by a wait on a 3 or a 7 only, as it is either a 12(3) or (7)89.
+     * This method checks for an end block (that waits on a penchan). This is a
+     * protogroup characterized by a wait on a 3 or a 7 only, as it is either a
+     * 12(3) or (7)89.
      */
     public static boolean isEndBlock(int first, int second)
     {
@@ -69,8 +72,9 @@ public class WaitShapeUtils
     }
 
     /**
-     * This method checks for an inside block (that waits on a kanchan). This is a protogroup characterized
-     * by a wait on the middle tile. For instance, 35 waits on 4.
+     * This method checks for an inside block (that waits on a kanchan). This is a
+     * protogroup characterized by a wait on the middle tile. For instance, 35 waits
+     * on 4.
      */
     public static boolean isInsideBlock(int first, int second)
     {

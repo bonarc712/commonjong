@@ -2,10 +2,9 @@ package com.monsieurmahjong.commonjong.rules.generic.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +17,8 @@ public class TileGroupUtilsTest
     @Test
     public void testTileGroupsOf()
     {
-        List<TileGroup> tileGroups = TileGroupUtils.tileGroupsOf("234s", "77z");
-        List<TileGroup> expectedTileGroups = new ArrayList<>();
+        var tileGroups = TileGroupUtils.tileGroupsOf("234s", "77z");
+        var expectedTileGroups = new ArrayList<TileGroup>();
         expectedTileGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4));
         expectedTileGroups.add(TileGroup.of(MahjongTileKind.RED, MahjongTileKind.RED));
 
@@ -29,8 +28,8 @@ public class TileGroupUtilsTest
     @Test
     public void testGetTilesFromMPSZNotation()
     {
-        List<Tile> tiles = TileGroupUtils.getTilesFromMPSZNotation("234s");
-        List<Tile> expectedTiles = Arrays.asList(new Tile(MahjongTileKind.BAMBOOS_2), //
+        var tiles = TileGroupUtils.getTilesFromMPSZNotation("234s");
+        var expectedTiles = Arrays.asList(new Tile(MahjongTileKind.BAMBOOS_2), //
                 new Tile(MahjongTileKind.BAMBOOS_3), new Tile(MahjongTileKind.BAMBOOS_4));
 
         assertEquals(expectedTiles, tiles, "234s should give 234s as tiles");
@@ -46,18 +45,18 @@ public class TileGroupUtilsTest
 
     private static void testTileSpecificTileGroups(String tiles, String... tileGroups)
     {
-        List<TileGroup> tileGroups1 = TileGroupUtils.tileGroupsOf(tileGroups);
-        List<Tile> tileList1 = TileGroupUtils.getTilesFromTileGroups(tileGroups1);
+        var tileGroups1 = TileGroupUtils.tileGroupsOf(tileGroups);
+        var tileList1 = TileGroupUtils.getTilesFromTileGroups(tileGroups1);
         Assertions.assertEquals(TileKindUtils.asHand(tiles), tileList1);
     }
 
     @Test
     public void testGetTileGroupFromTiles()
     {
-        TileGroup bambooRun234 = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4);
-        TileGroup redPair = TileGroup.of(MahjongTileKind.RED, MahjongTileKind.RED);
+        var bambooRun234 = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4);
+        var redPair = TileGroup.of(MahjongTileKind.RED, MahjongTileKind.RED);
 
-        TileGroup group = TileGroupUtils.getTileGroupFromTiles(TileKindUtils.asHand("234s"));
+        var group = TileGroupUtils.getTileGroupFromTiles(TileKindUtils.asHand("234s"));
         assertEquals(bambooRun234, group);
         group = TileGroupUtils.getTileGroupFromTiles(TileKindUtils.asHand("77z"));
         assertEquals(redPair, group);

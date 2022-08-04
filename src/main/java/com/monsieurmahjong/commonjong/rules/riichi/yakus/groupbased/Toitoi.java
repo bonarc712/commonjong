@@ -15,8 +15,8 @@ public class Toitoi extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        int pairAmount = 0;
-        for (TileGroup group : groups)
+        var pairAmount = 0;
+        for (var group : groups)
         {
             if (group.isPair())
             {

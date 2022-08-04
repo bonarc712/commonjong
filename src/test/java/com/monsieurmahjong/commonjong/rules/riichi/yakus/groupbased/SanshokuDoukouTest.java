@@ -1,11 +1,13 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.SanshokuDoukou;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -29,7 +31,7 @@ public class SanshokuDoukouTest
     {
         Yaku sanshokuDoukou = new SanshokuDoukou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeSanshokuDoukouHandGroups)), completeSanshokuDoukouHandGroups);
 
-        boolean sanshokuDoukouIsValid = sanshokuDoukou.isValid();
+        var sanshokuDoukouIsValid = sanshokuDoukou.isValid();
 
         assertTrue(sanshokuDoukouIsValid, "444m444p444999s11z should be valid for sanshoku doukou");
     }
@@ -39,7 +41,7 @@ public class SanshokuDoukouTest
     {
         Yaku sanshokuDoukou = new SanshokuDoukou(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteSanshokuDoukouHandGroups)), incompleteSanshokuDoukouHandGroups);
 
-        boolean sanshokuDoukouIsValid = sanshokuDoukou.isValid();
+        var sanshokuDoukouIsValid = sanshokuDoukou.isValid();
 
         assertTrue(sanshokuDoukouIsValid, "111m111p111s11z should be valid for sanshoku doukou");
     }
@@ -49,7 +51,7 @@ public class SanshokuDoukouTest
     {
         Yaku sanshokuDoukou = new SanshokuDoukou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonSanshokuDoukouHandGroups)), completeNonSanshokuDoukouHandGroups);
 
-        boolean sanshokuDoukouIsValid = sanshokuDoukou.isValid();
+        var sanshokuDoukouIsValid = sanshokuDoukou.isValid();
 
         assertFalse(sanshokuDoukouIsValid, "123345m22345678p should not be valid for sanshoku doukou");
     }
@@ -59,7 +61,7 @@ public class SanshokuDoukouTest
     {
         Yaku sanshokuDoukou = new SanshokuDoukou(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonSanshokuDoukouHandGroups)), incompleteNonSanshokuDoukouHandGroups);
 
-        boolean sanshokuDoukouIsValid = sanshokuDoukou.isValid();
+        var sanshokuDoukouIsValid = sanshokuDoukou.isValid();
 
         assertFalse(sanshokuDoukouIsValid, "111m555p11s should not be valid for sanshoku doukou");
     }
@@ -69,7 +71,7 @@ public class SanshokuDoukouTest
     {
         Yaku sanshokuDoukou = new SanshokuDoukou(new Hand(TileGroupUtils.getTilesFromTileGroups(twoRyanshokuDoukouHandGroups)), twoRyanshokuDoukouHandGroups);
 
-        boolean sanshokuDoukouIsValid = sanshokuDoukou.isValid();
+        var sanshokuDoukouIsValid = sanshokuDoukou.isValid();
 
         assertFalse(sanshokuDoukouIsValid, "11144m777p111777s should be valid for sanshoku doukou");
     }
@@ -79,7 +81,7 @@ public class SanshokuDoukouTest
     {
         Yaku sanshokuDoukou = new SanshokuDoukou(anyHand, anyGroups);
 
-        int sanshokuDoukouValue = sanshokuDoukou.getHanValue();
+        var sanshokuDoukouValue = sanshokuDoukou.getHanValue();
 
         assertEquals(2, sanshokuDoukouValue, "Sanshoku doukou value should be 2");
     }

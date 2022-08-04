@@ -1,10 +1,10 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class Chiitoitsu extends GroupBasedYaku
@@ -17,8 +17,8 @@ public class Chiitoitsu extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        List<MahjongTileKind> knownTileKinds = new ArrayList<>();
-        for (TileGroup group : groups)
+        var knownTileKinds = new ArrayList<MahjongTileKind>();
+        for (var group : groups)
         {
             if (!group.isPair())
             {
@@ -26,7 +26,7 @@ public class Chiitoitsu extends GroupBasedYaku
             }
             else
             {
-                MahjongTileKind tileKind = group.getTileKindAt(0);
+                var tileKind = group.getTileKindAt(0);
                 if (knownTileKinds.contains(tileKind))
                 {
                     return false;

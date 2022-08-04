@@ -1,10 +1,11 @@
 package com.monsieurmahjong.commonjong.game.mahjong;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import com.monsieurmahjong.commonjong.game.mahjong.MahjongGame;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.game.players.Player;
@@ -21,7 +22,7 @@ public class MahjongGameTest
         when(game.getAmountOfPlayers()).thenReturn(4);
         when(player.getSeat()).thenReturn(Seat.EAST);
 
-        Seat nextSeat = game.determineNextPlayer(player);
+        var nextSeat = game.determineNextPlayer(player);
 
         Assertions.assertEquals(Seat.SOUTH, nextSeat);
     }
@@ -33,7 +34,7 @@ public class MahjongGameTest
         when(game.getAmountOfPlayers()).thenReturn(4);
         when(player.getSeat()).thenReturn(Seat.SOUTH);
 
-        Seat nextSeat = game.determineNextPlayer(player);
+        var nextSeat = game.determineNextPlayer(player);
 
         Assertions.assertEquals(Seat.WEST, nextSeat);
     }
@@ -45,7 +46,7 @@ public class MahjongGameTest
         when(game.getAmountOfPlayers()).thenReturn(4);
         when(player.getSeat()).thenReturn(Seat.WEST);
 
-        Seat nextSeat = game.determineNextPlayer(player);
+        var nextSeat = game.determineNextPlayer(player);
 
         Assertions.assertEquals(Seat.NORTH, nextSeat);
     }
@@ -57,7 +58,7 @@ public class MahjongGameTest
         when(game.getAmountOfPlayers()).thenReturn(4);
         when(player.getSeat()).thenReturn(Seat.NORTH);
 
-        Seat nextSeat = game.determineNextPlayer(player);
+        var nextSeat = game.determineNextPlayer(player);
 
         Assertions.assertEquals(Seat.EAST, nextSeat);
     }
@@ -69,7 +70,7 @@ public class MahjongGameTest
         when(game.getAmountOfPlayers()).thenReturn(3);
         when(player.getSeat()).thenReturn(Seat.WEST);
 
-        Seat nextSeat = game.determineNextPlayer(player);
+        var nextSeat = game.determineNextPlayer(player);
 
         Assertions.assertEquals(Seat.EAST, nextSeat);
     }

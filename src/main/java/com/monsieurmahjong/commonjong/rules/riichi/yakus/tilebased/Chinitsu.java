@@ -1,6 +1,6 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.TileFamily;
 
 public class Chinitsu extends TileBasedYaku
@@ -13,9 +13,9 @@ public class Chinitsu extends TileBasedYaku
     @Override
     public boolean isValid()
     {
-        TileFamily chosenFamily = TileFamily.NONE;
+        var chosenFamily = TileFamily.NONE;
 
-        for (Tile tile : hand.getTiles())
+        for (var tile : hand.getTiles())
         {
             if (tile.getTileKind().isNumeral())
             {

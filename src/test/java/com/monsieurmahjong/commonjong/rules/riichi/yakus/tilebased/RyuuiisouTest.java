@@ -1,8 +1,9 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.tilebased.Ryuuiisou;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -23,7 +24,7 @@ public class RyuuiisouTest
     {
         Yaku ryuuiisou = new Ryuuiisou(completeRyuuiisouHand);
 
-        boolean ryuuiisouIsValid = ryuuiisou.isValid();
+        var ryuuiisouIsValid = ryuuiisou.isValid();
 
         assertTrue(ryuuiisouIsValid, "22234666888s666z should be valid for ryuuiisou");
     }
@@ -33,7 +34,7 @@ public class RyuuiisouTest
     {
         Yaku ryuuiisou = new Ryuuiisou(incompleteRyuuiisouHand);
 
-        boolean ryuuiisouIsValid = ryuuiisou.isValid();
+        var ryuuiisouIsValid = ryuuiisou.isValid();
 
         assertTrue(ryuuiisouIsValid, "22234666s should be valid for ryuuiisou");
     }
@@ -43,7 +44,7 @@ public class RyuuiisouTest
     {
         Yaku ryuuiisou = new Ryuuiisou(completeNonRyuuiisouHand);
 
-        boolean ryuuiisouIsValid = ryuuiisou.isValid();
+        var ryuuiisouIsValid = ryuuiisou.isValid();
 
         assertFalse(ryuuiisouIsValid, "11122233344s777z should not be valid for ryuuiisou");
     }
@@ -53,7 +54,7 @@ public class RyuuiisouTest
     {
         Yaku ryuuiisou = new Ryuuiisou(incompleteNonRyuuiisouHand);
 
-        boolean ryuuiisouIsValid = ryuuiisou.isValid();
+        var ryuuiisouIsValid = ryuuiisou.isValid();
 
         assertFalse(ryuuiisouIsValid, "222345666s should not be valid for ryuuiisou");
     }
@@ -63,7 +64,7 @@ public class RyuuiisouTest
     {
         Yaku ryuuiisou = new Ryuuiisou(anyHand);
 
-        int ryuuiisouValue = ryuuiisou.getHanValue();
+        var ryuuiisouValue = ryuuiisou.getHanValue();
 
         assertEquals(13, ryuuiisouValue, "Ryuuiisou value should be 13");
     }
@@ -73,7 +74,7 @@ public class RyuuiisouTest
     {
         Yaku ryuuiisou = new Ryuuiisou(anyHand);
 
-        boolean ryuuiisouIsYakuman = ryuuiisou.isYakuman();
+        var ryuuiisouIsYakuman = ryuuiisou.isYakuman();
 
         assertTrue(ryuuiisouIsYakuman, "Ryuuiisou should be yakuman");
     }

@@ -1,10 +1,9 @@
 package com.monsieurmahjong.commonjong.game.discard;
 
-import com.monsieurmahjong.commonjong.game.discard.DiscardStrategy;
-import com.monsieurmahjong.commonjong.game.discard.RightMostDiscardStrategy;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
@@ -15,7 +14,7 @@ public class RightMostDiscardStrategyTest
     {
         DiscardStrategy strategy = new RightMostDiscardStrategy();
 
-        Tile discardedTile = strategy.discard(new Hand(TileKindUtils.asHand("123456789s123p11m")));
+        var discardedTile = strategy.discard(new Hand(TileKindUtils.asHand("123456789s123p11m")));
 
         Assertions.assertEquals(MahjongTileKind.BAMBOOS_9, discardedTile.getTileKind(), "Wrong discard for 123456789s123p11m, it should be 9s");
 

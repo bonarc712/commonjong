@@ -1,14 +1,17 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.yakuhai;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.yakuhai.TableWindYakuhai;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
@@ -29,11 +32,11 @@ public class TableWindYakuhaiTest
     @Test
     public void testValidityOf_HandWithFourteenTableWindYakuhaiTiles_ShouldBeTrue()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeTableWindYakuhaiHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeTableWindYakuhaiHandGroups));
         hand.addTableWind(tableWind);
         Yaku tableWindYakuhai = new TableWindYakuhai(hand, completeTableWindYakuhaiHandGroups);
 
-        boolean tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
+        var tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
 
         assertTrue(tableWindYakuhaiIsValid, "111m888p999s11333z should be valid for table wind yakuhai");
     }
@@ -41,11 +44,11 @@ public class TableWindYakuhaiTest
     @Test
     public void testValidityOf_HandWithOnlyTableWindYakuhaiTiles_ShouldBeTrue()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteTableWindYakuhaiHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteTableWindYakuhaiHandGroups));
         hand.addTableWind(tableWind);
         Yaku tableWindYakuhai = new TableWindYakuhai(hand, incompleteTableWindYakuhaiHandGroups);
 
-        boolean tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
+        var tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
 
         assertTrue(tableWindYakuhaiIsValid, "111m11333z should be valid for table wind yakuhai");
     }
@@ -55,7 +58,7 @@ public class TableWindYakuhaiTest
     {
         Yaku tableWindYakuhai = new TableWindYakuhai(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonTableWindYakuhaiHandGroups)), completeNonTableWindYakuhaiHandGroups);
 
-        boolean tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
+        var tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
 
         assertFalse(tableWindYakuhaiIsValid, "123345m22345678p should not be valid for table wind yakuhai");
     }
@@ -65,7 +68,7 @@ public class TableWindYakuhaiTest
     {
         Yaku tableWindYakuhai = new TableWindYakuhai(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonTableWindYakuhaiHandGroups)), incompleteNonTableWindYakuhaiHandGroups);
 
-        boolean tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
+        var tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
 
         assertFalse(tableWindYakuhaiIsValid, "111m567p11s should not be valid for table wind yakuhai");
     }
@@ -73,12 +76,12 @@ public class TableWindYakuhaiTest
     @Test
     public void testValidityOf_TableWindYakuhaiWithWestTripletInTonshaba_ShouldBeTrue()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeTableWindYakuhaiHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeTableWindYakuhaiHandGroups));
         hand.addTableWind(Seat.EAST);
         hand.addTableWind(Seat.WEST);
         Yaku tableWindYakuhai = new TableWindYakuhai(hand, completeTableWindYakuhaiHandGroups);
 
-        boolean tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
+        var tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
 
         assertTrue(tableWindYakuhaiIsValid, "111m888p999s11333z should be valid for table wind yakuhai in tonshaba");
     }
@@ -86,11 +89,11 @@ public class TableWindYakuhaiTest
     @Test
     public void testValidityOf_HandWithTableWindKanYakuhaiTiles_ShouldBeTrue()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeTableWindKanYakuhaiHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeTableWindKanYakuhaiHandGroups));
         hand.addTableWind(tableWind);
         Yaku tableWindYakuhai = new TableWindYakuhai(hand, completeTableWindKanYakuhaiHandGroups);
 
-        boolean tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
+        var tableWindYakuhaiIsValid = tableWindYakuhai.isValid();
 
         assertTrue(tableWindYakuhaiIsValid, "111888p999s113333z should be valid for table wind yakuhai");
     }
@@ -100,7 +103,7 @@ public class TableWindYakuhaiTest
     {
         Yaku tableWindYakuhai = new TableWindYakuhai(anyHand, anyGroups);
 
-        int tableWindYakuhaiValue = tableWindYakuhai.getHanValue();
+        var tableWindYakuhaiValue = tableWindYakuhai.getHanValue();
 
         assertEquals(1, tableWindYakuhaiValue, "TableWindYakuhai value should be 1");
     }

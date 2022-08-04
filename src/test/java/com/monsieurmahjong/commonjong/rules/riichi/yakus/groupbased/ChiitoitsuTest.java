@@ -1,11 +1,13 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Chiitoitsu;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -30,7 +32,7 @@ public class ChiitoitsuTest
     {
         Yaku chiitoitsu = new Chiitoitsu(new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuHandGroups)), completeChiitoitsuHandGroups);
 
-        boolean chiitoitsuIsValid = chiitoitsu.isValid();
+        var chiitoitsuIsValid = chiitoitsu.isValid();
 
         assertTrue(chiitoitsuIsValid, "113377m7799p99s11z should be valid for chiitoitsu");
     }
@@ -40,7 +42,7 @@ public class ChiitoitsuTest
     {
         Yaku chiitoitsu = new Chiitoitsu(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteChiitoitsuHandGroups)), incompleteChiitoitsuHandGroups);
 
-        boolean chiitoitsuIsValid = chiitoitsu.isValid();
+        var chiitoitsuIsValid = chiitoitsu.isValid();
 
         assertTrue(chiitoitsuIsValid, "1122m11z should be valid for chiitoitsu");
     }
@@ -50,7 +52,7 @@ public class ChiitoitsuTest
     {
         Yaku chiitoitsu = new Chiitoitsu(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups);
 
-        boolean chiitoitsuIsValid = chiitoitsu.isValid();
+        var chiitoitsuIsValid = chiitoitsu.isValid();
 
         assertFalse(chiitoitsuIsValid, "123345m22345678p should not be valid for chiitoitsu");
     }
@@ -60,7 +62,7 @@ public class ChiitoitsuTest
     {
         Yaku chiitoitsu = new Chiitoitsu(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonChiitoitsuHandGroups)), incompleteNonChiitoitsuHandGroups);
 
-        boolean chiitoitsuIsValid = chiitoitsu.isValid();
+        var chiitoitsuIsValid = chiitoitsu.isValid();
 
         assertFalse(chiitoitsuIsValid, "111m555p11s should not be valid for chiitoitsu");
     }
@@ -70,7 +72,7 @@ public class ChiitoitsuTest
     {
         Yaku chiitoitsu = new Chiitoitsu(new Hand(TileGroupUtils.getTilesFromTileGroups(completeToitoiHandGroups)), completeToitoiHandGroups);
 
-        boolean chiitoitsuIsValid = chiitoitsu.isValid();
+        var chiitoitsuIsValid = chiitoitsu.isValid();
 
         assertFalse(chiitoitsuIsValid, "111m111777p11199s should not be valid for chiitoitsu");
     }
@@ -80,7 +82,7 @@ public class ChiitoitsuTest
     {
         Yaku chiitoitsu = new Chiitoitsu(new Hand(TileGroupUtils.getTilesFromTileGroups(chiitoitsuWithDuplicatedPairsHandGroups)), chiitoitsuWithDuplicatedPairsHandGroups);
 
-        boolean chiitoitsuIsValid = chiitoitsu.isValid();
+        var chiitoitsuIsValid = chiitoitsu.isValid();
 
         assertFalse(chiitoitsuIsValid, "111177m7799p99s11z should not be valid for chiitoitsu");
     }
@@ -90,7 +92,7 @@ public class ChiitoitsuTest
     {
         Yaku chiitoitsu = new Chiitoitsu(anyHand, anyGroups);
 
-        int chiitoitsuValue = chiitoitsu.getHanValue();
+        var chiitoitsuValue = chiitoitsu.getHanValue();
 
         assertEquals(2, chiitoitsuValue, "Chiitoitsu value should be 2");
     }

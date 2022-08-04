@@ -1,14 +1,17 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Suuankou;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
@@ -32,7 +35,7 @@ public class SuuankouTest
     {
         Yaku suuankou = new Suuankou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeSuuankouHandGroups)), completeSuuankouHandGroups);
 
-        boolean suuankouIsValid = suuankou.isValid();
+        var suuankouIsValid = suuankou.isValid();
 
         assertTrue(suuankouIsValid, "444m555p777999s11z should be valid for Suuankou");
     }
@@ -42,7 +45,7 @@ public class SuuankouTest
     {
         Yaku suuankou = new Suuankou(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteSuuankouHandGroups)), incompleteSuuankouHandGroups);
 
-        boolean suuankouIsValid = suuankou.isValid();
+        var suuankouIsValid = suuankou.isValid();
 
         assertTrue(suuankouIsValid, "1111m222p222s111z should be valid for Suuankou");
     }
@@ -52,7 +55,7 @@ public class SuuankouTest
     {
         Yaku suuankou = new Suuankou(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonSuuankouHandGroups)), completeNonSuuankouHandGroups);
 
-        boolean suuankouIsValid = suuankou.isValid();
+        var suuankouIsValid = suuankou.isValid();
 
         assertFalse(suuankouIsValid, "123345m22345678p should not be valid for Suuankou");
     }
@@ -62,7 +65,7 @@ public class SuuankouTest
     {
         Yaku suuankou = new Suuankou(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonSuuankouHandGroups)), incompleteNonSuuankouHandGroups);
 
-        boolean suuankouIsValid = suuankou.isValid();
+        var suuankouIsValid = suuankou.isValid();
 
         assertFalse(suuankouIsValid, "111m555p11s should not be valid for Suuankou");
     }
@@ -70,14 +73,14 @@ public class SuuankouTest
     @Test
     public void testValidityOf_ToitoiHand_ShouldBeFalse()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(toitoiHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(toitoiHandGroups));
         List<List<Tile>> toitoiHandMelds = new ArrayList<>();
         toitoiHandMelds.add(TileGroupUtils.getTilesFromTileGroups(TileGroupUtils.tileGroupsOf("4444m")));
         toitoiHandMelds.add(TileGroupUtils.getTilesFromTileGroups(TileGroupUtils.tileGroupsOf("777s")));
         hand.setMelds(toitoiHandMelds);
         Yaku suuankou = new Suuankou(hand, toitoiHandGroups);
 
-        boolean suuankouIsValid = suuankou.isValid();
+        var suuankouIsValid = suuankou.isValid();
 
         assertFalse(suuankouIsValid, "4444m555p777999s11z should not be valid for Suuankou");
     }
@@ -87,7 +90,7 @@ public class SuuankouTest
     {
         Yaku suuankou = new Suuankou(anyHand, anyGroups);
 
-        int suuankouValue = suuankou.getHanValue();
+        var suuankouValue = suuankou.getHanValue();
 
         assertEquals(13, suuankouValue, "Suuankou value should be 13");
     }
@@ -95,11 +98,11 @@ public class SuuankouTest
     @Test
     public void testValueOf_SuuankouWithTankiWait_ShouldBeTwentySix()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeSuuankouHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeSuuankouHandGroups));
         hand.setWinningTile(tankiWinningTile);
         Yaku suuankou = new Suuankou(hand, completeSuuankouHandGroups);
 
-        int suuankouValue = suuankou.getHanValue();
+        var suuankouValue = suuankou.getHanValue();
 
         assertEquals(26, suuankouValue, "Suuankou value should be 26");
     }
@@ -109,7 +112,7 @@ public class SuuankouTest
     {
         Yaku suuankou = new Suuankou(anyHand, anyGroups);
 
-        boolean suuankouIsYakuman = suuankou.isYakuman();
+        var suuankouIsYakuman = suuankou.isYakuman();
 
         assertTrue(suuankouIsYakuman, "Suuankou should be yakuman");
     }
@@ -117,11 +120,11 @@ public class SuuankouTest
     @Test
     public void testValueOf_SuuankouWithTankiWait_ShouldBeDoubleYakuman()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeSuuankouHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeSuuankouHandGroups));
         hand.setWinningTile(tankiWinningTile);
         Yaku suuankou = new Suuankou(hand, completeSuuankouHandGroups);
 
-        boolean suuankouTankiIsDoubleYakuman = suuankou.isDoubleYakuman();
+        var suuankouTankiIsDoubleYakuman = suuankou.isDoubleYakuman();
 
         assertTrue(suuankouTankiIsDoubleYakuman, "Suuankou tanki should be double yakuman");
     }

@@ -1,11 +1,13 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Daisangen;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
@@ -29,7 +31,7 @@ public class DaisangenTest
     {
         Yaku daisangen = new Daisangen(new Hand(TileGroupUtils.getTilesFromTileGroups(completeDaisangenHandGroups)), completeDaisangenHandGroups);
 
-        boolean daisangenIsValid = daisangen.isValid();
+        var daisangenIsValid = daisangen.isValid();
 
         assertTrue(daisangenIsValid, "111m11555666777z should be valid for daisangen");
     }
@@ -39,7 +41,7 @@ public class DaisangenTest
     {
         Yaku daisangen = new Daisangen(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteDaisangenHandGroups)), incompleteDaisangenHandGroups);
 
-        boolean daisangenIsValid = daisangen.isValid();
+        var daisangenIsValid = daisangen.isValid();
 
         assertTrue(daisangenIsValid, "555666777z should be valid for daisangen");
     }
@@ -49,7 +51,7 @@ public class DaisangenTest
     {
         Yaku daisangen = new Daisangen(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonDaisangenHandGroups)), completeNonDaisangenHandGroups);
 
-        boolean daisangenIsValid = daisangen.isValid();
+        var daisangenIsValid = daisangen.isValid();
 
         assertFalse(daisangenIsValid, "123345m22345678p should not be valid for daisangen");
     }
@@ -59,7 +61,7 @@ public class DaisangenTest
     {
         Yaku daisangen = new Daisangen(new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteNonDaisangenHandGroups)), incompleteNonDaisangenHandGroups);
 
-        boolean daisangenIsValid = daisangen.isValid();
+        var daisangenIsValid = daisangen.isValid();
 
         assertFalse(daisangenIsValid, "111m567p11s should not be valid for daisangen");
     }
@@ -69,7 +71,7 @@ public class DaisangenTest
     {
         Yaku daisangen = new Daisangen(new Hand(TileGroupUtils.getTilesFromTileGroups(completeDaisangenKanHandGroups)), completeDaisangenKanHandGroups);
 
-        boolean daisangenIsValid = daisangen.isValid();
+        var daisangenIsValid = daisangen.isValid();
 
         assertTrue(daisangenIsValid, "111m1155556666777z should be valid for daisangen");
     }
@@ -79,7 +81,7 @@ public class DaisangenTest
     {
         Yaku daisangen = new Daisangen(anyHand, anyGroups);
 
-        int daisangenValue = daisangen.getHanValue();
+        var daisangenValue = daisangen.getHanValue();
 
         assertEquals(13, daisangenValue, "Daisangen value should be 13");
     }
@@ -89,7 +91,7 @@ public class DaisangenTest
     {
         Yaku daisangen = new Daisangen(anyHand, anyGroups);
 
-        boolean daisangenIsYakuman = daisangen.isYakuman();
+        var daisangenIsYakuman = daisangen.isYakuman();
 
         assertTrue(daisangenIsYakuman, "Daisangen should be yakuman");
     }

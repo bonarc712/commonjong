@@ -1,13 +1,17 @@
 package com.monsieurmahjong.commonjong.rules.generic.utils;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Seat;
+import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 
 public class TileKindUtilsTest
@@ -15,9 +19,9 @@ public class TileKindUtilsTest
     @Test
     public void testAsHandString() throws Exception
     {
-        List<Tile> hand = TileKindUtils.asHand("345m345p345s1235z");
+        var hand = TileKindUtils.asHand("345m345p345s1235z");
         assertTrue(hand.size() == 13);
-        List<Tile> handCopy = new ArrayList<>();
+        var handCopy = new ArrayList<Tile>();
         handCopy.addAll(Arrays.asList(new Tile(MahjongTileKind.CHARACTERS_3), new Tile(MahjongTileKind.CHARACTERS_4), new Tile(MahjongTileKind.CHARACTERS_5), new Tile(MahjongTileKind.CIRCLES_3),
                 new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5), new Tile(MahjongTileKind.BAMBOOS_3), new Tile(MahjongTileKind.BAMBOOS_4), new Tile(MahjongTileKind.BAMBOOS_5),
                 new Tile(MahjongTileKind.EAST), new Tile(MahjongTileKind.SOUTH), new Tile(MahjongTileKind.WEST), new Tile(MahjongTileKind.WHITE)));
@@ -27,7 +31,7 @@ public class TileKindUtilsTest
     @Test
     public void testGetHandAsMPSZNotation() throws Exception
     {
-        List<Tile> handTiles = new ArrayList<>();
+        var handTiles = new ArrayList<Tile>();
         handTiles.addAll(Arrays.asList(new Tile(MahjongTileKind.CHARACTERS_3), new Tile(MahjongTileKind.CHARACTERS_4), new Tile(MahjongTileKind.CHARACTERS_5), new Tile(MahjongTileKind.CIRCLES_3),
                 new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5), new Tile(MahjongTileKind.BAMBOOS_3), new Tile(MahjongTileKind.BAMBOOS_4), new Tile(MahjongTileKind.BAMBOOS_5),
                 new Tile(MahjongTileKind.EAST), new Tile(MahjongTileKind.SOUTH), new Tile(MahjongTileKind.WEST), new Tile(MahjongTileKind.WHITE)));

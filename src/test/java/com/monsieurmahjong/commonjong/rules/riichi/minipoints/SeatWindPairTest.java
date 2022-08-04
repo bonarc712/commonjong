@@ -1,14 +1,17 @@
 package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.riichi.minipoints.SeatWindPair;
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.*;
+import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
@@ -26,11 +29,11 @@ public class SeatWindPairTest
     @Test
     public void withAHandWithASeatWindPair_SeatWindPairFu_IsValid()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeSeatWindPairHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeSeatWindPairHandGroups));
         hand.setSeatWind(seatWind);
-        SeatWindPair seatWindPair = new SeatWindPair(hand, completeSeatWindPairHandGroups);
+        var seatWindPair = new SeatWindPair(hand, completeSeatWindPairHandGroups);
 
-        boolean isValid = seatWindPair.isValid();
+        var isValid = seatWindPair.isValid();
 
         assertTrue(isValid, "Seat wind pair should be valid for a hand that contains a seat wind pair");
     }
@@ -38,11 +41,11 @@ public class SeatWindPairTest
     @Test
     public void withAnIncompleteHandWithASeatWindPair_SeatWindPairFu_IsValid()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteSeatWindPairHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(incompleteSeatWindPairHandGroups));
         hand.setSeatWind(seatWind);
-        SeatWindPair seatWindPair = new SeatWindPair(hand, incompleteSeatWindPairHandGroups);
+        var seatWindPair = new SeatWindPair(hand, incompleteSeatWindPairHandGroups);
 
-        boolean isValid = seatWindPair.isValid();
+        var isValid = seatWindPair.isValid();
 
         assertTrue(isValid, "Seat wind pair should be valid for a hand that contains a seat wind pair");
     }
@@ -50,11 +53,11 @@ public class SeatWindPairTest
     @Test
     public void withAHandWithoutASeatWindPair_SeatWindPairFu_IsNotValid()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonSeatWindPairHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonSeatWindPairHandGroups));
         hand.setSeatWind(seatWind);
-        SeatWindPair seatWindPair = new SeatWindPair(hand, completeNonSeatWindPairHandGroups);
+        var seatWindPair = new SeatWindPair(hand, completeNonSeatWindPairHandGroups);
 
-        boolean isValid = seatWindPair.isValid();
+        var isValid = seatWindPair.isValid();
 
         assertFalse(isValid, "Seat wind pair should not be valid for a hand that doesn't contain a seat wind pair");
     }
@@ -62,11 +65,11 @@ public class SeatWindPairTest
     @Test
     public void withASevenPairsHandWithASeatWindPair_SeatWindPairFu_IsNotValid()
     {
-        Hand hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuWithSeatWindPairHandGroups));
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuWithSeatWindPairHandGroups));
         hand.setSeatWind(seatWind);
-        SeatWindPair seatWindPair = new SeatWindPair(hand, completeChiitoitsuWithSeatWindPairHandGroups);
+        var seatWindPair = new SeatWindPair(hand, completeChiitoitsuWithSeatWindPairHandGroups);
 
-        boolean isValid = seatWindPair.isValid();
+        var isValid = seatWindPair.isValid();
 
         assertFalse(isValid, "Seat wind pair should not be valid for a seven pairs hand that contains a seat wind pair");
     }
@@ -74,9 +77,9 @@ public class SeatWindPairTest
     @Test
     public void getFuValue_ForSeatWindPair_IsTwo()
     {
-        SeatWindPair seatWindPair = new SeatWindPair(anyHand, new ArrayList<>());
+        var seatWindPair = new SeatWindPair(anyHand, new ArrayList<>());
 
-        int value = seatWindPair.getFuValue();
+        var value = seatWindPair.getFuValue();
 
         assertEquals(2, value, "Seat wind pair value should be 2");
     }
