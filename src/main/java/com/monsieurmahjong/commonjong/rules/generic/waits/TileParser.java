@@ -43,11 +43,10 @@ public class TileParser
                 var runBasedGroup = new TileGroup();
                 for (var j = i; j < tiles.size(); j++)
                 {
-                    if (WaitShapeUtils.isRun(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j)))
-                            && !tileGroups.contains(new TileGroup(Arrays.asList(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j))))))
-                    {
-                        runBasedGroup.addAll(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j)));
+                    runBasedGroup.addAll(indexOf(tiles.get(0)), indexOf(tiles.get(i)), indexOf(tiles.get(j)));
 
+                    if (runBasedGroup.isRun() && !tileGroups.contains(runBasedGroup))
+                    {
                         var occurrence = 4;
                         for (int index : runBasedGroup.getIndices())
                         {
@@ -88,6 +87,10 @@ public class TileParser
                             }
                         }
                         break;
+                    }
+                    else
+                    {
+                        runBasedGroup = new TileGroup();
                     }
                 }
 

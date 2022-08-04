@@ -6,22 +6,6 @@ package com.monsieurmahjong.commonjong.rules.generic.utils;
 @Deprecated
 public class WaitShapeUtils
 {
-    public static boolean isRun(int first, int second, int third)
-    {
-        if (TileKindUtils.areSameSuit(first, second) && TileKindUtils.areSameSuit(second, third))
-        {
-            if (first != second && first != third && second != third)
-            {
-                var highestIndex = Math.max(first, Math.max(second, third));
-                var lowestIndex = Math.min(first, Math.min(second, third));
-
-                // difference must be exactly two
-                return highestIndex - lowestIndex == 2;
-            }
-        }
-        return false;
-    }
-
     public static boolean isPair(int first, int second)
     {
         return first == second;

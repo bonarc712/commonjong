@@ -153,7 +153,23 @@ public class TileGroup
         {
             return false;
         }
-        return WaitShapeUtils.isRun(tileIndices.get(0), tileIndices.get(1), tileIndices.get(2));
+
+        var first = tileIndices.get(0);
+        var second = tileIndices.get(1);
+        var third = tileIndices.get(2);
+
+        if (TileKindUtils.areSameSuit(first, second) && TileKindUtils.areSameSuit(second, third))
+        {
+            if (first != second && first != third && second != third)
+            {
+                var highestIndex = Math.max(first, Math.max(second, third));
+                var lowestIndex = Math.min(first, Math.min(second, third));
+
+                // difference must be exactly two
+                return highestIndex - lowestIndex == 2;
+            }
+        }
+        return false;
     }
 
     public boolean isComplete()
@@ -162,7 +178,7 @@ public class TileGroup
         {
             return false;
         }
-        return isTriplet() || WaitShapeUtils.isRun(tileIndices.get(0), tileIndices.get(1), tileIndices.get(2));
+        return isTriplet() || isRun();
     }
 
     /**
