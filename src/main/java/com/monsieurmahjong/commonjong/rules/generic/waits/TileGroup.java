@@ -9,7 +9,7 @@ import com.monsieurmahjong.commonjong.rules.generic.utils.*;
 /**
  * A tile group represents a simple group of several tiles (for instance a pair, a triplet or a sequence)
  */
-public class TileGroup extends Object
+public class TileGroup
 {
     private List<Integer> tileIndices;
 
@@ -26,15 +26,15 @@ public class TileGroup extends Object
 
     public static TileGroup of(MahjongTileKind... tileKinds)
     {
-        TileGroup tileGroup = new TileGroup();
-        for (MahjongTileKind tileKind : tileKinds)
+        var tileGroup = new TileGroup();
+        for (var tileKind : tileKinds)
         {
-            int index = tileKind.getIndex();
+            var index = tileKind.getIndex();
             tileGroup.add(index);
         }
         return tileGroup;
     }
-
+    
     public int getSize()
     {
         return tileIndices.size();
@@ -158,9 +158,9 @@ public class TileGroup extends Object
         {
             return false;
         }
-        return WaitShapeUtils.isGroup(tileIndices.get(0), tileIndices.get(1), tileIndices.get(2));
+        return WaitShapeUtils.isTriplet(tileIndices.get(0), tileIndices.get(1), tileIndices.get(2)) || WaitShapeUtils.isRun(tileIndices.get(0), tileIndices.get(1), tileIndices.get(2));
     }
-
+    
     /**
      * Improving tiles are any tiles that improve the current group that is worked on.
      * All waiting tiles are included in that, but for lone tiles, we must also add all

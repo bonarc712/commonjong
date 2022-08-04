@@ -1,14 +1,11 @@
 package com.monsieurmahjong.commonjong.rules.generic.utils;
 
+/**
+ * @deprecated moving things over to TileGroup
+ */
+@Deprecated
 public class WaitShapeUtils
 {
-    // Element checks
-    public static boolean isGroup(int first, int second, int third)
-    {
-        // Group identity checked in isolation. Looping checks left to bigger functions.
-        return isTriplet(first, second, third) || isRun(first, second, third);
-    }
-
     public static boolean isTriplet(int first, int second, int third)
     {
         return first == second && second == third;
