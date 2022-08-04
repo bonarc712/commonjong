@@ -46,6 +46,26 @@ public class TileGroupTest
     }
 
     @Test
+    public void testIsTriplet()
+    {
+        var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        var ryanzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
+        var suuzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+        var suuzouQuad = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+        var suuzouPair = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+        var bambooProtogroup34 = TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4);
+        var loneRed = TileGroup.of(MahjongTileKind.RED);
+
+        assertThat(bambooRun123.isTriplet(), is(false));
+        assertThat(ryanzouTriplet.isTriplet(), is(true));
+        assertThat(suuzouTriplet.isTriplet(), is(true));
+        assertThat(suuzouQuad.isTriplet(), is(false));
+        assertThat(suuzouPair.isTriplet(), is(false));
+        assertThat(bambooProtogroup34.isTriplet(), is(false));
+        assertThat(loneRed.isTriplet(), is(false));
+    }
+
+    @Test
     public void testIsQuad()
     {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);

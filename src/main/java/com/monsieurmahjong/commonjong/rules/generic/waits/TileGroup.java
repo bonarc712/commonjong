@@ -162,14 +162,14 @@ public class TileGroup
         {
             return false;
         }
-        return WaitShapeUtils.isTriplet(tileIndices.get(0), tileIndices.get(1), tileIndices.get(2)) || WaitShapeUtils.isRun(tileIndices.get(0), tileIndices.get(1), tileIndices.get(2));
+        return isTriplet() || WaitShapeUtils.isRun(tileIndices.get(0), tileIndices.get(1), tileIndices.get(2));
     }
 
     /**
      * Improving tiles are any tiles that improve the current group that is worked
      * on. All waiting tiles are included in that, but for lone tiles, we must also
      * add all tiles that can match up with the current tile to form a protogroup.
-     * 
+     *
      * These are not tiles that will make the hand win, but they are part of the
      * ukeire and also contribute to reduce shanten.
      */
@@ -222,21 +222,25 @@ public class TileGroup
             if (WaitShapeUtils.isPair(first, second))
             {
                 wait.add(first);
-            } else if (WaitShapeUtils.isProtogroup(first, second))
+            }
+            else if (WaitShapeUtils.isProtogroup(first, second))
             {
                 if (WaitShapeUtils.isDoubleSidedBlock(first, second))
                 {
                     wait.add(first - 1);
                     wait.add(second + 1);
-                } else if (WaitShapeUtils.isInsideBlock(first, second))
+                }
+                else if (WaitShapeUtils.isInsideBlock(first, second))
                 {
                     wait.add(first + 1);
-                } else if (WaitShapeUtils.isEndBlock(first, second))
+                }
+                else if (WaitShapeUtils.isEndBlock(first, second))
                 {
                     if (TileKindUtils.isTerminal(first))
                     {
                         wait.add(second + 1);
-                    } else if (TileKindUtils.isTerminal(second))
+                    }
+                    else if (TileKindUtils.isTerminal(second))
                     {
                         wait.add(first - 1);
                     }
@@ -250,7 +254,7 @@ public class TileGroup
     /**
      * Return true if any tile index is the same in this group and in the other
      * group.
-     * 
+     *
      * @param other TileGroup to compare with the current group
      */
     public boolean collidesWith(TileGroup other)

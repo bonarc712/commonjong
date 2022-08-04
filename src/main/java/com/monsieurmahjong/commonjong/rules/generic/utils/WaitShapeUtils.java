@@ -6,11 +6,6 @@ package com.monsieurmahjong.commonjong.rules.generic.utils;
 @Deprecated
 public class WaitShapeUtils
 {
-    public static boolean isTriplet(int first, int second, int third)
-    {
-        return first == second && second == third;
-    }
-
     public static boolean isRun(int first, int second, int third)
     {
         if (TileKindUtils.areSameSuit(first, second) && TileKindUtils.areSameSuit(second, third))
@@ -36,7 +31,7 @@ public class WaitShapeUtils
      * This method checks for a protogroup. A protogroup is two tiles that can form
      * a group, for instance 1-2 in wait of a 3, 3-5 in wait of a 4, or 6-7 in wait
      * of a 5 or an 8.
-     * 
+     *
      * By definition, a pair is not a protogroup.
      */
     public static boolean isProtogroup(int first, int second)
