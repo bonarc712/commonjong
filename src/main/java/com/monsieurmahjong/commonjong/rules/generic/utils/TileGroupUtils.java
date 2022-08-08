@@ -11,7 +11,7 @@ public class TileGroupUtils
 {
     public static List<TileGroup> tileGroupsOf(String... groups)
     {
-        List<TileGroup> tileGroupList = new ArrayList<>();
+        var tileGroupList = new ArrayList<TileGroup>();
 
         for (String group : groups)
         {
@@ -31,14 +31,12 @@ public class TileGroupUtils
 
     public static List<Tile> getTilesFromTileGroup(TileGroup group)
     {
-        List<TileGroup> tileGroups = new ArrayList<>();
-        tileGroups.add(group);
-        return getTilesFromTileGroups(tileGroups);
+        return getTilesFromTileGroups(List.of(group));
     }
 
     public static List<Tile> getTilesFromTileGroups(List<TileGroup> groups)
     {
-        List<Tile> tiles = new ArrayList<>();
+        var tiles = new ArrayList<Tile>();
 
         for (TileGroup group : groups)
         {

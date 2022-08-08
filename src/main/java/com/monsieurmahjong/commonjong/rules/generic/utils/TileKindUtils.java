@@ -16,7 +16,7 @@ public class TileKindUtils
      * This method returns a hand made of the tiles in input. The strings in input
      * must make use of the {@link MahjongTileKind} abbreviation, which falls under
      * the Tenhou notation (1m, 2m, 3m, 1p, etc.)
-     * 
+     *
      * @param tiles : all the tiles that make up the hand
      */
     public static List<Tile> asHand(String... tiles)
@@ -29,7 +29,8 @@ public class TileKindUtils
                 var kind = MahjongTileKind.getMahjongTileByAbbreviation(tileName);
                 var tile = new Tile(kind);
                 hand.add(tile);
-            } catch (IllegalArgumentException e)
+            }
+            catch (IllegalArgumentException e)
             {
                 continue;
             }
@@ -40,7 +41,7 @@ public class TileKindUtils
     /**
      * This method returns a hand made of the tiles in input. The strings in input
      * must use the Tenhou notation in one block, eg. 345m345p345s1155z.
-     * 
+     *
      * @param tileText : all the tiles that make up the hand
      */
     public static List<Tile> asHand(String tileText)
@@ -55,7 +56,8 @@ public class TileKindUtils
             if (Character.isDigit(firstCharacter))
             {
                 currentSuitNumbers += firstCharacter;
-            } else if (Character.isAlphabetic(firstCharacter))
+            }
+            else if (Character.isAlphabetic(firstCharacter))
             {
                 for (var i = 0; i < currentSuitNumbers.length(); i++)
                 {
@@ -67,7 +69,8 @@ public class TileKindUtils
                     hand.add(tile);
                 }
                 currentSuitNumbers = "";
-            } else
+            }
+            else
             {
                 throw new IllegalArgumentException("Invalid input");
             }
@@ -87,13 +90,13 @@ public class TileKindUtils
 
         var resultString = mpszStringBuilder.toString();
 
-        BiFunction<String, String, String> replaceLettersInString = ((originalString, letterToReplace) -> {
+        BiFunction<String, String, String> replaceLettersInString = (originalString, letterToReplace) -> {
             while (originalString.indexOf(letterToReplace) != originalString.lastIndexOf(letterToReplace))
             {
                 originalString = originalString.replaceFirst(letterToReplace, "");
             }
             return originalString;
-        });
+        };
 
         resultString = replaceLettersInString.apply(resultString, "m");
         resultString = replaceLettersInString.apply(resultString, "p");
