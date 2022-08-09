@@ -13,7 +13,7 @@ public class NagashiMangan extends TimingBasedYaku
     @Override
     public boolean isValid()
     {
-        return parameters.doesPlayerWinOnNagashiMangan(hand.getSeatWind());
+        return parameters.doesPlayerWinOnNagashiMangan();
     }
 
     @Override

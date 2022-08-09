@@ -3,7 +3,6 @@ package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,7 +22,7 @@ public class ChankanTest
     {
         var chankan = new Chankan(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyParameters.doesPlayerWinOnChankan(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnChankan()).thenReturn(true);
 
         var isValid = chankan.isValid();
 
@@ -35,7 +34,7 @@ public class ChankanTest
     {
         var chankan = new Chankan(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyParameters.doesPlayerWinOnChankan(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnChankan()).thenReturn(false);
 
         var isValid = chankan.isValid();
 

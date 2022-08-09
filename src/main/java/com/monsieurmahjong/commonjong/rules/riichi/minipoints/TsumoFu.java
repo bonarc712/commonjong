@@ -23,7 +23,7 @@ public class TsumoFu implements Fu
     @Override
     public boolean isValid()
     {
-        if (!parameters.doesPlayerWinOnTsumo(hand.getSeatWind()))
+        if (!parameters.doesPlayerWinOnTsumo())
         {
             return false;
         }

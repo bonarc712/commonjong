@@ -13,7 +13,7 @@ public class Ippatsu extends TimingBasedYaku
     @Override
     public boolean isValid()
     {
-        return parameters.doesPlayerWinOnIppatsu(hand.getSeatWind());
+        return parameters.doesPlayerWinOnIppatsu();
     }
 
     @Override

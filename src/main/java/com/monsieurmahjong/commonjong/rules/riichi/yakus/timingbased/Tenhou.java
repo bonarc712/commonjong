@@ -13,7 +13,7 @@ public class Tenhou extends TimingBasedYaku
     @Override
     public boolean isValid()
     {
-        return parameters.doesPlayerWinOnTenhou(hand.getSeatWind());
+        return parameters.doesPlayerWinOnTenhou();
     }
 
     @Override

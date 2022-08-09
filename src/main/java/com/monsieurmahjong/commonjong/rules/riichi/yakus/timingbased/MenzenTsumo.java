@@ -13,7 +13,7 @@ public class MenzenTsumo extends TimingBasedYaku
     @Override
     public boolean isValid()
     {
-        return parameters.doesPlayerWinOnMenzenTsumo(hand.getSeatWind());
+        return parameters.doesPlayerWinOnMenzenTsumo();
     }
 
     @Override

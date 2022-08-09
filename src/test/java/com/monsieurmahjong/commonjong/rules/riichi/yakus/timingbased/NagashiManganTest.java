@@ -3,7 +3,6 @@ package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,7 +22,7 @@ public class NagashiManganTest
     {
         var nagashiMangan = new NagashiMangan(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyParameters.doesPlayerWinOnNagashiMangan(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnNagashiMangan()).thenReturn(true);
 
         var isValid = nagashiMangan.isValid();
 
@@ -35,7 +34,7 @@ public class NagashiManganTest
     {
         var nagashiMangan = new NagashiMangan(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyParameters.doesPlayerWinOnNagashiMangan(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnNagashiMangan()).thenReturn(false);
 
         var isValid = nagashiMangan.isValid();
 

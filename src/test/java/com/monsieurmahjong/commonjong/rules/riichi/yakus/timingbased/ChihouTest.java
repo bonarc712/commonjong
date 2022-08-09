@@ -3,7 +3,6 @@ package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,7 +22,7 @@ public class ChihouTest
     {
         var chihou = new Chihou(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.SOUTH);
-        when(anyParameters.doesPlayerWinOnChihou(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnChihou()).thenReturn(true);
 
         var isValid = chihou.isValid();
 
@@ -35,7 +34,7 @@ public class ChihouTest
     {
         var chihou = new Chihou(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.SOUTH);
-        when(anyParameters.doesPlayerWinOnChihou(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnChihou()).thenReturn(false);
 
         var isValid = chihou.isValid();
 

@@ -3,7 +3,6 @@ package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,7 +27,7 @@ public class TsumoFuTest
     {
         var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
         var tsumoFu = new TsumoFu(hand, completeNonChiitoitsuHandGroups, parameters);
-        when(parameters.doesPlayerWinOnTsumo(any())).thenReturn(true);
+        when(parameters.doesPlayerWinOnTsumo()).thenReturn(true);
 
         var isValid = tsumoFu.isValid();
 
@@ -40,7 +39,7 @@ public class TsumoFuTest
     {
         var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
         var tsumoFu = new TsumoFu(hand, completeNonChiitoitsuHandGroups, parameters);
-        when(parameters.doesPlayerWinOnTsumo(any())).thenReturn(false);
+        when(parameters.doesPlayerWinOnTsumo()).thenReturn(false);
 
         var isValid = tsumoFu.isValid();
 
@@ -53,7 +52,7 @@ public class TsumoFuTest
         var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
         hand.setWinningTile(MahjongTileKind.CHARACTERS_5);
         var tsumoFu = new TsumoFu(hand, completeNonChiitoitsuHandGroups, parameters);
-        when(parameters.doesPlayerWinOnTsumo(any())).thenReturn(true);
+        when(parameters.doesPlayerWinOnTsumo()).thenReturn(true);
 
         var isValid = tsumoFu.isValid();
 
@@ -65,7 +64,7 @@ public class TsumoFuTest
     {
         var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuHandGroups));
         var tsumoFu = new TsumoFu(hand, completeChiitoitsuHandGroups, parameters);
-        when(parameters.doesPlayerWinOnTsumo(any())).thenReturn(true);
+        when(parameters.doesPlayerWinOnTsumo()).thenReturn(true);
 
         var isValid = tsumoFu.isValid();
 
@@ -77,7 +76,7 @@ public class TsumoFuTest
     {
         var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
         var tsumoFu = new TsumoFu(hand, completeNonChiitoitsuHandGroups, parameters);
-        when(parameters.doesPlayerWinOnTsumo(any())).thenReturn(true);
+        when(parameters.doesPlayerWinOnTsumo()).thenReturn(true);
 
         var fuValue = tsumoFu.getFuValue();
 

@@ -1,32 +1,30 @@
 package com.monsieurmahjong.commonjong.rules.riichi.scoring;
 
-import com.monsieurmahjong.commonjong.game.Seat;
-
 public interface RiichiScoringParameters
 {
-    public boolean hasPlayerDeclaredRiichi(Seat playerWind);
+    public boolean hasPlayerDeclaredRiichi();
 
-    public boolean doesPlayerWinOnIppatsu(Seat playerWind);
+    public boolean doesPlayerWinOnIppatsu();
 
-    public boolean doesPlayerWinOnTenhou(Seat playerWind);
+    public boolean doesPlayerWinOnTenhou();
 
-    public boolean doesPlayerWinOnChihou(Seat playerWind);
+    public boolean doesPlayerWinOnChihou();
 
-    public boolean doesPlayerWinOnRenhou(Seat playerWind);
+    public boolean doesPlayerWinOnRenhou();
 
-    public boolean doesPlayerWinOnMenzenTsumo(Seat playerWind);
+    public boolean doesPlayerWinOnMenzenTsumo();
 
-    public boolean doesPlayerWinOnRinshanKaihou(Seat playerWind);
+    public boolean doesPlayerWinOnRinshanKaihou();
 
-    public boolean doesPlayerWinOnChankan(Seat playerWind);
+    public boolean doesPlayerWinOnChankan();
 
-    public boolean doesPlayerWinOnHaitei(Seat playerWind);
+    public boolean doesPlayerWinOnHaitei();
 
-    public boolean doesPlayerWinOnHoutei(Seat playerWind);
+    public boolean doesPlayerWinOnHoutei();
 
-    public boolean doesPlayerWinOnNagashiMangan(Seat playerWind);
+    public boolean doesPlayerWinOnNagashiMangan();
 
-    public boolean doesPlayerWinOnRon(Seat playerWind);
+    public boolean doesPlayerWinOnRon();
 
-    public boolean doesPlayerWinOnTsumo(Seat playerWind);
+    public boolean doesPlayerWinOnTsumo();
 }

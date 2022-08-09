@@ -13,7 +13,7 @@ public class Chihou extends TimingBasedYaku
     @Override
     public boolean isValid()
     {
-        return parameters.doesPlayerWinOnChihou(hand.getSeatWind());
+        return parameters.doesPlayerWinOnChihou();
     }
 
     @Override

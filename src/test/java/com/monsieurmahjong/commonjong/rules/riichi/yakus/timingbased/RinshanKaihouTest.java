@@ -3,7 +3,6 @@ package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,7 +22,7 @@ public class RinshanKaihouTest
     {
         var rinshanKaihou = new RinshanKaihou(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyParameters.doesPlayerWinOnRinshanKaihou(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnRinshanKaihou()).thenReturn(true);
 
         var isValid = rinshanKaihou.isValid();
 
@@ -35,7 +34,7 @@ public class RinshanKaihouTest
     {
         var rinshanKaihou = new RinshanKaihou(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyParameters.doesPlayerWinOnRinshanKaihou(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnRinshanKaihou()).thenReturn(false);
 
         var isValid = rinshanKaihou.isValid();
 

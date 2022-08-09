@@ -13,7 +13,7 @@ public class Riichi extends TimingBasedYaku
     @Override
     public boolean isValid()
     {
-        return parameters.hasPlayerDeclaredRiichi(hand.getSeatWind());
+        return parameters.hasPlayerDeclaredRiichi();
     }
 
     @Override

@@ -1,71 +1,83 @@
 package com.monsieurmahjong.commonjong.game.statelog;
 
-import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class RiichiGameStateLog extends GameStateLog implements RiichiScoringParameters
 {
-    public boolean hasPlayerDeclaredRiichi(Seat playerWind)
+    @Override
+    public boolean hasPlayerDeclaredRiichi()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean doesPlayerWinOnIppatsu(Seat playerWind)
+    @Override
+    public boolean doesPlayerWinOnIppatsu()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean doesPlayerWinOnTenhou(Seat playerWind)
+    @Override
+    public boolean doesPlayerWinOnTenhou()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean doesPlayerWinOnChihou(Seat playerWind)
+    @Override
+    public boolean doesPlayerWinOnChihou()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean doesPlayerWinOnRenhou(Seat playerWind)
+    @Override
+    public boolean doesPlayerWinOnRenhou()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean doesPlayerWinOnMenzenTsumo(Seat playerWind)
+    @Override
+    public boolean doesPlayerWinOnMenzenTsumo()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean doesPlayerWinOnRinshanKaihou(Seat playerWind)
+    @Override
+    public boolean doesPlayerWinOnRinshanKaihou()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean doesPlayerWinOnChankan(Seat playerWind)
+    @Override
+    public boolean doesPlayerWinOnChankan()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean doesPlayerWinOnHaitei(Seat playerWind)
+    @Override
+    public boolean doesPlayerWinOnHaitei()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean doesPlayerWinOnHoutei(Seat playerWind)
+    @Override
+    public boolean doesPlayerWinOnHoutei()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean doesPlayerWinOnNagashiMangan(Seat playerWind)
+    @Override
+    public boolean doesPlayerWinOnNagashiMangan()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean doesPlayerWinOnRon(Seat playerWind)
+    @Override
+    public boolean doesPlayerWinOnRon()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public boolean doesPlayerWinOnTsumo(Seat playerWind)
+    @Override
+    public boolean doesPlayerWinOnTsumo()
     {
         throw new UnsupportedOperationException("Not yet implemented");
     }

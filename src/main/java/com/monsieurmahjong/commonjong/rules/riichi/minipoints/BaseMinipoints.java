@@ -42,7 +42,7 @@ public class BaseMinipoints implements Fu
 
     private boolean isClosedRon()
     {
-        return hand.isClosed() && parameters.doesPlayerWinOnRon(hand.getSeatWind());
+        return hand.isClosed() && parameters.doesPlayerWinOnRon();
     }
 
     private boolean isSevenPairs()

@@ -3,7 +3,6 @@ package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,7 +22,7 @@ public class TenhouTest
     {
         var tenhou = new Tenhou(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyParameters.doesPlayerWinOnTenhou(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnTenhou()).thenReturn(true);
 
         var isValid = tenhou.isValid();
 
@@ -35,7 +34,7 @@ public class TenhouTest
     {
         var tenhou = new Tenhou(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyParameters.doesPlayerWinOnTenhou(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnTenhou()).thenReturn(false);
 
         var isValid = tenhou.isValid();
 

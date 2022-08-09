@@ -13,7 +13,7 @@ public class Chankan extends TimingBasedYaku
     @Override
     public boolean isValid()
     {
-        return parameters.doesPlayerWinOnChankan(hand.getSeatWind());
+        return parameters.doesPlayerWinOnChankan();
     }
 
     @Override

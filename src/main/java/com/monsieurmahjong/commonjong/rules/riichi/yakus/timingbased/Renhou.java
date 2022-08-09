@@ -21,7 +21,7 @@ public class Renhou extends TimingBasedYaku
     @Override
     public boolean isValid()
     {
-        return parameters.doesPlayerWinOnRenhou(hand.getSeatWind());
+        return parameters.doesPlayerWinOnRenhou();
     }
 
     @Override

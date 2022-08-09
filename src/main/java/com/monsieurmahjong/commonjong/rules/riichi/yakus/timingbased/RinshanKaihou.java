@@ -13,7 +13,7 @@ public class RinshanKaihou extends TimingBasedYaku
     @Override
     public boolean isValid()
     {
-        return parameters.doesPlayerWinOnRinshanKaihou(hand.getSeatWind());
+        return parameters.doesPlayerWinOnRinshanKaihou();
     }
 
     @Override

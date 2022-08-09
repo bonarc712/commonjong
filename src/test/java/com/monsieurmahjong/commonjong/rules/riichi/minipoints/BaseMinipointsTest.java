@@ -2,7 +2,6 @@ package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,7 +28,7 @@ public class BaseMinipointsTest
     public void baseMinipoints_IfPlayerWonOnClosedRon_IsThirty()
     {
         var minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups, anyParameters);
-        when(anyParameters.doesPlayerWinOnRon(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnRon()).thenReturn(true);
 
         var fuValue = minipoints.getFuValue();
 
@@ -53,7 +52,7 @@ public class BaseMinipointsTest
         var meld = Arrays.asList(new Tile(MahjongTileKind.CIRCLES_3), new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5));
         hand.addMeld(meld);
         var minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyParameters);
-        when(anyParameters.doesPlayerWinOnRon(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnRon()).thenReturn(true);
 
         var fuValue = minipoints.getFuValue();
 
@@ -65,7 +64,7 @@ public class BaseMinipointsTest
     {
         var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
         var minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyParameters);
-        when(anyParameters.doesPlayerWinOnRon(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnRon()).thenReturn(false);
 
         var fuValue = minipoints.getFuValue();
 
@@ -79,7 +78,7 @@ public class BaseMinipointsTest
         var meld = Arrays.asList(new Tile(MahjongTileKind.CIRCLES_3), new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5));
         hand.addMeld(meld);
         var minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyParameters);
-        when(anyParameters.doesPlayerWinOnRon(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnRon()).thenReturn(false);
 
         var fuValue = minipoints.getFuValue();
 

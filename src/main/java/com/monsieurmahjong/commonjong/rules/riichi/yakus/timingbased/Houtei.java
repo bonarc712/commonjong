@@ -13,7 +13,7 @@ public class Houtei extends TimingBasedYaku
     @Override
     public boolean isValid()
     {
-        return parameters.doesPlayerWinOnHoutei(hand.getSeatWind());
+        return parameters.doesPlayerWinOnHoutei();
     }
 
     @Override
