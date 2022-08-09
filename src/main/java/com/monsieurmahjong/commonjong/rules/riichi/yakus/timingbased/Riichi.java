@@ -1,13 +1,12 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 
-import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class Riichi extends TimingBasedYaku
 {
-    public Riichi(Hand hand, RiichiScoringParameters parameters)
+    public Riichi(RiichiScoringParameters parameters)
     {
-        super(hand, parameters);
+        super(parameters);
     }
 
     @Override

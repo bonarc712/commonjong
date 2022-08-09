@@ -8,20 +8,16 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class RinshanKaihouTest
 {
-    Hand anyHand = mock(Hand.class);
     RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfRinshanKaihou_WhenObtained_ShouldBeTrue()
     {
-        var rinshanKaihou = new RinshanKaihou(anyHand, anyParameters);
-        when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
+        var rinshanKaihou = new RinshanKaihou(anyParameters);
         when(anyParameters.doesPlayerWinOnRinshanKaihou()).thenReturn(true);
 
         var isValid = rinshanKaihou.isValid();
@@ -32,8 +28,7 @@ public class RinshanKaihouTest
     @Test
     public void testValidityOfRinshanKaihou_WhenNotObtained_ShouldBeFalse()
     {
-        var rinshanKaihou = new RinshanKaihou(anyHand, anyParameters);
-        when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
+        var rinshanKaihou = new RinshanKaihou(anyParameters);
         when(anyParameters.doesPlayerWinOnRinshanKaihou()).thenReturn(false);
 
         var isValid = rinshanKaihou.isValid();
@@ -44,7 +39,7 @@ public class RinshanKaihouTest
     @Test
     public void testValueOf_RinshanKaihou_ShouldBeOne()
     {
-        var rinshanKaihou = new RinshanKaihou(anyHand, anyParameters);
+        var rinshanKaihou = new RinshanKaihou(anyParameters);
 
         var hanValue = rinshanKaihou.getHanValue();
 

@@ -8,20 +8,16 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class HaiteiTest
 {
-    Hand anyHand = mock(Hand.class);
     RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfHaitei_WhenObtained_ShouldBeTrue()
     {
-        var haitei = new Haitei(anyHand, anyParameters);
-        when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
+        var haitei = new Haitei(anyParameters);
         when(anyParameters.doesPlayerWinOnHaitei()).thenReturn(true);
 
         var isValid = haitei.isValid();
@@ -32,8 +28,7 @@ public class HaiteiTest
     @Test
     public void testValidityOfHaitei_WhenNotObtained_ShouldBeFalse()
     {
-        var haitei = new Haitei(anyHand, anyParameters);
-        when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
+        var haitei = new Haitei(anyParameters);
         when(anyParameters.doesPlayerWinOnHaitei()).thenReturn(false);
 
         var isValid = haitei.isValid();
@@ -44,7 +39,7 @@ public class HaiteiTest
     @Test
     public void testValueOf_Haitei_ShouldBeOne()
     {
-        var haitei = new Haitei(anyHand, anyParameters);
+        var haitei = new Haitei(anyParameters);
 
         var hanValue = haitei.getHanValue();
 

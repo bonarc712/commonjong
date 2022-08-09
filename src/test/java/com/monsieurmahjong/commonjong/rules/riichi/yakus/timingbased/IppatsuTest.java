@@ -8,20 +8,16 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class IppatsuTest
 {
-    Hand anyHand = mock(Hand.class);
     RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfIppatsu_WhenObtained_ShouldBeTrue()
     {
-        var ippatsu = new Ippatsu(anyHand, anyParameters);
-        when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
+        var ippatsu = new Ippatsu(anyParameters);
         when(anyParameters.doesPlayerWinOnIppatsu()).thenReturn(true);
 
         var isValid = ippatsu.isValid();
@@ -32,8 +28,7 @@ public class IppatsuTest
     @Test
     public void testValidityOfIppatsu_WhenNotObtained_ShouldBeFalse()
     {
-        var ippatsu = new Ippatsu(anyHand, anyParameters);
-        when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
+        var ippatsu = new Ippatsu(anyParameters);
         when(anyParameters.doesPlayerWinOnIppatsu()).thenReturn(false);
 
         var isValid = ippatsu.isValid();
@@ -44,7 +39,7 @@ public class IppatsuTest
     @Test
     public void testValueOf_Ippatsu_ShouldBeOne()
     {
-        var ippatsu = new Ippatsu(anyHand, anyParameters);
+        var ippatsu = new Ippatsu(anyParameters);
 
         var hanValue = ippatsu.getHanValue();
 

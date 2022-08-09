@@ -1,13 +1,12 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 
-import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class Haitei extends TimingBasedYaku
 {
-    public Haitei(Hand hand, RiichiScoringParameters parameters)
+    public Haitei(RiichiScoringParameters parameters)
     {
-        super(hand, parameters);
+        super(parameters);
     }
 
     @Override

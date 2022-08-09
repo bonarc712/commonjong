@@ -1,13 +1,12 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 
-import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class Tenhou extends TimingBasedYaku
 {
-    public Tenhou(Hand hand, RiichiScoringParameters parameters)
+    public Tenhou(RiichiScoringParameters parameters)
     {
-        super(hand, parameters);
+        super(parameters);
     }
 
     @Override

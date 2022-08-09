@@ -8,20 +8,16 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class MenzenTsumoTest
 {
-    Hand anyHand = mock(Hand.class);
     RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfMenzenTsumo_WhenObtained_ShouldBeTrue()
     {
-        var menzenTsumo = new MenzenTsumo(anyHand, anyParameters);
-        when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
+        var menzenTsumo = new MenzenTsumo(anyParameters);
         when(anyParameters.doesPlayerWinOnMenzenTsumo()).thenReturn(true);
 
         var isValid = menzenTsumo.isValid();
@@ -32,8 +28,7 @@ public class MenzenTsumoTest
     @Test
     public void testValidityOfMenzenTsumo_WhenNotObtained_ShouldBeFalse()
     {
-        var menzenTsumo = new MenzenTsumo(anyHand, anyParameters);
-        when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
+        var menzenTsumo = new MenzenTsumo(anyParameters);
         when(anyParameters.doesPlayerWinOnMenzenTsumo()).thenReturn(false);
 
         var isValid = menzenTsumo.isValid();
@@ -44,7 +39,7 @@ public class MenzenTsumoTest
     @Test
     public void testValueOf_MenzenTsumo_ShouldBeOne()
     {
-        var menzenTsumo = new MenzenTsumo(anyHand, anyParameters);
+        var menzenTsumo = new MenzenTsumo(anyParameters);
 
         var hanValue = menzenTsumo.getHanValue();
 

@@ -8,20 +8,16 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class ChihouTest
 {
-    Hand anyHand = mock(Hand.class);
     RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfChihou_WhenObtained_ShouldBeTrue()
     {
-        var chihou = new Chihou(anyHand, anyParameters);
-        when(anyHand.getSeatWind()).thenReturn(Seat.SOUTH);
+        var chihou = new Chihou(anyParameters);
         when(anyParameters.doesPlayerWinOnChihou()).thenReturn(true);
 
         var isValid = chihou.isValid();
@@ -32,8 +28,7 @@ public class ChihouTest
     @Test
     public void testValidityOfChihou_WhenNotObtained_ShouldBeFalse()
     {
-        var chihou = new Chihou(anyHand, anyParameters);
-        when(anyHand.getSeatWind()).thenReturn(Seat.SOUTH);
+        var chihou = new Chihou(anyParameters);
         when(anyParameters.doesPlayerWinOnChihou()).thenReturn(false);
 
         var isValid = chihou.isValid();
@@ -44,7 +39,7 @@ public class ChihouTest
     @Test
     public void testValueOf_Chihou_ShouldBeThirteen()
     {
-        var chihou = new Chihou(anyHand, anyParameters);
+        var chihou = new Chihou(anyParameters);
 
         var hanValue = chihou.getHanValue();
 
@@ -54,7 +49,7 @@ public class ChihouTest
     @Test
     public void testValueOf_Chihou_ShouldBeYakuman()
     {
-        var chihou = new Chihou(anyHand, anyParameters);
+        var chihou = new Chihou(anyParameters);
 
         var isYakuman = chihou.isYakuman();
 

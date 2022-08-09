@@ -8,20 +8,16 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class ChankanTest
 {
-    Hand anyHand = mock(Hand.class);
     RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfChankan_WhenObtained_ShouldBeTrue()
     {
-        var chankan = new Chankan(anyHand, anyParameters);
-        when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
+        var chankan = new Chankan(anyParameters);
         when(anyParameters.doesPlayerWinOnChankan()).thenReturn(true);
 
         var isValid = chankan.isValid();
@@ -32,8 +28,7 @@ public class ChankanTest
     @Test
     public void testValidityOfChankan_WhenNotObtained_ShouldBeFalse()
     {
-        var chankan = new Chankan(anyHand, anyParameters);
-        when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
+        var chankan = new Chankan(anyParameters);
         when(anyParameters.doesPlayerWinOnChankan()).thenReturn(false);
 
         var isValid = chankan.isValid();
@@ -44,7 +39,7 @@ public class ChankanTest
     @Test
     public void testValueOf_Chankan_ShouldBeOne()
     {
-        var chankan = new Chankan(anyHand, anyParameters);
+        var chankan = new Chankan(anyParameters);
 
         var hanValue = chankan.getHanValue();
 
