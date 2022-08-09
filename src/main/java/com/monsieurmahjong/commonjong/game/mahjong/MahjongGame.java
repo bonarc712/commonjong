@@ -167,12 +167,4 @@ public class MahjongGame
                 .map(Player::getName) //
                 .collect(Collectors.toList());
     }
-
-    private int calculatePoints()
-    {
-        // get hand of winning player
-        var hand = players.get(0).getHand();
-        var scoring = ruleset.getScoring();
-        return scoring.getScore(this, hand);
-    }
 }

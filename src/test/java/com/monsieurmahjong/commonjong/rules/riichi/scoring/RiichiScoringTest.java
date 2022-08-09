@@ -1,13 +1,18 @@
 package com.monsieurmahjong.commonjong.rules.riichi.scoring;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Seat;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class RiichiScoringTest
 {
@@ -88,5 +93,42 @@ public class RiichiScoringTest
         assertEquals(1300, scoring.getRonScore(2, 20, false));
 
         assertEquals(192000, scoring.getRonScore(0, 0, 6, false));
+    }
+
+    @Test
+    public void whenHavingA1_30NonDealerHand_thenShouldBe1000()
+    {
+        var scoring = new RiichiScoring();
+        var tileGroups = new ArrayList<TileGroup>();
+        tileGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4));
+        tileGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_6, MahjongTileKind.BAMBOOS_7));
+        tileGroups.add(TileGroup.of(MahjongTileKind.CIRCLES_3, MahjongTileKind.CIRCLES_3, MahjongTileKind.CIRCLES_3));
+        tileGroups.add(TileGroup.of(MahjongTileKind.CIRCLES_4, MahjongTileKind.CIRCLES_4));
+        tileGroups.add(TileGroup.of(MahjongTileKind.CHARACTERS_5, MahjongTileKind.CHARACTERS_6, MahjongTileKind.CHARACTERS_7));
+        var scoringParameters = new RiichiScoringParametersImpl(Seat.SOUTH);
+        scoringParameters.setWinOnRon(true);
+
+        var score = scoring.getScore(tileGroups, scoringParameters);
+
+        assertThat(score, is(1000));
+    }
+
+    @Test
+    public void whenHavingA2_30NonDealerHand_thenShouldBe2000()
+    {
+        var scoring = new RiichiScoring();
+        var tileGroups = new ArrayList<TileGroup>();
+        tileGroups.add(TileGroup.of(MahjongTileKind.CHARACTERS_2, MahjongTileKind.CHARACTERS_3, MahjongTileKind.CHARACTERS_4));
+        tileGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4));
+        tileGroups.add(TileGroup.of(MahjongTileKind.CIRCLES_2, MahjongTileKind.CIRCLES_3, MahjongTileKind.CIRCLES_4));
+        tileGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_8, MahjongTileKind.BAMBOOS_8));
+        tileGroups.add(TileGroup.of(MahjongTileKind.NORTH, MahjongTileKind.NORTH, MahjongTileKind.NORTH));
+        var scoringParameters = new RiichiScoringParametersImpl(Seat.SOUTH);
+        scoringParameters.setWinOnRon(true);
+
+        var score = scoring.getScore(tileGroups, scoringParameters);
+
+        assertThat(score, is(2000));
+
     }
 }

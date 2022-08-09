@@ -1,12 +1,16 @@
 package com.monsieurmahjong.commonjong.rules.riichi.scoring;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Seat;
-import com.monsieurmahjong.commonjong.game.mahjong.MahjongGame;
 import com.monsieurmahjong.commonjong.rules.generic.Scoring;
+import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
+import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
+import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
+import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yakus;
 
 public class RiichiScoring implements Scoring
 {
@@ -22,11 +26,12 @@ public class RiichiScoring implements Scoring
         this.kiriageMangan = kiriageMangan;
     }
 
-    @Override
-    public int getScore(MahjongGame game, Hand hand)
+    public int getScore(List<TileGroup> tileGroups, RiichiScoringParameters parameters)
     {
-        // calculate han and fu
-        return 1000;
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(tileGroups));
+        var yakus = Yakus.getStandardYakus(hand, tileGroups, parameters);
+        var hanTotal = yakus.stream().filter(Yaku::isValid).mapToInt(Yaku::getHanValue).sum();
+        return getRonScore(hanTotal, 30, false);
     }
 
     public Map<Seat, Integer> getTsumoScore(int han, int fu, Seat winner)
