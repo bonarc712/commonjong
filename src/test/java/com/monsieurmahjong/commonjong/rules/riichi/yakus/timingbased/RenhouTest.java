@@ -11,19 +11,19 @@ import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Seat;
-import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
+import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class RenhouTest
 {
     Hand anyHand = mock(Hand.class);
-    GameStateLog anyLog = mock(GameStateLog.class);
+    RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfRenhou_WhenObtained_ShouldBeTrue()
     {
-        var renhou = new Renhou(anyHand, anyLog);
+        var renhou = new Renhou(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.NORTH);
-        when(anyLog.doesPlayerWinOnRenhou(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnRenhou(any())).thenReturn(true);
 
         var isValid = renhou.isValid();
 
@@ -33,9 +33,9 @@ public class RenhouTest
     @Test
     public void testValidityOfRenhou_WhenNotObtained_ShouldBeFalse()
     {
-        var renhou = new Renhou(anyHand, anyLog);
+        var renhou = new Renhou(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.NORTH);
-        when(anyLog.doesPlayerWinOnRenhou(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnRenhou(any())).thenReturn(false);
 
         var isValid = renhou.isValid();
 
@@ -45,7 +45,7 @@ public class RenhouTest
     @Test
     public void testValueOf_Renhou_ShouldBeFive()
     {
-        var renhou = new Renhou(anyHand, anyLog);
+        var renhou = new Renhou(anyHand, anyParameters);
 
         var hanValue = renhou.getHanValue();
 
@@ -55,7 +55,7 @@ public class RenhouTest
     @Test
     public void testValueOf_Renhou_ShouldNotBeYakuman()
     {
-        var renhou = new Renhou(anyHand, anyLog);
+        var renhou = new Renhou(anyHand, anyParameters);
 
         var isYakuman = renhou.isYakuman();
 
@@ -65,7 +65,7 @@ public class RenhouTest
     @Test
     public void testValueOf_RenhouWhenSetToYakuman_ShouldBeThirteen()
     {
-        var renhou = new Renhou(anyHand, anyLog);
+        var renhou = new Renhou(anyHand, anyParameters);
         renhou.setHanValue(13);
 
         var hanValue = renhou.getHanValue();
@@ -76,7 +76,7 @@ public class RenhouTest
     @Test
     public void testValueOf_RenhouWhenSetToYakuman_ShouldBeYakuman()
     {
-        var renhou = new Renhou(anyHand, anyLog);
+        var renhou = new Renhou(anyHand, anyParameters);
         renhou.setHanValue(13);
 
         var isYakuman = renhou.isYakuman();

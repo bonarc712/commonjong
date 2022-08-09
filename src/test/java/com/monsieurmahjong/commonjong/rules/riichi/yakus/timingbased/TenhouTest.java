@@ -11,19 +11,19 @@ import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Seat;
-import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
+import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class TenhouTest
 {
     Hand anyHand = mock(Hand.class);
-    GameStateLog anyLog = mock(GameStateLog.class);
+    RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfTenhou_WhenObtained_ShouldBeTrue()
     {
-        var tenhou = new Tenhou(anyHand, anyLog);
+        var tenhou = new Tenhou(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyLog.doesPlayerWinOnTenhou(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnTenhou(any())).thenReturn(true);
 
         var isValid = tenhou.isValid();
 
@@ -33,9 +33,9 @@ public class TenhouTest
     @Test
     public void testValidityOfTenhou_WhenNotObtained_ShouldBeFalse()
     {
-        var tenhou = new Tenhou(anyHand, anyLog);
+        var tenhou = new Tenhou(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyLog.doesPlayerWinOnTenhou(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnTenhou(any())).thenReturn(false);
 
         var isValid = tenhou.isValid();
 
@@ -45,7 +45,7 @@ public class TenhouTest
     @Test
     public void testValueOf_Tenhou_ShouldBeThirteen()
     {
-        var tenhou = new Tenhou(anyHand, anyLog);
+        var tenhou = new Tenhou(anyHand, anyParameters);
 
         var hanValue = tenhou.getHanValue();
 
@@ -55,7 +55,7 @@ public class TenhouTest
     @Test
     public void testValueOf_Tenhou_ShouldBeYakuman()
     {
-        var tenhou = new Tenhou(anyHand, anyLog);
+        var tenhou = new Tenhou(anyHand, anyParameters);
 
         var isYakuman = tenhou.isYakuman();
 

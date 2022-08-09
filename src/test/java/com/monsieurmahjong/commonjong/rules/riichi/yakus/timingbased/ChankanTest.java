@@ -11,19 +11,19 @@ import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Seat;
-import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
+import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class ChankanTest
 {
     Hand anyHand = mock(Hand.class);
-    GameStateLog anyLog = mock(GameStateLog.class);
+    RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfChankan_WhenObtained_ShouldBeTrue()
     {
-        var chankan = new Chankan(anyHand, anyLog);
+        var chankan = new Chankan(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyLog.doesPlayerWinOnChankan(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnChankan(any())).thenReturn(true);
 
         var isValid = chankan.isValid();
 
@@ -33,9 +33,9 @@ public class ChankanTest
     @Test
     public void testValidityOfChankan_WhenNotObtained_ShouldBeFalse()
     {
-        var chankan = new Chankan(anyHand, anyLog);
+        var chankan = new Chankan(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyLog.doesPlayerWinOnChankan(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnChankan(any())).thenReturn(false);
 
         var isValid = chankan.isValid();
 
@@ -45,7 +45,7 @@ public class ChankanTest
     @Test
     public void testValueOf_Chankan_ShouldBeOne()
     {
-        var chankan = new Chankan(anyHand, anyLog);
+        var chankan = new Chankan(anyHand, anyParameters);
 
         var hanValue = chankan.getHanValue();
 

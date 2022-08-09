@@ -2,9 +2,9 @@ package com.monsieurmahjong.commonjong.rules.generic;
 
 import com.monsieurmahjong.commonjong.game.Tileset;
 
-public interface RuleSet
+public interface Ruleset
 {
-    public Tileset getTileSet();
+    public Tileset getTileset();
 
     public int getUnusedTilesAmount();
 

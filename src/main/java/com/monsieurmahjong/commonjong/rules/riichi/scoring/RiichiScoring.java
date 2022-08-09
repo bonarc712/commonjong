@@ -7,7 +7,6 @@ import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.game.mahjong.MahjongGame;
 import com.monsieurmahjong.commonjong.rules.generic.Scoring;
-import com.monsieurmahjong.commonjong.utils.MathUtils;
 
 public class RiichiScoring implements Scoring
 {
@@ -45,15 +44,15 @@ public class RiichiScoring implements Scoring
 
         if (winner == Seat.EAST)
         {
-            var paidScore = MathUtils.roundToUpperHundred(baseScore / 2);
+            var paidScore = roundToUpperHundred(baseScore / 2);
             seatPayments.put(Seat.SOUTH, paidScore);
             seatPayments.put(Seat.WEST, paidScore);
             seatPayments.put(Seat.NORTH, paidScore);
         }
         else
         {
-            var dealerScore = MathUtils.roundToUpperHundred(baseScore / 2);
-            var nonDealerScore = MathUtils.roundToUpperHundred(baseScore / 4);
+            var dealerScore = roundToUpperHundred(baseScore / 2);
+            var nonDealerScore = roundToUpperHundred(baseScore / 4);
 
             seatPayments.put(Seat.EAST, dealerScore);
             seatPayments.put(Seat.SOUTH, nonDealerScore);
@@ -80,7 +79,7 @@ public class RiichiScoring implements Scoring
         {
             baseScore *= 1.5;
         }
-        return MathUtils.roundToUpperHundred(baseScore);
+        return roundToUpperHundred(baseScore);
     }
 
     private int getBaseScore(int han, int fu)
@@ -203,5 +202,14 @@ public class RiichiScoring implements Scoring
         }
 
         throw new IllegalArgumentException("No yakumans or too many yakumans");
+    }
+
+    private static int roundToUpperHundred(int score)
+    {
+        if (score % 100 == 0)
+        {
+            return score;
+        }
+        return (score / 100 + 1) * 100;
     }
 }

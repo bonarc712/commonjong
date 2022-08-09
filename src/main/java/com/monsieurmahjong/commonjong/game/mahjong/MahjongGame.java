@@ -8,20 +8,20 @@ import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.game.Tileset;
 import com.monsieurmahjong.commonjong.game.players.Player;
 import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
-import com.monsieurmahjong.commonjong.rules.generic.RuleSet;
+import com.monsieurmahjong.commonjong.rules.generic.Ruleset;
 import com.monsieurmahjong.commonjong.utils.NameGenerator;
 
 public class MahjongGame
 {
-    private RuleSet ruleSet;
-    private Tileset tileSet;
+    private Ruleset ruleset;
+    private Tileset tileset;
     private GameStateLog gameStateLog;
     private List<Player> players;
 
-    public MahjongGame(List<Player> players, RuleSet ruleSet)
+    public MahjongGame(List<Player> players, Ruleset ruleset)
     {
         this.players = players;
-        this.ruleSet = ruleSet;
+        this.ruleset = ruleset;
 
         gameStateLog = new GameStateLog();
     }
@@ -34,7 +34,7 @@ public class MahjongGame
 
     private void setup()
     {
-        tileSet = ruleSet.getTileSet();
+        tileset = ruleset.getTileset();
 
         if (players == null || players.isEmpty())
         {
@@ -56,7 +56,7 @@ public class MahjongGame
         players.forEach(player -> {
             for (var i = 0; i < 13; i++)
             {
-                player.draw(tileSet.draw());
+                player.draw(tileset.draw());
             }
         });
     }
@@ -84,7 +84,7 @@ public class MahjongGame
         var currentPlayer = getPlayerBySeat(activePlayer);
 
         // draw tile
-        var drawnTile = tileSet.draw();
+        var drawnTile = tileset.draw();
         currentPlayer.draw(drawnTile);
         gameStateLog.log(currentPlayer.getSeat().getSeatName() + " draws " + drawnTile.getTileKind().abbreviation);
 
@@ -102,7 +102,8 @@ public class MahjongGame
         {
             var nextPlayer = determineNextPlayer(currentPlayer);
             playTurn(nextPlayer);
-        } else
+        }
+        else
         {
             finishGame();
         }
@@ -145,7 +146,7 @@ public class MahjongGame
 
     private boolean canNextTurnBePlayed()
     {
-        return tileSet.getTiles().size() > ruleSet.getUnusedTilesAmount();
+        return tileset.getTiles().size() > ruleset.getUnusedTilesAmount();
     }
 
     private void waitForPlayerDiscard(Player currentPlayer)
@@ -165,5 +166,13 @@ public class MahjongGame
                 .filter(player -> player.getName() != null && !"".equals(player.getName())) //
                 .map(Player::getName) //
                 .collect(Collectors.toList());
+    }
+
+    private int calculatePoints()
+    {
+        // get hand of winning player
+        var hand = players.get(0).getHand();
+        var scoring = ruleset.getScoring();
+        return scoring.getScore(this, hand);
     }
 }

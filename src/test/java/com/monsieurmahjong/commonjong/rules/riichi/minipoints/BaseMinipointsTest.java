@@ -13,14 +13,14 @@ import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Tile;
-import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
+import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class BaseMinipointsTest
 {
-    private GameStateLog anyLog = mock(GameStateLog.class);
+    private RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     private List<TileGroup> completeChiitoitsuHandGroups = TileGroupUtils.tileGroupsOf("11m", "33m", "77m", "77p", "99p", "99s", "11z");
     private List<TileGroup> completeNonChiitoitsuHandGroups = TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p");
@@ -28,8 +28,8 @@ public class BaseMinipointsTest
     @Test
     public void baseMinipoints_IfPlayerWonOnClosedRon_IsThirty()
     {
-        var minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups, anyLog);
-        when(anyLog.doesPlayerWinOnRon(any())).thenReturn(true);
+        var minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups, anyParameters);
+        when(anyParameters.doesPlayerWinOnRon(any())).thenReturn(true);
 
         var fuValue = minipoints.getFuValue();
 
@@ -39,7 +39,7 @@ public class BaseMinipointsTest
     @Test
     public void baseMinipoints_IfPlayerWonOnSevenPairs_IsTwentyFive()
     {
-        var minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuHandGroups)), completeChiitoitsuHandGroups, anyLog);
+        var minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeChiitoitsuHandGroups)), completeChiitoitsuHandGroups, anyParameters);
 
         var fuValue = minipoints.getFuValue();
 
@@ -52,8 +52,8 @@ public class BaseMinipointsTest
         var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
         var meld = Arrays.asList(new Tile(MahjongTileKind.CIRCLES_3), new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5));
         hand.addMeld(meld);
-        var minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyLog);
-        when(anyLog.doesPlayerWinOnRon(any())).thenReturn(true);
+        var minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyParameters);
+        when(anyParameters.doesPlayerWinOnRon(any())).thenReturn(true);
 
         var fuValue = minipoints.getFuValue();
 
@@ -64,8 +64,8 @@ public class BaseMinipointsTest
     public void baseMinipoints_IfPlayerWonOnClosedTsumo_IsTwenty()
     {
         var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
-        var minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyLog);
-        when(anyLog.doesPlayerWinOnRon(any())).thenReturn(false);
+        var minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyParameters);
+        when(anyParameters.doesPlayerWinOnRon(any())).thenReturn(false);
 
         var fuValue = minipoints.getFuValue();
 
@@ -78,8 +78,8 @@ public class BaseMinipointsTest
         var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups));
         var meld = Arrays.asList(new Tile(MahjongTileKind.CIRCLES_3), new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5));
         hand.addMeld(meld);
-        var minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyLog);
-        when(anyLog.doesPlayerWinOnRon(any())).thenReturn(false);
+        var minipoints = new BaseMinipoints(hand, completeNonChiitoitsuHandGroups, anyParameters);
+        when(anyParameters.doesPlayerWinOnRon(any())).thenReturn(false);
 
         var fuValue = minipoints.getFuValue();
 
@@ -89,7 +89,7 @@ public class BaseMinipointsTest
     @Test
     public void baseMinipoints_IsAlwaysValid()
     {
-        var minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups, anyLog);
+        var minipoints = new BaseMinipoints(new Hand(TileGroupUtils.getTilesFromTileGroups(completeNonChiitoitsuHandGroups)), completeNonChiitoitsuHandGroups, anyParameters);
 
         var valid = minipoints.isValid();
 

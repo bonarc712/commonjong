@@ -11,19 +11,19 @@ import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Seat;
-import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
+import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class MenzenTsumoTest
 {
     Hand anyHand = mock(Hand.class);
-    GameStateLog anyLog = mock(GameStateLog.class);
+    RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfMenzenTsumo_WhenObtained_ShouldBeTrue()
     {
-        var menzenTsumo = new MenzenTsumo(anyHand, anyLog);
+        var menzenTsumo = new MenzenTsumo(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyLog.doesPlayerWinOnMenzenTsumo(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnMenzenTsumo(any())).thenReturn(true);
 
         var isValid = menzenTsumo.isValid();
 
@@ -33,9 +33,9 @@ public class MenzenTsumoTest
     @Test
     public void testValidityOfMenzenTsumo_WhenNotObtained_ShouldBeFalse()
     {
-        var menzenTsumo = new MenzenTsumo(anyHand, anyLog);
+        var menzenTsumo = new MenzenTsumo(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyLog.doesPlayerWinOnMenzenTsumo(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnMenzenTsumo(any())).thenReturn(false);
 
         var isValid = menzenTsumo.isValid();
 
@@ -45,7 +45,7 @@ public class MenzenTsumoTest
     @Test
     public void testValueOf_MenzenTsumo_ShouldBeOne()
     {
-        var menzenTsumo = new MenzenTsumo(anyHand, anyLog);
+        var menzenTsumo = new MenzenTsumo(anyHand, anyParameters);
 
         var hanValue = menzenTsumo.getHanValue();
 

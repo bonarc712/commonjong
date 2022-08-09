@@ -1,19 +1,19 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
+import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class Houtei extends TimingBasedYaku
 {
-    public Houtei(Hand hand, GameStateLog log)
+    public Houtei(Hand hand, RiichiScoringParameters parameters)
     {
-        super(hand, log);
+        super(hand, parameters);
     }
 
     @Override
     public boolean isValid()
     {
-        return log.doesPlayerWinOnHoutei(hand.getSeatWind());
+        return parameters.doesPlayerWinOnHoutei(hand.getSeatWind());
     }
 
     @Override

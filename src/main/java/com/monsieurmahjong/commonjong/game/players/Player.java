@@ -64,7 +64,12 @@ public class Player
 
     }
 
-    public List<Tile> getHand()
+    public Hand getHand()
+    {
+        return hand;
+    }
+
+    public List<Tile> getTiles()
     {
         return hand.getTiles();
     }

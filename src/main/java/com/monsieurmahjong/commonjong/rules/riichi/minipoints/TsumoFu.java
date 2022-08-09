@@ -3,27 +3,27 @@ package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
+import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.Pinfu;
 
 public class TsumoFu implements Fu
 {
     private Hand hand;
     private List<TileGroup> groups;
-    private GameStateLog log;
+    private RiichiScoringParameters parameters;
 
-    public TsumoFu(Hand hand, List<TileGroup> groups, GameStateLog log)
+    public TsumoFu(Hand hand, List<TileGroup> groups, RiichiScoringParameters parameters)
     {
         this.hand = hand;
         this.groups = groups;
-        this.log = log;
+        this.parameters = parameters;
     }
 
     @Override
     public boolean isValid()
     {
-        if (!log.doesPlayerWinOnTsumo(hand.getSeatWind()))
+        if (!parameters.doesPlayerWinOnTsumo(hand.getSeatWind()))
         {
             return false;
         }

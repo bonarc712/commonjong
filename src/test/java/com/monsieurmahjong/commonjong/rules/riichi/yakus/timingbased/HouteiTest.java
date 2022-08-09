@@ -11,19 +11,19 @@ import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Seat;
-import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
+import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class HouteiTest
 {
     Hand anyHand = mock(Hand.class);
-    GameStateLog anyLog = mock(GameStateLog.class);
+    RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfHoutei_WhenObtained_ShouldBeTrue()
     {
-        var houtei = new Houtei(anyHand, anyLog);
+        var houtei = new Houtei(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyLog.doesPlayerWinOnHoutei(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnHoutei(any())).thenReturn(true);
 
         var isValid = houtei.isValid();
 
@@ -33,9 +33,9 @@ public class HouteiTest
     @Test
     public void testValidityOfHoutei_WhenNotObtained_ShouldBeFalse()
     {
-        var houtei = new Houtei(anyHand, anyLog);
+        var houtei = new Houtei(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyLog.doesPlayerWinOnHoutei(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnHoutei(any())).thenReturn(false);
 
         var isValid = houtei.isValid();
 
@@ -45,7 +45,7 @@ public class HouteiTest
     @Test
     public void testValueOf_Houtei_ShouldBeOne()
     {
-        var houtei = new Houtei(anyHand, anyLog);
+        var houtei = new Houtei(anyHand, anyParameters);
 
         var hanValue = houtei.getHanValue();
 

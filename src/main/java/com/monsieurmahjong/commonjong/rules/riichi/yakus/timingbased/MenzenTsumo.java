@@ -1,19 +1,19 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
+import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class MenzenTsumo extends TimingBasedYaku
 {
-    public MenzenTsumo(Hand hand, GameStateLog log)
+    public MenzenTsumo(Hand hand, RiichiScoringParameters parameters)
     {
-        super(hand, log);
+        super(hand, parameters);
     }
 
     @Override
     public boolean isValid()
     {
-        return log.doesPlayerWinOnMenzenTsumo(hand.getSeatWind());
+        return parameters.doesPlayerWinOnMenzenTsumo(hand.getSeatWind());
     }
 
     @Override

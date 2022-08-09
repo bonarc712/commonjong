@@ -1,19 +1,19 @@
 package com.monsieurmahjong.commonjong.rules.riichi.yakus.timingbased;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
+import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class RinshanKaihou extends TimingBasedYaku
 {
-    public RinshanKaihou(Hand hand, GameStateLog log)
+    public RinshanKaihou(Hand hand, RiichiScoringParameters parameters)
     {
-        super(hand, log);
+        super(hand, parameters);
     }
 
     @Override
     public boolean isValid()
     {
-        return log.doesPlayerWinOnRinshanKaihou(hand.getSeatWind());
+        return parameters.doesPlayerWinOnRinshanKaihou(hand.getSeatWind());
     }
 
     @Override

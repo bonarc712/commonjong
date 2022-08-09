@@ -11,19 +11,19 @@ import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Seat;
-import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
+import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class NagashiManganTest
 {
     Hand anyHand = mock(Hand.class);
-    GameStateLog anyLog = mock(GameStateLog.class);
+    RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfNagashiMangan_WhenObtained_ShouldBeTrue()
     {
-        var nagashiMangan = new NagashiMangan(anyHand, anyLog);
+        var nagashiMangan = new NagashiMangan(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyLog.doesPlayerWinOnNagashiMangan(any())).thenReturn(true);
+        when(anyParameters.doesPlayerWinOnNagashiMangan(any())).thenReturn(true);
 
         var isValid = nagashiMangan.isValid();
 
@@ -33,9 +33,9 @@ public class NagashiManganTest
     @Test
     public void testValidityOfNagashiMangan_WhenNotObtained_ShouldBeFalse()
     {
-        var nagashiMangan = new NagashiMangan(anyHand, anyLog);
+        var nagashiMangan = new NagashiMangan(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyLog.doesPlayerWinOnNagashiMangan(any())).thenReturn(false);
+        when(anyParameters.doesPlayerWinOnNagashiMangan(any())).thenReturn(false);
 
         var isValid = nagashiMangan.isValid();
 
@@ -45,7 +45,7 @@ public class NagashiManganTest
     @Test
     public void testValueOf_NagashiMangan_ShouldBeFive()
     {
-        var nagashiMangan = new NagashiMangan(anyHand, anyLog);
+        var nagashiMangan = new NagashiMangan(anyHand, anyParameters);
 
         var hanValue = nagashiMangan.getHanValue();
 

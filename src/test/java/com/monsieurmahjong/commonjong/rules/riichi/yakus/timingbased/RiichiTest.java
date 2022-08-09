@@ -11,19 +11,19 @@ import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Seat;
-import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
+import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
 public class RiichiTest
 {
     Hand anyHand = mock(Hand.class);
-    GameStateLog anyLog = mock(GameStateLog.class);
+    RiichiScoringParameters anyParameters = mock(RiichiScoringParameters.class);
 
     @Test
     public void testValidityOfRiichi_WhenDeclared_ShouldBeTrue()
     {
-        var riichi = new Riichi(anyHand, anyLog);
+        var riichi = new Riichi(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyLog.hasPlayerDeclaredRiichi(any())).thenReturn(true);
+        when(anyParameters.hasPlayerDeclaredRiichi(any())).thenReturn(true);
 
         var isValid = riichi.isValid();
 
@@ -33,9 +33,9 @@ public class RiichiTest
     @Test
     public void testValidityOfRiichi_WhenNotDeclared_ShouldBeFalse()
     {
-        var riichi = new Riichi(anyHand, anyLog);
+        var riichi = new Riichi(anyHand, anyParameters);
         when(anyHand.getSeatWind()).thenReturn(Seat.EAST);
-        when(anyLog.hasPlayerDeclaredRiichi(any())).thenReturn(false);
+        when(anyParameters.hasPlayerDeclaredRiichi(any())).thenReturn(false);
 
         var isValid = riichi.isValid();
 
@@ -45,7 +45,7 @@ public class RiichiTest
     @Test
     public void testValueOf_Riichi_ShouldBeOne()
     {
-        var riichi = new Riichi(anyHand, anyLog);
+        var riichi = new Riichi(anyHand, anyParameters);
 
         var hanValue = riichi.getHanValue();
 

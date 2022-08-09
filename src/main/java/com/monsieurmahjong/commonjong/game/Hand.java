@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileOrderingComparator;
+import com.monsieurmahjong.commonjong.rules.generic.Ruleset;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
@@ -150,6 +151,11 @@ public class Hand
     public boolean isSeatWind(Seat seat)
     {
         return seatWind == seat;
+    }
+
+    public int calculateScore(Ruleset ruleset)
+    {
+        return 0;
     }
 
     @Override
