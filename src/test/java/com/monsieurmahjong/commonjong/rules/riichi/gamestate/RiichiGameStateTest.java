@@ -74,4 +74,28 @@ public class RiichiGameStateTest
         assertThat(playerWinsOnRon, is(false));
     }
 
+    @Test
+    public void whenPlayerDeclaresRiichi_thenShouldBeMarkedAsDeclaredRiichi()
+    {
+        var gameLog = mock(GameStateLog.class);
+        when(gameLog.getLogs()).thenReturn(List.of("east-riichi"));
+        var riichiGameState = new RiichiGameState(gameLog, Seat.EAST);
+
+        var playerDeclaredRiichi = riichiGameState.hasPlayerDeclaredRiichi();
+
+        assertThat(playerDeclaredRiichi, is(true));
+    }
+
+    @Test
+    public void whenAnotherPlayerDeclaresRiichi_thenShouldNotBeMarkedAsDeclaredRiichi()
+    {
+        var gameLog = mock(GameStateLog.class);
+        when(gameLog.getLogs()).thenReturn(List.of("east-riichi"));
+        var riichiGameState = new RiichiGameState(gameLog, Seat.NORTH);
+
+        var playerDeclaredRiichi = riichiGameState.hasPlayerDeclaredRiichi();
+
+        assertThat(playerDeclaredRiichi, is(false));
+    }
+
 }

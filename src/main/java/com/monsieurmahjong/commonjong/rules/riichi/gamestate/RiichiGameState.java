@@ -18,7 +18,7 @@ public class RiichiGameState implements RiichiScoringParameters
     @Override
     public boolean hasPlayerDeclaredRiichi()
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return log.getLogs().stream().anyMatch(aLog -> aLog.contains(targetPlayer + "-riichi"));
     }
 
     @Override
@@ -84,12 +84,12 @@ public class RiichiGameState implements RiichiScoringParameters
     @Override
     public boolean doesPlayerWinOnRon()
     {
-        return log.getLogs().stream().anyMatch(ron -> ron.contains(targetPlayer + "-ron"));
+        return log.getLogs().stream().anyMatch(aLog -> aLog.contains(targetPlayer + "-ron"));
     }
 
     @Override
     public boolean doesPlayerWinOnTsumo()
     {
-        return log.getLogs().stream().anyMatch(tsumo -> tsumo.contains(targetPlayer + "-tsumo"));
+        return log.getLogs().stream().anyMatch(aLog -> aLog.contains(targetPlayer + "-tsumo"));
     }
 }
