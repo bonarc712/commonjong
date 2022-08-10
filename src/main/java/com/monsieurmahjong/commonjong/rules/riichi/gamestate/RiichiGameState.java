@@ -1,9 +1,20 @@
-package com.monsieurmahjong.commonjong.game.statelog;
+package com.monsieurmahjong.commonjong.rules.riichi.gamestate;
 
+import com.monsieurmahjong.commonjong.game.Seat;
+import com.monsieurmahjong.commonjong.game.statelog.GameStateLog;
 import com.monsieurmahjong.commonjong.rules.riichi.scoring.RiichiScoringParameters;
 
-public class RiichiGameStateLog extends GameStateLog implements RiichiScoringParameters
+public class RiichiGameState implements RiichiScoringParameters
 {
+    private GameStateLog log;
+    private String targetPlayer;
+
+    public RiichiGameState(GameStateLog log, Seat targetPlayer)
+    {
+        this.log = log;
+        this.targetPlayer = targetPlayer.getSeatNameLowercase();
+    }
+
     @Override
     public boolean hasPlayerDeclaredRiichi()
     {
@@ -73,12 +84,12 @@ public class RiichiGameStateLog extends GameStateLog implements RiichiScoringPar
     @Override
     public boolean doesPlayerWinOnRon()
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return log.getLogs().stream().anyMatch(ron -> ron.contains(targetPlayer + "-ron"));
     }
 
     @Override
     public boolean doesPlayerWinOnTsumo()
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return log.getLogs().stream().anyMatch(tsumo -> tsumo.contains(targetPlayer + "-tsumo"));
     }
 }

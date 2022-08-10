@@ -17,6 +17,11 @@ public class GameStateLog
         logs.add(log);
     }
 
+    public List<String> getLogs()
+    {
+        return logs;
+    }
+
     public void showWholeLog()
     {
         System.out.println("Game state log:");
