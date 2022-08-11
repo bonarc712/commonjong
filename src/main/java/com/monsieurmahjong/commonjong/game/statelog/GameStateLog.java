@@ -27,9 +27,6 @@ public class GameStateLog
         System.out.println("Game state log:");
         System.out.println();
 
-        for (String log : logs)
-        {
-            System.out.println(log);
-        }
+        logs.forEach(System.out::println);
     }
 }

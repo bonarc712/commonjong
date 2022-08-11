@@ -97,4 +97,60 @@ public class RiichiGameStateTest
         assertThat(playerDeclaredRiichi, is(false));
     }
 
+    @Test
+    public void whenPlayerDeclaredRiichiAndWinsInSameTurn_thenPlayerWinsOnIppatsu()
+    {
+        when(gameLog.getLogs()).thenReturn(List.of("east-riichi", "east-ron-3p"));
+        var riichiGameState = new RiichiGameState(gameLog, Seat.EAST);
+
+        var playerWinsOnIppatsu = riichiGameState.doesPlayerWinOnIppatsu();
+
+        assertThat(playerWinsOnIppatsu, is(true));
+    }
+
+    @Test
+    public void whenPlayerDeclaredRiichiAndTsumosOnHisTurn_thenPlayerWinsOnIppatsu()
+    {
+        when(gameLog.getLogs()).thenReturn(List.of("east-riichi", "east-discard-4p", //
+                "south-draw-7z", "south-discard-7z", //
+                "west-draw-8s", "west-discard-8s", //
+                "north-draw-3m", "north-discard-3m", //
+                "east-tsumo-3p"));
+        var riichiGameState = new RiichiGameState(gameLog, Seat.EAST);
+
+        var playerWinsOnIppatsu = riichiGameState.doesPlayerWinOnIppatsu();
+
+        assertThat(playerWinsOnIppatsu, is(true));
+    }
+
+    @Test
+    public void whenPlayerDeclaredRiichiAndTsumosTwoTurnsAfter_thenPlayerDoesNotWinOnIppatsu()
+    {
+        when(gameLog.getLogs()).thenReturn(List.of("east-riichi", "east-discard-4p", //
+                "south-draw-7z", "south-discard-7z", //
+                "west-draw-8s", "west-discard-8s", //
+                "north-draw-3m", "north-discard-3m", //
+                "east-draw-1m", "east-discard-1m", //
+                "south-draw-7z", "south-discard-7z", //
+                "west-draw-8s", "west-discard-8s", //
+                "north-draw-3m", "north-discard-3m", //
+                "east-ron-3p"));
+        var riichiGameState = new RiichiGameState(gameLog, Seat.EAST);
+
+        var playerWinsOnIppatsu = riichiGameState.doesPlayerWinOnIppatsu();
+
+        assertThat(playerWinsOnIppatsu, is(false));
+    }
+
+    @Test
+    public void whenPlayerDeclaredRiichiAndAnyPlayerCallsBefore_thenPlayerDoesNotWinOnIppatsu()
+    {
+        when(gameLog.getLogs()).thenReturn(List.of("east-riichi", "east-kan-4p", "east-tsumo-8p"));
+        var riichiGameState = new RiichiGameState(gameLog, Seat.EAST);
+
+        var playerWinsOnIppatsu = riichiGameState.doesPlayerWinOnIppatsu();
+
+        assertThat(playerWinsOnIppatsu, is(false));
+    }
+
 }
