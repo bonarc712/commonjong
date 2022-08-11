@@ -3,8 +3,8 @@ package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 /**
@@ -55,7 +55,7 @@ public class ExclusiveGroups implements Fu
 
     private boolean isNonSimple(TileGroup tileGroup)
     {
-        return TileKindUtils.isTerminalOrHonour(tileGroup.getIndices().get(0));
+        return MahjongTileKind.isTerminalOrHonour(tileGroup.getIndices().get(0));
     }
 
     private boolean isClosed(TileGroup tileGroup)

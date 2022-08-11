@@ -1,6 +1,8 @@
 package com.monsieurmahjong.commonjong.rules.generic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,5 +39,23 @@ public class MahjongTileKindTest
         assertEquals(TileFamily.CIRCLES, MahjongTileKind.CIRCLES_8.getFamily());
         assertEquals(TileFamily.HONOURS, MahjongTileKind.SOUTH.getFamily());
         assertEquals(TileFamily.HONOURS, MahjongTileKind.GREEN.getFamily());
+    }
+
+    @Test
+    public void testAreSameSuit()
+    {
+        assertTrue(MahjongTileKind.areSameSuit(MahjongTileKind.BAMBOOS_1.ordinal(), MahjongTileKind.BAMBOOS_9.ordinal()));
+        assertTrue(MahjongTileKind.areSameSuit(MahjongTileKind.CIRCLES_6.ordinal(), MahjongTileKind.CIRCLES_6.ordinal()));
+        assertTrue(MahjongTileKind.areSameSuit(MahjongTileKind.CIRCLES_6.ordinal(), MahjongTileKind.CIRCLES_2.ordinal()));
+        assertTrue(MahjongTileKind.areSameSuit(MahjongTileKind.BAMBOOS_3.ordinal(), MahjongTileKind.BAMBOOS_9.ordinal()));
+        assertTrue(MahjongTileKind.areSameSuit(MahjongTileKind.CHARACTERS_1.ordinal(), MahjongTileKind.CHARACTERS_7.ordinal()));
+
+        assertFalse(MahjongTileKind.areSameSuit(MahjongTileKind.CHARACTERS_1.ordinal(), MahjongTileKind.BAMBOOS_1.ordinal()));
+        assertFalse(MahjongTileKind.areSameSuit(MahjongTileKind.WHITE.ordinal(), MahjongTileKind.BAMBOOS_1.ordinal()));
+        assertFalse(MahjongTileKind.areSameSuit(MahjongTileKind.CIRCLES_9.ordinal(), MahjongTileKind.BAMBOOS_1.ordinal()));
+
+        // Honours are not part of a suit
+        assertFalse(MahjongTileKind.areSameSuit(MahjongTileKind.EAST.ordinal(), MahjongTileKind.SOUTH.ordinal()));
+        assertFalse(MahjongTileKind.areSameSuit(MahjongTileKind.EAST.ordinal(), MahjongTileKind.WHITE.ordinal()));
     }
 }

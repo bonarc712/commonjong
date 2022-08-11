@@ -151,6 +151,53 @@ public enum MahjongTileKind
         return this.is(BAMBOOS_1, BAMBOOS_2, BAMBOOS_3, BAMBOOS_4, BAMBOOS_5, BAMBOOS_6, BAMBOOS_7, BAMBOOS_8, BAMBOOS_9);
     }
 
+    /**
+     * A terminal tile is any tile that is a 1 or a 9.
+     */
+    public static boolean isTerminal(int index)
+    {
+        return getKindFromIndex(index).isTerminal();
+    }
+
+    /**
+     * A terminal or honour tile is any tile that is a 1, a 9, a wind or a dragon.
+     */
+    public static boolean isTerminalOrHonour(int index)
+    {
+        var tileKind = getKindFromIndex(index);
+        return tileKind.isHonour() || tileKind.isTerminal();
+    }
+
+    /**
+     * A numeral tile is any tile is part of a family (characters, bamboos, dots)
+     */
+    public static boolean isNumeral(int index)
+    {
+        return getKindFromIndex(index).isNumeral();
+    }
+
+    /**
+     * A simple tile is any tile that is between 2 and 8, inclusive.
+     */
+    public static boolean isSimple(int index)
+    {
+        var tileKind = getKindFromIndex(index);
+        return tileKind.isNumeral() && !tileKind.isTerminal();
+    }
+
+    /**
+     * Checks only for the same suit, within characters, circles and bamboos.
+     */
+    public static boolean areSameSuit(int first, int second)
+    {
+        var firstTile = getKindFromIndex(first);
+        var secondTile = getKindFromIndex(second);
+
+        return firstTile.isCharacters() && secondTile.isCharacters() || //
+                firstTile.isCircles() && secondTile.isCircles() || //
+                firstTile.isBamboos() && secondTile.isBamboos();
+    }
+
     public TileFamily getFamily()
     {
         if (isCharacters())
@@ -218,5 +265,22 @@ public enum MahjongTileKind
     {
         return Arrays.asList(MahjongTileKind.CHARACTERS_1, MahjongTileKind.CHARACTERS_9, MahjongTileKind.CIRCLES_1, MahjongTileKind.CIRCLES_9, MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_9,
                 MahjongTileKind.EAST, MahjongTileKind.SOUTH, MahjongTileKind.WEST, MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED);
+    }
+
+    // ALIASES
+
+    public static boolean isYaochuu(int index)
+    {
+        return isTerminalOrHonour(index);
+    }
+
+    public static boolean isRoutou(int index)
+    {
+        return isTerminal(index);
+    }
+
+    public static boolean isEnd(int index)
+    {
+        return isTerminal(index);
     }
 }

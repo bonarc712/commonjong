@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
 /**
  * A tile group represents a simple group of several tiles (for instance a pair,
@@ -161,7 +160,7 @@ public class TileGroup
         var second = tileIndices.get(1);
         var third = tileIndices.get(2);
 
-        if (TileKindUtils.areSameSuit(first, second) && TileKindUtils.areSameSuit(second, third))
+        if (MahjongTileKind.areSameSuit(first, second) && MahjongTileKind.areSameSuit(second, third))
         {
             if (first != second && first != third && second != third)
             {
@@ -191,7 +190,7 @@ public class TileGroup
         // 2-sou.
         // Protogroups (taatsu) do not exist for winds, all pairs are considered
         // separate entities.
-        return (lowestIndex + 1 == highestIndex || lowestIndex + 2 == highestIndex) && TileKindUtils.areSameSuit(tileIndices.get(0), tileIndices.get(1));
+        return (lowestIndex + 1 == highestIndex || lowestIndex + 2 == highestIndex) && MahjongTileKind.areSameSuit(tileIndices.get(0), tileIndices.get(1));
     }
 
     /**
@@ -203,7 +202,7 @@ public class TileGroup
     {
         int first = tileIndices.get(0);
         int second = tileIndices.get(1);
-        return Math.abs(first - second) == 1 && TileKindUtils.areSameSuit(first, second) && !TileKindUtils.isTerminal(first) && !TileKindUtils.isTerminal(second);
+        return Math.abs(first - second) == 1 && MahjongTileKind.areSameSuit(first, second) && !MahjongTileKind.isTerminal(first) && !MahjongTileKind.isTerminal(second);
     }
 
     /**
@@ -215,7 +214,7 @@ public class TileGroup
     {
         int first = tileIndices.get(0);
         int second = tileIndices.get(1);
-        return Math.abs(first - second) == 1 && TileKindUtils.areSameSuit(first, second) && (TileKindUtils.isTerminal(first) || TileKindUtils.isTerminal(second));
+        return Math.abs(first - second) == 1 && MahjongTileKind.areSameSuit(first, second) && (MahjongTileKind.isTerminal(first) || MahjongTileKind.isTerminal(second));
     }
 
     /**
@@ -227,7 +226,7 @@ public class TileGroup
     {
         int first = tileIndices.get(0);
         int second = tileIndices.get(1);
-        return Math.abs(first - second) == 2 && TileKindUtils.areSameSuit(first, second);
+        return Math.abs(first - second) == 2 && MahjongTileKind.areSameSuit(first, second);
     }
 
     public boolean isComplete()
@@ -310,11 +309,11 @@ public class TileGroup
                 }
                 else if (isEndBlock())
                 {
-                    if (TileKindUtils.isTerminal(first))
+                    if (MahjongTileKind.isTerminal(first))
                     {
                         wait.add(second + 1);
                     }
-                    else if (TileKindUtils.isTerminal(second))
+                    else if (MahjongTileKind.isTerminal(second))
                     {
                         wait.add(first - 1);
                     }
