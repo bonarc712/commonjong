@@ -1,5 +1,8 @@
 package com.monsieurmahjong.commonjong.rules.generic;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * The mahjong tile kinds are in the rules because it's a definition of a game
  * element.
@@ -86,6 +89,9 @@ public enum MahjongTileKind
 
     /**
      * This should be used only for MPSZ notation needs.
+     *
+     * Note that this is different from getTileNumber() as this can yield an number
+     * for honours as well.
      */
     public int getMPSZNumber()
     {
@@ -178,5 +184,39 @@ public enum MahjongTileKind
 
         System.out.println("No match found for tile :" + abbreviation);
         return null;
+    }
+
+    public static MahjongTileKind getKindFromIndex(int index)
+    {
+        return MahjongTileKind.values()[index];
+    }
+
+    public static List<MahjongTileKind> getAllCharacters()
+    {
+        return Arrays.asList(MahjongTileKind.CHARACTERS_1, MahjongTileKind.CHARACTERS_2, MahjongTileKind.CHARACTERS_3, MahjongTileKind.CHARACTERS_4, MahjongTileKind.CHARACTERS_5,
+                MahjongTileKind.CHARACTERS_6, MahjongTileKind.CHARACTERS_7, MahjongTileKind.CHARACTERS_8, MahjongTileKind.CHARACTERS_9);
+    }
+
+    public static List<MahjongTileKind> getAllCircles()
+    {
+        return Arrays.asList(MahjongTileKind.CIRCLES_1, MahjongTileKind.CIRCLES_2, MahjongTileKind.CIRCLES_3, MahjongTileKind.CIRCLES_4, MahjongTileKind.CIRCLES_5, MahjongTileKind.CIRCLES_6,
+                MahjongTileKind.CIRCLES_7, MahjongTileKind.CIRCLES_8, MahjongTileKind.CIRCLES_9);
+    }
+
+    public static List<MahjongTileKind> getAllBamboos()
+    {
+        return Arrays.asList(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_6,
+                MahjongTileKind.BAMBOOS_7, MahjongTileKind.BAMBOOS_8, MahjongTileKind.BAMBOOS_9);
+    }
+
+    public static List<MahjongTileKind> getAllHonours()
+    {
+        return Arrays.asList(MahjongTileKind.EAST, MahjongTileKind.SOUTH, MahjongTileKind.WEST, MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED);
+    }
+
+    public static List<MahjongTileKind> getAllTerminalsAndHonours()
+    {
+        return Arrays.asList(MahjongTileKind.CHARACTERS_1, MahjongTileKind.CHARACTERS_9, MahjongTileKind.CIRCLES_1, MahjongTileKind.CIRCLES_9, MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_9,
+                MahjongTileKind.EAST, MahjongTileKind.SOUTH, MahjongTileKind.WEST, MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED);
     }
 }

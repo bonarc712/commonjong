@@ -1,11 +1,9 @@
 package com.monsieurmahjong.commonjong.rules.generic.utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 
-import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKindComparator;
@@ -106,32 +104,12 @@ public class TileKindUtils
         return resultString;
     }
 
-    public static MahjongTileKind getKindFromIndex(int index)
-    {
-        return MahjongTileKind.values()[index];
-    }
-
-    public static boolean isWind(int index)
-    {
-        return getKindFromIndex(index).isWind();
-    }
-
-    public static boolean isDragon(int index)
-    {
-        return getKindFromIndex(index).isDragon();
-    }
-
-    public static boolean isHonor(int index)
-    {
-        return getKindFromIndex(index).isHonour();
-    }
-
     /**
      * A terminal tile is any tile that is a 1 or a 9.
      */
     public static boolean isTerminal(int index)
     {
-        return getKindFromIndex(index).isTerminal();
+        return MahjongTileKind.getKindFromIndex(index).isTerminal();
     }
 
     /**
@@ -139,7 +117,7 @@ public class TileKindUtils
      */
     public static boolean isTerminalOrHonour(int index)
     {
-        var tileKind = getKindFromIndex(index);
+        var tileKind = MahjongTileKind.getKindFromIndex(index);
         return tileKind.isHonour() || tileKind.isTerminal();
     }
 
@@ -148,7 +126,7 @@ public class TileKindUtils
      */
     public static boolean isNumeral(int index)
     {
-        return getKindFromIndex(index).isNumeral();
+        return MahjongTileKind.getKindFromIndex(index).isNumeral();
     }
 
     /**
@@ -156,37 +134,8 @@ public class TileKindUtils
      */
     public static boolean isSimple(int index)
     {
-        var tileKind = getKindFromIndex(index);
+        var tileKind = MahjongTileKind.getKindFromIndex(index);
         return tileKind.isNumeral() && !tileKind.isTerminal();
-    }
-
-    public static List<MahjongTileKind> getAllCharacters()
-    {
-        return Arrays.asList(MahjongTileKind.CHARACTERS_1, MahjongTileKind.CHARACTERS_2, MahjongTileKind.CHARACTERS_3, MahjongTileKind.CHARACTERS_4, MahjongTileKind.CHARACTERS_5,
-                MahjongTileKind.CHARACTERS_6, MahjongTileKind.CHARACTERS_7, MahjongTileKind.CHARACTERS_8, MahjongTileKind.CHARACTERS_9);
-    }
-
-    public static List<MahjongTileKind> getAllCircles()
-    {
-        return Arrays.asList(MahjongTileKind.CIRCLES_1, MahjongTileKind.CIRCLES_2, MahjongTileKind.CIRCLES_3, MahjongTileKind.CIRCLES_4, MahjongTileKind.CIRCLES_5, MahjongTileKind.CIRCLES_6,
-                MahjongTileKind.CIRCLES_7, MahjongTileKind.CIRCLES_8, MahjongTileKind.CIRCLES_9);
-    }
-
-    public static List<MahjongTileKind> getAllBamboos()
-    {
-        return Arrays.asList(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_6,
-                MahjongTileKind.BAMBOOS_7, MahjongTileKind.BAMBOOS_8, MahjongTileKind.BAMBOOS_9);
-    }
-
-    public static List<MahjongTileKind> getAllHonours()
-    {
-        return Arrays.asList(MahjongTileKind.EAST, MahjongTileKind.SOUTH, MahjongTileKind.WEST, MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED);
-    }
-
-    public static List<MahjongTileKind> getAllTerminalsAndHonours()
-    {
-        return Arrays.asList(MahjongTileKind.CHARACTERS_1, MahjongTileKind.CHARACTERS_9, MahjongTileKind.CIRCLES_1, MahjongTileKind.CIRCLES_9, MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_9,
-                MahjongTileKind.EAST, MahjongTileKind.SOUTH, MahjongTileKind.WEST, MahjongTileKind.NORTH, MahjongTileKind.WHITE, MahjongTileKind.GREEN, MahjongTileKind.RED);
     }
 
     /**
@@ -194,46 +143,12 @@ public class TileKindUtils
      */
     public static boolean areSameSuit(int first, int second)
     {
-        var firstTile = getKindFromIndex(first);
-        var secondTile = getKindFromIndex(second);
+        var firstTile = MahjongTileKind.getKindFromIndex(first);
+        var secondTile = MahjongTileKind.getKindFromIndex(second);
 
         return firstTile.isCharacters() && secondTile.isCharacters() || //
                 firstTile.isCircles() && secondTile.isCircles() || //
                 firstTile.isBamboos() && secondTile.isBamboos();
-    }
-
-    public static Seat getSeatFromTileKind(MahjongTileKind kind)
-    {
-        switch (kind)
-        {
-        case EAST:
-            return Seat.EAST;
-        case SOUTH:
-            return Seat.SOUTH;
-        case WEST:
-            return Seat.WEST;
-        case NORTH:
-            return Seat.NORTH;
-        default:
-            throw new IllegalArgumentException("Tile kind should be a wind");
-        }
-    }
-
-    public static MahjongTileKind getTileKindFromSeat(Seat seat)
-    {
-        switch (seat)
-        {
-        case EAST:
-            return MahjongTileKind.EAST;
-        case SOUTH:
-            return MahjongTileKind.SOUTH;
-        case WEST:
-            return MahjongTileKind.WEST;
-        case NORTH:
-            return MahjongTileKind.NORTH;
-        default:
-            throw new IllegalArgumentException("Seat should be a wind");
-        }
     }
 
     // ALIASES

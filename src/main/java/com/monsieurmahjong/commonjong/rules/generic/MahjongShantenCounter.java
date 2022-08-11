@@ -3,7 +3,6 @@ package com.monsieurmahjong.commonjong.rules.generic;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroupLengthComparator;
 import com.monsieurmahjong.commonjong.rules.generic.waits.WaitShapeEngine;
@@ -31,7 +30,7 @@ public class MahjongShantenCounter
 
     private static int countKokushiShanten(List<TileGroup> tileGroups)
     {
-        List<MahjongTileKind> terminalAndHonourCatalog = new ArrayList<>(TileKindUtils.getAllTerminalsAndHonours());
+        List<MahjongTileKind> terminalAndHonourCatalog = new ArrayList<>(MahjongTileKind.getAllTerminalsAndHonours());
         var pairFound = false;
 
         for (TileGroup group : tileGroups)
@@ -51,13 +50,13 @@ public class MahjongShantenCounter
             }
 
             var currentTerminalOrHonour = group.getIndices().stream().filter(index -> {
-                var kind = TileKindUtils.getKindFromIndex(index);
+                var kind = MahjongTileKind.getKindFromIndex(index);
                 return kind.isTerminal() || kind.isHonour();
             }).findFirst();
 
             if (currentTerminalOrHonour.isPresent())
             {
-                var kind = TileKindUtils.getKindFromIndex(currentTerminalOrHonour.get());
+                var kind = MahjongTileKind.getKindFromIndex(currentTerminalOrHonour.get());
                 terminalAndHonourCatalog.remove(kind);
             }
         }

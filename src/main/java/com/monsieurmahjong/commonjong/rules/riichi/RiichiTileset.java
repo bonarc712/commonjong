@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Tileset;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
 public class RiichiTileset extends Tileset
 {
@@ -13,10 +12,10 @@ public class RiichiTileset extends Tileset
     public List<MahjongTileKind> getTileList()
     {
         var tileList = new ArrayList<MahjongTileKind>();
-        tileList.addAll(TileKindUtils.getAllCharacters());
-        tileList.addAll(TileKindUtils.getAllCircles());
-        tileList.addAll(TileKindUtils.getAllBamboos());
-        tileList.addAll(TileKindUtils.getAllHonours());
+        tileList.addAll(MahjongTileKind.getAllCharacters());
+        tileList.addAll(MahjongTileKind.getAllCircles());
+        tileList.addAll(MahjongTileKind.getAllBamboos());
+        tileList.addAll(MahjongTileKind.getAllHonours());
         return tileList;
     }
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class KokushiMusou extends GroupBasedYaku
@@ -18,7 +17,7 @@ public class KokushiMusou extends GroupBasedYaku
     @Override
     public boolean isValid()
     {
-        var terminalAndHonourCatalog = new ArrayList<>(TileKindUtils.getAllTerminalsAndHonours());
+        var terminalAndHonourCatalog = new ArrayList<>(MahjongTileKind.getAllTerminalsAndHonours());
         var pairFound = false;
 
         for (var group : groups)

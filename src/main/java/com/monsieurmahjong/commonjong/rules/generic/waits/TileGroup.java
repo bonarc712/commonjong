@@ -64,7 +64,7 @@ public class TileGroup
 
     public MahjongTileKind getTileKindAt(int index)
     {
-        return TileKindUtils.getKindFromIndex(tileIndices.get(index));
+        return MahjongTileKind.getKindFromIndex(tileIndices.get(index));
     }
 
     public List<MahjongTileKind> getTileKinds()
@@ -72,7 +72,7 @@ public class TileGroup
         List<MahjongTileKind> tileKinds = new ArrayList<>();
         for (int index : tileIndices)
         {
-            tileKinds.add(TileKindUtils.getKindFromIndex(index));
+            tileKinds.add(MahjongTileKind.getKindFromIndex(index));
         }
         return tileKinds;
     }
@@ -104,7 +104,7 @@ public class TileGroup
     {
         for (int index : tileIndices)
         {
-            var tileKind = TileKindUtils.getKindFromIndex(index);
+            var tileKind = MahjongTileKind.getKindFromIndex(index);
             if (predicate.test(tileKind))
             {
                 return true;
@@ -255,7 +255,7 @@ public class TileGroup
         if (tileIndices.size() == 1)
         {
             int tileIndex = tileIndices.get(0);
-            if (TileKindUtils.getKindFromIndex(tileIndex).isNumeral())
+            if (MahjongTileKind.getKindFromIndex(tileIndex).isNumeral())
             {
                 if (tileIndex % 9 != 0 && tileIndex % 9 != 1) // tile is not a 1 or a 2
                 {
@@ -359,7 +359,7 @@ public class TileGroup
         var toReturn = "TileGroup : ";
         for (Integer index : tileIndices)
         {
-            toReturn += TileKindUtils.getKindFromIndex(index).name() + " ";
+            toReturn += MahjongTileKind.getKindFromIndex(index).name() + " ";
         }
 
         return toReturn;
@@ -370,9 +370,9 @@ public class TileGroup
         var toReturn = "";
         for (Integer index : tileIndices)
         {
-            toReturn += TileKindUtils.getKindFromIndex(index).getMPSZNumber();
+            toReturn += MahjongTileKind.getKindFromIndex(index).getMPSZNumber();
         }
-        toReturn += TileKindUtils.getKindFromIndex(tileIndices.get(0)).getMPSZFamily();
+        toReturn += MahjongTileKind.getKindFromIndex(tileIndices.get(0)).getMPSZFamily();
 
         return toReturn;
     }

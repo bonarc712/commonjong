@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.game.Seat;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class Pinfu extends GroupBasedYaku
@@ -65,14 +66,14 @@ public class Pinfu extends GroupBasedYaku
         {
             return false;
         }
-        var pairKind = TileKindUtils.getKindFromIndex(pair.getIndices().get(0));
+        var pairKind = MahjongTileKind.getKindFromIndex(pair.getIndices().get(0));
         if (pairKind.isDragon())
         {
             return false;
         }
         if (pairKind.isWind())
         {
-            var pairSeat = TileKindUtils.getSeatFromTileKind(pairKind);
+            var pairSeat = Seat.getSeatFromTileKind(pairKind);
             if (hand.isTableWind(pairSeat))
             {
                 return false;

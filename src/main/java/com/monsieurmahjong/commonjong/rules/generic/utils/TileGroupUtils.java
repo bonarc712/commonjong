@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.Tile;
+import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class TileGroupUtils
@@ -42,7 +43,7 @@ public class TileGroupUtils
         {
             for (int index : group.getIndices())
             {
-                var tile = new Tile(TileKindUtils.getKindFromIndex(index));
+                var tile = new Tile(MahjongTileKind.getKindFromIndex(index));
                 tiles.add(tile);
             }
         }

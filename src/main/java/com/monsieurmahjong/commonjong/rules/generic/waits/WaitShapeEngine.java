@@ -9,7 +9,6 @@ import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongShantenCounter;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKindComparator;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 
 public class WaitShapeEngine
 {
@@ -185,7 +184,7 @@ public class WaitShapeEngine
     private void addTilesToWait(List<MahjongTileKind> waitList, List<Integer> indicesToAddToWaitList)
     {
         indicesToAddToWaitList.forEach(index -> {
-            var kind = TileKindUtils.getKindFromIndex(index);
+            var kind = MahjongTileKind.getKindFromIndex(index);
             waitList.add(kind);
         });
     }

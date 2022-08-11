@@ -3,7 +3,7 @@ package com.monsieurmahjong.commonjong.rules.riichi.minipoints;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class SeatWindPair implements Fu
@@ -27,7 +27,7 @@ public class SeatWindPair implements Fu
 
         for (var group : groups)
         {
-            var seatWindTile = TileKindUtils.getTileKindFromSeat(hand.getSeatWind());
+            var seatWindTile = Seat.getTileKindFromSeat(hand.getSeatWind());
             if (group.isPair() && group.getTileKindAt(0).equals(seatWindTile))
             {
                 return true;

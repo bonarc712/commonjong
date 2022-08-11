@@ -2,7 +2,6 @@ package com.monsieurmahjong.commonjong.rules.generic.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.game.Seat;
 import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 
@@ -45,7 +43,6 @@ public class TileKindUtilsTest
         assertTrue(TileKindUtils.isTerminal(0));
         assertTrue(TileKindUtils.isNumeral(0));
         assertTrue(TileKindUtils.isTerminalOrHonour(0));
-        assertFalse(TileKindUtils.isHonor(0));
         // three of characters
         assertFalse(TileKindUtils.isTerminal(2));
         assertTrue(TileKindUtils.isNumeral(2));
@@ -54,14 +51,10 @@ public class TileKindUtilsTest
         assertTrue(TileKindUtils.isTerminal(26));
         assertTrue(TileKindUtils.isNumeral(26));
         // west
-        assertTrue(TileKindUtils.isWind(29));
-        assertFalse(TileKindUtils.isDragon(29));
         assertTrue(TileKindUtils.isTerminalOrHonour(29));
         assertFalse(TileKindUtils.isTerminal(29));
         assertFalse(TileKindUtils.isNumeral(29));
         // white dragon
-        assertFalse(TileKindUtils.isWind(31));
-        assertTrue(TileKindUtils.isDragon(31));
         assertTrue(TileKindUtils.isTerminalOrHonour(31));
         assertFalse(TileKindUtils.isTerminal(31));
         assertFalse(TileKindUtils.isNumeral(31));
@@ -88,29 +81,10 @@ public class TileKindUtilsTest
     @Test
     public void testGetKindFromIndex()
     {
-        assertEquals(MahjongTileKind.CHARACTERS_1, TileKindUtils.getKindFromIndex(0));
-        assertEquals(MahjongTileKind.CHARACTERS_3, TileKindUtils.getKindFromIndex(2));
-        assertEquals(MahjongTileKind.BAMBOOS_9, TileKindUtils.getKindFromIndex(26));
-        assertEquals(MahjongTileKind.WEST, TileKindUtils.getKindFromIndex(29));
-        assertEquals(MahjongTileKind.WHITE, TileKindUtils.getKindFromIndex(31));
-    }
-
-    @Test
-    public void testGetSeatFromTileKind()
-    {
-        assertEquals(Seat.EAST, TileKindUtils.getSeatFromTileKind(MahjongTileKind.EAST));
-        assertEquals(Seat.SOUTH, TileKindUtils.getSeatFromTileKind(MahjongTileKind.SOUTH));
-        assertEquals(Seat.WEST, TileKindUtils.getSeatFromTileKind(MahjongTileKind.WEST));
-        assertEquals(Seat.NORTH, TileKindUtils.getSeatFromTileKind(MahjongTileKind.NORTH));
-        assertThrows(IllegalArgumentException.class, () -> TileKindUtils.getSeatFromTileKind(MahjongTileKind.BAMBOOS_3));
-    }
-
-    @Test
-    public void testGetTileKindFromSeat()
-    {
-        assertEquals(MahjongTileKind.EAST, TileKindUtils.getTileKindFromSeat(Seat.EAST));
-        assertEquals(MahjongTileKind.SOUTH, TileKindUtils.getTileKindFromSeat(Seat.SOUTH));
-        assertEquals(MahjongTileKind.WEST, TileKindUtils.getTileKindFromSeat(Seat.WEST));
-        assertEquals(MahjongTileKind.NORTH, TileKindUtils.getTileKindFromSeat(Seat.NORTH));
+        assertEquals(MahjongTileKind.CHARACTERS_1, MahjongTileKind.getKindFromIndex(0));
+        assertEquals(MahjongTileKind.CHARACTERS_3, MahjongTileKind.getKindFromIndex(2));
+        assertEquals(MahjongTileKind.BAMBOOS_9, MahjongTileKind.getKindFromIndex(26));
+        assertEquals(MahjongTileKind.WEST, MahjongTileKind.getKindFromIndex(29));
+        assertEquals(MahjongTileKind.WHITE, MahjongTileKind.getKindFromIndex(31));
     }
 }
