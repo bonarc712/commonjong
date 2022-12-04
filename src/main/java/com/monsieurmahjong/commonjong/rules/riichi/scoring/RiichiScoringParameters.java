@@ -4,6 +4,8 @@ public interface RiichiScoringParameters
 {
     public boolean hasPlayerDeclaredRiichi();
 
+    public boolean isPlayerDealer();
+
     public boolean doesPlayerWinOnIppatsu();
 
     public boolean doesPlayerWinOnTenhou();

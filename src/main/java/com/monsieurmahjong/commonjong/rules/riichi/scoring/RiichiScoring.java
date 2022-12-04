@@ -31,7 +31,7 @@ public class RiichiScoring implements Scoring
         var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(tileGroups));
         var yakus = Yakus.getStandardYakus(hand, tileGroups, parameters);
         var hanTotal = yakus.stream().filter(Yaku::isValid).mapToInt(Yaku::getHanValue).sum();
-        return getRonScore(hanTotal, 30, false);
+        return getRonScore(hanTotal, 30, parameters.isPlayerDealer());
     }
 
     public Map<Seat, Integer> getTsumoScore(int han, int fu, Seat winner)

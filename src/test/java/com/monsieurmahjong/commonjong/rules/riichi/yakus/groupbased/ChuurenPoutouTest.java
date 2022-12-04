@@ -25,6 +25,7 @@ public class ChuurenPoutouTest
 
     private List<TileGroup> completeChuurenHandGroups = TileGroupUtils.tileGroupsOf("111m", "234m", "456m", "789m", "99m");
     private List<TileGroup> completeNonChuurenHandGroups = TileGroupUtils.tileGroupsOf("123m", "345m", "22p", "345p", "678p");
+    private List<TileGroup> chinitsuButNotChuurenHandGroups = TileGroupUtils.tileGroupsOf("123m", "22m", "345m", "777m", "789m");
     private List<TileGroup> incompleteNonChuurenHandGroups = TileGroupUtils.tileGroupsOf("111m", "555p", "11s");
     private List<TileGroup> openChuurenHandGroups = TileGroupUtils.tileGroupsOf("111m", "234m", "456m", "789m", "99m");
     private MahjongTileKind junseiChuurenWinningTile = MahjongTileKind.CHARACTERS_4;
@@ -48,6 +49,16 @@ public class ChuurenPoutouTest
         var chuurenPoutouIsValid = chuurenPoutou.isValid();
 
         assertFalse(chuurenPoutouIsValid, "123345m22345678p should not be valid for ChuurenPoutou");
+    }
+
+    @Test
+    public void testValidityOf_ChinitsuButNotChuurenHand_ShouldBeFalse()
+    {
+        Yaku chuurenPoutou = new ChuurenPoutou(new Hand(TileGroupUtils.getTilesFromTileGroups(chinitsuButNotChuurenHandGroups)), chinitsuButNotChuurenHandGroups);
+
+        var chuurenPoutouIsValid = chuurenPoutou.isValid();
+
+        assertFalse(chuurenPoutouIsValid, "12223345777789m should not be valid for ChuurenPoutou");
     }
 
     @Test
@@ -118,5 +129,16 @@ public class ChuurenPoutouTest
         var junseiChuurenPoutouIsDoubleYakuman = chuurenPoutou.isDoubleYakuman();
 
         assertTrue(junseiChuurenPoutouIsDoubleYakuman, "Junsei chuuren poutou should be double yakuman");
+    }
+
+    @Test
+    public void testValueOf_ChuurenPoutouWithWinningTileUnknown_ShouldBeYakuman()
+    {
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(completeChuurenHandGroups));
+        Yaku chuurenPoutou = new ChuurenPoutou(hand, completeChuurenHandGroups);
+
+        var chuurenPoutouIsYakuman = chuurenPoutou.isYakuman();
+
+        assertTrue(chuurenPoutouIsYakuman, "Chuuren poutou without winning tile defined is yakuman");
     }
 }

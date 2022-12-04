@@ -37,6 +37,12 @@ public class RiichiScoringParametersImpl implements RiichiScoringParameters
     }
 
     @Override
+    public boolean isPlayerDealer()
+    {
+        return winningPlayer == Seat.EAST;
+    }
+
+    @Override
     public boolean doesPlayerWinOnIppatsu()
     {
         return winOnIppatsu;

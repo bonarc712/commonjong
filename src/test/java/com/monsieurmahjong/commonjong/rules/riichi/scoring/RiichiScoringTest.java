@@ -129,6 +129,23 @@ public class RiichiScoringTest
         var score = scoring.getScore(tileGroups, scoringParameters);
 
         assertThat(score, is(2000));
+    }
 
+    @Test
+    public void whenHavingAHanemanDealerHand_thenShouldBe18000()
+    {
+        var scoring = new RiichiScoring();
+        var tileGroups = new ArrayList<TileGroup>();
+        tileGroups.add(TileGroup.of(MahjongTileKind.CHARACTERS_1, MahjongTileKind.CHARACTERS_2, MahjongTileKind.CHARACTERS_3));
+        tileGroups.add(TileGroup.of(MahjongTileKind.CHARACTERS_2, MahjongTileKind.CHARACTERS_2));
+        tileGroups.add(TileGroup.of(MahjongTileKind.CHARACTERS_3, MahjongTileKind.CHARACTERS_4, MahjongTileKind.CHARACTERS_5));
+        tileGroups.add(TileGroup.of(MahjongTileKind.CHARACTERS_7, MahjongTileKind.CHARACTERS_7, MahjongTileKind.CHARACTERS_7));
+        tileGroups.add(TileGroup.of(MahjongTileKind.CHARACTERS_7, MahjongTileKind.CHARACTERS_8, MahjongTileKind.CHARACTERS_9));
+        var scoringParameters = new RiichiScoringParametersImpl(Seat.EAST);
+        scoringParameters.setWinOnRon(true);
+
+        var score = scoring.getScore(tileGroups, scoringParameters);
+
+        assertThat(score, is(18000));
     }
 }

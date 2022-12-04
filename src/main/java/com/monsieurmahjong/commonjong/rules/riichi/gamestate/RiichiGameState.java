@@ -58,6 +58,12 @@ public class RiichiGameState implements RiichiScoringParameters
     }
 
     @Override
+    public boolean isPlayerDealer()
+    {
+        return targetPlayer.equals(Seat.EAST.getSeatNameLowercase());
+    }
+
+    @Override
     public boolean doesPlayerWinOnTenhou()
     {
         throw new UnsupportedOperationException("Not yet implemented");

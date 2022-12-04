@@ -40,7 +40,7 @@ public class HandConfigurationParser
      * current hand using the known tile groups that are supplied as a parameter.
      * All melded tile groups are added automatically to all hand configurations
      * because they can't be changed.
-     * 
+     *
      * @param tileGroups possible tile groups that can be created with the hand
      */
     public List<List<TileGroup>> getHandConfigurations(List<TileGroup> tileGroups)
@@ -186,7 +186,8 @@ public class HandConfigurationParser
 
                                 keepTilesFlags.get(j).set(k, true);
                             }
-                        } else if (countForCurrentGroup == 1)
+                        }
+                        else if (countForCurrentGroup == 1)
                         {
                             var currentIndexOfIndex = group.getIndices().indexOf(currentIndex);
                             keepTilesFlags.get(j).set(currentIndexOfIndex, true);
@@ -221,7 +222,8 @@ public class HandConfigurationParser
             if (pairingsCopy.isEmpty())
             {
                 tileGroupsToReturn.add(currentTileGroupSoFarCopy);
-            } else
+            }
+            else
             {
                 tileGroupsToReturn = listDifferentCombinations(pairingsCopy, tileGroupsToReturn, currentTileGroupSoFarCopy);
             }
@@ -250,7 +252,8 @@ public class HandConfigurationParser
             if (possiblePairingsCopy.isEmpty())
             {
                 handConfigsToReturn.add(currentHandConfigSoFarCopy);
-            } else
+            }
+            else
             {
                 handConfigsToReturn = createHandConfigurations(possiblePairingsCopy, handConfigsToReturn, currentHandConfigSoFarCopy);
             }
@@ -263,7 +266,7 @@ public class HandConfigurationParser
      * Create the possible pairings on a specific tile kind. The occurrences is how
      * many of that tile kind need to be found and sorted between groups. This
      * method is recursive as it needs to search into a tree of possibilities.
-     * 
+     *
      * @param tileKind                   : the tile kind to search
      * @param occurrences                : how many of this tile need to be found
      * @param groupsToSelectFrom         : the groups within which the tile is
@@ -305,7 +308,8 @@ public class HandConfigurationParser
                     if (countForCurrentPairing == 0)
                     {
                         possiblePairingsOfTileKind.add(pairingForCurrentGroup);
-                    } else
+                    }
+                    else
                     {
                         addPossiblePairings(tileKind, countForCurrentPairing, groupsToSelectFromExcludingCurrent, possiblePairingsOfTileKind, pairingForCurrentGroup);
                     }
@@ -341,7 +345,8 @@ public class HandConfigurationParser
                     knownCollision.add(secondGroup);
                     currentCollision = knownCollision;
                     addedToKnownCollision = true;
-                } else if (knownCollision.contains(secondGroup))
+                }
+                else if (knownCollision.contains(secondGroup))
                 {
                     knownCollision.add(firstGroup);
                     currentCollision = knownCollision;
@@ -372,14 +377,16 @@ public class HandConfigurationParser
                         currentCollision.add(currentCollisionPairSecond);
                     }
                     collisionPairs.remove(i);
-                } else if (currentCollision.contains(currentCollisionPairSecond))
+                }
+                else if (currentCollision.contains(currentCollisionPairSecond))
                 {
                     if (!currentCollision.contains(currentCollisionPairFirst) && !currentCollisionPairFirst.equals(currentCollisionPairSecond))
                     {
                         currentCollision.add(currentCollisionPairFirst);
                     }
                     collisionPairs.remove(i);
-                } else
+                }
+                else
                 {
                     i++;
                 }

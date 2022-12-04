@@ -7,4 +7,9 @@ public enum TileFamily
     BAMBOOS, //
     HONOURS, //
     NONE;
+
+    public boolean isNumeral()
+    {
+        return this == CHARACTERS || this == CIRCLES || this == BAMBOOS;
+    }
 }
