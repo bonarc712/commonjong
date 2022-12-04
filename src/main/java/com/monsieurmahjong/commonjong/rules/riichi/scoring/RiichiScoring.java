@@ -1,6 +1,7 @@
 package com.monsieurmahjong.commonjong.rules.riichi.scoring;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.Scoring;
@@ -30,6 +31,6 @@ public class RiichiScoring implements Scoring
     public List<Yaku> getValidYakus(Hand hand, List<TileGroup> tileGroups, RiichiScoringParameters parameters)
     {
         var yakus = Yakus.getStandardYakus(hand, tileGroups, parameters);
-        return yakus.stream().filter(Yaku::isValid).toList();
+        return yakus.stream().filter(Yaku::isValid).collect(Collectors.toList());
     }
 }
