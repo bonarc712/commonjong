@@ -34,6 +34,18 @@ public class RiichiScoring implements Scoring
         return getRonScore(hanTotal, 30, parameters.isPlayerDealer());
     }
 
+    public List<Yaku> getValidYakus(List<TileGroup> tileGroups, RiichiScoringParameters parameters)
+    {
+        var hand = new Hand(TileGroupUtils.getTilesFromTileGroups(tileGroups));
+        return getValidYakus(hand, tileGroups, parameters);
+    }
+
+    public List<Yaku> getValidYakus(Hand hand, List<TileGroup> tileGroups, RiichiScoringParameters parameters)
+    {
+        var yakus = Yakus.getStandardYakus(hand, tileGroups, parameters);
+        return yakus.stream().filter(Yaku::isValid).toList();
+    }
+
     public Map<Seat, Integer> getTsumoScore(int han, int fu, Seat winner)
     {
         return getTsumoScore(han, fu, 0, winner);
