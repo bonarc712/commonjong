@@ -9,6 +9,13 @@ import com.monsieurmahjong.commonjong.rules.generic.waits.WaitShapeEngine;
 
 public class MahjongShantenCounter
 {
+    private List<TileGroup> tileGroups;
+
+    public MahjongShantenCounter(List<TileGroup> tileGroups)
+    {
+        this.tileGroups = tileGroups;
+    }
+
     /**
      * This method counts all shanten for a specific hand combination. It does not
      * count all combinations that are possible for the current hand. See
@@ -17,18 +24,18 @@ public class MahjongShantenCounter
      * @param tileGroups
      * @return shanten count. 0 is tenpai, -1 is mahjong-complete
      */
-    public static int countShanten(List<TileGroup> tileGroups)
+    public int countShanten()
     {
-        var kokushiShantenCount = countKokushiShanten(tileGroups);
-        var sevenPairsShantenCount = countSevenPairsShanten(tileGroups);
-        var fourGroupsOnePairShantenCount = countFourGroupsOnePairShanten(tileGroups);
+        var kokushiShantenCount = countKokushiShanten();
+        var sevenPairsShantenCount = countSevenPairsShanten();
+        var fourGroupsOnePairShantenCount = countFourGroupsOnePairShanten();
 
         var lowestShantenCount = Math.min(kokushiShantenCount, sevenPairsShantenCount);
         lowestShantenCount = Math.min(lowestShantenCount, fourGroupsOnePairShantenCount);
         return lowestShantenCount;
     }
 
-    private static int countKokushiShanten(List<TileGroup> tileGroups)
+    private int countKokushiShanten()
     {
         List<MahjongTileKind> terminalAndHonourCatalog = new ArrayList<>(MahjongTileKind.getAllTerminalsAndHonours());
         var pairFound = false;
@@ -69,7 +76,7 @@ public class MahjongShantenCounter
         return shantenCount;
     }
 
-    private static int countSevenPairsShanten(List<TileGroup> tileGroups)
+    private int countSevenPairsShanten()
     {
         var amountOfPairs = 0;
 
@@ -84,7 +91,7 @@ public class MahjongShantenCounter
         return 6 - amountOfPairs;
     }
 
-    private static int countFourGroupsOnePairShanten(List<TileGroup> tileGroups)
+    private int countFourGroupsOnePairShanten()
     {
         var shanten = 8;
         var pairFound = false;
