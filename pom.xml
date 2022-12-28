@@ -2,7 +2,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.monsieurmahjong</groupId>
   <artifactId>commonjong</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.4-SNAPSHOT</version>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
 
   <dependencies>
     <dependency>
