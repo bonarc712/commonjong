@@ -9,6 +9,8 @@ import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongShantenCounter;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKindComparator;
+import com.monsieurmahjong.commonjong.rules.generic.waits.parsing.HandConfigurationParser;
+import com.monsieurmahjong.commonjong.rules.generic.waits.parsing.TileParser;
 
 public class WaitShapeEngine
 {

@@ -1,4 +1,4 @@
-package com.monsieurmahjong.commonjong.rules.generic.waits;
+package com.monsieurmahjong.commonjong.rules.generic.waits.parsing;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
+import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
+import com.monsieurmahjong.commonjong.rules.generic.waits.parsing.TileParser;
 
 public class TileParserTest
 {

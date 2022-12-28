@@ -1,4 +1,4 @@
-package com.monsieurmahjong.commonjong.rules.generic.waits;
+package com.monsieurmahjong.commonjong.rules.generic.waits.parsing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,7 +13,9 @@ import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
-import com.monsieurmahjong.commonjong.rules.generic.waits.HandConfigurationParser.CollisionPair;
+import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
+import com.monsieurmahjong.commonjong.rules.generic.waits.parsing.HandConfigurationParser;
+import com.monsieurmahjong.commonjong.rules.generic.waits.parsing.HandConfigurationParser.CollisionPair;
 
 public class HandConfigurationParserTest
 {
@@ -115,6 +117,19 @@ public class HandConfigurationParserTest
 
         assertEquals(expectedPossiblePairings, possiblePairings2, "Possible pairings for 135567s77z is not as expected");
     }
+
+//    @Test
+//    public void testCreatePossiblePairingsForPinzuOneToNine()
+//    {
+//        // 135567s case
+//        var collisionList = TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p", "567p", "678p", "789p");
+//
+//        var mpsz = new MPSZNotation();
+//        var parser = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("123456789p")));
+//        var possiblePairings = parser.createPossiblePairings(collisionList);
+//
+//        assertEquals(null, possiblePairings);
+//    }
 
     @Test
     public void testGetFlagsForTilesToKeep()

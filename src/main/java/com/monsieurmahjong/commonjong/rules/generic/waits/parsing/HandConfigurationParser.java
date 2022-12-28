@@ -1,4 +1,4 @@
-package com.monsieurmahjong.commonjong.rules.generic.waits;
+package com.monsieurmahjong.commonjong.rules.generic.waits.parsing;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,22 +12,33 @@ import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
+import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class HandConfigurationParser
 {
+    // START MAIN BLOCK
+
     public static void main(String[] args)
     {
-//        var hand1 = new Hand(TileKindUtils.asHand("123456789m11122z"));
+        var mpsz = new MPSZNotation();
+
+//        var hand1 = new Hand(mpsz.getTilesFrom("123456789m11122z"));
 //        var tileGroups = TileGroupUtils.tileGroupsOf("123m", "234m", "345m", "456m", "567m", "678m", "789m", "111z", "22z");
 
-        var mpsz = new MPSZNotation();
         var hand1 = new Hand(mpsz.getTilesFrom("123456789p11122z"));
         var tileGroups = TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p", "567p", "678p", "789p", "111z", "22z");
 
         var instance = new HandConfigurationParser(hand1);
-        instance.getHandConfigurations(tileGroups);
+        var result = instance.getHandConfigurations(tileGroups);
 
+        System.out.println("bob");
+//        for (var subList : result)
+//        {
+//            System.out.println("One possibility: " + subList);
+//        }
     }
+
+    // END MAIN BLOCK
 
     private Hand hand;
     private List<Tile> unmeldedTiles;
@@ -61,11 +72,13 @@ public class HandConfigurationParser
      */
     public List<List<TileGroup>> getHandConfigurations(List<TileGroup> tileGroups)
     {
-        List<List<TileGroup>> handConfigurations = new ArrayList<>();
-
         // first, create the collision list for all groups that collide with each other.
         // All groups that have no collisions are not added in the list
         var collisionList = createCollisionList(tileGroups);
+        for (var collision : collisionList)
+        {
+            System.out.println("One collision: " + collision);
+        }
 
         // then dissect these collision groups to get the different possible pairings
         List<List<List<TileGroup>>> listOfPossiblePairings = new ArrayList<>();
@@ -76,7 +89,7 @@ public class HandConfigurationParser
         }
 
         // create hand configurations from possible pairing lists
-        handConfigurations = createHandConfigurations(listOfPossiblePairings, new ArrayList<>(), new ArrayList<>());
+        var handConfigurations = createHandConfigurations(listOfPossiblePairings, new ArrayList<>(), new ArrayList<>());
 
         if (handConfigurations.isEmpty())
         {
@@ -85,17 +98,24 @@ public class HandConfigurationParser
         }
 
         // add tile groups that are not within a collision list to the result
-        for (TileGroup tileGroup : tileGroups)
-        {
-            if (collisionList.stream().noneMatch(list -> list.contains(tileGroup)))
-            {
-                handConfigurations.forEach(list -> list.add(tileGroup));
-            }
-        }
+        handConfigurations.forEach(list -> list.addAll(getTileGroupsWithoutCollisions(tileGroups, collisionList)));
 
         // add melded tiles to the result
         handConfigurations.forEach(list -> list.addAll(getMeldedTileGroups()));
         return handConfigurations;
+    }
+
+    private List<TileGroup> getTileGroupsWithoutCollisions(List<TileGroup> tileGroups, List<List<TileGroup>> collisionList)
+    {
+        var tileGroupsWithoutCollisions = new ArrayList<TileGroup>();
+        for (TileGroup tileGroup : tileGroups)
+        {
+            if (collisionList.stream().noneMatch(list -> list.contains(tileGroup)))
+            {
+                tileGroupsWithoutCollisions.add(tileGroup);
+            }
+        }
+        return tileGroupsWithoutCollisions;
     }
 
     /**

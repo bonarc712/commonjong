@@ -1,4 +1,4 @@
-package com.monsieurmahjong.commonjong.rules.generic.waits;
+package com.monsieurmahjong.commonjong.rules.generic.waits.parsing;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 /**
  * All parsing methods (for runs, pairs, triplets, etc.) for tiles are here.
