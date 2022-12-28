@@ -16,7 +16,7 @@ public class TileGroupUtils
 
         for (String group : groups)
         {
-            var tiles = TileKindUtils.asHand(group);
+            var tiles = new MPSZNotation().getTilesFrom(group);
             List<Integer> tileIndices = tiles.stream().map(tile -> tile.getTileKind().getIndex()).collect(Collectors.toList());
             var tileGroup = new TileGroup(tileIndices);
             tileGroupList.add(tileGroup);

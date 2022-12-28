@@ -123,5 +123,11 @@ public class ShantenCalculationTest
 
         resultShanten = ShantenCalculation.countShanten("1244566789m112p");
         Assertions.assertEquals(1, resultShanten, "Wrong shanten for 1244566789m112p");
+
+        resultShanten = ShantenCalculation.countShanten("123456789m11122z");
+        Assertions.assertEquals(-1, resultShanten, "Wrong shanten for 123456789m11122z");
+
+//        resultShanten = ShantenCalculation.countShanten("123456789p11122z");
+//        Assertions.assertEquals(-1, resultShanten, "Wrong shanten for 123456789p11122z");
     }
 }

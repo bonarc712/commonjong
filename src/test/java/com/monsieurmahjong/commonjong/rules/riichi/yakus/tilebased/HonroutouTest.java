@@ -7,19 +7,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
 
 public class HonroutouTest
 {
     private Hand anyHand = new Hand();
 
-    private Hand completeHonroutouHand = new Hand(TileKindUtils.asHand("111999m11p333555z"));
-    private Hand incompleteHonroutouHand = new Hand(TileKindUtils.asHand("111999m11z"));
-    private Hand invalidHonroutouOnlyTerminals = new Hand(TileKindUtils.asHand("111999m111999p11s"));
-    private Hand invalidHonroutouOnlyHonours = new Hand(TileKindUtils.asHand("11122233344455z"));
-    private Hand completeNonHonroutouHand = new Hand(TileKindUtils.asHand("123456m22345678p"));
-    private Hand incompleteNonHonroutouHand = new Hand(TileKindUtils.asHand("456789m"));
+    private Hand completeHonroutouHand = new Hand(new MPSZNotation().getTilesFrom("111999m11p333555z"));
+    private Hand incompleteHonroutouHand = new Hand(new MPSZNotation().getTilesFrom("111999m11z"));
+    private Hand invalidHonroutouOnlyTerminals = new Hand(new MPSZNotation().getTilesFrom("111999m111999p11s"));
+    private Hand invalidHonroutouOnlyHonours = new Hand(new MPSZNotation().getTilesFrom("11122233344455z"));
+    private Hand completeNonHonroutouHand = new Hand(new MPSZNotation().getTilesFrom("123456m22345678p"));
+    private Hand incompleteNonHonroutouHand = new Hand(new MPSZNotation().getTilesFrom("456789m"));
 
     @Test
     public void testValidityOf_HandWithFourteenHonroutouTiles_ShouldBeTrue()

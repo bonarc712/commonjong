@@ -13,17 +13,17 @@ import org.junit.jupiter.api.Test;
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
 
 public class TanyaoTest
 {
     private Hand anyHand = new Hand();
 
-    private Hand completeTanyaoHand = new Hand(TileKindUtils.asHand("234567m22345678p"));
-    private Hand incompleteTanyaoHand = new Hand(TileKindUtils.asHand("22345678p"));
-    private Hand completeNonTanyaoHand = new Hand(TileKindUtils.asHand("123456m22345678p"));
-    private Hand incompleteNonTanyaoHand = new Hand(TileKindUtils.asHand("456789m"));
+    private Hand completeTanyaoHand = new Hand(new MPSZNotation().getTilesFrom("234567m22345678p"));
+    private Hand incompleteTanyaoHand = new Hand(new MPSZNotation().getTilesFrom("22345678p"));
+    private Hand completeNonTanyaoHand = new Hand(new MPSZNotation().getTilesFrom("123456m22345678p"));
+    private Hand incompleteNonTanyaoHand = new Hand(new MPSZNotation().getTilesFrom("456789m"));
 
     @Test
     public void testValidityOf_HandWithFourteenSimpleTiles_ShouldBeTrue()

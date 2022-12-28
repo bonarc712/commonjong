@@ -9,18 +9,18 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
 
 public class ChinitsuTest
 {
     private Hand anyHand = mock(Hand.class);
 
-    private Hand completeChinitsuHand = new Hand(TileKindUtils.asHand("11123445566799m"));
-    private Hand incompleteChinitsuHand = new Hand(TileKindUtils.asHand("11123477m"));
-    private Hand completeNonChinitsuHand = new Hand(TileKindUtils.asHand("123456m22345678p"));
-    private Hand incompleteNonChinitsuHand = new Hand(TileKindUtils.asHand("111p111s22z"));
-    private Hand completeHonitsuHand = new Hand(TileKindUtils.asHand("111234455667m55z"));
+    private Hand completeChinitsuHand = new Hand(new MPSZNotation().getTilesFrom("11123445566799m"));
+    private Hand incompleteChinitsuHand = new Hand(new MPSZNotation().getTilesFrom("11123477m"));
+    private Hand completeNonChinitsuHand = new Hand(new MPSZNotation().getTilesFrom("123456m22345678p"));
+    private Hand incompleteNonChinitsuHand = new Hand(new MPSZNotation().getTilesFrom("111p111s22z"));
+    private Hand completeHonitsuHand = new Hand(new MPSZNotation().getTilesFrom("111234455667m55z"));
 
     @Test
     public void testValidityOf_HandWithFourteenChinitsuTiles_ShouldBeTrue()

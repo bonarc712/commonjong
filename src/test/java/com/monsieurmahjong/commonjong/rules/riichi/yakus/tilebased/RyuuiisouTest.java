@@ -7,17 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
 
 public class RyuuiisouTest
 {
     private Hand anyHand = new Hand();
 
-    private Hand completeRyuuiisouHand = new Hand(TileKindUtils.asHand("22234666888s666z"));
-    private Hand incompleteRyuuiisouHand = new Hand(TileKindUtils.asHand("22234666s"));
-    private Hand completeNonRyuuiisouHand = new Hand(TileKindUtils.asHand("11122233344s777z"));
-    private Hand incompleteNonRyuuiisouHand = new Hand(TileKindUtils.asHand("222345666s"));
+    private Hand completeRyuuiisouHand = new Hand(new MPSZNotation().getTilesFrom("22234666888s666z"));
+    private Hand incompleteRyuuiisouHand = new Hand(new MPSZNotation().getTilesFrom("22234666s"));
+    private Hand completeNonRyuuiisouHand = new Hand(new MPSZNotation().getTilesFrom("11122233344s777z"));
+    private Hand incompleteNonRyuuiisouHand = new Hand(new MPSZNotation().getTilesFrom("222345666s"));
 
     @Test
     public void testValidityOf_HandWithFourteenRyuuiisouTiles_ShouldBeTrue()

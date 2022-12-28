@@ -47,7 +47,7 @@ public class TileGroupUtilsTest
     {
         var tileGroups1 = TileGroupUtils.tileGroupsOf(tileGroups);
         var tileList1 = TileGroupUtils.getTilesFromTileGroups(tileGroups1);
-        Assertions.assertEquals(TileKindUtils.asHand(tiles), tileList1);
+        Assertions.assertEquals(new MPSZNotation().getTilesFrom(tiles), tileList1);
     }
 
     @Test
@@ -55,10 +55,11 @@ public class TileGroupUtilsTest
     {
         var bambooRun234 = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4);
         var redPair = TileGroup.of(MahjongTileKind.RED, MahjongTileKind.RED);
+        var mpsz = new MPSZNotation();
 
-        var group = TileGroupUtils.getTileGroupFromTiles(TileKindUtils.asHand("234s"));
+        var group = TileGroupUtils.getTileGroupFromTiles(mpsz.getTilesFrom("234s"));
         assertEquals(bambooRun234, group);
-        group = TileGroupUtils.getTileGroupFromTiles(TileKindUtils.asHand("77z"));
+        group = TileGroupUtils.getTileGroupFromTiles(mpsz.getTilesFrom("77z"));
         assertEquals(redPair, group);
     }
 }

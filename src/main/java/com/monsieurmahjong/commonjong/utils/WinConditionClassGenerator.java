@@ -3,8 +3,8 @@ package com.monsieurmahjong.commonjong.utils;
 import java.util.List;
 
 import com.monsieurmahjong.commonjong.game.Hand;
+import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
 import com.monsieurmahjong.commonjong.rules.riichi.yakus.groupbased.GroupBasedYaku;
@@ -158,7 +158,7 @@ public class WinConditionClassGenerator
         {
             testCaseText += "False";
         }
-        testCaseText += "(" + isValidVariableName + ", \"" + TileKindUtils.getHandAsMPSZNotation(TileGroupUtils.getTilesFromTileGroups(testCase.getGroups())) + " should ";
+        testCaseText += "(" + isValidVariableName + ", \"" + new MPSZNotation().getHandAsMPSZNotation(TileGroupUtils.getTilesFromTileGroups(testCase.getGroups())) + " should ";
         if (!testCase.isExpectsSuccess())
         {
             testCaseText += "not ";

@@ -1,24 +1,27 @@
 package com.monsieurmahjong.commonjong.rules.generic.waits;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.rules.generic.waits.HandConfigurationParser.CollisionPair;
 
 public class HandConfigurationParserTest
 {
     @Test
     public void testGetHandConfigurations()
     {
-        var hand1 = new Hand(TileKindUtils.asHand("135567s77z"));
+        var mpsz = new MPSZNotation();
+        var hand1 = new Hand(mpsz.getTilesFrom("135567s77z"));
 
         var tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s", "77z");
 
@@ -35,7 +38,7 @@ public class HandConfigurationParserTest
         expectedResultConfigurations.add(TileGroupUtils.tileGroupsOf("1s", "3s", "5s", "567s", "77z"));
         expectedResultConfigurations.add(TileGroupUtils.tileGroupsOf("1s", "3s", "55s", "67s", "77z"));
 
-        Assertions.assertEquals(expectedResultConfigurations, resultConfigurations, "Result configurations for 135567s77z were not as expected");
+        assertEquals(expectedResultConfigurations, resultConfigurations, "Result configurations for 135567s77z were not as expected");
     }
 
     @Test
@@ -44,26 +47,28 @@ public class HandConfigurationParserTest
         // 135567s case
         var tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
-        var parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
+        var mpsz = new MPSZNotation();
+        var parser = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("135567s")));
         var collisionPairs = parser.findCollisionPairs(tileGroups);
-        List<List<TileGroup>> expectedCollisionPairs = new ArrayList<>();
+        List<CollisionPair> expectedCollisionPairs = new ArrayList<>();
 
-        expectedCollisionPairs.add(TileGroupUtils.tileGroupsOf("13s", "35s"));
-        expectedCollisionPairs.add(TileGroupUtils.tileGroupsOf("35s", "55s"));
-        expectedCollisionPairs.add(TileGroupUtils.tileGroupsOf("35s", "567s"));
-        expectedCollisionPairs.add(TileGroupUtils.tileGroupsOf("55s", "567s"));
+        var tileGroupArray = new TileGroup[2];
+        expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("13s", "35s").toArray(tileGroupArray)));
+        expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("35s", "55s").toArray(tileGroupArray)));
+        expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("35s", "567s").toArray(tileGroupArray)));
+        expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("55s", "567s").toArray(tileGroupArray)));
 
-        Assertions.assertEquals(expectedCollisionPairs, collisionPairs, "Collision pairs for 135567s are not as expected");
+        assertEquals(expectedCollisionPairs, collisionPairs, "Collision pairs for 135567s are not as expected");
 
         // 77z case
         List<TileGroup> tileGroups2 = new ArrayList<>();
-        tileGroups.add(TileGroup.of(MahjongTileKind.RED, MahjongTileKind.RED));
+        tileGroups2.add(TileGroup.of(MahjongTileKind.RED, MahjongTileKind.RED));
 
-        var parser2 = new HandConfigurationParser(new Hand(TileKindUtils.asHand("77z")));
+        var parser2 = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("77z")));
         var collisionPairs2 = parser2.findCollisionPairs(tileGroups2);
         List<List<TileGroup>> expectedCollisionPairs2 = new ArrayList<>();
 
-        Assertions.assertEquals(expectedCollisionPairs2, collisionPairs2, "There should be not collision pair for 77z");
+        assertEquals(expectedCollisionPairs2, collisionPairs2, "There should be not collision pair for 77z");
     }
 
     @Test
@@ -72,13 +77,14 @@ public class HandConfigurationParserTest
         // 135567s case
         var tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
-        var parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
+        var mpsz = new MPSZNotation();
+        var parser = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("135567s")));
         var collisionList = parser.createCollisionList(tileGroups);
 
         List<List<TileGroup>> expectedResultCollisionList = new ArrayList<>();
         expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s"));
 
-        Assertions.assertEquals(expectedResultCollisionList, collisionList, "Collision list for 135567s is not as expected");
+        assertEquals(expectedResultCollisionList, collisionList, "Collision list for 135567s is not as expected");
     }
 
     @Test
@@ -87,7 +93,8 @@ public class HandConfigurationParserTest
         // 135567s case
         var collisionList = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
-        var parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
+        var mpsz = new MPSZNotation();
+        var parser = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("135567s")));
         var possiblePairings = parser.createPossiblePairings(collisionList);
         List<List<TileGroup>> expectedPossiblePairings = new ArrayList<>();
 
@@ -100,19 +107,20 @@ public class HandConfigurationParserTest
         expectedPossiblePairings.add(TileGroupUtils.tileGroupsOf("1s", "3s", "5s", "567s"));
         expectedPossiblePairings.add(TileGroupUtils.tileGroupsOf("1s", "3s", "55s", "67s"));
 
-        Assertions.assertEquals(expectedPossiblePairings, possiblePairings, "Possible pairings for 135567s is not as expected");
+        assertEquals(expectedPossiblePairings, possiblePairings, "Possible pairings for 135567s is not as expected");
 
         // 135567s case with 77z also in the hand
-        var parser2 = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s77z")));
+        var parser2 = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("135567s77z")));
         var possiblePairings2 = parser2.createPossiblePairings(collisionList);
 
-        Assertions.assertEquals(expectedPossiblePairings, possiblePairings2, "Possible pairings for 135567s77z is not as expected");
+        assertEquals(expectedPossiblePairings, possiblePairings2, "Possible pairings for 135567s77z is not as expected");
     }
 
     @Test
     public void testGetFlagsForTilesToKeep()
     {
-        List<Integer> indicesForCollidingGroups = TileKindUtils.asHand("13567s").stream().map(tile -> tile.getTileKind().getIndex()).collect(Collectors.toList());
+        var mpsz = new MPSZNotation();
+        List<Integer> indicesForCollidingGroups = mpsz.getTilesFrom("13567s").stream().map(tile -> tile.getTileKind().getIndex()).collect(Collectors.toList());
         var collidingGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
         List<List<TileGroup>> combination = new ArrayList<>();
@@ -122,7 +130,7 @@ public class HandConfigurationParserTest
         combination.add(TileGroupUtils.tileGroupsOf("567s"));
         combination.add(TileGroupUtils.tileGroupsOf("567s"));
 
-        var parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
+        var parser = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("135567s")));
         var resultFlags = parser.getFlagsForTilesToKeep(indicesForCollidingGroups, combination, collidingGroups);
 
         List<List<Boolean>> expectedFlags = new ArrayList<>();
@@ -131,7 +139,7 @@ public class HandConfigurationParserTest
         expectedFlags.add(Arrays.asList(true, false));
         expectedFlags.add(Arrays.asList(false, true, true));
 
-        Assertions.assertEquals(expectedFlags, resultFlags, "Flags for 13-13-35+55-567-567 are not as expected");
+        assertEquals(expectedFlags, resultFlags, "Flags for 13-13-35+55-567-567 are not as expected");
 
         combination.clear();
         combination.add(TileGroupUtils.tileGroupsOf("13s"));
@@ -148,11 +156,11 @@ public class HandConfigurationParserTest
         expectedFlags.add(Arrays.asList(true, true));
         expectedFlags.add(Arrays.asList(false, true, true));
 
-        Assertions.assertEquals(expectedFlags, resultFlags, "Flags for 13-13-55-567-567 are not as expected");
+        assertEquals(expectedFlags, resultFlags, "Flags for 13-13-55-567-567 are not as expected");
 
-        indicesForCollidingGroups = TileKindUtils.asHand("456s").stream().map(tile -> tile.getTileKind().getIndex()).collect(Collectors.toList());
+        indicesForCollidingGroups = mpsz.getTilesFrom("456s").stream().map(tile -> tile.getTileKind().getIndex()).collect(Collectors.toList());
         collidingGroups = TileGroupUtils.tileGroupsOf("456s", "666s");
-        parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("45666s")));
+        parser = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("45666s")));
 
         combination.clear();
         combination.add(TileGroupUtils.tileGroupsOf("456s"));
@@ -165,11 +173,11 @@ public class HandConfigurationParserTest
         expectedFlags.add(Arrays.asList(true, true, true));
         expectedFlags.add(Arrays.asList(true, true, false));
 
-        Assertions.assertEquals(expectedFlags, resultFlags, "Flags for 456-456-456+666 are not as expected");
+        assertEquals(expectedFlags, resultFlags, "Flags for 456-456-456+666 are not as expected");
 
-        indicesForCollidingGroups = TileKindUtils.asHand("456s").stream().map(tile -> tile.getTileKind().getIndex()).collect(Collectors.toList());
+        indicesForCollidingGroups = mpsz.getTilesFrom("456s").stream().map(tile -> tile.getTileKind().getIndex()).collect(Collectors.toList());
         collidingGroups = TileGroupUtils.tileGroupsOf("456s", "666s");
-        parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("45666s")));
+        parser = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("45666s")));
 
         combination.clear();
         combination.add(TileGroupUtils.tileGroupsOf("456s"));
@@ -182,7 +190,7 @@ public class HandConfigurationParserTest
         expectedFlags.add(Arrays.asList(true, true, false));
         expectedFlags.add(Arrays.asList(true, true, true));
 
-        Assertions.assertEquals(expectedFlags, resultFlags, "Flags for 456-456-666 are not as expected");
+        assertEquals(expectedFlags, resultFlags, "Flags for 456-456-666 are not as expected");
     }
 
     @Test
@@ -190,7 +198,8 @@ public class HandConfigurationParserTest
     {
         var groupsToSelectFrom = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
-        var parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
+        var mpsz = new MPSZNotation();
+        var parser = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("135567s")));
         var possiblePairings = parser.addPossiblePairings(MahjongTileKind.BAMBOOS_5, 2, groupsToSelectFrom, new ArrayList<>(), new ArrayList<>());
 
         List<List<TileGroup>> expectedPairings = new ArrayList<>();
@@ -199,7 +208,7 @@ public class HandConfigurationParserTest
         expectedPairings.add(TileGroupUtils.tileGroupsOf("55s", "567s"));
         expectedPairings.add(TileGroupUtils.tileGroupsOf("55s"));
 
-        Assertions.assertEquals(expectedPairings, possiblePairings, "Possible pairings for 5s within 135567s are not as expected");
+        assertEquals(expectedPairings, possiblePairings, "Possible pairings for 5s within 135567s are not as expected");
     }
 
     @Test
@@ -226,7 +235,7 @@ public class HandConfigurationParserTest
         pairingsOf7s.add(TileGroupUtils.tileGroupsOf("567s"));
         knownPairings.add(pairingsOf7s);
 
-        var parser = new HandConfigurationParser(new Hand(TileKindUtils.asHand("135567s")));
+        var parser = new HandConfigurationParser(new Hand(new MPSZNotation().getTilesFrom("135567s")));
         var resultGroups = parser.listDifferentCombinations(knownPairings, new ArrayList<>(), new ArrayList<>());
 
         List<List<List<TileGroup>>> expectedGroups = new ArrayList<>();
@@ -247,7 +256,7 @@ public class HandConfigurationParserTest
         expectedGroups.add(getExpectedListOfList(TileGroupUtils.tileGroupsOf("13s"), TileGroupUtils.tileGroupsOf("35s"), TileGroupUtils.tileGroupsOf("55s"), TileGroupUtils.tileGroupsOf("567s"),
                 TileGroupUtils.tileGroupsOf("567s")));
 
-        Assertions.assertEquals(expectedGroups, resultGroups, "Different combinations were not listed properly for 135567s");
+        assertEquals(expectedGroups, resultGroups, "Different combinations were not listed properly for 135567s");
     }
 
     private List<List<TileGroup>> getExpectedListOfList(List<TileGroup>... list)

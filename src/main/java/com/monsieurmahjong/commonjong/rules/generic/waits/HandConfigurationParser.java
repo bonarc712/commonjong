@@ -10,9 +10,25 @@ import java.util.stream.Collectors;
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
+import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 
 public class HandConfigurationParser
 {
+    public static void main(String[] args)
+    {
+//        var hand1 = new Hand(TileKindUtils.asHand("123456789m11122z"));
+//        var tileGroups = TileGroupUtils.tileGroupsOf("123m", "234m", "345m", "456m", "567m", "678m", "789m", "111z", "22z");
+
+        var mpsz = new MPSZNotation();
+        var hand1 = new Hand(mpsz.getTilesFrom("123456789p11122z"));
+        var tileGroups = TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p", "567p", "678p", "789p", "111z", "22z");
+
+        var instance = new HandConfigurationParser(hand1);
+        instance.getHandConfigurations(tileGroups);
+
+    }
+
     private Hand hand;
     private List<Tile> unmeldedTiles;
 
@@ -334,21 +350,19 @@ public class HandConfigurationParser
         {
             List<TileGroup> currentCollision = null;
             var collisionPair = collisionPairs.get(0);
-            var firstGroup = collisionPair.get(0);
-            var secondGroup = collisionPair.get(1);
 
             var addedToKnownCollision = false;
             for (List<TileGroup> knownCollision : collisionList)
             {
-                if (knownCollision.contains(firstGroup))
+                if (knownCollision.contains(collisionPair.firstTileGroup))
                 {
-                    knownCollision.add(secondGroup);
+                    knownCollision.add(collisionPair.secondTileGroup);
                     currentCollision = knownCollision;
                     addedToKnownCollision = true;
                 }
-                else if (knownCollision.contains(secondGroup))
+                else if (knownCollision.contains(collisionPair.secondTileGroup))
                 {
-                    knownCollision.add(firstGroup);
+                    knownCollision.add(collisionPair.firstTileGroup);
                     currentCollision = knownCollision;
                     addedToKnownCollision = true;
                 }
@@ -357,8 +371,8 @@ public class HandConfigurationParser
             if (!addedToKnownCollision)
             {
                 List<TileGroup> collision = new ArrayList<>();
-                collision.add(firstGroup);
-                collision.add(secondGroup);
+                collision.add(collisionPair.firstTileGroup);
+                collision.add(collisionPair.secondTileGroup);
                 collisionList.add(collision);
                 currentCollision = collision;
             }
@@ -368,21 +382,19 @@ public class HandConfigurationParser
             while (i < collisionPairs.size())
             {
                 var currentCollisionPair = collisionPairs.get(i);
-                var currentCollisionPairFirst = currentCollisionPair.get(0);
-                var currentCollisionPairSecond = currentCollisionPair.get(1);
-                if (currentCollision.contains(currentCollisionPairFirst))
+                if (currentCollision.contains(currentCollisionPair.firstTileGroup))
                 {
-                    if (!currentCollision.contains(currentCollisionPairSecond) && !currentCollisionPairFirst.equals(currentCollisionPairSecond))
+                    if (!currentCollision.contains(currentCollisionPair.secondTileGroup) && !currentCollisionPair.firstTileGroup.equals(currentCollisionPair.secondTileGroup))
                     {
-                        currentCollision.add(currentCollisionPairSecond);
+                        currentCollision.add(currentCollisionPair.secondTileGroup);
                     }
                     collisionPairs.remove(i);
                 }
-                else if (currentCollision.contains(currentCollisionPairSecond))
+                else if (currentCollision.contains(currentCollisionPair.secondTileGroup))
                 {
-                    if (!currentCollision.contains(currentCollisionPairFirst) && !currentCollisionPairFirst.equals(currentCollisionPairSecond))
+                    if (!currentCollision.contains(currentCollisionPair.firstTileGroup) && !currentCollisionPair.firstTileGroup.equals(currentCollisionPair.secondTileGroup))
                     {
-                        currentCollision.add(currentCollisionPairFirst);
+                        currentCollision.add(currentCollisionPair.firstTileGroup);
                     }
                     collisionPairs.remove(i);
                 }
@@ -398,22 +410,28 @@ public class HandConfigurationParser
         return collisionList;
     }
 
-    public List<List<TileGroup>> findCollisionPairs(List<TileGroup> tileGroups)
+    public List<CollisionPair> findCollisionPairs(List<TileGroup> tileGroups)
     {
-        List<List<TileGroup>> collisionPairs = new ArrayList<>();
+        List<CollisionPair> collisionPairs = new ArrayList<>();
         for (var i = 0; i < tileGroups.size(); i++)
         {
             for (var j = i + 1; j < tileGroups.size(); j++)
             {
                 if (tileGroups.get(i).collidesWith(tileGroups.get(j)))
                 {
-                    List<TileGroup> collision = new ArrayList<>();
-                    collision.add(tileGroups.get(i));
-                    collision.add(tileGroups.get(j));
+                    var collision = new CollisionPair(tileGroups.get(i), tileGroups.get(j));
                     collisionPairs.add(collision);
                 }
             }
         }
         return collisionPairs;
+    }
+
+    protected record CollisionPair(TileGroup firstTileGroup, TileGroup secondTileGroup)
+    {
+        protected CollisionPair(TileGroup... tileGroups)
+        {
+            this(tileGroups[0], tileGroups[1]);
+        }
     }
 }

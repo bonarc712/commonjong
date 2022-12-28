@@ -7,17 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
 
 public class ChinroutouTest
 {
     private Hand anyHand = new Hand();
 
-    private Hand completeChinroutouHand = new Hand(TileKindUtils.asHand("111999m111999p11s"));
-    private Hand incompleteChinroutouHand = new Hand(TileKindUtils.asHand("111999m11p"));
-    private Hand completeNonChinroutouHand = new Hand(TileKindUtils.asHand("123456m22345678p"));
-    private Hand incompleteNonChinroutouHand = new Hand(TileKindUtils.asHand("111p11122z"));
+    private Hand completeChinroutouHand = new Hand(new MPSZNotation().getTilesFrom("111999m111999p11s"));
+    private Hand incompleteChinroutouHand = new Hand(new MPSZNotation().getTilesFrom("111999m11p"));
+    private Hand completeNonChinroutouHand = new Hand(new MPSZNotation().getTilesFrom("123456m22345678p"));
+    private Hand incompleteNonChinroutouHand = new Hand(new MPSZNotation().getTilesFrom("111p11122z"));
 
     @Test
     public void testValidityOf_HandWithFourteenChinroutouTiles_ShouldBeTrue()

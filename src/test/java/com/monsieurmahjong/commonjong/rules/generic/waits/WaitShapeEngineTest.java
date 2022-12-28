@@ -8,7 +8,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 
 public class WaitShapeEngineTest
 {
@@ -35,7 +35,7 @@ public class WaitShapeEngineTest
 
     private void testGetWait(String startingHand, MahjongTileKind... expectedWait)
     {
-        var hand = TileKindUtils.asHand(startingHand);
+        var hand = new MPSZNotation().getTilesFrom(startingHand);
         var engine = new WaitShapeEngine(hand);
         var waitResult = engine.getWait();
 

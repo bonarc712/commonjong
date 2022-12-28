@@ -16,7 +16,7 @@ public class TileKindUtilsTest
     @Test
     public void testAsHandString() throws Exception
     {
-        var hand = TileKindUtils.asHand("345m345p345s1235z");
+        var hand = new MPSZNotation().getTilesFrom("345m345p345s1235z");
         assertTrue(hand.size() == 13);
         var handCopy = new ArrayList<Tile>();
         handCopy.addAll(Arrays.asList(new Tile(MahjongTileKind.CHARACTERS_3), new Tile(MahjongTileKind.CHARACTERS_4), new Tile(MahjongTileKind.CHARACTERS_5), new Tile(MahjongTileKind.CIRCLES_3),
@@ -32,7 +32,7 @@ public class TileKindUtilsTest
         handTiles.addAll(Arrays.asList(new Tile(MahjongTileKind.CHARACTERS_3), new Tile(MahjongTileKind.CHARACTERS_4), new Tile(MahjongTileKind.CHARACTERS_5), new Tile(MahjongTileKind.CIRCLES_3),
                 new Tile(MahjongTileKind.CIRCLES_4), new Tile(MahjongTileKind.CIRCLES_5), new Tile(MahjongTileKind.BAMBOOS_3), new Tile(MahjongTileKind.BAMBOOS_4), new Tile(MahjongTileKind.BAMBOOS_5),
                 new Tile(MahjongTileKind.EAST), new Tile(MahjongTileKind.SOUTH), new Tile(MahjongTileKind.WEST), new Tile(MahjongTileKind.WHITE)));
-        assertEquals("345m345p345s1235z", TileKindUtils.getHandAsMPSZNotation(handTiles), "345m345p345s1235z tiles are not correctly represented");
+        assertEquals("345m345p345s1235z", new MPSZNotation().getHandAsMPSZNotation(handTiles), "345m345p345s1235z tiles are not correctly represented");
     }
 
     @Test

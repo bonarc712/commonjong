@@ -6,14 +6,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 
 public class TileParserTest
 {
     @Test
     public void testParseHonourTiles()
     {
-        var winds = TileKindUtils.asHand("1223334444z");
+        var mpsz = new MPSZNotation();
+
+        var winds = mpsz.getTilesFrom("1223334444z");
         var windsGroups = TileParser.parseHonourTiles(winds);
         var expectedWindsGroups = new ArrayList<TileGroup>();
         expectedWindsGroups.add(TileGroup.of(MahjongTileKind.EAST));
@@ -22,7 +24,7 @@ public class TileParserTest
         expectedWindsGroups.add(TileGroup.of(MahjongTileKind.NORTH, MahjongTileKind.NORTH, MahjongTileKind.NORTH, MahjongTileKind.NORTH));
         Assertions.assertEquals(expectedWindsGroups, windsGroups, "Winds do not work");
 
-        var dragons = TileKindUtils.asHand("556677z");
+        var dragons = mpsz.getTilesFrom("556677z");
         var dragonsGroups = TileParser.parseHonourTiles(dragons);
         var expectedDragonsGroups = new ArrayList<TileGroup>();
         expectedDragonsGroups.add(TileGroup.of(MahjongTileKind.WHITE, MahjongTileKind.WHITE));
@@ -34,20 +36,22 @@ public class TileParserTest
     @Test
     public void testParseFamilyTiles()
     {
-        var ryanmenShape = TileKindUtils.asHand("34s");
+        var mpsz = new MPSZNotation();
+
+        var ryanmenShape = mpsz.getTilesFrom("34s");
         var ryanmenShapedProtogroup = TileParser.parseFamilyTiles(ryanmenShape);
         var expectedRyanmenShapedProtogroup = new ArrayList<TileGroup>();
         expectedRyanmenShapedProtogroup.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4));
         Assertions.assertEquals(expectedRyanmenShapedProtogroup, ryanmenShapedProtogroup, "Ryanmen shape does not work");
 
-        var nobetanShape = TileKindUtils.asHand("2345s");
+        var nobetanShape = mpsz.getTilesFrom("2345s");
         var nobetanShapedProtogroup = TileParser.parseFamilyTiles(nobetanShape);
         var expectedNobetanShapedProtogroup = new ArrayList<TileGroup>();
         expectedNobetanShapedProtogroup.add(TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4));
         expectedNobetanShapedProtogroup.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_5));
         Assertions.assertEquals(expectedNobetanShapedProtogroup, nobetanShapedProtogroup, "Nobetan shape does not work");
 
-        var doubleRyanmenShape = TileKindUtils.asHand("3344s");
+        var doubleRyanmenShape = mpsz.getTilesFrom("3344s");
         var doubleRyanmenShapedProtogroup = TileParser.parseFamilyTiles(doubleRyanmenShape);
         var expectedDoubleRyanmenShapedProtogroup = new ArrayList<TileGroup>();
         expectedDoubleRyanmenShapedProtogroup.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3));
@@ -56,7 +60,7 @@ public class TileParserTest
         expectedDoubleRyanmenShapedProtogroup.add(TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4));
         Assertions.assertEquals(expectedDoubleRyanmenShapedProtogroup, doubleRyanmenShapedProtogroup, "Double ryanmen shape does not work");
 
-        var iipeikouShape = TileKindUtils.asHand("334455s");
+        var iipeikouShape = mpsz.getTilesFrom("334455s");
         var iipeikouShapedGroups = TileParser.parseFamilyTiles(iipeikouShape);
         var expectedIipeikouShapedGroups = new ArrayList<TileGroup>();
         expectedIipeikouShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3));
@@ -66,7 +70,7 @@ public class TileParserTest
         expectedIipeikouShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5));
         Assertions.assertEquals(expectedIipeikouShapedGroups, iipeikouShapedGroups, "Iipeikou shape does not work");
 
-        var iipeikouKanchanWait = TileKindUtils.asHand("33455s");
+        var iipeikouKanchanWait = mpsz.getTilesFrom("33455s");
         var iipeikouKanchanGroups = TileParser.parseFamilyTiles(iipeikouKanchanWait);
         var expectedIipeikouKanchanGroups = new ArrayList<TileGroup>();
         expectedIipeikouKanchanGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3));
@@ -75,7 +79,7 @@ public class TileParserTest
         expectedIipeikouKanchanGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5));
         Assertions.assertEquals(expectedIipeikouKanchanGroups, iipeikouKanchanGroups, "Iipeikou kanchan-wait shape does not work");
 
-        var tatsumakiShape = TileKindUtils.asHand("3334555s");
+        var tatsumakiShape = mpsz.getTilesFrom("3334555s");
         var tatsumakiShapedGroups = TileParser.parseFamilyTiles(tatsumakiShape);
         var expectedTatsumakiShapedGroups = new ArrayList<TileGroup>();
         expectedTatsumakiShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3));
@@ -85,14 +89,14 @@ public class TileParserTest
         expectedTatsumakiShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5));
         Assertions.assertEquals(expectedTatsumakiShapedGroups, tatsumakiShapedGroups, "Tatsumaki shape does not work");
 
-        var entotsuShape = TileKindUtils.asHand("34555s");
+        var entotsuShape = mpsz.getTilesFrom("34555s");
         var entotsuShapedGroups = TileParser.parseFamilyTiles(entotsuShape);
         var expectedEntotsuShapedGroups = new ArrayList<TileGroup>();
         expectedEntotsuShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_5));
         expectedEntotsuShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5));
         Assertions.assertEquals(expectedEntotsuShapedGroups, entotsuShapedGroups, "Entotsu shape does not work");
 
-        var sanrenkouShape = TileKindUtils.asHand("333444555s");
+        var sanrenkouShape = mpsz.getTilesFrom("333444555s");
         var sanrenkouShapedGroups = TileParser.parseFamilyTiles(sanrenkouShape);
         var expectedSanrenkouShapedGroups = new ArrayList<TileGroup>();
         expectedSanrenkouShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3));
@@ -103,7 +107,7 @@ public class TileParserTest
         expectedSanrenkouShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_5));
         Assertions.assertEquals(expectedSanrenkouShapedGroups, sanrenkouShapedGroups, "Sanrenkou shape does not work");
 
-        var chuurenShape = TileKindUtils.asHand("1112345678999s");
+        var chuurenShape = mpsz.getTilesFrom("1112345678999s");
         var chuurenShapedGroups = TileParser.parseFamilyTiles(chuurenShape);
         var expectedChuurenShapedGroups = new ArrayList<TileGroup>();
         expectedChuurenShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_1));
@@ -117,7 +121,7 @@ public class TileParserTest
         expectedChuurenShapedGroups.add(TileGroup.of(MahjongTileKind.BAMBOOS_9, MahjongTileKind.BAMBOOS_9, MahjongTileKind.BAMBOOS_9));
         Assertions.assertEquals(expectedChuurenShapedGroups, chuurenShapedGroups, "Chuuren shape does not work");
 
-        var customShape1 = TileKindUtils.asHand("135567s");
+        var customShape1 = mpsz.getTilesFrom("135567s");
         var customShape1Groups = TileParser.parseFamilyTiles(customShape1);
         var expectedCustomShape1Groups = new ArrayList<TileGroup>();
         expectedCustomShape1Groups.add(TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_3));
@@ -126,7 +130,7 @@ public class TileParserTest
         expectedCustomShape1Groups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_6, MahjongTileKind.BAMBOOS_7));
         Assertions.assertEquals(expectedCustomShape1Groups, customShape1Groups, "Custom shape 135567s does not work");
 
-        var customShape2 = TileKindUtils.asHand("566799s");
+        var customShape2 = mpsz.getTilesFrom("566799s");
         var customShape2Groups = TileParser.parseFamilyTiles(customShape2);
         var expectedCustomShape2Groups = new ArrayList<TileGroup>();
         expectedCustomShape2Groups.add(TileGroup.of(MahjongTileKind.BAMBOOS_5, MahjongTileKind.BAMBOOS_6, MahjongTileKind.BAMBOOS_7));
@@ -139,17 +143,19 @@ public class TileParserTest
     @Test
     public void testParsePairsAndTriplets()
     {
-        var twoSanZous = TileKindUtils.asHand("33s");
+        var mpsz = new MPSZNotation();
+
+        var twoSanZous = mpsz.getTilesFrom("33s");
         var sanZouPair = TileParser.parsePairsAndTriplets(twoSanZous, MahjongTileKind.BAMBOOS_3).get();
 
         Assertions.assertEquals(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3), sanZouPair);
 
-        var threeSanZous = TileKindUtils.asHand("333s");
+        var threeSanZous = mpsz.getTilesFrom("333s");
         var sanZouTriplet = TileParser.parsePairsAndTriplets(threeSanZous, MahjongTileKind.BAMBOOS_3).get();
 
         Assertions.assertEquals(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3), sanZouTriplet);
 
-        var fourSanZous = TileKindUtils.asHand("3333s");
+        var fourSanZous = mpsz.getTilesFrom("3333s");
         var sanZouQuad = TileParser.parsePairsAndTriplets(fourSanZous, MahjongTileKind.BAMBOOS_3).get();
 
         Assertions.assertEquals(TileGroup.of(MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3, MahjongTileKind.BAMBOOS_3), sanZouQuad);

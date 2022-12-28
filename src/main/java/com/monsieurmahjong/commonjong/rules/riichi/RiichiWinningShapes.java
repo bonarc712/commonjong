@@ -35,9 +35,6 @@ public class RiichiWinningShapes implements WinningShapes
             return true;
         }
 
-        // TODO implement shiisanpuutaa (Montréal rules), nagashi mangan will probably
-        // be implemented in another way
-
         return false;
     }
 
@@ -152,7 +149,7 @@ public class RiichiWinningShapes implements WinningShapes
         if (tileGroups.size() == 5)
         {
             var sizes = tileGroups.stream().mapToInt(List::size).boxed().collect(Collectors.toList());
-            if (sizes.stream().filter(size -> size == 3).count() == 4 && sizes.stream().filter(size -> size == 2).count() == 1)
+            if (sizes.stream().filter(size -> size >= 3 && size < 5).count() == 4 && sizes.stream().filter(size -> size == 2).count() == 1)
             {
                 return true;
             }

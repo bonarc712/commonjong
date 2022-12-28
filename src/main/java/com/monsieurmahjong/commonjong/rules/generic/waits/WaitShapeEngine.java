@@ -86,8 +86,12 @@ public class WaitShapeEngine
 
         // do parsing
 
-        tileGroups.addAll(TileParser.parseFamilyTiles(characterTiles));
-        tileGroups.addAll(TileParser.parseFamilyTiles(circleTiles));
+        var characterTileGroups = TileParser.parseFamilyTiles(characterTiles);
+        System.out.println(characterTileGroups);
+        tileGroups.addAll(characterTileGroups);
+        var circleTileGroups = TileParser.parseFamilyTiles(circleTiles);
+        System.out.println(circleTileGroups);
+        tileGroups.addAll(circleTileGroups);
         tileGroups.addAll(TileParser.parseFamilyTiles(bambooTiles));
 
         tileGroups.addAll(TileParser.parseHonourTiles(honourTiles));
@@ -111,6 +115,7 @@ public class WaitShapeEngine
 
         var handParser = new HandConfigurationParser(hand);
         handCombinations = handParser.getHandConfigurations(tileGroups);
+        System.out.println(handCombinations);
     }
 
     /**

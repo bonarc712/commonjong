@@ -9,22 +9,22 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.Test;
 
 import com.monsieurmahjong.commonjong.game.Hand;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileKindUtils;
+import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.riichi.yakus.Yaku;
 
 public class HonitsuTest
 {
     private Hand anyHand = mock(Hand.class);
 
-    private Hand completeHonitsuHand = new Hand(TileKindUtils.asHand("111234567m11177z"));
-    private Hand incompleteHonitsuHand = new Hand(TileKindUtils.asHand("111234m77z"));
-    private Hand completeNonHonitsuHand = new Hand(TileKindUtils.asHand("123456m22345678p"));
-    private Hand chinitsuHand = new Hand(TileKindUtils.asHand("11123445678999m"));
-    private Hand tsuuiisouHand = new Hand(TileKindUtils.asHand("11122233344455z"));
-    private Hand circlesHonitsuHand = new Hand(TileKindUtils.asHand("11123456p111333z"));
-    private Hand bamboosHonitsuHand = new Hand(TileKindUtils.asHand("44456789s111666z"));
-    private Hand terminalLessHonitsuHand = new Hand(TileKindUtils.asHand("34445678s111666z"));
-    private Hand incompleteNonHonitsuHand = new Hand(TileKindUtils.asHand("111p111s22z"));
+    private Hand completeHonitsuHand = new Hand(new MPSZNotation().getTilesFrom("111234567m11177z"));
+    private Hand incompleteHonitsuHand = new Hand(new MPSZNotation().getTilesFrom("111234m77z"));
+    private Hand completeNonHonitsuHand = new Hand(new MPSZNotation().getTilesFrom("123456m22345678p"));
+    private Hand chinitsuHand = new Hand(new MPSZNotation().getTilesFrom("11123445678999m"));
+    private Hand tsuuiisouHand = new Hand(new MPSZNotation().getTilesFrom("11122233344455z"));
+    private Hand circlesHonitsuHand = new Hand(new MPSZNotation().getTilesFrom("11123456p111333z"));
+    private Hand bamboosHonitsuHand = new Hand(new MPSZNotation().getTilesFrom("44456789s111666z"));
+    private Hand terminalLessHonitsuHand = new Hand(new MPSZNotation().getTilesFrom("34445678s111666z"));
+    private Hand incompleteNonHonitsuHand = new Hand(new MPSZNotation().getTilesFrom("111p111s22z"));
 
     @Test
     public void testValidityOf_HandWithFourteenHonitsuTiles_ShouldBeTrue()
