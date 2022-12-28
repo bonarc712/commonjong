@@ -14,8 +14,6 @@ import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
-import com.monsieurmahjong.commonjong.rules.generic.waits.parsing.HandConfigurationParser;
-import com.monsieurmahjong.commonjong.rules.generic.waits.parsing.HandConfigurationParser.CollisionPair;
 
 public class HandConfigurationParserTest
 {
@@ -41,52 +39,6 @@ public class HandConfigurationParserTest
         expectedResultConfigurations.add(TileGroupUtils.tileGroupsOf("1s", "3s", "55s", "67s", "77z"));
 
         assertEquals(expectedResultConfigurations, resultConfigurations, "Result configurations for 135567s77z were not as expected");
-    }
-
-    @Test
-    public void testFindCollisionPairs()
-    {
-        // 135567s case
-        var tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
-
-        var mpsz = new MPSZNotation();
-        var parser = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("135567s")));
-        var collisionPairs = parser.findCollisionPairs(tileGroups);
-        List<CollisionPair> expectedCollisionPairs = new ArrayList<>();
-
-        var tileGroupArray = new TileGroup[2];
-        expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("13s", "35s").toArray(tileGroupArray)));
-        expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("35s", "55s").toArray(tileGroupArray)));
-        expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("35s", "567s").toArray(tileGroupArray)));
-        expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("55s", "567s").toArray(tileGroupArray)));
-
-        assertEquals(expectedCollisionPairs, collisionPairs, "Collision pairs for 135567s are not as expected");
-
-        // 77z case
-        List<TileGroup> tileGroups2 = new ArrayList<>();
-        tileGroups2.add(TileGroup.of(MahjongTileKind.RED, MahjongTileKind.RED));
-
-        var parser2 = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("77z")));
-        var collisionPairs2 = parser2.findCollisionPairs(tileGroups2);
-        List<List<TileGroup>> expectedCollisionPairs2 = new ArrayList<>();
-
-        assertEquals(expectedCollisionPairs2, collisionPairs2, "There should be not collision pair for 77z");
-    }
-
-    @Test
-    public void testCreateCollisionList()
-    {
-        // 135567s case
-        var tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
-
-        var mpsz = new MPSZNotation();
-        var parser = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("135567s")));
-        var collisionList = parser.createCollisionList(tileGroups);
-
-        List<List<TileGroup>> expectedResultCollisionList = new ArrayList<>();
-        expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s"));
-
-        assertEquals(expectedResultCollisionList, collisionList, "Collision list for 135567s is not as expected");
     }
 
     @Test
