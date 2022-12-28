@@ -4,24 +4,24 @@ import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 
 public class TileLabels_fr
 {
-    private static String UN_DE_CARACTÈRES = "Un de caractères";
-    private static String DEUX_DE_CARACTÈRES = "Deux de caractères";
-    private static String TROIS_DE_CARACTÈRES = "Trois de caractères";
-    private static String QUATRE_DE_CARACTÈRES = "Quatre de caractères";
-    private static String CINQ_DE_CARACTÈRES = "Cinq de caractères";
-    private static String SIX_DE_CARACTÈRES = "Six de caractères";
-    private static String SEPT_DE_CARACTÈRES = "Sept de caractères";
-    private static String HUIT_DE_CARACTÈRES = "Huit de caractères";
-    private static String NEUF_DE_CARACTÈRES = "Neuf de caractères";
-    private static String UN_DE_SAPÈQUES = "Un de sapèques";
-    private static String DEUX_DE_SAPÈQUES = "Deux de sapèques";
-    private static String TROIS_DE_SAPÈQUES = "Trois de sapèques";
-    private static String QUATRE_DE_SAPÈQUES = "Quatre de sapèques";
-    private static String CINQ_DE_SAPÈQUES = "Cinq de sapèques";
-    private static String SIX_DE_SAPÈQUES = "Six de sapèques";
-    private static String SEPT_DE_SAPÈQUES = "Sept de sapèques";
-    private static String HUIT_DE_SAPÈQUES = "Huit de sapèques";
-    private static String NEUF_DE_SAPÈQUES = "Neuf de sapèques";
+    private static String UN_DE_CARACTÃˆRES = "Un de caractÃ¨res";
+    private static String DEUX_DE_CARACTÃˆRES = "Deux de caractÃ¨res";
+    private static String TROIS_DE_CARACTÃˆRES = "Trois de caractÃ¨res";
+    private static String QUATRE_DE_CARACTÃˆRES = "Quatre de caractÃ¨res";
+    private static String CINQ_DE_CARACTÃˆRES = "Cinq de caractÃ¨res";
+    private static String SIX_DE_CARACTÃˆRES = "Six de caractÃ¨res";
+    private static String SEPT_DE_CARACTÃˆRES = "Sept de caractÃ¨res";
+    private static String HUIT_DE_CARACTÃˆRES = "Huit de caractÃ¨res";
+    private static String NEUF_DE_CARACTÃˆRES = "Neuf de caractÃ¨res";
+    private static String UN_DE_SAPÃˆQUES = "Un de sapÃ¨ques";
+    private static String DEUX_DE_SAPÃˆQUES = "Deux de sapÃ¨ques";
+    private static String TROIS_DE_SAPÃˆQUES = "Trois de sapÃ¨ques";
+    private static String QUATRE_DE_SAPÃˆQUES = "Quatre de sapÃ¨ques";
+    private static String CINQ_DE_SAPÃˆQUES = "Cinq de sapÃ¨ques";
+    private static String SIX_DE_SAPÃˆQUES = "Six de sapÃ¨ques";
+    private static String SEPT_DE_SAPÃˆQUES = "Sept de sapÃ¨ques";
+    private static String HUIT_DE_SAPÃˆQUES = "Huit de sapÃ¨ques";
+    private static String NEUF_DE_SAPÃˆQUES = "Neuf de sapÃ¨ques";
     private static String UN_DE_BAMBOUS = "Un de bambous";
     private static String DEUX_DE_BAMBOUS = "Deux de bambous";
     private static String TROIS_DE_BAMBOUS = "Trois de bambous";
@@ -44,41 +44,41 @@ public class TileLabels_fr
         switch (tile)
         {
         case CHARACTERS_1:
-            return UN_DE_CARACTÈRES;
+            return UN_DE_CARACTÃˆRES;
         case CHARACTERS_2:
-            return DEUX_DE_CARACTÈRES;
+            return DEUX_DE_CARACTÃˆRES;
         case CHARACTERS_3:
-            return TROIS_DE_CARACTÈRES;
+            return TROIS_DE_CARACTÃˆRES;
         case CHARACTERS_4:
-            return QUATRE_DE_CARACTÈRES;
+            return QUATRE_DE_CARACTÃˆRES;
         case CHARACTERS_5:
-            return CINQ_DE_CARACTÈRES;
+            return CINQ_DE_CARACTÃˆRES;
         case CHARACTERS_6:
-            return SIX_DE_CARACTÈRES;
+            return SIX_DE_CARACTÃˆRES;
         case CHARACTERS_7:
-            return SEPT_DE_CARACTÈRES;
+            return SEPT_DE_CARACTÃˆRES;
         case CHARACTERS_8:
-            return HUIT_DE_CARACTÈRES;
+            return HUIT_DE_CARACTÃˆRES;
         case CHARACTERS_9:
-            return NEUF_DE_CARACTÈRES;
+            return NEUF_DE_CARACTÃˆRES;
         case CIRCLES_1:
-            return UN_DE_SAPÈQUES;
+            return UN_DE_SAPÃˆQUES;
         case CIRCLES_2:
-            return DEUX_DE_SAPÈQUES;
+            return DEUX_DE_SAPÃˆQUES;
         case CIRCLES_3:
-            return TROIS_DE_SAPÈQUES;
+            return TROIS_DE_SAPÃˆQUES;
         case CIRCLES_4:
-            return QUATRE_DE_SAPÈQUES;
+            return QUATRE_DE_SAPÃˆQUES;
         case CIRCLES_5:
-            return CINQ_DE_SAPÈQUES;
+            return CINQ_DE_SAPÃˆQUES;
         case CIRCLES_6:
-            return SIX_DE_SAPÈQUES;
+            return SIX_DE_SAPÃˆQUES;
         case CIRCLES_7:
-            return SEPT_DE_SAPÈQUES;
+            return SEPT_DE_SAPÃˆQUES;
         case CIRCLES_8:
-            return HUIT_DE_SAPÈQUES;
+            return HUIT_DE_SAPÃˆQUES;
         case CIRCLES_9:
-            return NEUF_DE_SAPÈQUES;
+            return NEUF_DE_SAPÃˆQUES;
         case BAMBOOS_1:
             return UN_DE_BAMBOUS;
         case BAMBOOS_2:
