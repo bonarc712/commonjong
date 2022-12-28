@@ -22,8 +22,7 @@ public class Hand
     private List<List<Tile>> melds; // called tiles, they are not removed from hand
     private List<Tile> bonus; // flowers, peis, etc.
 
-    private List<Seat> tableWinds; // TODO : check whether we can rename Seat to Wind... I feel it works worse with
-                                   // the table wind
+    private List<Seat> tableWinds;
     private Seat seatWind;
 
     private MahjongTileKind winningTile;
@@ -122,7 +121,6 @@ public class Hand
         return !isClosed();
     }
 
-    // TODO : make sure closed kan is not considered as open
     public boolean isClosed()
     {
         return melds.isEmpty();

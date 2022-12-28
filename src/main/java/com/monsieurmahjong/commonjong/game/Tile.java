@@ -44,4 +44,14 @@ public class Tile
         var otherTile = (Tile) other;
         return tileKind == otherTile.tileKind && red == otherTile.red;
     }
+
+    @Override
+    public int hashCode()
+    {
+        var prime = 13;
+        prime = 31 * prime + tileKind.hashCode();
+        prime = 31 * prime + (red ? 1 : 0);
+        return prime;
+    }
+
 }

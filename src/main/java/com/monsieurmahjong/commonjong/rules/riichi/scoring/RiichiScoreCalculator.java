@@ -85,14 +85,6 @@ public class RiichiScoreCalculator
         return baseScore;
     }
 
-    private int getYakumanBaseScore(int yakuman)
-    {
-        var scoringTier = getYakumanScoringTier(yakuman);
-        var baseScore = getBaseScore(0, 0, scoringTier);
-
-        return baseScore;
-    }
-
     /**
      * The base score is the score someone gets on ron, as non-dealer, without
      * rounding to the upper hundred
@@ -125,6 +117,14 @@ public class RiichiScoreCalculator
         default:
             return calculateScore(han, fu);
         }
+    }
+
+    private int getYakumanBaseScore(int yakuman)
+    {
+        var scoringTier = getYakumanScoringTier(yakuman);
+        var baseScore = getBaseScore(0, 0, scoringTier);
+
+        return baseScore;
     }
 
     private int calculateScore(int han, int fu)

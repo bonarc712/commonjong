@@ -353,6 +353,14 @@ public class TileGroup
     }
 
     @Override
+    public int hashCode()
+    {
+        var prime = 13;
+        prime = 31 * prime + tileIndices.hashCode();
+        return prime;
+    }
+
+    @Override
     public String toString()
     {
         var toReturn = "TileGroup : ";
