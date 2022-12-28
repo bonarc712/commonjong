@@ -44,8 +44,6 @@ public enum MahjongTileKind
     GREEN("6z"), // green dragon
     RED("7z"); // red dragon
 
-    // TODO add flowers, jokers, etc.
-
     public String abbreviation;
 
     private MahjongTileKind(String abbreviation)
@@ -126,6 +124,11 @@ public enum MahjongTileKind
         return this.is(CHARACTERS_1, CHARACTERS_9, CIRCLES_1, CIRCLES_9, BAMBOOS_1, BAMBOOS_9);
     }
 
+    public static boolean isTerminal(int index)
+    {
+        return getKindFromIndex(index).isTerminal();
+    }
+
     public boolean isNonTerminalNumeral()
     {
         return this.isNumeral() && !this.isTerminal();
@@ -134,6 +137,11 @@ public enum MahjongTileKind
     public boolean isNumeral()
     {
         return this.isCharacters() || this.isBamboos() || this.isCircles();
+    }
+
+    public static boolean isNumeral(int index)
+    {
+        return getKindFromIndex(index).isNumeral();
     }
 
     public boolean isCharacters()
@@ -152,28 +160,12 @@ public enum MahjongTileKind
     }
 
     /**
-     * A terminal tile is any tile that is a 1 or a 9.
-     */
-    public static boolean isTerminal(int index)
-    {
-        return getKindFromIndex(index).isTerminal();
-    }
-
-    /**
      * A terminal or honour tile is any tile that is a 1, a 9, a wind or a dragon.
      */
     public static boolean isTerminalOrHonour(int index)
     {
         var tileKind = getKindFromIndex(index);
         return tileKind.isHonour() || tileKind.isTerminal();
-    }
-
-    /**
-     * A numeral tile is any tile is part of a family (characters, bamboos, dots)
-     */
-    public static boolean isNumeral(int index)
-    {
-        return getKindFromIndex(index).isNumeral();
     }
 
     /**
