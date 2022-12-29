@@ -18,6 +18,21 @@ import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 public class HandConfigurationParserTest
 {
     @Test
+    public void whenCreatingHandConfigurationWithoutCollision_thenShouldBringBackJustOneConfiguration()
+    {
+        var mpsz = new MPSZNotation();
+        var hand = new Hand(mpsz.getTilesFrom("123m123p123s11177z"));
+        var tileGroups = TileGroupUtils.tileGroupsOf("123m", "123p", "123s", "111z", "77z");
+
+        var parser = new HandConfigurationParser(hand);
+        var resultConfigurations = parser.getHandConfigurations(tileGroups);
+        var expectedResultConfigurations = new ArrayList<List<TileGroup>>();
+        expectedResultConfigurations.add(TileGroupUtils.tileGroupsOf("123m", "123p", "123s", "111z", "77z"));
+
+        assertEquals(expectedResultConfigurations, resultConfigurations, "Result configurations for 123m123p123s11177z were not as expected");
+    }
+
+    @Test
     public void testGetHandConfigurations()
     {
         var mpsz = new MPSZNotation();
