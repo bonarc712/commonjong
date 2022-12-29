@@ -24,7 +24,7 @@ public class TileCollisionsTest
         var mpsz = new MPSZNotation();
         var tileCollisions = new TileCollisions(tileGroups);
         var collisionPairs = tileCollisions.findCollisionPairs(tileGroups);
-        List<CollisionPair> expectedCollisionPairs = new ArrayList<>();
+        var expectedCollisionPairs = new ArrayList<CollisionPair>();
 
         var tileGroupArray = new TileGroup[2];
         expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("13s", "35s").toArray(tileGroupArray)));
@@ -43,10 +43,10 @@ public class TileCollisionsTest
         tileGroups.add(TileGroup.of(MahjongTileKind.RED, MahjongTileKind.RED));
 
         var tileCollisions = new TileCollisions(tileGroups);
-        var collisionPairs2 = tileCollisions.findCollisionPairs(tileGroups);
-        List<List<TileGroup>> expectedCollisionPairs2 = new ArrayList<>();
+        var collisionPairs = tileCollisions.findCollisionPairs(tileGroups);
+        var expectedCollisionPairs = new ArrayList<CollisionPair>();
 
-        assertEquals(expectedCollisionPairs2, collisionPairs2, "There should be not collision pair for 77z");
+        assertEquals(expectedCollisionPairs, collisionPairs, "There should be not collision pair for 77z");
     }
 
     @Test
@@ -58,10 +58,24 @@ public class TileCollisionsTest
         var tileCollisions = new TileCollisions(tileGroups);
         var collisionList = tileCollisions.createCollisionList();
 
-        List<List<TileGroup>> expectedResultCollisionList = new ArrayList<>();
+        var expectedResultCollisionList = new ArrayList<List<TileGroup>>();
         expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s"));
 
         assertEquals(expectedResultCollisionList, collisionList, "Collision list for 135567s is not as expected");
+    }
+
+    @Test
+    public void whenCreatingCollisionListFor123456789p11122z_thenAllPinzuGroupsShouldBeInThere()
+    {
+        var tileGroups = TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p", "567p", "678p", "789p", "111z", "22z");
+
+        var tileCollisions = new TileCollisions(tileGroups);
+        var collisionList = tileCollisions.createCollisionList();
+
+        var expectedResultCollisionList = new ArrayList<List<TileGroup>>();
+        expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p", "567p", "678p", "789p"));
+
+        assertEquals(expectedResultCollisionList, collisionList, "Collision list for 123456789p11122z is not as expected");
     }
 
 }
