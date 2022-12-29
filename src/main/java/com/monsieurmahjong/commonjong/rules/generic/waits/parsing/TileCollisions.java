@@ -109,11 +109,5 @@ public class TileCollisions
         {
             this(tileGroups[0], tileGroups[1]);
         }
-
-        public boolean equals(CollisionPair other)
-        {
-            return firstTileGroup.equals(other.firstTileGroup) && secondTileGroup.equals(other.secondTileGroup);
-        }
     }
-
 }
