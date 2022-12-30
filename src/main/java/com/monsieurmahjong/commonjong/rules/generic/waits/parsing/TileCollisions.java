@@ -2,8 +2,10 @@ package com.monsieurmahjong.commonjong.rules.generic.waits.parsing;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
+import com.monsieurmahjong.commonjong.utils.NestedLoop;
 
 public class TileCollisions
 {
@@ -88,19 +90,10 @@ public class TileCollisions
 
     protected List<CollisionPair> findCollisionPairs(List<TileGroup> tileGroups)
     {
-        List<CollisionPair> collisionPairs = new ArrayList<>();
-        for (var i = 0; i < tileGroups.size(); i++)
-        {
-            for (var j = i + 1; j < tileGroups.size(); j++)
-            {
-                if (tileGroups.get(i).collidesWith(tileGroups.get(j)))
-                {
-                    var collision = new CollisionPair(tileGroups.get(i), tileGroups.get(j));
-                    collisionPairs.add(collision);
-                }
-            }
-        }
-        return collisionPairs;
+        return new NestedLoop().loopOn(tileGroups) //
+                .filter(pair -> pair.getFirst().collidesWith(pair.getSecond())) //
+                .map(pair -> new CollisionPair(pair.getFirst(), pair.getSecond())) //
+                .collect(Collectors.toList());
     }
 
     protected record CollisionPair(TileGroup firstTileGroup, TileGroup secondTileGroup)
