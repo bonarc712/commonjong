@@ -7,48 +7,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
-import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
-import com.monsieurmahjong.commonjong.rules.generic.waits.parsing.TileCollisions.CollisionPair;
 
 public class TileCollisionsTest
 {
-    @Test
-    public void whenSearchingCollisionPairsForTilesWithCollisions_thenShouldReturnThePairs()
-    {
-        // 135567s case
-        var tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
-
-        var mpsz = new MPSZNotation();
-        var tileCollisions = new TileCollisions(tileGroups);
-        var collisionPairs = tileCollisions.findCollisionPairs(tileGroups);
-        var expectedCollisionPairs = new ArrayList<CollisionPair>();
-
-        var tileGroupArray = new TileGroup[2];
-        expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("13s", "35s").toArray(tileGroupArray)));
-        expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("35s", "55s").toArray(tileGroupArray)));
-        expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("35s", "567s").toArray(tileGroupArray)));
-        expectedCollisionPairs.add(new CollisionPair(mpsz.getTileGroupsFrom("55s", "567s").toArray(tileGroupArray)));
-
-        assertEquals(expectedCollisionPairs, collisionPairs, "Collision pairs for 135567s are not as expected");
-    }
-
-    @Test
-    public void whenSearchingCollisionPairsForTilesWithoutCollisions_thenShouldBeEmpty()
-    {
-        // 77z case
-        List<TileGroup> tileGroups = new ArrayList<>();
-        tileGroups.add(TileGroup.of(MahjongTileKind.RED, MahjongTileKind.RED));
-
-        var tileCollisions = new TileCollisions(tileGroups);
-        var collisionPairs = tileCollisions.findCollisionPairs(tileGroups);
-        var expectedCollisionPairs = new ArrayList<CollisionPair>();
-
-        assertEquals(expectedCollisionPairs, collisionPairs, "There should be not collision pair for 77z");
-    }
-
     @Test
     public void testCreateCollisionList()
     {
@@ -76,6 +39,36 @@ public class TileCollisionsTest
         expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p", "567p", "678p", "789p"));
 
         assertEquals(expectedResultCollisionList, collisionList, "Collision list for 123456789p11122z is not as expected");
+    }
+
+    @Test
+    public void whenCreatingCollisionListForTwoDistinctGroupsOfGroups_thenShouldReturnBothGroups()
+    {
+        var tileGroups = TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p", "123s", "234s", "345s", "456s");
+
+        var tileCollisions = new TileCollisions(tileGroups);
+        var collisionList = tileCollisions.createCollisionList();
+
+        var expectedResultCollisionList = new ArrayList<List<TileGroup>>();
+        expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p"));
+        expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("123s", "234s", "345s", "456s"));
+
+        assertEquals(expectedResultCollisionList, collisionList, "Collision list for 12345p12345s is not as expected");
+    }
+
+    @Test
+    public void whenCreatingCollisionListForTwoDistinctUnorderedGroupsOfGroups_thenShouldReturnBothGroups()
+    {
+        var tileGroups = TileGroupUtils.tileGroupsOf("123p", "234p", "456s", "123s", "234s", "345s", "345p", "456p");
+
+        var tileCollisions = new TileCollisions(tileGroups);
+        var collisionList = tileCollisions.createCollisionList();
+
+        var expectedResultCollisionList = new ArrayList<List<TileGroup>>();
+        expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p"));
+        expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("123s", "234s", "345s", "456s"));
+
+        assertEquals(expectedResultCollisionList, collisionList, "Collision list for 123456p123456s is not as expected");
     }
 
 }

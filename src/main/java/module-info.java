@@ -1,5 +1,7 @@
 module commonjong
 {
+    requires one.util.streamex;
+
     opens com.monsieurmahjong.commonjong.api;
     opens com.monsieurmahjong.commonjong.game;
     opens com.monsieurmahjong.commonjong.game.mahjong;
