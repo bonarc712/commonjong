@@ -338,6 +338,11 @@ public class TileGroup
         return false;
     }
 
+    public int countOfTile(MahjongTileKind tileKind)
+    {
+        return (int) tileIndices.stream().filter(index -> index == tileKind.getIndex()).count();
+    }
+
     @Override
     public boolean equals(Object other)
     {

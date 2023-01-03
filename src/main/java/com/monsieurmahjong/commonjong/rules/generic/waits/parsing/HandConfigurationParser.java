@@ -1,15 +1,11 @@
 package com.monsieurmahjong.commonjong.rules.generic.waits.parsing;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Tile;
-import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
 import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
@@ -32,10 +28,10 @@ public class HandConfigurationParser
         var result = instance.getHandConfigurations(tileGroups);
 
         System.out.println("bob");
-//        for (var subList : result)
-//        {
-//            System.out.println("One possibility: " + subList);
-//        }
+        for (var subList : result)
+        {
+            System.out.println("One possibility: " + subList);
+        }
     }
 
     // END MAIN BLOCK
@@ -74,14 +70,15 @@ public class HandConfigurationParser
     {
         // first, create the collision list for all groups that collide with each other.
         // All groups that have no collisions are not added in the list
-        var collisionList = new TileCollisions(tileGroups).createCollisionList();
+        var collisionList = new TileCollisions().createCollisionList(tileGroups);
 
         // then dissect these collision groups to get the different possible pairings
         List<List<List<TileGroup>>> listOfPossiblePairings = new ArrayList<>();
+        var possiblePairings = new PossiblePairings(unmeldedTiles);
         for (List<TileGroup> collidingGroups : collisionList)
         {
             // create the pairings for the current group
-            listOfPossiblePairings.add(createPossiblePairings(collidingGroups));
+            listOfPossiblePairings.add(possiblePairings.createFrom(collidingGroups));
         }
 
         // create hand configurations from possible pairing lists
@@ -93,11 +90,13 @@ public class HandConfigurationParser
             handConfigurations.add(new ArrayList<>());
         }
 
-        // add tile groups that are not within a collision list to the result
-        handConfigurations.forEach(list -> list.addAll(getTileGroupsWithoutCollisions(tileGroups, collisionList)));
+        // add tile groups that are not within a collision list to the result, then add
+        // melded tiles to the result
+        handConfigurations.forEach(list -> {
+            list.addAll(getTileGroupsWithoutCollisions(tileGroups, collisionList));
+            list.addAll(getMeldedTileGroups());
+        });
 
-        // add melded tiles to the result
-        handConfigurations.forEach(list -> list.addAll(getMeldedTileGroups()));
         return handConfigurations;
     }
 
@@ -112,156 +111,6 @@ public class HandConfigurationParser
             }
         }
         return tileGroupsWithoutCollisions;
-    }
-
-    /**
-     * @param collidingGroups all groups that are part of one collision
-     * @return the different ways the colliding groups can be arranged
-     */
-    public List<List<TileGroup>> createPossiblePairings(List<TileGroup> collidingGroups)
-    {
-        List<List<TileGroup>> possiblePairings = new ArrayList<>();
-
-        List<Integer> indicesForCollidingGroups = collidingGroups.stream().map(tileGroup -> tileGroup.getIndices()).flatMap(list -> list.stream()).distinct().collect(Collectors.toList());
-        Map<Integer, List<List<TileGroup>>> possiblePairingsByElement = new HashMap<>();
-        var loopIndex = 0;
-        while (loopIndex < unmeldedTiles.size())
-        {
-            var currentKind = unmeldedTiles.get(loopIndex).getTileKind();
-            var count = (int) unmeldedTiles.stream().filter(tile -> tile.getTileKind().equals(currentKind)).count();
-
-            if (indicesForCollidingGroups.contains(currentKind.getIndex()))
-            {
-                List<List<TileGroup>> possiblePairingsOfCurrentElement = new ArrayList<>();
-                possiblePairingsOfCurrentElement = addPossiblePairings(currentKind, count, collidingGroups, possiblePairingsOfCurrentElement, new ArrayList<>());
-
-                possiblePairingsByElement.put(currentKind.getIndex(), possiblePairingsOfCurrentElement);
-            }
-
-            loopIndex = loopIndex + count;
-        }
-
-        var differentCombinations = listDifferentCombinations(possiblePairingsByElement.values(), new ArrayList<>(), new ArrayList<>());
-
-        for (List<List<TileGroup>> combination : differentCombinations) // for each combination
-        {
-            // initialize tile keep flags
-            var keepTilesFlags = getFlagsForTilesToKeep(indicesForCollidingGroups, combination, collidingGroups);
-
-            List<TileGroup> currentTileGroupPairing = new ArrayList<>();
-
-            for (var i = 0; i < keepTilesFlags.size(); i++)
-            {
-                var currentGroup = collidingGroups.get(i);
-                var dividedTileGroup = new TileGroup();
-                var keepTilesFlagsForCurrentGroup = keepTilesFlags.get(i);
-
-                for (var j = 0; j < currentGroup.getIndices().size(); j++)
-                {
-                    if (keepTilesFlagsForCurrentGroup.get(j))
-                    {
-                        dividedTileGroup.add(currentGroup.getIndices().get(j));
-                    }
-                }
-
-                if (!dividedTileGroup.isEmpty())
-                {
-                    currentTileGroupPairing.add(dividedTileGroup);
-                }
-            }
-
-            possiblePairings.add(currentTileGroupPairing);
-        }
-
-        return possiblePairings;
-    }
-
-    public List<List<Boolean>> getFlagsForTilesToKeep(List<Integer> indicesForCollidingGroups, List<List<TileGroup>> combination, List<TileGroup> collidingGroups)
-    {
-        List<List<Boolean>> keepTilesFlags = new ArrayList<>();
-        for (TileGroup group : collidingGroups)
-        {
-            List<Boolean> keepFlagsForCurrentGroup = new ArrayList<>();
-            for (var i = 0; i < group.getIndices().size(); i++)
-            {
-                keepFlagsForCurrentGroup.add(false);
-            }
-            keepTilesFlags.add(keepFlagsForCurrentGroup);
-        }
-
-        // for each different tile kind
-        for (var i = 0; i < indicesForCollidingGroups.size(); i++)
-        {
-            int currentIndex = indicesForCollidingGroups.get(i);
-            var currentIndexCount = (int) unmeldedTiles.stream().filter(tile -> tile.getTileKind().getIndex() == currentIndex).count(); // how many tiles in hand
-            var tileGroupsForCurrentIndex = combination.get(i);
-            var originalTileGroupsForCurrentIndexSize = tileGroupsForCurrentIndex.size();
-
-            // for each group in collision
-            for (var j = 0; j < collidingGroups.size(); j++)
-            {
-                var group = collidingGroups.get(j);
-                if (group.getIndices().contains(currentIndex))
-                {
-                    if (tileGroupsForCurrentIndex.contains(group))
-                    {
-                        // keep only one tile if amount of groups is equal to count, otherwise keep
-                        var countForCurrentGroup = (int) group.getIndices().stream().filter(index -> index == currentIndex).count();
-                        if (countForCurrentGroup > 1)
-                        {
-                            var indicesToCheck = group.getIndices();
-                            var indicesToKeep = currentIndexCount - originalTileGroupsForCurrentIndexSize + 1;
-                            for (var k = 0; k < indicesToKeep; k++)
-                            {
-                                var kthIndexOfIndex = indicesToCheck.indexOf(currentIndex);
-                                indicesToCheck = indicesToCheck.subList(kthIndexOfIndex + 1, indicesToCheck.size());
-
-                                keepTilesFlags.get(j).set(k, true);
-                            }
-                        }
-                        else if (countForCurrentGroup == 1)
-                        {
-                            var currentIndexOfIndex = group.getIndices().indexOf(currentIndex);
-                            keepTilesFlags.get(j).set(currentIndexOfIndex, true);
-                        }
-                    }
-                }
-            }
-        }
-        return keepTilesFlags;
-    }
-
-    /**
-     * This method creates a list of all the possible tile group lists of lists that
-     * can be created with the current colliding tiles. The combinations must be
-     * ordered by tile index. A simplified signature is not necessary since this
-     * method won't be accessed from the outside.
-     */
-    public List<List<List<TileGroup>>> listDifferentCombinations(Collection<List<List<TileGroup>>> pairings, List<List<List<TileGroup>>> tileGroupsToReturn,
-            List<List<TileGroup>> currentTileGroupSoFar)
-    {
-        if (pairings.isEmpty())
-        {
-            return tileGroupsToReturn;
-        }
-
-        List<List<List<TileGroup>>> pairingsCopy = new ArrayList<>(pairings);
-        var pairingsForCurrentIndex = pairingsCopy.remove(0);
-        for (List<TileGroup> pairing : pairingsForCurrentIndex)
-        {
-            List<List<TileGroup>> currentTileGroupSoFarCopy = new ArrayList<>(currentTileGroupSoFar);
-            currentTileGroupSoFarCopy.add(pairing);
-            if (pairingsCopy.isEmpty())
-            {
-                tileGroupsToReturn.add(currentTileGroupSoFarCopy);
-            }
-            else
-            {
-                tileGroupsToReturn = listDifferentCombinations(pairingsCopy, tileGroupsToReturn, currentTileGroupSoFarCopy);
-            }
-        }
-
-        return tileGroupsToReturn;
     }
 
     /**
@@ -292,65 +141,5 @@ public class HandConfigurationParser
         }
 
         return handConfigsToReturn;
-    }
-
-    /**
-     * Create the possible pairings on a specific tile kind. The occurrences is how
-     * many of that tile kind need to be found and sorted between groups. This
-     * method is recursive as it needs to search into a tree of possibilities.
-     *
-     * @param tileKind                   : the tile kind to search
-     * @param occurrences                : how many of this tile need to be found
-     * @param groupsToSelectFrom         : the groups within which the tile is
-     *                                   included
-     * @param possiblePairingsOfTileKind : the possible pairings that have been
-     *                                   built so far
-     * @param currentPairingMade         : the current pairing on which the code is
-     *                                   operating
-     * @return all possible pairings for the current tile
-     */
-    public List<List<TileGroup>> addPossiblePairings(MahjongTileKind tileKind, int occurrences, List<TileGroup> groupsToSelectFrom, List<List<TileGroup>> possiblePairingsOfTileKind,
-            List<TileGroup> currentPairingMade)
-    {
-        if (occurrences <= 0)
-        {
-            return possiblePairingsOfTileKind;
-        }
-
-        List<TileGroup> groupsToSelectFromCopy = new ArrayList<>(groupsToSelectFrom);
-        while (!groupsToSelectFromCopy.isEmpty())
-        {
-            var group = groupsToSelectFromCopy.get(0);
-
-            // if the case the group contains the current tile kind, add it to the group,
-            // then redo
-            if (group.getIndices().contains(tileKind.getIndex()))
-            {
-                List<TileGroup> pairingForCurrentGroup = new ArrayList<>(currentPairingMade);
-                pairingForCurrentGroup.add(group);
-
-                var amountInCurrentGroup = (int) group.getIndices().stream().filter(index -> index == tileKind.getIndex()).count();
-
-                // branch out depending on the amount (for pairs, triplets, etc.)
-                for (var i = 0; i < Math.min(amountInCurrentGroup, occurrences); i++)
-                {
-                    var countForCurrentPairing = occurrences - (i + 1);
-                    List<TileGroup> groupsToSelectFromExcludingCurrent = new ArrayList<>(groupsToSelectFromCopy);
-                    groupsToSelectFromExcludingCurrent.remove(group);
-                    if (countForCurrentPairing == 0)
-                    {
-                        possiblePairingsOfTileKind.add(pairingForCurrentGroup);
-                    }
-                    else
-                    {
-                        addPossiblePairings(tileKind, countForCurrentPairing, groupsToSelectFromExcludingCurrent, possiblePairingsOfTileKind, pairingForCurrentGroup);
-                    }
-                }
-            }
-
-            groupsToSelectFromCopy.remove(group);
-        }
-
-        return possiblePairingsOfTileKind;
     }
 }

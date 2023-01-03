@@ -18,8 +18,8 @@ public class TileCollisionsTest
         // 135567s case
         var tileGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
-        var tileCollisions = new TileCollisions(tileGroups);
-        var collisionList = tileCollisions.createCollisionList();
+        var tileCollisions = new TileCollisions();
+        var collisionList = tileCollisions.createCollisionList(tileGroups);
 
         var expectedResultCollisionList = new ArrayList<List<TileGroup>>();
         expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s"));
@@ -32,8 +32,8 @@ public class TileCollisionsTest
     {
         var tileGroups = TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p", "567p", "678p", "789p", "111z", "22z");
 
-        var tileCollisions = new TileCollisions(tileGroups);
-        var collisionList = tileCollisions.createCollisionList();
+        var tileCollisions = new TileCollisions();
+        var collisionList = tileCollisions.createCollisionList(tileGroups);
 
         var expectedResultCollisionList = new ArrayList<List<TileGroup>>();
         expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p", "567p", "678p", "789p"));
@@ -46,8 +46,8 @@ public class TileCollisionsTest
     {
         var tileGroups = TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p", "123s", "234s", "345s", "456s");
 
-        var tileCollisions = new TileCollisions(tileGroups);
-        var collisionList = tileCollisions.createCollisionList();
+        var tileCollisions = new TileCollisions();
+        var collisionList = tileCollisions.createCollisionList(tileGroups);
 
         var expectedResultCollisionList = new ArrayList<List<TileGroup>>();
         expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p"));
@@ -61,8 +61,8 @@ public class TileCollisionsTest
     {
         var tileGroups = TileGroupUtils.tileGroupsOf("123p", "234p", "456s", "123s", "234s", "345s", "345p", "456p");
 
-        var tileCollisions = new TileCollisions(tileGroups);
-        var collisionList = tileCollisions.createCollisionList();
+        var tileCollisions = new TileCollisions();
+        var collisionList = tileCollisions.createCollisionList(tileGroups);
 
         var expectedResultCollisionList = new ArrayList<List<TileGroup>>();
         expectedResultCollisionList.add(TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p"));

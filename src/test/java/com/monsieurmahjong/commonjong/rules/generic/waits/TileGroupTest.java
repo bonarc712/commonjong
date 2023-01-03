@@ -28,6 +28,18 @@ public class TileGroupTest
     }
 
     @Test
+    public void testCountOfTile()
+    {
+        var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+        var ryanzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);
+        var suuzouTriplet = TileGroup.of(MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4, MahjongTileKind.BAMBOOS_4);
+
+        assertEquals(1, bambooRun123.countOfTile(MahjongTileKind.BAMBOOS_2));
+        assertEquals(3, ryanzouTriplet.countOfTile(MahjongTileKind.BAMBOOS_2));
+        assertEquals(0, suuzouTriplet.countOfTile(MahjongTileKind.BAMBOOS_2));
+    }
+
+    @Test
     public void testIsPair()
     {
         var ryanzouPair = TileGroup.of(MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_2);

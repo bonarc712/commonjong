@@ -9,14 +9,7 @@ import one.util.streamex.StreamEx;
 
 public class TileCollisions
 {
-    private List<TileGroup> tileGroups;
-
-    public TileCollisions(List<TileGroup> tileGroups)
-    {
-        this.tileGroups = tileGroups;
-    }
-
-    public List<List<TileGroup>> createCollisionList()
+    public List<List<TileGroup>> createCollisionList(List<TileGroup> tileGroups)
     {
         return StreamEx.of(tileGroups) //
                 .sorted(new TileGroupKindComparator()::compare) //
