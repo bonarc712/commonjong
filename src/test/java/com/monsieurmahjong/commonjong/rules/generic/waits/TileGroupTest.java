@@ -256,6 +256,15 @@ public class TileGroupTest
     }
 
     @Test
+    public void whenRunContainsATile_thenShouldContainItAndNothingElse()
+    {
+        var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);
+
+        assertTrue(bambooRun123.contains(MahjongTileKind.BAMBOOS_2));
+        assertFalse(bambooRun123.contains(MahjongTileKind.BAMBOOS_4));
+    }
+
+    @Test
     public void testContains()
     {
         var bambooRun123 = TileGroup.of(MahjongTileKind.BAMBOOS_1, MahjongTileKind.BAMBOOS_2, MahjongTileKind.BAMBOOS_3);

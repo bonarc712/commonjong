@@ -96,20 +96,16 @@ public class TileGroup
         tileIndices.addAll(Arrays.asList(indices));
     }
 
-    /**
-     * @return true if one of the tiles matches the predicate; false otherwise
-     */
+    public boolean contains(MahjongTileKind tileKind)
+    {
+        return contains(kind -> kind == tileKind);
+    }
+
     public boolean contains(Predicate<MahjongTileKind> predicate)
     {
-        for (int index : tileIndices)
-        {
-            var tileKind = MahjongTileKind.getKindFromIndex(index);
-            if (predicate.test(tileKind))
-            {
-                return true;
-            }
-        }
-        return false;
+        return tileIndices.stream() //
+                .map(MahjongTileKind::getKindFromIndex) //
+                .anyMatch(predicate);
     }
 
     /**
