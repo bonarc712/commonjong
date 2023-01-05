@@ -178,7 +178,7 @@ public class PossiblePairingsTest
         knownPairings.add(pairingsOf7s);
 
         var pairings = new PossiblePairings(new MPSZNotation().getTilesFrom("135567s"));
-        var resultGroups = pairings.listDifferentCombinations(knownPairings, new ArrayList<>(), new ArrayList<>());
+        var resultGroups = pairings.listDifferentCombinations(knownPairings);
 
         List<List<List<TileGroup>>> expectedGroups = new ArrayList<>();
         expectedGroups.add(getExpectedListOfList(TileGroupUtils.tileGroupsOf("13s"), TileGroupUtils.tileGroupsOf("13s"), TileGroupUtils.tileGroupsOf("35s", "55s"), TileGroupUtils.tileGroupsOf("567s"),

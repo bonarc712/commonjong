@@ -14,6 +14,8 @@ import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroupKindComparator;
 import com.monsieurmahjong.commonjong.utils.Permutations;
 
+import one.util.streamex.StreamEx;
+
 public class PossiblePairings
 {
     private List<Tile> referenceTiles;
@@ -48,7 +50,7 @@ public class PossiblePairings
             loopIndex = loopIndex + count;
         }
 
-        var differentCombinations = listDifferentCombinations(possiblePairingsByElement.values(), new ArrayList<>(), new ArrayList<>());
+        var differentCombinations = listDifferentCombinations(possiblePairingsByElement.values());
 
         List<List<TileGroup>> possiblePairings = new ArrayList<>();
         for (List<List<TileGroup>> combination : differentCombinations) // for each combination
@@ -142,34 +144,11 @@ public class PossiblePairings
     /**
      * This method creates a list of all the possible tile group lists of lists that
      * can be created with the current colliding tiles. The combinations must be
-     * ordered by tile index. A simplified signature is not necessary since this
-     * method won't be accessed from the outside.
+     * ordered by tile index.
      */
-    public List<List<List<TileGroup>>> listDifferentCombinations(Collection<List<List<TileGroup>>> pairings, List<List<List<TileGroup>>> tileGroupsToReturn,
-            List<List<TileGroup>> currentTileGroupSoFar)
+    public List<List<List<TileGroup>>> listDifferentCombinations(Collection<List<List<TileGroup>>> pairings)
     {
-        if (pairings.isEmpty())
-        {
-            return tileGroupsToReturn;
-        }
-
-        List<List<List<TileGroup>>> pairingsCopy = new ArrayList<>(pairings);
-        var pairingsForCurrentIndex = pairingsCopy.remove(0);
-        for (List<TileGroup> pairing : pairingsForCurrentIndex)
-        {
-            List<List<TileGroup>> currentTileGroupSoFarCopy = new ArrayList<>(currentTileGroupSoFar);
-            currentTileGroupSoFarCopy.add(pairing);
-            if (pairingsCopy.isEmpty())
-            {
-                tileGroupsToReturn.add(currentTileGroupSoFarCopy);
-            }
-            else
-            {
-                tileGroupsToReturn = listDifferentCombinations(pairingsCopy, tileGroupsToReturn, currentTileGroupSoFarCopy);
-            }
-        }
-
-        return tileGroupsToReturn;
+        return StreamEx.cartesianProduct(pairings).toList();
     }
 
     /**
