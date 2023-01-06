@@ -14,7 +14,7 @@ import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
  */
 public class TileParser
 {
-    public static List<TileGroup> parseFamilyTiles(List<Tile> tiles)
+    public List<TileGroup> parseFamilyTiles(List<Tile> tiles)
     {
         List<TileGroup> tileGroups = new ArrayList<>();
 
@@ -130,12 +130,12 @@ public class TileParser
         return tileGroups;
     }
 
-    private static int getOccurrencesOfTileIndex(int index, List<Tile> tiles)
+    private int getOccurrencesOfTileIndex(int index, List<Tile> tiles)
     {
         return (int) tiles.stream().filter(tile -> tile.getTileKind().getIndex() == index).count();
     }
 
-    public static List<TileGroup> parseHonourTiles(List<Tile> tiles)
+    public List<TileGroup> parseHonourTiles(List<Tile> tiles)
     {
         List<TileGroup> tileGroups = new ArrayList<>();
 
@@ -156,7 +156,7 @@ public class TileParser
         return tileGroups;
     }
 
-    protected static Optional<TileGroup> parsePairsAndTriplets(List<Tile> tiles, MahjongTileKind tileKind)
+    protected Optional<TileGroup> parsePairsAndTriplets(List<Tile> tiles, MahjongTileKind tileKind)
     {
         var sameTileCount = (int) tiles.stream().filter(tile -> tile.getTileKind() == tileKind).count();
         if (sameTileCount > 1)
@@ -171,29 +171,27 @@ public class TileParser
         return Optional.empty();
     }
 
-    protected static TileGroup parseLoneTiles(MahjongTileKind currentTileKind)
+    protected TileGroup parseLoneTiles(MahjongTileKind currentTileKind)
     {
-        var loneTile = new TileGroup();
-        loneTile.addAll(currentTileKind.getIndex());
-        return loneTile;
+        return new TileGroup(currentTileKind.getIndex());
     }
 
-    protected static boolean includedInAnExclusiveGroup(MahjongTileKind currentTileKind, List<TileGroup> tileGroups)
+    protected boolean includedInAnExclusiveGroup(MahjongTileKind currentTileKind, List<TileGroup> tileGroups)
     {
         return tileGroups.stream().anyMatch(group -> group.getTileKindAt(0) == currentTileKind && group.isExclusiveGroup());
     }
 
-    protected static boolean includedInAGroup(MahjongTileKind currentTileKind, List<TileGroup> tileGroups)
+    protected boolean includedInAGroup(MahjongTileKind currentTileKind, List<TileGroup> tileGroups)
     {
         return tileGroups.stream().anyMatch(group -> group.getIndices().contains(currentTileKind.getIndex()));
     }
 
-    protected static boolean includedInARunGroup(int first, int second, List<TileGroup> tileGroups)
+    protected boolean includedInARunGroup(int first, int second, List<TileGroup> tileGroups)
     {
         return tileGroups.stream().filter(TileGroup::isComplete).anyMatch(group -> group.getIndices().contains(first) && group.getIndices().contains(second));
     }
 
-    protected static int indexOf(Tile tile)
+    protected int indexOf(Tile tile)
     {
         return tile.getTileKind().getIndex();
     }

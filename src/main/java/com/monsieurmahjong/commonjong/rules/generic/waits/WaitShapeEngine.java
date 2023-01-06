@@ -88,11 +88,11 @@ public class WaitShapeEngine
 
         // do parsing
 
-        tileGroups.addAll(TileParser.parseFamilyTiles(characterTiles));
-        tileGroups.addAll(TileParser.parseFamilyTiles(circleTiles));
-        tileGroups.addAll(TileParser.parseFamilyTiles(bambooTiles));
-
-        tileGroups.addAll(TileParser.parseHonourTiles(honourTiles));
+        var tileParser = new TileParser();
+        tileGroups.addAll(tileParser.parseFamilyTiles(characterTiles));
+        tileGroups.addAll(tileParser.parseFamilyTiles(circleTiles));
+        tileGroups.addAll(tileParser.parseFamilyTiles(bambooTiles));
+        tileGroups.addAll(tileParser.parseHonourTiles(honourTiles));
 
         // create possible hands (so we can differ between triplet in run in cases like
         // 34555)
