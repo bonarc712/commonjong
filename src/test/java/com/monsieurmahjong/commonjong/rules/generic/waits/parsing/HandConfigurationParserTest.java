@@ -29,24 +29,6 @@ public class HandConfigurationParserTest
         assertEquals(expectedResultConfigurations, resultConfigurations, "Result configurations for 123m123p123s11177z were not as expected");
     }
 
-//    @Test
-//    public void whenCreatingHandConfigurationWithOverlaps_thenShouldBringBackConfigurationsThatWorkWellWithOverlap()
-//    {
-//        var mpsz = new MPSZNotation();
-//        var hand = new Hand(mpsz.getTilesFrom("12345p"));
-//        var tileGroups = TileGroupUtils.tileGroupsOf("123p", "234p", "345p");
-//
-//        var parser = new HandConfigurationParser(hand);
-//        var resultConfigurations = parser.getHandConfigurations(tileGroups);
-//        var expectedResultConfigurations = new ArrayList<List<TileGroup>>();
-//        expectedResultConfigurations.add(TileGroupUtils.tileGroupsOf("123p", "45p"));
-//        expectedResultConfigurations.add(TileGroupUtils.tileGroupsOf("12p", "345p"));
-//        // we don't want more complex result configurations (like 1p, 23p, 4p, 5p)
-//        // because it's not really useful
-//
-//        assertEquals(expectedResultConfigurations, resultConfigurations, "Result configurations for 12345p were not as expected");
-//    }
-
     @Test
     public void testGetHandConfigurations()
     {

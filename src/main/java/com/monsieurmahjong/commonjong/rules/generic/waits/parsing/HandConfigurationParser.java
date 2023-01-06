@@ -6,36 +6,10 @@ import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Tile;
-import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
-import com.monsieurmahjong.commonjong.rules.generic.utils.TileGroupUtils;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 
 public class HandConfigurationParser
 {
-    // START MAIN BLOCK
-
-    public static void main(String[] args)
-    {
-        var mpsz = new MPSZNotation();
-
-//        var hand1 = new Hand(mpsz.getTilesFrom("123456789m11122z"));
-//        var tileGroups = TileGroupUtils.tileGroupsOf("123m", "234m", "345m", "456m", "567m", "678m", "789m", "111z", "22z");
-
-        var hand1 = new Hand(mpsz.getTilesFrom("123456789p11122z"));
-        var tileGroups = TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p", "567p", "678p", "789p", "111z", "22z");
-
-        var instance = new HandConfigurationParser(hand1);
-        var result = instance.getHandConfigurations(tileGroups);
-
-        System.out.println("bob");
-        for (var subList : result)
-        {
-            System.out.println("One possibility: " + subList);
-        }
-    }
-
-    // END MAIN BLOCK
-
     private Hand hand;
     private List<Tile> unmeldedTiles;
 

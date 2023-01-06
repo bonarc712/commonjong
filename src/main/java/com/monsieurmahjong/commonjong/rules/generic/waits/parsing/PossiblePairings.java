@@ -39,7 +39,7 @@ public class PossiblePairings
     public List<List<TileGroup>> createFrom(List<TileGroup> collidingGroups)
     {
         List<Integer> indicesForCollidingGroups = collidingGroups.stream().map(tileGroup -> tileGroup.getIndices()).flatMap(list -> list.stream()).distinct().collect(Collectors.toList());
-        Map<Integer, List<List<TileGroup>>> possiblePairingsByElement = new HashMap<>();
+        Map<Integer, List<List<TileGroup>>> possiblePairingsByElement = new TreeMap<>();
         var loopIndex = 0;
         while (loopIndex < referenceTiles.size())
         {

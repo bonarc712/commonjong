@@ -46,34 +46,6 @@ public class PossiblePairingsTest
         assertEquals(expectedPossiblePairings, possiblePairings2, "Possible pairings for 135567s77z is not as expected");
     }
 
-//    @Test
-//    public void testCreatePossiblePairingsForPinzuOneToNine()
-//    {
-//        // 135567s case
-//        var collisionList = TileGroupUtils.tileGroupsOf("123p", "234p", "345p", "456p", "567p", "678p", "789p");
-//
-//        var mpsz = new MPSZNotation();
-//        var parser = new HandConfigurationParser(new Hand(mpsz.getTilesFrom("123456789p")));
-//        var possiblePairings = parser.createPossiblePairings(collisionList);
-//
-//        assertEquals(null, possiblePairings);
-//    }
-
-    // @Test
-    // public void testCreatePossiblePairingsForPinzuOneToNine()
-    // {
-    // // 135567s case
-    // var collisionList = TileGroupUtils.tileGroupsOf("123p", "234p", "345p",
-    // "456p", "567p", "678p", "789p");
-    //
-    // var mpsz = new MPSZNotation();
-    // var parser = new HandConfigurationParser(new
-    // Hand(mpsz.getTilesFrom("123456789p")));
-    // var possiblePairings = parser.createPossiblePairings(collisionList);
-    //
-    // assertEquals(null, possiblePairings);
-    // }
-
     @Test
     public void testGetFlagsForTilesToKeep()
     {
