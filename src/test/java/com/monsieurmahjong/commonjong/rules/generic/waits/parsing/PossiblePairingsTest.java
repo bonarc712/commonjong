@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.function.Function;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +24,7 @@ public class PossiblePairingsTest
         // 135567s case
         var collisionList = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
-        var mpsz = new MPSZNotation();
-        var pairings = new PossiblePairings(mpsz.getTilesFrom("135567s"));
+        var pairings = new PossiblePairings("135567s");
         var possiblePairings = pairings.createFrom(collisionList);
         List<List<TileGroup>> expectedPossiblePairings = new ArrayList<>();
 
@@ -39,7 +40,7 @@ public class PossiblePairingsTest
         assertEquals(expectedPossiblePairings, possiblePairings, "Possible pairings for 135567s is not as expected");
 
         // 135567s case with 77z also in the hand
-        var parser2 = new PossiblePairings(mpsz.getTilesFrom("135567s77z"));
+        var parser2 = new PossiblePairings("135567s77z");
         var possiblePairings2 = parser2.createFrom(collisionList);
 
         assertEquals(expectedPossiblePairings, possiblePairings2, "Possible pairings for 135567s77z is not as expected");
@@ -58,22 +59,40 @@ public class PossiblePairingsTest
 //        assertEquals(null, possiblePairings);
 //    }
 
+    // @Test
+    // public void testCreatePossiblePairingsForPinzuOneToNine()
+    // {
+    // // 135567s case
+    // var collisionList = TileGroupUtils.tileGroupsOf("123p", "234p", "345p",
+    // "456p", "567p", "678p", "789p");
+    //
+    // var mpsz = new MPSZNotation();
+    // var parser = new HandConfigurationParser(new
+    // Hand(mpsz.getTilesFrom("123456789p")));
+    // var possiblePairings = parser.createPossiblePairings(collisionList);
+    //
+    // assertEquals(null, possiblePairings);
+    // }
+
     @Test
     public void testGetFlagsForTilesToKeep()
     {
-        var mpsz = new MPSZNotation();
-        List<Integer> indicesForCollidingGroups = mpsz.getTilesFrom("13567s").stream().map(tile -> tile.getTileKind().getIndex()).collect(Collectors.toList());
+        Function<String, Integer> indexOf = tile -> {
+            var mpsz = new MPSZNotation();
+            return mpsz.getTilesFrom(tile).get(0).getTileKind().getIndex();
+        };
+
+        Map<Integer, List<TileGroup>> combination = new TreeMap<>();
+        combination.put(indexOf.apply("1s"), TileGroupUtils.tileGroupsOf("13s"));
+        combination.put(indexOf.apply("3s"), TileGroupUtils.tileGroupsOf("13s"));
+        combination.put(indexOf.apply("5s"), TileGroupUtils.tileGroupsOf("35s", "55s"));
+        combination.put(indexOf.apply("6s"), TileGroupUtils.tileGroupsOf("567s"));
+        combination.put(indexOf.apply("7s"), TileGroupUtils.tileGroupsOf("567s"));
+
         var collidingGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
-        List<List<TileGroup>> combination = new ArrayList<>();
-        combination.add(TileGroupUtils.tileGroupsOf("13s"));
-        combination.add(TileGroupUtils.tileGroupsOf("13s"));
-        combination.add(TileGroupUtils.tileGroupsOf("35s", "55s"));
-        combination.add(TileGroupUtils.tileGroupsOf("567s"));
-        combination.add(TileGroupUtils.tileGroupsOf("567s"));
-
-        var pairings = new PossiblePairings(mpsz.getTilesFrom("135567s"));
-        var resultFlags = pairings.getFlagsForTilesToKeep(indicesForCollidingGroups, combination, collidingGroups);
+        var pairings = new PossiblePairings("135567s");
+        var resultFlags = pairings.getFlagsForTilesToKeep(combination, collidingGroups);
 
         List<List<Boolean>> expectedFlags = new ArrayList<>();
         expectedFlags.add(Arrays.asList(true, true));
@@ -83,14 +102,19 @@ public class PossiblePairingsTest
 
         assertEquals(expectedFlags, resultFlags, "Flags for 13-13-35+55-567-567 are not as expected");
 
-        combination.clear();
-        combination.add(TileGroupUtils.tileGroupsOf("13s"));
-        combination.add(TileGroupUtils.tileGroupsOf("13s"));
-        combination.add(TileGroupUtils.tileGroupsOf("55s"));
-        combination.add(TileGroupUtils.tileGroupsOf("567s"));
-        combination.add(TileGroupUtils.tileGroupsOf("567s"));
+        // ---
 
-        resultFlags = pairings.getFlagsForTilesToKeep(indicesForCollidingGroups, combination, collidingGroups);
+        combination.clear();
+        combination.put(indexOf.apply("1s"), TileGroupUtils.tileGroupsOf("13s"));
+        combination.put(indexOf.apply("3s"), TileGroupUtils.tileGroupsOf("13s"));
+        combination.put(indexOf.apply("5s"), TileGroupUtils.tileGroupsOf("55s"));
+        combination.put(indexOf.apply("6s"), TileGroupUtils.tileGroupsOf("567s"));
+        combination.put(indexOf.apply("7s"), TileGroupUtils.tileGroupsOf("567s"));
+
+        collidingGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
+
+        pairings = new PossiblePairings("135567s");
+        resultFlags = pairings.getFlagsForTilesToKeep(combination, collidingGroups);
 
         expectedFlags = new ArrayList<>();
         expectedFlags.add(Arrays.asList(true, true));
@@ -100,16 +124,39 @@ public class PossiblePairingsTest
 
         assertEquals(expectedFlags, resultFlags, "Flags for 13-13-55-567-567 are not as expected");
 
-        indicesForCollidingGroups = mpsz.getTilesFrom("456s").stream().map(tile -> tile.getTileKind().getIndex()).collect(Collectors.toList());
-        collidingGroups = TileGroupUtils.tileGroupsOf("456s", "666s");
-        pairings = new PossiblePairings(mpsz.getTilesFrom("45666s"));
+        // ---
 
         combination.clear();
-        combination.add(TileGroupUtils.tileGroupsOf("456s"));
-        combination.add(TileGroupUtils.tileGroupsOf("456s"));
-        combination.add(TileGroupUtils.tileGroupsOf("456s", "666s"));
+        combination.put(indexOf.apply("1s"), TileGroupUtils.tileGroupsOf("13s"));
+        combination.put(indexOf.apply("3s"), TileGroupUtils.tileGroupsOf("13s"));
+        combination.put(indexOf.apply("5s"), TileGroupUtils.tileGroupsOf("55s", "567s"));
+        combination.put(indexOf.apply("6s"), TileGroupUtils.tileGroupsOf("567s"));
+        combination.put(indexOf.apply("7s"), TileGroupUtils.tileGroupsOf("567s"));
 
-        resultFlags = pairings.getFlagsForTilesToKeep(indicesForCollidingGroups, combination, collidingGroups);
+        collidingGroups = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
+
+        pairings = new PossiblePairings("135567s");
+        resultFlags = pairings.getFlagsForTilesToKeep(combination, collidingGroups);
+
+        expectedFlags = new ArrayList<>();
+        expectedFlags.add(Arrays.asList(true, true));
+        expectedFlags.add(Arrays.asList(false, false));
+        expectedFlags.add(Arrays.asList(true, false));
+        expectedFlags.add(Arrays.asList(true, true, true));
+
+        assertEquals(expectedFlags, resultFlags, "Flags for 13-13-55-567-567 are not as expected");
+
+        // ---
+
+        combination.clear();
+        combination.put(indexOf.apply("4s"), TileGroupUtils.tileGroupsOf("456s"));
+        combination.put(indexOf.apply("5s"), TileGroupUtils.tileGroupsOf("456s"));
+        combination.put(indexOf.apply("6s"), TileGroupUtils.tileGroupsOf("456s", "666s"));
+
+        collidingGroups = TileGroupUtils.tileGroupsOf("456s", "666s");
+
+        pairings = new PossiblePairings("45666s");
+        resultFlags = pairings.getFlagsForTilesToKeep(combination, collidingGroups);
 
         expectedFlags = new ArrayList<>();
         expectedFlags.add(Arrays.asList(true, true, true));
@@ -117,16 +164,17 @@ public class PossiblePairingsTest
 
         assertEquals(expectedFlags, resultFlags, "Flags for 456-456-456+666 are not as expected");
 
-        indicesForCollidingGroups = mpsz.getTilesFrom("456s").stream().map(tile -> tile.getTileKind().getIndex()).collect(Collectors.toList());
-        collidingGroups = TileGroupUtils.tileGroupsOf("456s", "666s");
-        pairings = new PossiblePairings(mpsz.getTilesFrom("45666s"));
+        // ---
 
         combination.clear();
-        combination.add(TileGroupUtils.tileGroupsOf("456s"));
-        combination.add(TileGroupUtils.tileGroupsOf("456s"));
-        combination.add(TileGroupUtils.tileGroupsOf("666s"));
+        combination.put(indexOf.apply("4s"), TileGroupUtils.tileGroupsOf("456s"));
+        combination.put(indexOf.apply("5s"), TileGroupUtils.tileGroupsOf("456s"));
+        combination.put(indexOf.apply("6s"), TileGroupUtils.tileGroupsOf("666s"));
 
-        resultFlags = pairings.getFlagsForTilesToKeep(indicesForCollidingGroups, combination, collidingGroups);
+        collidingGroups = TileGroupUtils.tileGroupsOf("456s", "666s");
+
+        pairings = new PossiblePairings("45666s");
+        resultFlags = pairings.getFlagsForTilesToKeep(combination, collidingGroups);
 
         expectedFlags = new ArrayList<>();
         expectedFlags.add(Arrays.asList(true, true, false));
@@ -140,8 +188,7 @@ public class PossiblePairingsTest
     {
         var groupsToSelectFrom = TileGroupUtils.tileGroupsOf("13s", "35s", "55s", "567s");
 
-        var mpsz = new MPSZNotation();
-        var pairings = new PossiblePairings(mpsz.getTilesFrom("135567s"));
+        var pairings = new PossiblePairings("135567s");
         var possiblePairings = pairings.addPossiblePairing(MahjongTileKind.BAMBOOS_5, 2, groupsToSelectFrom);
 
         List<List<TileGroup>> expectedPairings = new ArrayList<>();
@@ -177,7 +224,7 @@ public class PossiblePairingsTest
         pairingsOf7s.add(TileGroupUtils.tileGroupsOf("567s"));
         knownPairings.add(pairingsOf7s);
 
-        var pairings = new PossiblePairings(new MPSZNotation().getTilesFrom("135567s"));
+        var pairings = new PossiblePairings("135567s");
         var resultGroups = pairings.listDifferentCombinations(knownPairings);
 
         List<List<List<TileGroup>>> expectedGroups = new ArrayList<>();

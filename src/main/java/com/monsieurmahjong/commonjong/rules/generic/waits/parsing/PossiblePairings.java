@@ -5,11 +5,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
+import com.monsieurmahjong.commonjong.rules.generic.utils.MPSZNotation;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroupKindComparator;
 import com.monsieurmahjong.commonjong.utils.Permutations;
@@ -23,6 +25,11 @@ public class PossiblePairings
     public PossiblePairings(List<Tile> referenceTiles)
     {
         this.referenceTiles = referenceTiles;
+    }
+
+    public PossiblePairings(String referenceTiles)
+    {
+        this(new MPSZNotation().getTilesFrom(referenceTiles));
     }
 
     /**
@@ -41,9 +48,7 @@ public class PossiblePairings
 
             if (indicesForCollidingGroups.contains(currentKind.getIndex()))
             {
-                List<List<TileGroup>> possiblePairingsOfCurrentElement = new ArrayList<>();
-                possiblePairingsOfCurrentElement = addPossiblePairing(currentKind, count, collidingGroups);
-
+                var possiblePairingsOfCurrentElement = addPossiblePairing(currentKind, count, collidingGroups);
                 possiblePairingsByElement.put(currentKind.getIndex(), possiblePairingsOfCurrentElement);
             }
 
@@ -55,8 +60,13 @@ public class PossiblePairings
         List<List<TileGroup>> possiblePairings = new ArrayList<>();
         for (List<List<TileGroup>> combination : differentCombinations) // for each combination
         {
+            Map<Integer, List<TileGroup>> combinationsByIndex = new TreeMap<>();
+            StreamEx.of(indicesForCollidingGroups) //
+                    .zipWith(combination.stream()) //
+                    .forEach(oneCombination -> combinationsByIndex.put(oneCombination.getKey(), oneCombination.getValue()));
+
             // initialize tile keep flags
-            var keepTilesFlags = getFlagsForTilesToKeep(indicesForCollidingGroups, combination, collidingGroups);
+            var keepTilesFlags = getFlagsForTilesToKeep(combinationsByIndex, collidingGroups);
 
             List<TileGroup> currentTileGroupPairing = new ArrayList<>();
 
@@ -86,59 +96,25 @@ public class PossiblePairings
         return possiblePairings;
     }
 
-    public List<List<Boolean>> getFlagsForTilesToKeep(List<Integer> indicesForCollidingGroups, List<List<TileGroup>> combination, List<TileGroup> collidingGroups)
+    public List<List<Boolean>> getFlagsForTilesToKeep(Map<Integer, List<TileGroup>> combination, List<TileGroup> collidingGroups)
     {
-        List<List<Boolean>> keepTilesFlags = new ArrayList<>();
-        for (TileGroup group : collidingGroups)
-        {
-            List<Boolean> keepFlagsForCurrentGroup = new ArrayList<>();
-            for (var i = 0; i < group.getIndices().size(); i++)
-            {
-                keepFlagsForCurrentGroup.add(false);
-            }
-            keepTilesFlags.add(keepFlagsForCurrentGroup);
-        }
+        var indicesLeft = new HashMap<Integer, Integer>();
+        combination.keySet().forEach(index -> {
+            indicesLeft.put(index, (int) referenceTiles.stream().filter(tile -> tile.getTileKind().getIndex() == index).count());
+        });
 
-        // for each different tile kind
-        for (var i = 0; i < indicesForCollidingGroups.size(); i++)
-        {
-            int currentIndex = indicesForCollidingGroups.get(i);
-            var currentIndexCount = (int) referenceTiles.stream().filter(tile -> tile.getTileKind().getIndex() == currentIndex).count(); // how many tiles in hand
-            var tileGroupsForCurrentIndex = combination.get(i);
-            var originalTileGroupsForCurrentIndexSize = tileGroupsForCurrentIndex.size();
-
-            // for each group in collision
-            for (var j = 0; j < collidingGroups.size(); j++)
-            {
-                var group = collidingGroups.get(j);
-                if (group.getIndices().contains(currentIndex))
+        return collidingGroups.stream().map(tileGroup -> {
+            return tileGroup.getIndices().stream().map(index -> {
+                var amountOfIndexLeft = indicesLeft.get(index);
+                var currentCombination = combination.get(index);
+                if (currentCombination.contains(tileGroup) && amountOfIndexLeft > currentCombination.size() - currentCombination.indexOf(tileGroup) - 1)
                 {
-                    if (tileGroupsForCurrentIndex.contains(group))
-                    {
-                        // keep only one tile if amount of groups is equal to count, otherwise keep
-                        var countForCurrentGroup = (int) group.getIndices().stream().filter(index -> index == currentIndex).count();
-                        if (countForCurrentGroup > 1)
-                        {
-                            var indicesToCheck = group.getIndices();
-                            var indicesToKeep = currentIndexCount - originalTileGroupsForCurrentIndexSize + 1;
-                            for (var k = 0; k < indicesToKeep; k++)
-                            {
-                                var kthIndexOfIndex = indicesToCheck.indexOf(currentIndex);
-                                indicesToCheck = indicesToCheck.subList(kthIndexOfIndex + 1, indicesToCheck.size());
-
-                                keepTilesFlags.get(j).set(k, true);
-                            }
-                        }
-                        else if (countForCurrentGroup == 1)
-                        {
-                            var currentIndexOfIndex = group.getIndices().indexOf(currentIndex);
-                            keepTilesFlags.get(j).set(currentIndexOfIndex, true);
-                        }
-                    }
+                    indicesLeft.put(index, amountOfIndexLeft - 1);
+                    return true;
                 }
-            }
-        }
-        return keepTilesFlags;
+                return false;
+            }).toList();
+        }).toList();
     }
 
     /**
