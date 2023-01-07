@@ -1,9 +1,9 @@
 package com.monsieurmahjong.commonjong.rules.generic.waits.parsing;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.MahjongTileKind;
@@ -158,17 +158,16 @@ public class TileParser
 
     protected Optional<TileGroup> parsePairsAndTriplets(List<Tile> tiles, MahjongTileKind tileKind)
     {
-        var sameTileCount = (int) tiles.stream().filter(tile -> tile.getTileKind() == tileKind).count();
-        if (sameTileCount > 1)
-        {
-            var indices = new Integer[sameTileCount];
-            Arrays.fill(indices, tileKind.getIndex());
+        var tileGroup = new TileGroup(tiles.stream() //
+                .filter(tile -> tile.getTileKind() == tileKind) //
+                .map(tile -> tile.getTileKind().getIndex()) //
+                .collect(Collectors.toList()));
 
-            var tileGroup = new TileGroup();
-            tileGroup.addAll(indices);
-            return Optional.of(tileGroup);
+        if (tileGroup.isLoneTile())
+        {
+            return Optional.empty();
         }
-        return Optional.empty();
+        return Optional.of(tileGroup);
     }
 
     protected TileGroup parseLoneTiles(MahjongTileKind currentTileKind)

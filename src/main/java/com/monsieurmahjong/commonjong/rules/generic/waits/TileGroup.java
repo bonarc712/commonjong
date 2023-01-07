@@ -117,6 +117,11 @@ public class TileGroup
         return tileIndices.stream().distinct().count() == 1;
     }
 
+    public boolean isLoneTile()
+    {
+        return tileIndices.size() == 1;
+    }
+
     public boolean isPair()
     {
         return isExclusiveGroup() && tileIndices.size() == 2;
