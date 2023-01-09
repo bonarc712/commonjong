@@ -79,15 +79,9 @@ public class HandConfigurationParser
 
     private List<TileGroup> getTileGroupsWithoutCollisions(List<TileGroup> tileGroups, List<List<TileGroup>> collisionList)
     {
-        var tileGroupsWithoutCollisions = new ArrayList<TileGroup>();
-        for (TileGroup tileGroup : tileGroups)
-        {
-            if (collisionList.stream().noneMatch(list -> list.contains(tileGroup)))
-            {
-                tileGroupsWithoutCollisions.add(tileGroup);
-            }
-        }
-        return tileGroupsWithoutCollisions;
+        return tileGroups.stream() //
+                .filter(tileGroup -> collisionList.stream().noneMatch(list -> list.contains(tileGroup))) //
+                .toList();
     }
 
     /**
@@ -96,6 +90,8 @@ public class HandConfigurationParser
      */
     private List<List<TileGroup>> createHandConfigurations(List<List<List<TileGroup>>> possiblePairingsList)
     {
-        return StreamEx.cartesianProduct(possiblePairingsList).map(list -> list.stream().flatMap(Collection::stream).collect(Collectors.toList())).toList();
+        return StreamEx.cartesianProduct(possiblePairingsList) //
+                .map(list -> list.stream().flatMap(Collection::stream).collect(Collectors.toList())) //
+                .toList();
     }
 }
