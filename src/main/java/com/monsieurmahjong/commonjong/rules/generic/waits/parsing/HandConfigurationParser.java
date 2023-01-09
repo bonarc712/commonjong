@@ -1,12 +1,15 @@
 package com.monsieurmahjong.commonjong.rules.generic.waits.parsing;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.monsieurmahjong.commonjong.game.Hand;
 import com.monsieurmahjong.commonjong.game.Tile;
 import com.monsieurmahjong.commonjong.rules.generic.waits.TileGroup;
+
+import one.util.streamex.StreamEx;
 
 public class HandConfigurationParser
 {
@@ -56,7 +59,7 @@ public class HandConfigurationParser
         }
 
         // create hand configurations from possible pairing lists
-        var handConfigurations = createHandConfigurations(listOfPossiblePairings, new ArrayList<>(), new ArrayList<>());
+        var handConfigurations = createHandConfigurations(listOfPossiblePairings);
 
         if (handConfigurations.isEmpty())
         {
@@ -91,29 +94,8 @@ public class HandConfigurationParser
      * Hand configs are built in a similar fashion than combinations are, as they
      * are basically a combination of combinations.
      */
-    private List<List<TileGroup>> createHandConfigurations(List<List<List<TileGroup>>> possiblePairingsList, List<List<TileGroup>> handConfigsToReturn, List<TileGroup> currentHandConfigSoFar)
+    private List<List<TileGroup>> createHandConfigurations(List<List<List<TileGroup>>> possiblePairingsList)
     {
-        if (possiblePairingsList.isEmpty())
-        {
-            return handConfigsToReturn;
-        }
-
-        List<List<List<TileGroup>>> possiblePairingsCopy = new ArrayList<>(possiblePairingsList);
-        var pairingsForCurrentIndex = possiblePairingsCopy.remove(0);
-        for (List<TileGroup> pairing : pairingsForCurrentIndex)
-        {
-            List<TileGroup> currentHandConfigSoFarCopy = new ArrayList<>(currentHandConfigSoFar);
-            currentHandConfigSoFarCopy.addAll(pairing);
-            if (possiblePairingsCopy.isEmpty())
-            {
-                handConfigsToReturn.add(currentHandConfigSoFarCopy);
-            }
-            else
-            {
-                handConfigsToReturn = createHandConfigurations(possiblePairingsCopy, handConfigsToReturn, currentHandConfigSoFarCopy);
-            }
-        }
-
-        return handConfigsToReturn;
+        return StreamEx.cartesianProduct(possiblePairingsList).map(list -> list.stream().flatMap(Collection::stream).collect(Collectors.toList())).toList();
     }
 }
