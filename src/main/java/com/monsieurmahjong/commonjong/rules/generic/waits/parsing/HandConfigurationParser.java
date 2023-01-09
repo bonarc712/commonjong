@@ -61,12 +61,6 @@ public class HandConfigurationParser
         // create hand configurations from possible pairing lists
         var handConfigurations = createHandConfigurations(listOfPossiblePairings);
 
-        if (handConfigurations.isEmpty())
-        {
-            // only one configuration is possible. Create just one list
-            handConfigurations.add(new ArrayList<>());
-        }
-
         // add tile groups that are not within a collision list to the result, then add
         // melded tiles to the result
         handConfigurations.forEach(list -> {
