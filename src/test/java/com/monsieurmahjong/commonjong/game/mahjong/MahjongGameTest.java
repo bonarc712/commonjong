@@ -18,9 +18,7 @@ public class MahjongGameTest
     @Test
     public void test_determineNextPlayer_afterEastPlays_shouldBeSouth()
     {
-        when(game.determineNextPlayer(any(Player.class))).thenCallRealMethod();
-        when(game.getAmountOfPlayers()).thenReturn(4);
-        when(player.getSeat()).thenReturn(Seat.EAST);
+        setupMahjongGameDetermineNextPlayerAndGetAmountOfPlayersAndGetSeatStubs(4, Seat.EAST);
 
         var nextSeat = game.determineNextPlayer(player);
 
@@ -30,9 +28,7 @@ public class MahjongGameTest
     @Test
     public void test_determineNextPlayer_afterSouthPlays_shouldBeWest()
     {
-        when(game.determineNextPlayer(any(Player.class))).thenCallRealMethod();
-        when(game.getAmountOfPlayers()).thenReturn(4);
-        when(player.getSeat()).thenReturn(Seat.SOUTH);
+        setupMahjongGameDetermineNextPlayerAndGetAmountOfPlayersAndGetSeatStubs(4, Seat.SOUTH);
 
         var nextSeat = game.determineNextPlayer(player);
 
@@ -42,9 +38,7 @@ public class MahjongGameTest
     @Test
     public void test_determineNextPlayer_afterWestPlays_shouldBeNorth()
     {
-        when(game.determineNextPlayer(any(Player.class))).thenCallRealMethod();
-        when(game.getAmountOfPlayers()).thenReturn(4);
-        when(player.getSeat()).thenReturn(Seat.WEST);
+        setupMahjongGameDetermineNextPlayerAndGetAmountOfPlayersAndGetSeatStubs(4, Seat.WEST);
 
         var nextSeat = game.determineNextPlayer(player);
 
@@ -54,9 +48,7 @@ public class MahjongGameTest
     @Test
     public void test_determineNextPlayer_afterNorthPlays_shouldBeEast()
     {
-        when(game.determineNextPlayer(any(Player.class))).thenCallRealMethod();
-        when(game.getAmountOfPlayers()).thenReturn(4);
-        when(player.getSeat()).thenReturn(Seat.NORTH);
+        setupMahjongGameDetermineNextPlayerAndGetAmountOfPlayersAndGetSeatStubs(4, Seat.NORTH);
 
         var nextSeat = game.determineNextPlayer(player);
 
@@ -66,12 +58,16 @@ public class MahjongGameTest
     @Test
     public void test_determineNextPlayer_afterWestPlaysInSanma_shouldBeEast()
     {
-        when(game.determineNextPlayer(any(Player.class))).thenCallRealMethod();
-        when(game.getAmountOfPlayers()).thenReturn(3);
-        when(player.getSeat()).thenReturn(Seat.WEST);
+        setupMahjongGameDetermineNextPlayerAndGetAmountOfPlayersAndGetSeatStubs(3, Seat.WEST);
 
         var nextSeat = game.determineNextPlayer(player);
 
         Assertions.assertEquals(Seat.EAST, nextSeat);
+    }
+
+    private void setupMahjongGameDetermineNextPlayerAndGetAmountOfPlayersAndGetSeatStubs(int getAmountOfPlayersReturnValue, Seat getSeatReturnValue) {
+        when(game.determineNextPlayer(any(Player.class))).thenCallRealMethod();
+        when(game.getAmountOfPlayers()).thenReturn(getAmountOfPlayersReturnValue);
+        when(player.getSeat()).thenReturn(getSeatReturnValue);
     }
 }
